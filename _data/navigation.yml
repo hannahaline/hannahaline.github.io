@@ -1,0 +1,17 @@
+# The order of the links in the header of the website.
+
+main:
+  - title: "Research"
+    url: /research/
+
+  - title: "Publications"
+    url: /publications/
+
+  - title: "Teaching & Outreach"
+    url: /teaching-outreach/
+
+  - title: "TWS CMWG"
+    url: /cmwg/
+
+  - title: "CV"
+    url: /cv/
