@@ -13,4 +13,4 @@ gem 'github-pages'
 gem 'connection_pool', '2.5.0'
 
 # Needed only for local previews on Windows
-gem 'tzinfo-data', platforms: [:windows]
+gem 'tzinfo-data' if Gem.win_platform?
