@@ -1,6 +1,7 @@
 ---
 permalink: /
 title: "About me"
+seo_title: "Hannah Henry"
 author_profile: true
 redirect_from:
   - /about/
