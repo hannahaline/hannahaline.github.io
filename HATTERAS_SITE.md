@@ -19,7 +19,7 @@ This file is excluded from the build.
 
 **Next, in order:**
 1. ~~Finish Dorian~~ (done 10-03).
-2. Refresh the private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE, at version 5, from before the split). In the session scratchpad, `make_preview.py` already lists `storms` and `then-and-now`. The scratchpad is temporary, so if it is gone, rebuild the flattening script from the description under Preview below.
+2. ~~Refresh the private preview~~ (done 10-03: claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE is version 6, with all nine pages and the Dorian text). To refresh it again: `jekyll build -d <scratch>/site`, copy `assets/hatteras/js/` in by hand (no Node), then run `make_preview.py` (in the 10-03 session scratchpad) and publish to the same URL.
 3. Work through the to-do notes (`grep -rn "hatteras/todo.liquid" _pages/hatteras`), starting with the ones only Hannah can answer:
    - collaborators' full names;
    - the reference author lists;
