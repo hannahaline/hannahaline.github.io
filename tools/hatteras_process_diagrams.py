@@ -210,12 +210,11 @@ def overwash():
     s.append(f'<line x1="790" y1="{HT}" x2="{W}" y2="{HT}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="6 5"/>')
     s.append(label(W - 12, HT + 24, "normal high tide", anchor="end", size=14, color=MUTED, box=False))
     s.append(f'<line x1="770" y1="{STORM}" x2="{W}" y2="{STORM}" stroke="#2166ac" stroke-width="2"/>')
-    s.append(label(W - 12, STORM - 12, "storm water level", anchor="end", size=15, color="#2166ac"))
-    s.append(f'<line x1="880" y1="{HT - 2}" x2="880" y2="{STORM + 6}" stroke="#2166ac" stroke-width="2" marker-end="url(#ow-h)"/>')
-    s.append(label(866, 242, "surge", anchor="end", size=14, color="#2166ac", box=False))
+    s.append(label(W - 46, STORM + 21, "storm water level, raised by surge", anchor="end", size=15, color="#2166ac"))
+    s.append(f'<line x1="975" y1="{HT - 2}" x2="975" y2="{STORM + 6}" stroke="#2166ac" stroke-width="2" marker-end="url(#ow-h)"/>')
 
     # waves running up the beach, over the dune, and on across the island
-    s.append(f'<path d="M960,{STORM - 4} C840,{STORM - 30} 760,90 690,110 S520,150 430,166" stroke="{ARROW}" '
+    s.append(f'<path d="M995,{STORM - 3} C860,{STORM - 30} 760,90 690,110 S520,150 430,166" stroke="{ARROW}" '
              f'stroke-width="3.5" fill="none" marker-end="url(#ow-h)"/>')
     s.append(label(560, 76, "storm waves run over the dune,\ncarrying sand inland", anchor="middle"))
     s.append(label(400, 236, "overwash fan: a new layer of sand on the island", anchor="middle", size=15))

@@ -21,10 +21,9 @@
 <line x1="790" y1="252" x2="1000" y2="252" stroke="#5b6469" stroke-width="1.5" stroke-dasharray="6 5"/>
 <text x="988" y="276" text-anchor="end" font-size="14" fill="#5b6469" font-weight="400"><tspan x="988" dy="0em">normal high tide</tspan></text>
 <line x1="770" y1="218" x2="1000" y2="218" stroke="#2166ac" stroke-width="2"/>
-<rect x="846" y="190" width="149" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="988" y="206" text-anchor="end" font-size="15" fill="#2166ac" font-weight="400"><tspan x="988" dy="0em">storm water level</tspan></text>
-<line x1="880" y1="250" x2="880" y2="224" stroke="#2166ac" stroke-width="2" marker-end="url(#ow-h)"/>
-<text x="866" y="242" text-anchor="end" font-size="14" fill="#2166ac" font-weight="400"><tspan x="866" dy="0em">surge</tspan></text>
-<path d="M960,214 C840,188 760,90 690,110 S520,150 430,166" stroke="#1a1a1a" stroke-width="3.5" fill="none" marker-end="url(#ow-h)"/>
+<rect x="677" y="223" width="284" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="954" y="239" text-anchor="end" font-size="15" fill="#2166ac" font-weight="400"><tspan x="954" dy="0em">storm water level, raised by surge</tspan></text>
+<line x1="975" y1="250" x2="975" y2="224" stroke="#2166ac" stroke-width="2" marker-end="url(#ow-h)"/>
+<path d="M995,215 C860,188 760,90 690,110 S520,150 430,166" stroke="#1a1a1a" stroke-width="3.5" fill="none" marker-end="url(#ow-h)"/>
 <rect x="426" y="59" width="268" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="560" y="76" text-anchor="middle" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="560" dy="0em">storm waves run over the dune,</tspan><tspan x="560" dy="1.2em">carrying sand inland</tspan></text>
 <rect x="206" y="220" width="388" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="400" y="236" text-anchor="middle" font-size="15" fill="#2b2f31" font-weight="400"><tspan x="400" dy="0em">overwash fan: a new layer of sand on the island</tspan></text>
 <text x="14" y="40" text-anchor="start" font-size="15" fill="#5b6469" font-weight="400"><tspan x="14" dy="0em">Pamlico Sound</tspan></text>
