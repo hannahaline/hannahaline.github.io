@@ -4,8 +4,9 @@ Study-area map for the Hatteras stakeholder pages, in the house map style.
     python tools/hatteras_stakeholder_map.py
 
 Hatteras Island from Cape Point to Oregon Inlet on Esri World Imagery, north up, UTM 18N, with the
-villages, NC-12 (current alignment), the beach nourishment reaches the model is forced with, and the
-Buxton groins; a locator inset of the Mid-Atlantic coast. Reaches and labels are placed on the CoastSat
+villages, NC-12 today (over the 2022 Jug Handle Bridge) with the 2008 beach road it bypassed dashed, the
+beach nourishment reaches the model is forced with, and the Buxton groins; a locator inset of the
+Mid-Atlantic coast. Reaches and labels are placed on the CoastSat
 transects in assets/hatteras/data/shoreline_rates.json, so run hatteras_shoreline_data.py first.
 Writes assets/hatteras/img/study_area_map.jpg. Needs the CASCADE repo beside this one.
 
@@ -27,6 +28,8 @@ import numpy as np
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
 from pyproj import Transformer
+from shapely.geometry import Point
+from shapely.ops import linemerge, substring
 from rasterio.warp import transform_bounds
 
 SITE = Path(__file__).resolve().parents[1]
@@ -39,6 +42,10 @@ from site_layer.hat_map_layers import NE_STATES  # noqa: E402
 
 RATES = SITE / "assets/hatteras/data/shoreline_rates.json"
 NC12 = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset/current/nc12_current.geojson"
+NC12_2008 = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset/2008/nc12_2008.geojson"
+# The Jug Handle Bridge: nc12_current follows it (within 3 m of OpenStreetMap, checked 2026-10-02);
+# the 2008 line still runs along the beach there. Ends of the bridge stretch on the current line:
+BRIDGE_ENDS_LL = [(-75.471925, 35.633187), (-75.467351, 35.598803)]
 OUT = SITE / "assets/hatteras/img/study_area_map.jpg"
 TILE_CACHE = CASCADE / "data/hatteras_init/map_elements/tile_cache"
 
@@ -121,14 +128,24 @@ def main() -> None:
     ax.set_yticks([])
     spines_for_image(ax)
 
-    # NC-12, current alignment (State Plane feet in the source)
-    road = gpd.read_file(NC12).to_crs(CRS)
-    for geom in road.geometry:
-        lines = getattr(geom, "geoms", [geom])
-        for ln in lines:
-            xs, ys = ln.xy
-            ax.plot(xs, ys, color="0.1", lw=3.0, solid_capstyle="round", zorder=4)
-            ax.plot(xs, ys, color=ROAD, lw=1.6, solid_capstyle="round", zorder=5)
+    # NC-12 today (State Plane feet in the source), which crosses the sound on the Jug Handle Bridge,
+    # and, dashed, the 2008 road it bypassed along the beach at the S-curves
+    road = linemerge(list(gpd.read_file(NC12).to_crs(CRS).geometry))
+    xs, ys = road.xy
+    ax.plot(xs, ys, color="0.1", lw=3.0, solid_capstyle="round", zorder=4)
+    ax.plot(xs, ys, color=ROAD, lw=1.6, solid_capstyle="round", zorder=5)
+    ends = [Point(to_utm(*ll)) for ll in BRIDGE_ENDS_LL]
+    old = linemerge(list(gpd.read_file(NC12_2008).to_crs(CRS).geometry))
+    a, b = sorted(old.project(p) for p in ends)
+    former = substring(old, a, b)
+    xs, ys = former.xy
+    ax.plot(xs, ys, color="0.1", lw=2.6, zorder=4)
+    ax.plot(xs, ys, color="white", lw=1.3, ls=(0, (2.5, 2)), zorder=5)
+    a, b = sorted(road.project(p) for p in ends)
+    mid = substring(road, a, b).interpolate(0.5, normalized=True)
+    ax.annotate("Jug Handle\nBridge, 2022", (mid.x, mid.y), xytext=(-16, 0), textcoords="offset points",
+                ha="right", va="center", **TEXT,
+                arrowprops=dict(arrowstyle="-", color="white", lw=0.6, shrinkA=0, shrinkB=3))
 
     # Nourishment reaches, offshore of the beach they cover, labelled to the east
     for n in data["nourishments"]:
@@ -171,6 +188,8 @@ def main() -> None:
 
     handles = [
         Line2D([], [], color=ROAD, lw=2.2, label="NC-12", path_effects=[mpl.patheffects.withStroke(linewidth=3.6, foreground="0.1")]),
+        Line2D([], [], color="white", lw=1.3, ls=(0, (2.5, 2)), label="NC-12 before the 2022 bridge",
+               path_effects=[mpl.patheffects.withStroke(linewidth=2.6, foreground="0.35")]),
         Line2D([], [], color=SAND, lw=5.5, label="Beach nourishment", path_effects=[mpl.patheffects.withStroke(linewidth=7.5, foreground="0.1")]),
         groin_handle(),
         Line2D([], [], marker="o", ls="none", ms=5, mfc="white", mec="0.1", label="Village"),
@@ -178,7 +197,8 @@ def main() -> None:
     ax.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.985, 0.015), **MAP_LEGEND)
     scale_bar_km(ax, 10_000, x=0.05, y=0.055)
     north_dart(ax, (x0 + 0.08 * (x1 - x0), y0 + 0.30 * (y1 - y0)), arrow_m=3000)
-    ax.text(0.015, 0.006, "Imagery: Esri World Imagery", transform=ax.transAxes, ha="left", va="bottom",
+    ax.text(0.015, 0.006, "Imagery: Esri World Imagery",
+            transform=ax.transAxes, ha="left", va="bottom",
             fontsize=6, color="white", path_effects=HALO, zorder=12)
 
     inset = fig.add_axes([0.62, 0.70, 0.36, 0.28])
