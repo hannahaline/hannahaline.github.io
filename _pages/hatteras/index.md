@@ -1,0 +1,60 @@
+---
+layout: page
+title: Hatteras Island, past and present
+permalink: /hatteras/
+description: How Hatteras Island has changed since the 1990s, why, and how a computer model can help plan for what comes next.
+nav: false
+---
+
+{% include hatteras/subnav.liquid %}
+
+<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/img/photos/hatteras-aerial.jpg' | relative_url }}')">
+  <div class="hat-hero-text">
+    <h2>An island on the move</h2>
+    <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
+  </div>
+</section>
+
+<p class="hat-lead">
+This site shares what my research has learned about how Hatteras Island has changed over the last three decades.
+It covers what satellites and aerial photos show, the natural processes behind those changes, and the ways that people manage the island.
+It also introduces a computer model that recreates this history, so that we can test management choices before making them.
+</p>
+
+<div class="hat-keypoint">
+<b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of beach nourishment, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
+</div>
+
+{% include hatteras/todo.liquid text="Swap the hero photo for a Hatteras-specific aerial (Rodanthe S-curves or Buxton) once imagery sources are settled." %}
+
+## Explore
+
+<div class="hat-cards">
+  <a class="hat-card" href="{{ '/hatteras/island/' | relative_url }}">
+    <h3>The island</h3>
+    <p>How barrier islands work: waves, storms, overwash, and sea-level rise.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/shoreline-change/' | relative_url }}">
+    <h3>Shoreline change</h3>
+    <p>Where the beach has retreated or grown since 1996, and the storms and projects that show up in the record.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/management/' | relative_url }}">
+    <h3>Management</h3>
+    <p>Beach nourishment, NC-12, dune building, and groins: how each one shapes the island.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/model/' | relative_url }}">
+    <h3>The model</h3>
+    <p>How CASCADE works in plain language, and how well it recreates the past.</p>
+  </a>
+</div>
+
+## The study area
+
+The research covers about 45 km of Hatteras Island, from Cape Point north to Pea Island, including the villages of Buxton, Avon, Salvo, Waves, and Rodanthe.
+Most of the island lies within Cape Hatteras National Seashore. NC-12, the only road on and off the island, runs its full length.
+
+{% include figure.liquid loading="lazy" path="assets/img/research/hatteras_study_area.jpg" alt="Map of the Hatteras Island study area from Cape Point to Pea Island" class="img-fluid rounded" caption="The study area, from Cape Point to Pea Island." %}
+
+{% include hatteras/todo.liquid text="Replace with a stakeholder version of the study-area map: villages, NC-12, the nourishment reaches, and the Buxton groins labelled." %}
+
+{% include hatteras/pager.liquid %}

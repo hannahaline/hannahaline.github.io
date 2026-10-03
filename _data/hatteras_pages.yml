@@ -1,0 +1,23 @@
+# Pages of the Hatteras stakeholder section, in reading order.
+# ready: false shows the page greyed out in the section menu and skips it in previous/next links.
+- title: Overview
+  url: /hatteras/
+  ready: true
+- title: The island
+  url: /hatteras/island/
+  ready: true
+- title: Shoreline change
+  url: /hatteras/shoreline-change/
+  ready: true
+- title: Management
+  url: /hatteras/management/
+  ready: true
+- title: The model
+  url: /hatteras/model/
+  ready: true
+- title: Looking ahead
+  url: /hatteras/looking-ahead/
+  ready: false
+- title: About
+  url: /hatteras/about/
+  ready: true

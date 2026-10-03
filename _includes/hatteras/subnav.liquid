@@ -1,0 +1,15 @@
+{% comment %} Section menu for the Hatteras pages, plus the draft banner while hatteras_draft is on {% endcomment %}
+{% if site.hatteras_draft %}
+  <div class="hat-draft-banner">Draft preview, not for distribution. Results on these pages are not yet peer reviewed.</div>
+{% endif %}
+<nav class="hat-subnav" aria-label="Hatteras Island project pages">
+  {% for p in site.data.hatteras_pages %}
+    {% if p.url == page.permalink %}
+      <span class="hat-subnav-item current" aria-current="page">{{ p.title }}</span>
+    {% elsif p.ready %}
+      <a class="hat-subnav-item" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+    {% else %}
+      <span class="hat-subnav-item soon" title="Coming soon">{{ p.title }}</span>
+    {% endif %}
+  {% endfor %}
+</nav>

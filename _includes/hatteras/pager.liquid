@@ -1,0 +1,17 @@
+{% comment %} Previous / next links at the foot of each Hatteras page, skipping pages that are not ready {% endcomment %}
+{% assign ready = site.data.hatteras_pages | where: "ready", true %}
+{% assign prev = nil %}
+{% assign next = nil %}
+{% for p in ready %}
+  {% if p.url == page.permalink %}
+    {% assign i = forloop.index0 %}
+    {% assign pi = i | minus: 1 %}
+    {% assign ni = i | plus: 1 %}
+    {% if i > 0 %}{% assign prev = ready[pi] %}{% endif %}
+    {% assign next = ready[ni] %}
+  {% endif %}
+{% endfor %}
+<nav class="hat-pager" aria-label="Previous and next page">
+  {% if prev %}<a class="hat-pager-prev" href="{{ prev.url | relative_url }}">&larr; {{ prev.title }}</a>{% else %}<span></span>{% endif %}
+  {% if next %}<a class="hat-pager-next" href="{{ next.url | relative_url }}">{{ next.title }} &rarr;</a>{% endif %}
+</nav>

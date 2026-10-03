@@ -33,6 +33,9 @@
 @use "teachings";
 @use "typograms";
 
+// Hatteras stakeholder section (_sass/_hatteras.scss)
+@use "hatteras";
+
 // -----------------------------------------------------------------------------
 // Site additions (this file overrides al_folio_core's assets/css/main.scss;
 // everything above is the theme's own file, with only the accent colour changed)

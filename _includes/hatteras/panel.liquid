@@ -1,0 +1,12 @@
+{% comment %}
+  Placeholder for an interactive panel that has not been built yet.
+  Usage: {% include hatteras/panel.liquid id="shoreline-map" title="..." plan="..." %}
+  When the panel is built, replace the include with its container div and script.
+{% endcomment %}
+<figure class="hat-panel hat-panel-placeholder {% if include.wide %}hat-bleed{% endif %}" id="panel-{{ include.id }}">
+  <div class="hat-panel-body">
+    <span class="hat-panel-tag">Interactive panel, in progress</span>
+    <h4>{{ include.title }}</h4>
+    {% if site.hatteras_draft and include.plan %}<p class="hat-panel-plan">{{ include.plan }}</p>{% endif %}
+  </div>
+</figure>
