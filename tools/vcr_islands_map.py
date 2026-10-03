@@ -195,8 +195,8 @@ def main() -> None:
         s.set_edgecolor("white")
         s.set_linewidth(1.6)
     letter(ax_ph, 2, 0.02, 0.97)
-    ax_ph.text(0.98, 0.04, "American Oystercatcher", transform=ax_ph.transAxes, ha="right", va="bottom",
-               fontstyle="italic", **TEXT)
+    ax_ph.text(0.98, 0.96, "American Oystercatcher", transform=ax_ph.transAxes, ha="right", va="top",
+               fontstyle="italic", fontsize=8, color="black", zorder=8)
 
     scale_bar(ax, 0.40, 0.06)
     ax.text(0.988, 0.012, "Imagery: Esri World Imagery · Islands: © OpenStreetMap contributors",
