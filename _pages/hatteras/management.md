@@ -55,7 +55,10 @@ Where the ocean has come too close, the road has been moved:
 
 We measured how far the road moved by comparing digitised road lines from 1978 and 2008, and the model moves the road by the same distances in the years the moves happened.
 
-{% include hatteras/todo.liquid text="Photo of NC-12 behind a low dune (public domain, source noted)." %}
+<figure class="hat-photo-wide" style="max-width: 34rem; margin-left: auto; margin-right: auto;">
+<img src="{{ '/assets/hatteras/img/nc12_scurves_2016.jpg' | relative_url }}" alt="Aerial photo of NC-12 at the Rodanthe S-curves running a short distance behind a low dune line, with a narrow beach and the surf beyond" loading="lazy">
+<figcaption class="hat-caption">NC-12 at the Rodanthe S-curves in early 2016, running just behind a low, narrow dune line with the ocean a few tens of metres away. Since 2022 the Jug Handle Bridge has carried the road around this stretch. Imagery: NC OneMap / NC Center for Geographic Information and Analysis.</figcaption>
+</figure>
 
 ## Beach nourishment
 
