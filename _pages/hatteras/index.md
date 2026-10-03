@@ -63,7 +63,7 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
 
 <figure class="hat-studymap">
 <img src="{{ '/assets/hatteras/img/study_area_map.jpg' | relative_url }}" alt="Map of Hatteras Island from Cape Point to Oregon Inlet, showing the villages of Buxton, Avon, Salvo, Waves and Rodanthe, NC-12, the beach nourishment reaches at Buxton, Avon and the Rodanthe S-curves, and the Buxton groins" loading="lazy">
-<figcaption class="hat-caption">Hatteras Island from Cape Point to Oregon Inlet. Gold bars mark the beaches nourished at Buxton (2017 and 2022), Avon (2022) and the Rodanthe S-curves (2014). Since 2022, NC-12 crosses Pamlico Sound on the Jug Handle Bridge; the dashed line is the beach road it replaced.</figcaption>
+<figcaption class="hat-caption">Hatteras Island from Cape Point to Oregon Inlet. Sand-coloured bands just off the beach mark the stretches nourished at Buxton (2017 and 2022), Avon (2022) and the Rodanthe S-curves (2014), and the red line marks the Buxton groins. Since 2022, NC-12 crosses Pamlico Sound on the Jug Handle Bridge; the dashed line is the beach road it replaced.</figcaption>
 </figure>
 
 

@@ -13,7 +13,7 @@ Writes assets/hatteras/img/study_area_map.jpg. Needs the CASCADE repo beside thi
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
          University of North Carolina at Chapel Hill
 Contact: hahenry@unc.edu
-Version: 2026-10-02
+Version: 2026-10-03
 """
 import json
 import math
@@ -36,9 +36,10 @@ SITE = Path(__file__).resolve().parents[1]
 CASCADE = SITE.parent / "CASCADE"
 sys.path.insert(0, str(CASCADE / "scripts"))
 from site_layer.hat_figure_style import (  # noqa: E402
-    INK, INK_MUTED, MAP_LEGEND, apply_style, groin_handle, groin_marker, north_dart, scale_bar_km,
-    spines_for_image)
+    C, INK, INK_MUTED, MAP_LEGEND, apply_style, north_dart, scale_bar_km, spines_for_image)
 from site_layer.hat_map_layers import NE_STATES  # noqa: E402
+sys.path.insert(0, str(SITE / "tools"))
+import hatteras_shoreline_data as shoreline  # noqa: E402
 
 RATES = SITE / "assets/hatteras/data/shoreline_rates.json"
 NC12 = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset/current/nc12_current.geojson"
@@ -53,11 +54,14 @@ LAT0, LAT1, LON0, LON1 = 35.19, 35.80, -75.72, -75.36
 CRS = "EPSG:32618"
 TEAL = "#1b7f8c"                    # house LOCATOR
 ROAD = "#ffd23f"                    # house: NC-12 on imagery
-SAND, SAND_EDGE = "#f6e3b8", "#c8880f"  # house ADDED_FILL / ADDED
+SAND = "#f6e3b8"                    # house ADDED_FILL
 WATER_MAP, LAND, LAND_EDGE = "#e9eff4", "#ede9df", "0.55"
 HALO = [mpl.patheffects.withStroke(linewidth=1.4, foreground="0.12")]
 TEXT = dict(color="white", fontsize=8.5, zorder=8, path_effects=HALO)
-REACH_OFFSET_M = 450.0              # reaches are drawn this far seaward of the transect ends
+REACH_OFFSET_M = 280.0              # reaches are drawn this far seaward of today's shoreline, just off the beach and clear of NC-12
+BEACH_YEARS = (2020, 2025)          # "today's shoreline": the median CoastSat position over these years
+GROIN = C["GROIN"]
+GROIN_LEN_M = 900.0                 # the groins drawn as one short shore-normal line, out from the beach
 
 to_utm = Transformer.from_crs("EPSG:4326", CRS, always_xy=True).transform
 
@@ -74,15 +78,20 @@ def imagery(ax, window):
     ax.imshow(img, extent=ext, interpolation="bilinear", zorder=0)
 
 
-def seaward_ends(transects, g0, g1):
-    """UTM seaward ends of the transects in GIS g0..g1, south to north, pushed a little further offshore."""
+def beach_points(transects, g0, g1):
+    """UTM points on today's beach for the transects in GIS g0..g1, south to north: each transect's median
+    CoastSat shoreline position over BEACH_YEARS, measured along it from its landward end."""
     pts = []
     for t in transects:
         if g0 <= t["d"] <= g1:
+            date, pos = shoreline.load_series(t["id"])
+            recent = pos[date.dt.year.between(*BEACH_YEARS)]
+            if recent.empty:
+                continue
             (lx, ly), (sx, sy) = t["line"]
             a, b = np.array(to_utm(lx, ly)), np.array(to_utm(sx, sy))
             u = (b - a) / np.linalg.norm(b - a)
-            pts.append(b + u * REACH_OFFSET_M)
+            pts.append(a + u * (float(recent.median()) + REACH_OFFSET_M))
     return np.array(pts)
 
 
@@ -106,7 +115,7 @@ def locator(ax, box_ll):
     ax.set_xlim(lon0, lon1)
     ax.set_ylim(lat0, lat1)
     ax.set_aspect(1.0 / math.cos(math.radians((lat0 + lat1) / 2)))
-    ax.set_anchor("NE")
+    ax.set_anchor("NW")
     ax.set_xticks([])
     ax.set_yticks([])
     spines_for_image(ax)
@@ -147,22 +156,24 @@ def main() -> None:
                 ha="right", va="center", **TEXT,
                 arrowprops=dict(arrowstyle="-", color="white", lw=0.6, shrinkA=0, shrinkB=3))
 
-    # Nourishment reaches, offshore of the beach they cover, labelled to the east
+    # Nourishment reaches: a gold band along the beach they cover, labelled to the east with place and years
     for n in data["nourishments"]:
-        p = seaward_ends(data["transects"], *n["gis"])
-        ax.plot(p[:, 0], p[:, 1], color="0.1", lw=7.5, solid_capstyle="butt", zorder=6)
-        ax.plot(p[:, 0], p[:, 1], color=SAND, lw=5.5, solid_capstyle="butt", zorder=7)
+        p = beach_points(data["transects"], *n["gis"])
+        ax.plot(p[:, 0], p[:, 1], color="0.1", lw=5.4, solid_capstyle="round", zorder=6)
+        ax.plot(p[:, 0], p[:, 1], color=SAND, lw=3.6, solid_capstyle="round", zorder=7)
         mid = p[len(p) // 2]
         where = "Rodanthe S-curves" if n["name"] == "Rodanthe" else n["name"]
-        label = f"{where}\nnourishment\n{', '.join(str(y) for y in n['years'])}"
-        ax.annotate(label, mid, xytext=(16, 0), textcoords="offset points", va="center", ha="left",
-                    **TEXT, arrowprops=dict(arrowstyle="-", color="white", lw=0.7, shrinkA=0, shrinkB=4))
+        ax.annotate(where + "\n" + " and ".join(str(y) for y in n["years"]), mid, xytext=(22, 0),
+                    textcoords="offset points", va="center", ha="left", linespacing=1.15, **TEXT,
+                    arrowprops=dict(arrowstyle="-", color=SAND, lw=0.9, shrinkA=0, shrinkB=4))
 
-    # Groins, on the beach at the GIS 5-6 boundary
-    gx, gy = to_utm(*data["groin"]["ll"][::-1])
-    groin_marker(ax, gx, gy)
-    ax.annotate("Buxton\ngroins", (gx, gy), xytext=(-14, -18), textcoords="offset points", ha="right",
-                va="top", **TEXT, arrowprops=dict(arrowstyle="-", color="white", lw=0.7, shrinkA=0, shrinkB=5))
+    # Groins: a short horizontal line out from the beach at the GIS 5-6 boundary (the shore runs north-south here)
+    g = beach_points(data["transects"], 5, 6)
+    bx, by = g[len(g) // 2] - np.array([REACH_OFFSET_M, 0])  # from the shoreline itself
+    ax.plot([bx, bx + GROIN_LEN_M], [by, by], color="white", lw=4.2, solid_capstyle="butt", zorder=8)
+    ax.plot([bx, bx + GROIN_LEN_M], [by, by], color=GROIN, lw=2.4, solid_capstyle="butt", zorder=9)
+    ax.annotate("Buxton groins", (bx + GROIN_LEN_M, by), xytext=(12, 0), textcoords="offset points", ha="left",
+                va="center", **TEXT, arrowprops=dict(arrowstyle="-", color="white", lw=0.7, shrinkA=0, shrinkB=2))
 
     # Villages and places, labelled into the sound
     for p in data["places"]:
@@ -190,8 +201,10 @@ def main() -> None:
         Line2D([], [], color=ROAD, lw=2.2, label="NC-12", path_effects=[mpl.patheffects.withStroke(linewidth=3.6, foreground="0.1")]),
         Line2D([], [], color="white", lw=1.3, ls=(0, (2.5, 2)), label="NC-12 before the 2022 bridge",
                path_effects=[mpl.patheffects.withStroke(linewidth=2.6, foreground="0.35")]),
-        Line2D([], [], color=SAND, lw=5.5, label="Beach nourishment", path_effects=[mpl.patheffects.withStroke(linewidth=7.5, foreground="0.1")]),
-        groin_handle(),
+        Line2D([], [], color=SAND, lw=3.6, solid_capstyle="round", label="Beach nourishment (years labelled)",
+               path_effects=[mpl.patheffects.withStroke(linewidth=5.4, foreground="0.1")]),
+        Line2D([], [], color=GROIN, lw=2.4, label="Buxton groins",
+               path_effects=[mpl.patheffects.withStroke(linewidth=4.2, foreground="white")]),
         Line2D([], [], marker="o", ls="none", ms=5, mfc="white", mec="0.1", label="Village"),
     ]
     ax.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.985, 0.015), **MAP_LEGEND)
@@ -201,7 +214,7 @@ def main() -> None:
             transform=ax.transAxes, ha="left", va="bottom",
             fontsize=6, color="white", path_effects=HALO, zorder=12)
 
-    inset = fig.add_axes([0.62, 0.70, 0.36, 0.28])
+    inset = fig.add_axes([0.02, 0.70, 0.36, 0.28])
     locator(inset, (LON0, LON1, LAT0, LAT1))
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
