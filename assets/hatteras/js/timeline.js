@@ -1,6 +1,6 @@
 // Storms and management timeline (markup in _includes/hatteras/timeline.liquid; data from tools/hatteras_timeline_data.py).
-// One SVG: high-water events above, management lanes below, on a shared year axis. Hovering a management event
-// sends "hat:reach" with its km range, which the shoreline map draws.
+// One SVG: high-water events above, management lanes below, on a shared year axis. mode "storms" or "management" draws
+// only that half. Hovering a management event sends "hat:reach" with its km range, which the shoreline map draws.
 (function () {
   "use strict";
 
@@ -32,8 +32,9 @@
     fetch(root.getAttribute("data-src")).then(function (r) { return r.json(); }).then(function (d) {
       self.data = d;
       self.legend();
-      root.querySelector(".hat-tl-caption").textContent = (self.mode === "management" ? "" : d.storm_note + " ") +
-        "The Navy built the Buxton groins in 1969, before this record begins. Events marked “not in the model” are shown for context only.";
+      root.querySelector(".hat-tl-caption").textContent = (self.mode === "management" ? "" : d.storm_note) +
+        (self.mode === "storms" ? "" : (self.mode === "management" ? "" : " ") +
+          "The Navy built the Buxton groins in 1969, before this record begins. Events marked “not in the model” are shown for context only.");
       root.querySelectorAll("[data-show]").forEach(function (b) {
         b.addEventListener("click", function () {
           self.show = b.getAttribute("data-show");
@@ -53,10 +54,12 @@
       items.push('<span><i class="dot" style="background:' + TROPICAL + '"></i>Tropical storm or hurricane within ' + this.data.tc_km + " km</span>");
       items.push('<span><i class="dot small" style="background:' + OTHER + '"></i>Other high-water event</span>');
     }
-    items.push('<span><i class="bar"></i>Beach nourishment</span>');
-    items.push('<span><i class="diamond"></i>NC-12 moved landward</span>');
-    items.push('<span><i class="square"></i>Bridge</span>');
-    items.push('<span><i class="square open"></i>Open mark: not in the model</span>');
+    if (this.mode !== "storms") {
+      items.push('<span><i class="bar"></i>Beach nourishment</span>');
+      items.push('<span><i class="diamond"></i>NC-12 moved landward</span>');
+      items.push('<span><i class="square"></i>Bridge</span>');
+      items.push('<span><i class="square open"></i>Open mark: not in the model</span>');
+    }
     this.root.querySelector(".hat-tl-legend").innerHTML = items.join("");
   };
 
@@ -79,7 +82,7 @@
     var stormH = storms.length ? 230 : 0, laneH = 44, top = storms.length ? 26 : 6;
     var fills = d.management.filter(function (m) { return m.kind === "fill"; });
     var roads = d.management.filter(function (m) { return m.kind === "road" || m.kind === "bridge"; });
-    var lanes = [{ name: "Beach nourishment", items: fills }, { name: "NC-12 and bridges", items: roads }];
+    var lanes = this.mode === "storms" ? [] : [{ name: "Beach nourishment", items: fills }, { name: "NC-12 and bridges", items: roads }];
     var x0 = d.range[0], x1 = d.range[1] + 1;
     var X = function (y) { return left + (y - x0) / (x1 - x0) * (W - left - right); };
 

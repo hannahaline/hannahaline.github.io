@@ -10,14 +10,15 @@ nav: false
 
 <p class="hat-lead">
 A big storm can reshape the beach in a few days.
-This page sets every high-water event since 1984 beside the projects that changed the beach and the road, then looks closely at three hurricanes.
+This page shows every high-water event since 1984, then looks closely at three hurricanes.
 </p>
 
 ## Every high-water event since 1984
 
-Each dot is one high-water event: a time when tide, storm surge and waves together pushed water high up the beach. The taller the stem, the higher the water reached. Below are the management projects that changed the beach and the road.
+Each dot is one high-water event: a time when tide, storm surge and waves together pushed water high up the beach. The taller the stem, the higher the water reached.
+The beach projects and road moves of the same years are on the [management page]({{ '/hatteras/management/' | relative_url }}).
 
-{% include hatteras/timeline.liquid %}
+{% include hatteras/timeline.liquid mode="storms" %}
 
 ## Hurricane Isabel, 2003
 
