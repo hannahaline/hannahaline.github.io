@@ -71,7 +71,8 @@ def longshore():
                  "Point; on the shorter south-facing shore, a smaller drift runs east toward the cape. The two meet at the "
                  "cape, where the sand builds Cape Point and the offshore Diamond Shoals. A close-up shows how each wave "
                  "pushes sand up the beach at an angle and it slides straight back down, so the sand creeps along the shore.")
-    s.append(f'<defs>{head("ls-h")}{head("ls-hd", ADDED)}'
+    s.append(f'<defs>{head("ls-h")}<marker id="ls-hd" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="2.6" '
+             f'markerHeight="2.6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{ADDED}"/></marker>'
              f'<linearGradient id="ls-sea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{WATER_TOP}"/>'
              f'<stop offset="1" stop-color="{WATER_DEEP}"/></linearGradient></defs>')
     s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="url(#ls-sea)"/>')
@@ -122,20 +123,26 @@ def longshore():
     wave_field(740, 560, 225)        # from the south-east, travelling north-west
     s.append(label(790, 650, "waves from\nthe southeast", size=15))
 
-    # drift along the east-facing shore: south, toward the cape
-    for lat in (35.74, 35.62, 35.50, 35.38):
+    # drift along the east-facing shore: south, toward the cape. Widths are schematic, read from the shoreline
+    # record: the drift grows where the beach erodes (Pea Island, Rodanthe: more sand leaves than arrives),
+    # holds where it is steady (Salvo to Avon), grows again toward Buxton, and ends at Cape Point, where sand is laid down
+    DRIFT = [(35.765, 3.0), (35.69, 4.5), (35.615, 6.0), (35.54, 7.0), (35.465, 7.0), (35.39, 7.0), (35.315, 9.0)]
+    for lat, w in DRIFT:
         x0, y0 = east_shore(lat)
-        x1, y1 = east_shore(lat - 0.075)
-        s.append(f'<line x1="{x0 + 24:.0f}" y1="{y0:.0f}" x2="{x1 + 24:.0f}" y2="{y1:.0f}" stroke="{ADDED}" '
-                 f'stroke-width="3.5" marker-end="url(#ls-hd)"/>')
-    xs, ys = east_shore(35.52)
-    s.append(label(xs + 34, ys + 4, "sand drifts south\nalong the shore", size=15))
+        x1, y1 = east_shore(lat - 0.055)
+        s.append(f'<line x1="{x0 + 26:.0f}" y1="{y0:.0f}" x2="{x1 + 26:.0f}" y2="{y1:.0f}" stroke="{ADDED}" '
+                 f'stroke-width="{w}" marker-end="url(#ls-hd)"/>')
+    # and on into the shoal at the cape
+    s.append(f'<line x1="{cape[0] + 10:.0f}" y1="{cape[1] - 4:.0f}" x2="{cape[0] + 52:.0f}" y2="{cape[1] + 24:.0f}" '
+             f'stroke="{ADDED}" stroke-width="6" marker-end="url(#ls-hd)"/>')
+    xs, ys = east_shore(35.50)
+    s.append(label(xs + 50, ys + 4, "sand drifts south;\nthicker arrow = more sand", size=15))
 
     # a smaller drift along the south-facing shore: east, toward the cape
     sx, sy = south_shore(cape[0] - 120)
     sy += 14
     s.append(f'<line x1="{sx - 60:.0f}" y1="{sy + 8:.0f}" x2="{sx + 50:.0f}" y2="{sy - 4:.0f}" stroke="{ADDED}" '
-             f'stroke-width="3.5" marker-end="url(#ls-hd)"/>')
+             f'stroke-width="3" marker-end="url(#ls-hd)"/>')
     s.append(label(cape[0] + 40, cape[1] + 150, "the drifts meet at the cape and build\nCape Point and Diamond Shoals",
                    anchor="start", size=15))
 

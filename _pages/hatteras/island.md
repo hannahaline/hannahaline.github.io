@@ -25,7 +25,7 @@ Where more sand arrives than leaves, the beach grows. Where more leaves than arr
 
 <figure class="hat-model-figure">
 {% include hatteras/longshore.svg %}
-<figcaption class="hat-caption">Simplified. On Hatteras Island's long east-facing shore, waves from the northeast drive sand south toward Cape Hatteras; on the shorter south-facing shore, a smaller drift runs toward the cape. Sand from both sides collects at Cape Point and on Diamond Shoals (<a href="https://www.usgs.gov/centers/whcmsc/science/coastal-change-processes-cape-hatteras-nc">USGS</a>). Island outline © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</figcaption>
+<figcaption class="hat-caption">Simplified. On Hatteras Island's long east-facing shore, waves from the northeast drive sand south toward Cape Hatteras; on the shorter south-facing shore, a smaller drift runs toward the cape. Arrow widths are schematic, read from the shoreline record: the drift grows where the beach is eroding (more sand leaving than arriving), holds steady where the beach is stable, and ends at the cape. Sand from both sides collects at Cape Point and on Diamond Shoals (<a href="https://www.usgs.gov/centers/whcmsc/science/coastal-change-processes-cape-hatteras-nc">USGS</a>). Island outline © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</figcaption>
 </figure>
 
 <details class="hat-deeper" markdown="1">
