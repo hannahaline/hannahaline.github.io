@@ -56,7 +56,7 @@ These events stand out in the record.
 
 {% include hatteras/todo.liquid text="Irene breached the island at Pea Island and near Rodanthe. Describe what the record shows, and link to the management page for the bridges that followed." %}
 
-### Beach nourishment, 2017–2022
+### Beach nourishment, 2014 and 2022
 
 {% include hatteras/todo.liquid text="How the Buxton, Rodanthe, and Avon fills show up as sudden seaward jumps, and how long the added width lasts." %}
 
