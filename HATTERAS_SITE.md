@@ -19,7 +19,7 @@ This file is excluded from the build.
 
 **Next, in order:**
 1. ~~Finish Dorian~~ (done 10-03).
-2. ~~Refresh the private preview~~ (done 10-03: claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE is version 6, with all nine pages and the Dorian text). To refresh it again: `jekyll build -d <scratch>/site`, copy `assets/hatteras/js/` in by hand (no Node), then run `make_preview.py` (in the 10-03 session scratchpad) and publish to the same URL.
+2. Private preview: claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE is **version 7 (10-03)**: 10 pages with the glossary, the sea-level chart, the year-by-year player and the side-by-side Irene photos. To refresh: `jekyll build -d <scratch>/site_new`, copy `assets/hatteras/js/` in by hand (no Node), run `make_preview.py` (10-03 session scratchpad; it now keeps `#fragments` in page links and lists `glossary`), then publish the changed files to the same URL. Files left out of a publish are kept.
 3. Work through the to-do notes (`grep -rn "hatteras/todo.liquid" _pages/hatteras`), starting with the ones only Hannah can answer:
    - collaborators' full names;
    - the reference author lists;
