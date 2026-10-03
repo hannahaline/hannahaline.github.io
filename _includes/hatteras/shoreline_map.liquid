@@ -1,7 +1,7 @@
 {% comment %}
   Shoreline change map: Leaflet map of every CoastSat transect coloured by its rate, a time series for the
   clicked transect, and a profile of the rates along the island. Data from tools/hatteras_shoreline_data.py.
-  The page needs `map: true` and `chart: chartjs: true` in its front matter.
+  The page needs `map: true` and `chart: chartjs: true` in its front matter (the theme then loads Leaflet).
 {% endcomment %}
 <div class="hat-shoremap hat-bleed" id="shoremap" data-base="{{ '/assets/hatteras/data/' | relative_url }}">
   <div class="hat-shoremap-inner">
@@ -41,5 +41,4 @@
 <p><a href="{{ '/assets/hatteras/data/shoreline_rates.json' | relative_url }}">Download the data (JSON)</a></p>
 </details>
 
-<script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js" integrity="sha256-MgH13bFTTNqsnuEoqNPBLDaqxjGH+lCpqrukmXc8Ppg=" crossorigin="anonymous"></script>
 <script defer src="{{ '/assets/hatteras/js/shoreline-map.js' | relative_url }}"></script>

@@ -66,7 +66,9 @@ These events stand out in the record.
 
 ## Then and now
 
-{% include hatteras/panel.liquid id="imagery-compare" wide=true title="Aerial photos, then and now" plan="Swipe slider comparing historic and recent aerial imagery at four spots: the Rodanthe S-curves, Avon, Buxton near the old lighthouse site, and Hatteras Village / Isabel Inlet. Sources pending the online imagery search; the D: drive USGS frames are the fallback." %}
+Drag the handle across each photo to compare two years. Use the buttons to move between places, and the menus to pick any two years from 1993 to 2024.
+
+{% include hatteras/imagery_compare.liquid %}
 
 ## Explore further
 

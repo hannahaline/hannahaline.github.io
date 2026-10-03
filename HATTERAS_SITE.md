@@ -33,7 +33,11 @@ This file is excluded from the build.
    - Share links: `#t=<transect id>`.
    - Data: `python tools/hatteras_shoreline_data.py`. It refits the LRR from the time series and refuses to write if the fit differs from the published `lrr/<window>/` tables. GIS 91–120 is refit only; it matches `lrr/1996_2024/ext` for 1996–2024.
 2. `events-timeline` / `management-timeline`: one timeline engine with storms (HURDAT2 type colours) and management actions.
-3. `imagery-compare`: before/after swipe slider at four spots. Sources pending the online search; D: drive as the fallback.
+3. `imagery-compare`: **BUILT 2026-10-02.** A swipe slider. Layers and places live in `_data/hatteras_imagery.yml`, which you can edit by hand.
+   - Layers: 11 public layers, all loaded live with nothing re-hosted. NC OneMap gives 1993, 1996, 1998 CIR, 2002, 2007, 2010, Feb–Mar 2012, Jan–Feb 2016, Feb 2020 and Mar 2024 (mosaic dates read from the Dare County tile names). NOAA adds Dorian, 7 Sep 2019.
+   - Places: the S-curves and Jug Handle Bridge, New Inlet (located on the 2012 photo), Avon, and Buxton.
+   - Every caption fact comes from the timeline xlsx or the config. Links like `#spot=<id>` open a given place.
+   - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
 

@@ -1,0 +1,74 @@
+# Imagery compare slider on /hatteras/shoreline-change/ (_includes/hatteras/imagery_compare.liquid).
+# Every layer is public and loaded live from its host; checked to cover all four spots on 2026-10-02.
+# nconemap: an NC OneMap ImageServer, drawn tile by tile through exportImage.
+# xyz: a ready-made tile template.
+# Flight dates for the multi-year mosaics are read from their Dare County tile names (identify, catalog items).
+layers:
+  - id: "1993"
+    label: "1993 (black and white)"
+    nconemap: DOQQ_NC_1993
+  - id: "1996"
+    label: "1996"
+    nconemap: Orthoimagery_1996
+  - id: "1998"
+    label: "1998 (infrared: plants show red)"
+    nconemap: DOQQ_NC_CIR_1998
+  - id: "2002"
+    label: "2002"
+    nconemap: Orthoimagery_2002
+  - id: "2007"
+    label: "2007"
+    nconemap: Orthoimagery_2007
+  - id: "2010"
+    label: "2010"
+    nconemap: Orthoimagery_2010
+  - id: "2012"
+    label: "Feb–Mar 2012 (after Hurricane Irene)"
+    nconemap: Orthoimagery_2012_2015
+  - id: "2016"
+    label: "Jan–Feb 2016"
+    nconemap: Orthoimagery_2016_2019
+  - id: "2019"
+    label: "7 Sep 2019 (after Hurricane Dorian)"
+    xyz: "https://stormscdn.ngs.noaa.gov/20190907a-rgb/{z}/{x}/{y}"
+    credit: "NOAA National Geodetic Survey emergency response imagery"
+  - id: "2020"
+    label: "Feb 2020"
+    nconemap: Orthoimagery_2020_2023
+  - id: "2024"
+    label: "Mar 2024"
+    nconemap: Orthoimagery_20242027
+
+# Spots: centre [lat, lon] from the transect frame (GIS domain noted) or, for New Inlet, from the 2012 photo.
+# split: where the divider starts, in percent from the left (default 50).
+# Facts in the captions come from Hatteras_Management_Timelines.xlsx and HATTERAS_NOURISHMENT_PROJECTS.
+spots:
+  - id: scurves
+    name: "S-curves and Jug Handle Bridge"
+    centre: [35.6140, -75.4690]  # GIS 84-88, framed on the bridge in the 2024 photo
+    zoom: 14
+    split: 25  # the bridge is west of centre, so open mostly on 2024
+    before: "2020"
+    after: "2024"
+    caption: "North of Rodanthe, NC-12 ran right behind the beach. The Jug Handle Bridge opened in July 2022 and carries the road over Pamlico Sound around this stretch. The beach here was also nourished in 2014."
+  - id: newinlet
+    name: "New Inlet, Pea Island"
+    centre: [35.6838, -75.4830]
+    zoom: 16
+    before: "2010"
+    after: "2012"
+    caption: "Hurricane Irene cut through the island here in August 2011. A temporary bridge carried NC-12 across the breach from October 2011, and the permanent Etheridge Bridge replaced it in 2017."
+  - id: avon
+    name: "Avon"
+    centre: [35.3465, -75.4992]  # GIS 26, Avon Pier
+    zoom: 15
+    before: "2020"
+    after: "2024"
+    caption: "Avon's beach was nourished in 2022, as part of the Avon and Buxton shore protection project."
+  - id: buxton
+    name: "Buxton and the groins"
+    centre: [35.2530, -75.5165]  # GIS 5-6
+    zoom: 15
+    before: "1993"
+    after: "2024"
+    caption: "The Navy built the Buxton groins at the lighthouse in 1969. In 2022, sand was added along 4.7 km of beach running north from the lighthouse groin."
