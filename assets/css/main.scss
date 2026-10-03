@@ -1,40 +1,451 @@
 ---
+# Only the main Sass file needs front matter (the dashes are enough)
 ---
+@charset "utf-8";
 
-/*
- * This file controls what is imported from /_sass
- *
- * Note that the files are processed in the order they are imported, so they are partly
-   sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
- */
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
 
-@import
-    "vendor/breakpoint/breakpoint",
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }},
+  $purple-color: #2f7f93
+);
 
-    "themes",
-    "theme/{{ site.site_theme | default: 'default' | append: '_light' }}",
-    "theme/{{ site.site_theme | default: 'default' | append: '_dark' }}",
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
 
-    "include/mixins",
-    "vendor/susy/susy",
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
 
-    "layout/reset",
-    "layout/base",
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
 
-    "include/utilities",
-    "layout/tables",
-    "layout/buttons",
-    "layout/notices",
-    "layout/masthead",
-    "layout/navigation",
-    "layout/footer",
-    "syntax",
+// -----------------------------------------------------------------------------
+// Site additions (this file overrides al_folio_core's assets/css/main.scss;
+// everything above is the theme's own file, with only the accent colour changed)
+// -----------------------------------------------------------------------------
 
-    "layout/forms",
+// Smaller social icons on the home page
+.social .contact-icons {
+  font-size: 2.4rem;
 
-    "layout/page",
-    "layout/archive",
-    "layout/sidebar",
-    "layout/json_cv",
-    "layout/custom"
-;
+  a img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+// Research cards: every photo the same shape
+.projects .card .card-img-top,
+.projects .card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+// Talks: breathing room between entries
+ul.talk-list > li {
+  margin-bottom: 0.9rem;
+}
+
+// Photo rows: crop every photo in a row to the same shape
+img.strip-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+// Home page banner: name and subtitle over a full-width coastal photo.
+// Only the about page has a .profile, so this leaves other pages alone.
+.post:has(.profile) > .post-header {
+  margin: -3rem calc(50% - 50vw) 2rem;
+  padding: 7rem calc(50vw - 50%) 2.5rem;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.68)),
+    url("/assets/img/photos/hatteras-aerial.jpg") center 60% / cover no-repeat;
+  color: #fff;
+
+  .post-title,
+  .post-title span,
+  .desc,
+  .desc span,
+  .desc a {
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  .desc a {
+    text-decoration: underline;
+  }
+}
+
+// Playfair Display for headings, served from this site (SIL Open Font License, assets/fonts/OFL-PlayfairDisplay.txt)
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-500-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-500-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-600-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-700-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/playfair-display-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+$heading-font: "Playfair Display", Georgia, "Times New Roman", serif;
+
+.post-title,
+.post h1,
+.post h2,
+.post h3,
+.post .card-title,
+.publications h2.bibliography,
+.navbar-brand {
+  font-family: $heading-font;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+// Hero: taller banner with tagline and outlined buttons
+.post:has(.profile) > .post-header {
+  padding-top: 5.5rem;
+  padding-bottom: 2.5rem;
+  min-height: 38vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .post-title {
+    font-size: 3.4rem;
+
+    @media (max-width: 576px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  .desc span {
+    display: block;
+  }
+
+  .hero-tagline {
+    font-family: $heading-font;
+    font-style: italic;
+    font-size: 1.35rem;
+    margin-top: 0.6rem;
+    max-width: 40rem;
+  }
+
+  .hero-buttons {
+    margin-top: 1.4rem;
+  }
+
+  a.hero-btn {
+    display: inline-block;
+    margin: 0 0.6rem 0.6rem 0;
+    padding: 0.45rem 1.1rem;
+    border: 1.5px solid #fff;
+    border-radius: 3px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+// Interests | Education columns
+.about-columns h3 {
+  font-size: 1.45rem;
+  margin-bottom: 0.8rem;
+}
+
+.about-list {
+  padding-left: 1.1rem;
+
+  li {
+    margin-bottom: 0.45rem;
+  }
+
+  &.education {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    i {
+      color: var(--global-theme-color);
+      margin-top: 0.3rem;
+    }
+  }
+}
+
+// News feed: picture cards alternate sides, plain items are one line
+.news-heading {
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.news-card {
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--global-divider-color);
+
+  img.news-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    .news-img-right {
+      order: 2;
+    }
+  }
+
+  .news-title {
+    font-size: 1.4rem;
+    margin: 0.6rem 0 0.2rem;
+  }
+}
+
+.news-date {
+  color: var(--global-theme-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.news-line {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--global-divider-color);
+
+  .news-date {
+    margin: 0.15rem 0 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+// One-sentence plain-language summary under each paper
+.pub-summary {
+  font-size: 0.95rem;
+  margin: 0.15rem 0 0.25rem;
+}
+
+// -----------------------------------------------------------------------------
+// Readability: regular-weight text, and nothing smaller than 14px
+// -----------------------------------------------------------------------------
+body,
+.navbar .nav-link {
+  font-weight: 400;
+}
+
+.post-description {
+  font-size: 1.06rem;
+}
+
+.card-text,
+.pub-summary,
+.contact-note {
+  font-size: 1rem;
+}
+
+small,
+.small,
+.caption,
+.news-date {
+  font-size: 0.94rem;
+}
+
+.publications .btn,
+.publications a.btn.btn-sm {
+  font-size: 0.875rem;
+  padding: 0.2rem 0.7rem;
+}
+
+.publications abbr.badge {
+  font-size: 0.875rem;
+}
+
+footer,
+footer .container,
+footer a {
+  font-size: 0.875rem;
+}
+
+.post:has(.profile) > .post-header a.hero-btn {
+  font-size: 0.9rem;
+}
+
+.social .contact-note,
+.post .social .contact-note {
+  font-size: 1rem;
+}
+
+// Year headings on publications and the research category labels were too pale to read
+.publications h2.bibliography,
+.post h2.category,
+.projects h2.category {
+  color: #6b7378;
+}
+
+// Long photo strip under the bio
+.about-banner {
+  clear: both;
+
+  img.banner-img {
+    width: 100%;
+    aspect-ratio: 5.5 / 1;
+    object-fit: cover;
+    object-position: center 55%;
+  }
+}
+
+// Research pages: "at a glance" panel, intro questions, and the site map
+.glance {
+  background: #eef5f7;
+  border-left: 4px solid var(--global-theme-color);
+  border-radius: 4px;
+  padding: 1rem 1.3rem 0.6rem;
+  margin: 0.5rem 0 1.8rem;
+
+  h4 {
+    font-family: $heading-font;
+    font-size: 1.2rem;
+    margin: 0 0 0.6rem;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0.35rem 1rem;
+    margin: 0;
+  }
+
+  dt {
+    font-weight: 600;
+    color: var(--global-theme-color);
+  }
+
+  dd {
+    margin: 0 0 0.3rem;
+  }
+
+  @media (max-width: 576px) {
+    dl {
+      grid-template-columns: 1fr;
+    }
+
+    dd {
+      margin-bottom: 0.6rem;
+    }
+  }
+}
+
+.research-intro {
+  margin-bottom: 1.5rem;
+
+  .research-questions li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.map-heading {
+  margin-top: 0.5rem;
+}
+
+#research-map {
+  height: 380px;
+  border-radius: 4px;
+  margin: 0.6rem 0 0.4rem;
+  z-index: 0;
+}
+
+.map-note {
+  font-size: 0.94rem;
+  color: #5d666b;
+  margin-bottom: 1.5rem;
+}
+
+// CV page: awards list with a year column, compact skills paragraph
+ul.highlights-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .yr {
+    flex: 0 0 5.5rem;
+    font-weight: 600;
+    color: var(--global-theme-color);
+  }
+}
+
+p.skills {
+  line-height: 1.75;
+}

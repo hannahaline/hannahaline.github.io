@@ -1,0 +1,5 @@
+# Settings for local previews on Windows only (GitHub's build ignores this file).
+# Use with: bundle exec jekyll serve --config _config.yml,_config_local.yml
+# Windows has its own unrelated "convert" program, so ImageMagick resizing is off here.
+imagemagick:
+  enabled: false

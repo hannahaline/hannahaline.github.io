@@ -1,77 +1,80 @@
 ---
-layout: single
-title: "Teaching, Mentorship, and Public Engagement"
+layout: page
 permalink: /teaching-outreach/
-author_profile: true
-redirect_from:
-  - /teaching/
+title: teaching & outreach
+description: Leadership, teaching, science communication, and service.
+nav: true
+nav_order: 4
 ---
 
-I am deeply committed to science education, mentorship, and public outreach. With experience spanning university classrooms, K–12 education, and community programming, my goal is to make conservation science accessible, engaging, and actionable for diverse audiences.
+I care about making coastal science accessible and about building the community around it: leading a national working group, teaching undergraduates, translating policy for The Wildlife Society, and bringing hands-on science to K–12 students.
 
-At the university level, I have taught over 180 undergraduate students as a Teaching Assistant and Learning Assistant in biology and earth science courses, leading more than 10 lab sections focused on hands-on experimentation, field-based learning, and interdisciplinary problem-solving. My teaching philosophy centers on experiential learning and inclusivity—ensuring that students from all backgrounds can meaningfully engage with science.
+## Leadership
 
-Beyond university teaching, I've designed and delivered interactive environmental education programs reaching more than 500 K–12 students and community members. This includes work with organizations such as the Florida Fish and Wildlife Conservation Commission, the Alabama Department of Conservation and Natural Resources, SeaWorld, and the NOAA Nature Coast Biological Station, where I created programming on topics such as marine wildlife ecology, species conservation, and environmental stewardship.
-
-I also actively support the professional growth of early-career scientists. In 2024, I founded and currently chair the [Coastal and Marine Wildlife Working Group (CMWG)](/cmwg/) within The Wildlife Society—a national initiative connecting students, researchers, and professionals in marine conservation.
-
-<div class="photo-row tall">
-  <figure><img src="/images/photos/field-trip-students.jpg" alt="Hannah with a group of students on a field trip in the woods"></figure>
-  <figure><img src="/images/photos/outreach-specimen.jpg" alt="Hannah holding a specimen during an outreach program"></figure>
-  <figure><img src="/images/photos/barbour-wma.jpg" alt="Hannah beside the Barbour Wildlife Management Area sign"></figure>
+<div class="row align-items-center mb-2" id="cmwg">
+  <div class="col-sm-3 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/cmwg-logo.png" alt="Coastal and Marine Wildlife Working Group logo" class="img-fluid rounded" %}
+  </div>
+  <div class="col-sm-9">
+    <p><b>Founder &amp; Chair, Coastal and Marine Wildlife Working Group (CMWG), The Wildlife Society</b> (2024–2026)</p>
+    <p>I founded the CMWG to give coastal and marine wildlife professionals a home within The Wildlife Society, the largest professional organization for wildlife scientists. I defined its mission and executive team and grew it to a network of more than 60 members, from Alaska to Australia.</p>
+  </div>
 </div>
 
-Teaching experience
-======
+- **Conference sessions:** organized the CMWG's inaugural meeting (TWS 2024, Baltimore) and the session "Coastal and Marine Wildlife Conservation: Challenges, Innovations, and Future Directions" (TWS 2025, Edmonton); co-organized "Estuaries and Coasts as Wildlife Habitat" (CERF 2025, Richmond)
+- **Programs:** a monthly newsletter, a professional-opportunities tracker, a mentorship program, and webinars including a Marine & Coastal Ecology Career Panel and "Caribbean Coasts: Partnering with Local Communities to Conserve Tropical Coastal Wildlife"
+- **Learn more:** [wildlife.org/cmwwg](https://wildlife.org/cmwwg/) · [member map](https://maphub.net/twscmwg/membership-locations) · Instagram [@tws.cmwg](https://www.instagram.com/tws.cmwg/) · [Facebook](https://www.facebook.com/profile.php?id=61560575535260)
 
-### Teaching Assistant
+<div class="row mt-3 mb-3">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="lazy" path="assets/img/photos/cmwg-group.jpg" alt="CMWG members gathered for a group photo at a conference" class="img-fluid rounded z-depth-1 strip-img" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="lazy" path="assets/img/photos/cmwg-presentation.jpg" alt="A talk at a CMWG conference session" class="img-fluid rounded z-depth-1 strip-img" %}
+  </div>
+</div>
+
+## Teaching
 
 **University of North Carolina at Chapel Hill**
-- Planet Earth Laboratory (EMES101L), Spring 2025 — led 3 lab sections (40 students total) focused on Earth science concepts, with hands-on experiments and field-based learning
+- **Teaching Assistant**, Science Fiction, the Environment, and Vulnerable Communities (IDST 114), Spring 2026
+- **Graduate Research Consultant**, Analysis and Solutions for Environmental Problems (ENEC 698), Spring 2026
+- **Laboratory TA**, Planet Earth Laboratory (EMES 101L), Spring 2025
 
 **University of Florida**
-- Integrated Principles of Biology II Laboratory (BSC2011L), Spring 2021 — taught 2 lab sections (~25 students each) covering evolutionary biology, genetics, and ecology
+- **Laboratory TA**, Integrated Principles of Biology II Laboratory (BSC 2011L), Spring 2021
+- **Learning Assistant**, Integrated Principles of Biology II (BSC 2011), Fall 2020 and Spring 2021
 
-### Learning Assistant
+**Guest lectures:** Modeling Barrier Island Evolution at Hatteras, NC (UNC, 2026) · Predicting the Future of Hatteras Island (UNC, 2024) · Human Dimensions Research Methods (Arkansas State University, 2023) · Human–Wildlife Interactions on the Alabama Coast and the Bottlenose Dolphin Take Reduction Plan (Auburn University, 2023)
 
-**University of Florida**
-- Integrated Principles of Biology II (BSC2011), Fall 2020 and Spring 2021 — peer-assisted learning across two semesters (40 students); facilitated discussion groups and collaborative problem-solving
+## Science communication and policy
 
-### Guest lectures
+- **Joe Burns Memorial Wildlife Policy Intern, The Wildlife Society** (2023–2024): researched emerging conservation policy, drafted briefings and position statements, and represented TWS at coalition meetings and agency briefings
+- **Writing:** "Policy Perspectives: Informing energy policy on public lands," *The Wildlife Professional* 18(3), 2024, and ten policy news articles for The Wildlife Society (2024)
+- **Social Media Campus Representative, UNC Earth, Marine, and Environmental Sciences** (2025–present): lead the department's digital outreach with the Institute of Marine Sciences and the Environment, Ecology, and Energy Program, and supervise an undergraduate assistant
 
-- Predicting the Future of Hatteras Island — UNC Chapel Hill (2024)
-- Human Dimensions Research Methods — Arkansas State University (2023)
-- Human–Wildlife Interactions on the Alabama Coast — Auburn University (2023)
-- Tuna Industry & Bottlenose Dolphin Take Reduction Plan — Auburn University (2023)
+## Service
 
-Outreach and science communication
-======
+- Virginia Coast Reserve Graduate Representative, NSF LTER community working group (2025)
+- Elected geology senator, UNC Graduate and Professional Student Government (2025–present; re-elected 2026)
+- Treasurer, Committee for Graduate Advocacy, UNC EMES (2025)
+- Peer reviewer for *Fisheries Research* and *Discover Sustainability*
 
-### Professional organizations
+## Community and K–12 outreach
 
-**Founder & Chair, Coastal and Marine Wildlife Working Group, The Wildlife Society** (2024–present)
-- Established a national working group connecting students and professionals
-- Organized mentorship programs, webinars, and conference sessions
+<div class="row mt-2 mb-3">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="lazy" path="assets/img/photos/field-trip-students.jpg" alt="Hannah with a group of students on a field trip in the woods" class="img-fluid rounded z-depth-1 strip-img" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="lazy" path="assets/img/photos/outreach-specimen.jpg" alt="Hannah holding a specimen during an outreach program" class="img-fluid rounded z-depth-1 strip-img" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="lazy" path="assets/img/photos/hands-on-specimens.jpg" alt="Hands-on wildlife specimens at an outreach program" class="img-fluid rounded z-depth-1 strip-img" %}
+  </div>
+</div>
 
-### K–12 and community education
-
-**Assistant Director, Ocala Conservation Center, Florida Fish and Wildlife Conservation Commission** (2020–2022)
-- Managed day-to-day operations at a residential conservation education center
-- Hired, trained, and supervised a team of 30 seasonal educators
-- Designed and launched 4 new educational programs on wildlife, ecosystems, and hunter safety
-- Delivered presentations and outreach to youth and families to promote conservation awareness
-
-**Science Instructor, Alachua County Public Schools** (2020)
-- Designed weekly environmental science lessons for ~30 students, with hands-on experiments and outdoor exploration
-
-**Education Specialist, SeaWorld Entertainment** (2019)
-- Led marine conservation programs for 200+ students and families on ocean ecosystems and wildlife stewardship
-
-**Educator, Nature Coast Biological Station, University of Florida** (2018–2019)
-- Reached 100+ participants with interactive salt marsh ecology programs, including fish dissections and coastal trawling expeditions
-
-### Public engagement
-
-**R3 Outreach, Alabama Department of Conservation and Natural Resources** (2023–2024)<br>
-**R3 Outreach, Florida Fish and Wildlife Conservation Commission** (2022–2023)
-- Developed and delivered public education programs on wildlife conservation, hunter education, and environmental policy and stewardship
+- **Now:** UNC Science Expo ambassador (2026), UNC Shadow a Scientist program (2025), and judge for the Accawmacke Elementary and Eastern Shore Regional Science Fairs (2025)
+- **Educational outreach for state agencies:** the Alabama Department of Conservation and Natural Resources (2023–2024) and the Florida Fish and Wildlife Conservation Commission (2022–2023)
+- **Assistant Director, Ocala Conservation Center, Florida Fish and Wildlife Conservation Commission** (2020–2022): led daily operations, hired, trained, and supervised 30 seasonal educators, and launched 4 new programs on wildlife conservation, ecosystem stewardship, and hunter safety
+- **Earlier:** environmental science instructor for Alachua County Public Schools (2020), education specialist at SeaWorld (2019), and salt marsh educator at the UF Nature Coast Biological Station (2018–2019)

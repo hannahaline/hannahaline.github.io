@@ -1,0 +1,7 @@
+{%- comment -%}
+  Called by al_folio_core's bib layout for every paper. Shows the one-sentence
+  plain-language summary from the paper's `summary` field in papers.bib.
+{%- endcomment -%}
+{%- if entry.summary -%}
+  <div class="pub-summary">{{ entry.summary }}</div>
+{%- endif -%}

@@ -1,48 +1,87 @@
 ---
+layout: about
+title: about
 permalink: /
-title: "About me"
-seo_title: "Hannah Henry"
-author_profile: true
-redirect_from:
-  - /about/
-  - /about.html
+subtitle: >-
+  <span class="hero-role">Ph.D. candidate, <a href="https://cecl.online/">Coastal Environmental Change Lab</a>, UNC Chapel Hill</span>
+  <span class="hero-tagline">How barrier islands change, and what that means for the people and wildlife that depend on them</span>
+  <span class="hero-buttons">
+  <a class="hero-btn" href="https://scholar.google.com/citations?user=rFOSoSYAAAAJ">Google Scholar</a>
+  <a class="hero-btn" href="https://orcid.org/0000-0003-0767-8669">ORCID</a>
+  <a class="hero-btn" href="/cv/">CV</a>
+  </span>
+
+profile:
+  align: right
+  image: prof_pic.jpg
+  image_circular: false # crops the image to make it circular
+
+selected_papers: true # includes a list of papers marked as "selected={true}"
+social: true # includes social icons at the bottom of the page
+
+announcements:
+  enabled: false # news is drawn below as a picture feed instead
+  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
+  limit: 10 # leave blank to include all the news in the `_news` folder
+
+latest_posts:
+  enabled: false
 ---
 
-I am a Ph.D. student in Earth, Marine, and Environmental Sciences at UNC Chapel Hill, where I study how barrier islands change—and what that means for the people and wildlife that depend on them. My research integrates coastal geomorphology, wildlife ecology, and human dimensions to examine shoreline change on developed and undeveloped coastlines under climate change.
+I am a Ph.D. candidate in Earth, Marine, and Environmental Sciences at UNC Chapel Hill, where I study how barrier islands change—and what that means for the people and wildlife that depend on them. My research integrates coastal geomorphology, wildlife ecology, and human dimensions to examine shoreline change on developed and undeveloped coastlines under climate change.
 
 On Hatteras Island, I use numerical modeling and remote sensing to evaluate management strategies, such as beach nourishment and groin installation, alongside stakeholder input from communities, agencies, and conservation organizations navigating real decisions about infrastructure and managed retreat. In parallel, I model shorebird habitat dynamics on the Virginia Coast Reserve to understand how geomorphic change shapes species persistence over time.
 
-The coast doesn't separate ecology from geomorphology from people, and neither do I.
 
-<div class="photo-row">
-  <figure><img src="/images/photos/hatteras-aerial.jpg" alt="Aerial view of Hatteras Island, with NC-12 running between the ocean and the sound"></figure>
-  <figure><img src="/images/photos/hatteras-dunes.jpg" alt="Hannah standing among dune grasses on a barrier island"></figure>
-  <figure><img src="/images/photos/oystercatchers.jpg" alt="Two American Oystercatchers feeding in shallow water"></figure>
+<div class="about-banner mt-4">
+{% include figure.liquid loading="lazy" path="assets/img/photos/banner-barrier-aerial.jpg" alt="Aerial view of barrier islands, an inlet, and the sound behind them" class="img-fluid rounded z-depth-1 banner-img" %}
 </div>
 
-Education
-======
+<div class="row mt-4 about-columns">
+  <div class="col-md-6">
+    <h3>Interests</h3>
+    <ul class="about-list">
+      <li>Barrier island evolution and coastal geomorphology</li>
+      <li>Numerical modeling and remote sensing</li>
+      <li>Coastal management, infrastructure, and managed retreat</li>
+      <li>Shorebird habitat and coastal wildlife conservation</li>
+      <li>Human dimensions of coastal change</li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3>Education</h3>
+    <ul class="about-list education">
+      <li><i class="fa-solid fa-graduation-cap"></i><span><b>Ph.D. in Earth, Marine, and Environmental Sciences</b>, 2024–present<br><small>University of North Carolina at Chapel Hill · advisor <a href="https://cecl.online/about/">Dr. Laura Moore</a><br><i>Dissertation: Modeling Coupled Dynamics of Mid-Atlantic Barrier Islands for Improved Coastal Management</i><br>Committee: Dr. Sarah Karpanty, Dr. Katherine Anarde, Dr. Tamlin Pavelsky, Dr. Antonio B. Rodriguez</small></span></li>
+      <li><i class="fa-solid fa-graduation-cap"></i><span><b>M.S. in Natural Resources</b>, 2024<br><small>Auburn University · advisor <a href="https://www.uwyo.edu/haub/about-us/people/dunning-kelly.html">Dr. Kelly Dunning</a><br><i>Thesis: <a href="https://etd.auburn.edu/handle/10415/9305">Conservation Compliance and Public Awareness: Assessing Dolphin and Sea Turtle Interactions in Coastal Alabama</a></i></small></span></li>
+      <li><i class="fa-solid fa-graduation-cap"></i><span><b>B.S. in Wildlife Ecology &amp; Conservation</b>, 2022, Summa Cum Laude<br><small>University of Florida · advisors <a href="https://wec.ifas.ufl.edu/people/wec-faculty/kathryn-sieving/">Dr. Kathryn Sieving</a> and <a href="https://case.fiu.edu/about/directory/profiles/gomes-cristina.html">Dr. Cristina Gomes</a><br><i>Honors thesis: Utilizing Bioacoustics for Conservation of the St. Vincent Amazon Parrot</i><br>Minors: Economics; International Studies in Agricultural and Life Sciences</small></span></li>
+    </ul>
+  </div>
+</div>
 
-**Ph.D. in Earth, Marine, and Environmental Science** (present)<br>
-University of North Carolina at Chapel Hill — advisor [Dr. Laura Moore](https://cecl.online/about/), [Coastal Environmental Change Lab](https://cecl.web.unc.edu/)
+<h2 class="news-heading">News</h2>
 
-**M.Sc. in Natural Resources** (2024)<br>
-Auburn University — advisor [Dr. Kelly Dunning](https://www.uwyo.edu/haub/about-us/people/dunning-kelly.html) · [Thesis](https://etd.auburn.edu/handle/10415/9305)
-
-**B.Sc. in Wildlife Ecology & Conservation** (2022), Summa Cum Laude<br>
-University of Florida — advisors [Dr. Kathryn Sieving](https://wec.ifas.ufl.edu/people/wec-faculty/kathryn-sieving/) and [Dr. Cristina Gomes](https://case.fiu.edu/about/directory/profiles/gomes-cristina.html)
-
-Highlights
-======
-
-<ul class="highlights">
-  <li><span class="year">2025</span>NSF-ASI Fellow, Coastal Hazards Training Program in Semarang and Yogyakarta, Indonesia</li>
-  <li><span class="year">2025</span>Earth Surface Processes Institute, Community Surface Dynamics Modeling System (CSDMS)</li>
-  <li><span class="year">2024</span>Trailblazing Work in Science Policy, and the Katherine S. McCarter Graduate Student Policy Award, Ecological Society of America</li>
-  <li><span class="year">2024</span>Best Graduate Student Oral Presentation, 75th Atlantic Estuarine Research Society Conference</li>
-  <li><span class="year">2024</span>Founded the <a href="/cmwg/">Coastal and Marine Wildlife Working Group</a> of The Wildlife Society</li>
-  <li><span class="year">2023–24</span>Ronald F. Labisky Graduate Fellowship in Wildlife Policy, The Wildlife Society</li>
-  <li><span class="year">2023</span>Best Graduate Student Oral Presentation and Rising TIDES Scholar, 27th Biennial Coastal and Estuarine Research Federation Conference</li>
-</ul>
-
-Please reach out at [hahenry@unc.edu](mailto:hahenry@unc.edu) if you have any questions or would like to learn more.
+<div class="news-feed">
+{%- assign news_items = site.news | sort: "date" | reverse -%}
+{%- assign pictured = 0 -%}
+{%- for item in news_items -%}
+{%- if item.img -%}
+{%- assign side = pictured | modulo: 2 -%}
+{%- assign pictured = pictured | plus: 1 -%}
+<div class="row news-card align-items-center">
+<div class="col-md-4{% if side == 1 %} news-img-right{% endif %}">
+{%- include figure.liquid loading="lazy" path=item.img alt=item.title class="img-fluid rounded z-depth-1 news-img" -%}
+</div>
+<div class="col-md-8">
+<h3 class="news-title">{{ item.title }}</h3>
+<p class="news-date">{{ item.date | date: "%B %Y" }}</p>
+<div class="news-text">{{ item.content }}</div>
+</div>
+</div>
+{%- else -%}
+<div class="row news-line">
+<div class="col-sm-2 news-date">{{ item.date | date: "%b %Y" }}</div>
+<div class="col-sm-10 news-text">{{ item.content }}</div>
+</div>
+{%- endif -%}
+{%- endfor -%}
+</div>
