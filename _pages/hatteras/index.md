@@ -10,7 +10,7 @@ nav: false
 
 <section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/img/photos/hatteras-aerial.jpg' | relative_url }}')">
   <div class="hat-hero-text">
-    <h2>An island on the move</h2>
+    <h2>Living with a changing coast</h2>
     <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
   </div>
 </section>

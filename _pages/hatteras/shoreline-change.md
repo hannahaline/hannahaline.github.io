@@ -41,12 +41,12 @@ That average hides large differences from place to place.
 
 Rates that include the last few years are pushed seaward by an island-wide shift in 2021 (described below). That is why the 2010–2026 view shows more growth than the earlier period.
 
-{% include hatteras/todo.liquid text="Check these village summaries against your own reading. Numbers are means of the transect rates in each reach (GIS 1–5, 6–15, 21–31, 32–67, 68–83, 91–120), from shoreline_rates.json." %}
+{% include hatteras/todo.liquid text="Check the wording of these village summaries against your own reading. The numbers were re-checked on 10-03 against the current windows (means of the transect rates in GIS 1–5, 6–15, 21–31, 32–67, 68–83, 91–120, from shoreline_rates.json) and all match." %}
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: how shoreline change is measured</summary>
 
-Shoreline positions come from [CoastSat](https://github.com/kvos/CoastSat), an open-source toolkit that finds the water's edge in Landsat and Sentinel-2 satellite images and corrects it for the tide.
+Shoreline positions come from CoastSat Live ([coastsat.space](https://coastsat.space)), a public dataset made with [CoastSat](https://github.com/kvos/CoastSat), an open-source toolkit that finds the water's edge in Landsat and Sentinel-2 satellite images. Each position is corrected for the tide using the FES2022 tide model and a beach slope estimated at each transect.
 Positions are measured along {% include hatteras/term.liquid id="transect" text="transects" %}, shore-normal lines spaced every 50 m along the island.
 The rate at each transect is the slope of a straight-line fit through every position in the period (a *linear regression rate*), reported in metres per year.
 Negative rates mean {% include hatteras/term.liquid id="erosion" text="erosion" %}, and positive rates mean {% include hatteras/term.liquid id="accretion" text="accretion" %}.
@@ -54,7 +54,7 @@ A rate is shown as "no clear trend" when it is smaller than its 95% uncertainty.
 The smoothed line on the chart is a LOWESS fit over about 3.5 km (seven 500 m model domains). Near Cape Point (the first 5 km) it is replaced by the average of each 500 m stretch, because the shoreline there changes too sharply to smooth.
 Periods run from 1 January of the first year to 31 December of the last.
 
-{% include hatteras/todo.liquid text="Confirm the tide and beach-slope correction settings against the CoastSat run." %}
+{% include hatteras/todo.liquid text="Record when the CoastSat Live data were downloaded: the platform now processes with FES2022, but the repo does not record the download date, so this is not yet confirmed for these files." %}
 
 </details>
 ## Events that stand out

@@ -23,15 +23,14 @@ This work is supported by a Mountains to Sea Graduate Research Fellowship from t
 
 ## Data sources
 
-- **Shorelines:** traced from Landsat and Sentinel-2 satellite images with [CoastSat](https://github.com/kvos/CoastSat) (Vos and others, 2019), 1984 to January 2026.
+- **Shorelines:** CoastSat Live ([coastsat.space](https://coastsat.space)), the public dataset of shorelines traced from Landsat and Sentinel-2 satellite images with [CoastSat](https://github.com/kvos/CoastSat) (Vos and others, 2019), 1984 to January 2026.
 - **Water levels:** NOAA tide gauge 8651370 at Duck, North Carolina.
 - **Waves:** the US Army Corps of Engineers Wave Information Study (WIS) hindcast, station 63228.
 - **Storm tracks and names:** the National Hurricane Center's best-track database (HURDAT2).
 - **Aerial photos:** NC OneMap orthoimagery (NC Center for Geographic Information and Analysis, NC 911 Board), and NOAA National Geodetic Survey emergency response imagery.
 - **Road, bridge and nourishment history:** compiled from NCDOT project documents, agency records and local news coverage.
+- **Island elevation (the model's starting island):** airborne lidar. The US Army Corps of Engineers' 2009 survey, with gaps filled from NOAA's 2014 survey after Hurricane Sandy; for the 1996–2015 period, the beach and dunes come from the 1996 NOAA/NASA ALACE survey.
 - **The model:** [CASCADE](https://github.com/UNC-CECL/CASCADE), open source.
-
-{% include hatteras/todo.liquid text="Add the lidar surveys used for the model's starting island (years and providers), and check the WIS station number against the wave file." %}
 
 ## Publications
 
