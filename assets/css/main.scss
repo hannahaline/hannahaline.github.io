@@ -450,10 +450,37 @@ p.skills {
   line-height: 1.75;
 }
 
-// Field photo under the interests list on the home page
+// Field photo under the interests list on the home page; on wide screens it
+// stretches to end level with the bottom of the education column
 .about-field-photo img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: center 40%;
+}
+
+@media (min-width: 768px) {
+  .about-columns > .col-md-6:first-child {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-field-photo {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 12rem;
+
+    figure,
+    picture {
+      position: static;
+      margin: 0;
+    }
+
+    img {
+      position: absolute;
+      inset: 0 0 1rem 0;     // end level with the last line of the education column
+      height: calc(100% - 1rem);
+      aspect-ratio: auto;
+    }
+  }
 }
