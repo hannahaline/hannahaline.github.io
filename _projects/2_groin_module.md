@@ -18,6 +18,8 @@ category: current research
     <dd>Develop a groin module for CASCADE and test it against the shoreline change observed on either side of the Buxton groins</dd>
     <dt>Data</dt>
     <dd>Satellite-derived shorelines, historical shoreline positions, and the area's management record</dd>
+    <dt>Collaborators</dt>
+    <dd>Coastal Environmental Change Lab, UNC Chapel Hill (advisor Dr. Laura Moore)</dd>
     <dt>Status</dt>
     <dd>In development</dd>
   </dl>

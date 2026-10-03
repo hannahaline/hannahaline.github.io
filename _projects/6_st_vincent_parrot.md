@@ -15,8 +15,10 @@ category: past research
     <dt>Where</dt>
     <dd>St. Vincent and the Grenadines</dd>
     <dt>Approach</dt>
-    <dd>Field and social science surveys (150+), and the first passive acoustic monitoring protocol for the species (12,000+ recordings)</dd>
-    <dt>Partners</dt>
+    <dd>Field and social science surveys, and the first passive acoustic monitoring protocol for the species</dd>
+    <dt>Data</dt>
+    <dd>150+ stakeholder surveys and 12,000+ audio recordings analyzed in Raven Pro</dd>
+    <dt>Collaborators</dt>
     <dd>FIU Tropical Conservation Institute, St. Vincent and the Grenadines Forestry Department, Cornell Lab of Ornithology</dd>
     <dt>Status</dt>
     <dd>Complete; NSF IRES fellowship, 2022</dd>
@@ -27,6 +29,8 @@ As an NSF IRES Fellow, I worked with the Florida International University Tropic
 
 This work involved processing over 150 stakeholder surveys for statistical analysis and co-developing the first passive acoustic monitoring protocol for the species. Using RavenPro software, I analyzed more than 12,000 audio recordings and helped train local staff in bioacoustic methods to support long-term, community-based monitoring in the Eastern Caribbean.
 
-**Poster.** Casanova A, Sabol A, Henry H, and Gomes C. 2023. "Investigating Human–Parrot Conflicts: A Case Study for the St. Vincent Amazon Parrot." The 30th Wildlife Society Conference, Louisville, Kentucky, November 2023.
-
 This project formed my undergraduate honors thesis at the University of Florida, <i>Utilizing Bioacoustics for Conservation of the St. Vincent Amazon Parrot (Amazona guildingii)</i>.
+
+### Presentations
+
+- Poster: Casanova A, Sabol A, Henry H, and Gomes C. 2023. "Investigating Human–Parrot Conflicts: A Case Study for the St. Vincent Amazon Parrot." The 30th Wildlife Society Conference, Louisville, Kentucky, November 2023.
