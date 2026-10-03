@@ -1,0 +1,122 @@
+<svg class="hat-model-diagram" viewBox="0 0 1000 560" role="img" aria-labelledby="md-title md-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="md-title">How the model works</title>
+<desc id="md-desc">Three neighbouring stretches of island seen from above, ocean at the bottom and the sound at the top. 1: each stretch starts from lidar elevation on a 10 metre grid. 2: storms push water and sand over a low dune and inland. 3: waves carry sand along the beach from one stretch to the next. 4: people add sand to the beach, rebuild the dunes, and protect or move the road.</desc>
+<defs><marker id="md-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker>
+<linearGradient id="md-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0ec"/><stop offset="1" stop-color="#9fbfd6"/></linearGradient>
+<linearGradient id="md-fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="0.07" stop-color="#fff" stop-opacity="0"/><stop offset="0.93" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/></linearGradient>
+<pattern id="md-grid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12,0 L0,0 0,12" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.7"/></pattern>
+</defs>
+<rect x="0" y="40" width="1000" height="100" fill="#cfe0ec"/>
+<rect x="0" y="330" width="1000" height="190" fill="url(#md-sea)"/>
+<rect x="70" y="126" width="860" height="18" fill="#93a86c"/>
+<rect x="70" y="140" width="860" height="146" fill="#7d9467"/>
+<rect x="70" y="286" width="860" height="24" fill="#d9c89a"/>
+<rect x="70" y="310" width="860" height="82" fill="#ecdfb9"/>
+<path d="M76,306 l2,-9 M80,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M87,306 l2,-9 M91,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M98,306 l2,-9 M102,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M109,306 l2,-9 M113,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M120,306 l2,-9 M124,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M131,306 l2,-9 M135,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M142,306 l2,-9 M146,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M153,306 l2,-9 M157,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M164,306 l2,-9 M168,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M175,306 l2,-9 M179,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M186,306 l2,-9 M190,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M197,306 l2,-9 M201,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M208,306 l2,-9 M212,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M219,306 l2,-9 M223,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M230,306 l2,-9 M234,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M241,306 l2,-9 M245,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M252,306 l2,-9 M256,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M263,306 l2,-9 M267,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M274,306 l2,-9 M278,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M285,306 l2,-9 M289,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M296,306 l2,-9 M300,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M307,306 l2,-9 M311,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M318,306 l2,-9 M322,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M329,306 l2,-9 M333,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M340,306 l2,-9 M344,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M351,306 l2,-9 M355,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M362,306 l2,-9 M366,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M373,306 l2,-9 M377,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M384,306 l2,-9 M388,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M395,306 l2,-9 M399,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M406,306 l2,-9 M410,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M417,306 l2,-9 M421,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M428,306 l2,-9 M432,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M439,306 l2,-9 M443,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M450,306 l2,-9 M454,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M461,306 l2,-9 M465,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M472,306 l2,-9 M476,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M483,306 l2,-9 M487,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M494,306 l2,-9 M498,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M505,306 l2,-9 M509,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M516,306 l2,-9 M520,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M527,306 l2,-9 M531,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M538,306 l2,-9 M542,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M549,306 l2,-9 M553,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M560,306 l2,-9 M564,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M571,306 l2,-9 M575,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M582,306 l2,-9 M586,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M593,306 l2,-9 M597,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M604,306 l2,-9 M608,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M615,306 l2,-9 M619,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M626,306 l2,-9 M630,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M637,306 l2,-9 M641,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M648,306 l2,-9 M652,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M659,306 l2,-9 M663,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M670,306 l2,-9 M674,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M681,306 l2,-9 M685,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M692,306 l2,-9 M696,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M703,306 l2,-9 M707,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M714,306 l2,-9 M718,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M725,306 l2,-9 M729,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M736,306 l2,-9 M740,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M747,306 l2,-9 M751,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M758,306 l2,-9 M762,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M769,306 l2,-9 M773,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M780,306 l2,-9 M784,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M791,306 l2,-9 M795,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M802,306 l2,-9 M806,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M813,306 l2,-9 M817,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M824,306 l2,-9 M828,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M835,306 l2,-9 M839,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M846,306 l2,-9 M850,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M857,306 l2,-9 M861,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M868,306 l2,-9 M872,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M879,306 l2,-9 M883,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M890,306 l2,-9 M894,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M901,306 l2,-9 M905,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M912,306 l2,-9 M916,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M923,306 l2,-9 M927,306 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
+<path d="M70,392 Q85,399 100,392 Q115,399 130,392 Q145,399 160,392 Q175,399 190,392 Q205,399 220,392 Q235,399 250,392 Q265,399 280,392 Q295,399 310,392 Q325,399 340,392 Q355,399 370,392 Q385,399 400,392 Q415,399 430,392 Q445,399 460,392 Q475,399 490,392 Q505,399 520,392 Q535,399 550,392 Q565,399 580,392 Q595,399 610,392 Q625,399 640,392 Q655,399 670,392 Q685,399 700,392 Q715,399 730,392 Q745,399 760,392 Q775,399 790,392 Q805,399 820,392 Q835,399 850,392 Q865,399 880,392 Q895,399 910,392 Q925,399 940,392" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.9"/>
+<rect x="70" y="231" width="860" height="14" fill="#3a3f42"/>
+<line x1="70" y1="238" x2="930" y2="238" stroke="#ffd23f" stroke-width="2" stroke-dasharray="10 8"/>
+<text x="80" y="264" text-anchor="start" font-size="13" fill="#fff" font-weight="600"><tspan x="80" dy="0em">NC-12</tspan></text>
+<rect x="70" y="126" width="287" height="266" fill="url(#md-grid)"/>
+<path d="M430.0,310 Q500.0,216 570.0,310 Z" fill="#ecdfb9" stroke="#d9c89a" stroke-width="1.5"/>
+<rect x="454.0" y="284" width="92" height="28" fill="#ecdfb9"/>
+<line x1="500.0" y1="426" x2="500.0" y2="252" stroke="#1a1a1a" stroke-width="3.2" marker-end="url(#md-head)"/>
+<line x1="482.0" y1="422" x2="448.0" y2="264" stroke="#1a1a1a" stroke-width="2.2" marker-end="url(#md-head)"/>
+<line x1="518.0" y1="422" x2="552.0" y2="264" stroke="#1a1a1a" stroke-width="2.2" marker-end="url(#md-head)"/>
+<line x1="309" y1="355.0" x2="405" y2="355.0" stroke="#1a1a1a" stroke-width="3" marker-end="url(#md-head)"/>
+<line x1="595" y1="355.0" x2="691" y2="355.0" stroke="#1a1a1a" stroke-width="3" marker-end="url(#md-head)"/>
+<path d="M683,392 L703,418 L870,418 L890,392 Z" fill="#f6e3b8" stroke="#c8880f" stroke-width="1.5" stroke-dasharray="5 3"/>
+<rect x="683" y="282" width="207" height="10" rx="4" fill="#d9c89a" stroke="#c8880f" stroke-width="1.2"/>
+<line x1="357" y1="122" x2="357" y2="398" stroke="#fff" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="643" y1="122" x2="643" y2="398" stroke="#fff" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M361,70 v-8 H639 v8" fill="none" stroke="#5b6469" stroke-width="1.4"/>
+<text x="500.0" y="54" text-anchor="middle" font-size="15" fill="#5b6469" font-weight="400"><tspan x="500.0" dy="0em">one stretch of island, 500 m along the shore</tspan></text>
+<text x="924" y="114" text-anchor="end" font-size="15" fill="#5b6469" font-weight="400"><tspan x="924" dy="0em">Pamlico Sound</tspan></text>
+<text x="924" y="506" text-anchor="end" font-size="15" fill="#5b6469" font-weight="400"><tspan x="924" dy="0em">Atlantic Ocean</tspan></text>
+<rect x="0" y="40" width="1000" height="480" fill="url(#md-fade)"/>
+<circle cx="100" cy="174" r="15" fill="#2f7f93" stroke="#fff" stroke-width="2"/><text x="100" y="179.5" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">1</text>
+<rect x="117" y="163" width="150" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="124" y="180" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="124" dy="0em">lidar elevation,</tspan><tspan x="124" dy="1.2em">10 m grid</tspan></text>
+<circle cx="564.0" cy="444" r="15" fill="#2f7f93" stroke="#fff" stroke-width="2"/><text x="564.0" y="449.5" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">2</text>
+<rect x="581" y="433" width="167" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="588.0" y="450" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="588.0" dy="0em">storm water and</tspan><tspan x="588.0" dy="1.2em">sand over the dune</tspan></text>
+<circle cx="293" cy="385.0" r="15" fill="#2f7f93" stroke="#fff" stroke-width="2"/><text x="293" y="390.5" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">3</text>
+<rect x="310" y="374" width="234" height="27" rx="5" fill="#fff" fill-opacity="0.92"/><text x="317" y="391.0" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="317" dy="0em">sand moves along the beach</tspan></text>
+<circle cx="681" cy="187" r="15" fill="#2f7f93" stroke="#fff" stroke-width="2"/><text x="681" y="192.5" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">4</text>
+<rect x="698" y="175" width="226" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="705" y="192" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="705" dy="0em">dune rebuilt, sand added,</tspan><tspan x="705" dy="1.2em">road protected or moved</tspan></text>
+</svg>

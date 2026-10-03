@@ -15,26 +15,16 @@ It starts from a detailed map of the island's elevation, applies the storms, wav
 
 ## How it works, in four parts
 
-<div class="hat-cards">
-  <div class="hat-card-static">
-    <h3>1. The starting island</h3>
-    <p>Laser elevation surveys (lidar) give the height of the beach, dunes, and island interior at the start of each run.</p>
-  </div>
-  <div class="hat-card-static">
-    <h3>2. Storms and overwash</h3>
-    <p>Each year, the real storms from the record are sent over the island. Where they overtop the dunes, sand moves inland.</p>
-  </div>
-  <div class="hat-card-static">
-    <h3>3. Sand along the shore</h3>
-    <p>Waves move sand along the beach between neighbouring stretches of island, so what happens in one place affects the next.</p>
-  </div>
-  <div class="hat-card-static">
-    <h3>4. People</h3>
-    <p>Management rules rebuild dunes, add nourishment sand, and protect or move the road, as happened in real life.</p>
-  </div>
-</div>
+<figure class="hat-model-figure">
+{% include hatteras/model_diagram.svg %}
+</figure>
 
-{% include hatteras/todo.liquid text="Turn the four cards into one diagram (a stack of island strips with arrows for overwash, longshore transport, and management), in house style." %}
+<ol class="hat-model-parts">
+  <li><b>The starting island.</b> Laser elevation surveys (lidar) give the height of the beach, dunes, and island interior at the start of each run, on a grid of 10 m cells.</li>
+  <li><b>Storms and overwash.</b> Each year, the real storms from the record are sent over the island. Where they overtop the dunes, sand moves inland.</li>
+  <li><b>Sand along the shore.</b> Waves move sand along the beach between neighbouring stretches of island, so what happens in one place affects the next.</li>
+  <li><b>People.</b> Management rules rebuild dunes, add nourishment sand, and protect or move the road, as happened in real life.</li>
+</ol>
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: what is inside CASCADE</summary>

@@ -1100,3 +1100,27 @@ a.hat-term {
   }
 }
 
+// How the model works (_includes/hatteras/model_diagram.svg) and its numbered parts
+.hat-model-figure {
+  margin: 1rem 0 0.5rem;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+ol.hat-model-parts {
+  padding-left: 1.4rem;
+
+  li {
+    margin-bottom: 0.4rem;
+  }
+
+  li::marker {
+    color: var(--global-theme-color);
+    font-weight: 700;
+  }
+}
+
