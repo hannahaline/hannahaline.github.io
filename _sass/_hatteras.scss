@@ -972,27 +972,6 @@ table.hat-table {
   gap: 0.5rem;
 }
 
-// Storm before/after slider (photo_slider.liquid): full text width, the tall overview narrower beneath it
-.hat-photo-slider {
-  margin-bottom: 0.6rem;
-
-  .hat-compare-photos {
-    max-height: none;
-  }
-}
-
-.hat-photo-narrow {
-  max-width: 26rem;
-  margin: 0 auto 0.5rem;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-}
-
 // Sea-level chart legend: line swatches
 .hat-tl-legend .line {
   width: 1.4rem;
