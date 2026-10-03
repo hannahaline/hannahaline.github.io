@@ -4,8 +4,8 @@ Two process diagrams for "How the island works" on the Hatteras stakeholder page
     python tools/hatteras_process_diagrams.py
 
 longshore.svg: Hatteras Island from above (the OpenStreetMap coastline in tools/data/), waves from the northeast and
-southeast, sand drifting south along the east-facing shore and, less, east along the south-facing shore, meeting at
-Cape Point and Diamond Shoals (USGS, Coastal Change Processes: Cape Hatteras), with a close-up of the zig-zag path
+southeast, sand drifting south along the east-facing shore (arrow widths schematic, from the shoreline record) and
+ending at Cape Point, with a close-up of the zig-zag path
 sand takes up and down the beach face. overwash.svg: a slice across the island in a storm, the water level raised above normal
 high tide, waves running over a low dune, and a new layer of sand (an overwash fan) spread across the island
 toward the sound. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
@@ -64,12 +64,11 @@ def island_outline():
 
 
 def longshore():
-    W, H = 1000, 760
+    W, H = 1000, 660
     s = svg_open("longshore", W, H, "Waves move sand along the coast",
                  "A map of Hatteras Island from Oregon Inlet south to Cape Point and west to Hatteras Inlet. Waves arrive "
-                 "from the northeast and from the southeast. On the long east-facing shore, sand drifts south toward Cape "
-                 "Point; on the shorter south-facing shore, a smaller drift runs east toward the cape. The two meet at the "
-                 "cape, where the sand builds Cape Point and the offshore Diamond Shoals. A close-up shows how each wave "
+                 "from the northeast and from the southeast. Along the east-facing shore, sand drifts south, more of it "
+                 "where the beach is eroding, and the drift ends at Cape Point, where the sand builds up. A close-up shows how each wave "
                  "pushes sand up the beach at an angle and it slides straight back down, so the sand creeps along the shore.")
     s.append(f'<defs>{head("ls-h")}<marker id="ls-hd" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="2.6" '
              f'markerHeight="2.6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{ADDED}"/></marker>'
@@ -96,15 +95,7 @@ def longshore():
     def south_shore(x):   # where a line at this x leaves the island on the south side
         return x, poly.intersection(LineString([(x, 0), (x, H)])).bounds[3]
 
-    # Diamond Shoals: the shoal running out to sea from Cape Point
     cape = max((p for p in ring if p[0] > xy(-75.60, 35.5)[0]), key=lambda p: p[1])  # Cape Point: southernmost east of Frisco
-    shoal = [(cape[0] + 4, cape[1] + 4), (cape[0] + 70, cape[1] + 46), (cape[0] + 140, cape[1] + 80)]
-    s.append(f'<path d="M{shoal[0][0]:.0f},{shoal[0][1]:.0f} Q{shoal[1][0]:.0f},{shoal[1][1] - 10:.0f} '
-             f'{shoal[2][0]:.0f},{shoal[2][1]:.0f}" stroke="{SAND_NEW}" stroke-width="16" stroke-linecap="round" '
-             f'fill="none" opacity="0.9"/>')
-    s.append(f'<path d="M{shoal[0][0]:.0f},{shoal[0][1]:.0f} Q{shoal[1][0]:.0f},{shoal[1][1] - 10:.0f} '
-             f'{shoal[2][0]:.0f},{shoal[2][1]:.0f}" stroke="{ADDED}" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>')
-    s.append(label(cape[0] + 150, cape[1] + 104, "Diamond Shoals", size=15, color=MUTED, box=False, weight=600))
 
     # waves from the northeast (heading south-west) and from the southeast (heading north-west): crests and arrows
     def wave_field(cx, cy, heading_deg, n=4, half=60, gap=22):
@@ -120,8 +111,8 @@ def longshore():
                  f'y2="{cy + ty * 30:.0f}" stroke="{ARROW}" stroke-width="3" marker-end="url(#ls-h)"/>')
     wave_field(720, 230, 135)        # from the north-east, travelling south-west
     s.append(label(770, 110, "waves from\nthe northeast", size=15))
-    wave_field(740, 560, 225)        # from the south-east, travelling north-west
-    s.append(label(790, 650, "waves from\nthe southeast", size=15))
+    wave_field(840, 520, 225)        # from the south-east, travelling north-west
+    s.append(label(850, 600, "waves from\nthe southeast", size=15))
 
     # drift along the east-facing shore: south, toward the cape. Widths are schematic, read from the shoreline
     # record: the drift grows where the beach erodes (Pea Island, Rodanthe: more sand leaves than arrives),
@@ -132,19 +123,10 @@ def longshore():
         x1, y1 = east_shore(lat - 0.055)
         s.append(f'<line x1="{x0 + 26:.0f}" y1="{y0:.0f}" x2="{x1 + 26:.0f}" y2="{y1:.0f}" stroke="{ADDED}" '
                  f'stroke-width="{w}" marker-end="url(#ls-hd)"/>')
-    # and on into the shoal at the cape
-    s.append(f'<line x1="{cape[0] + 10:.0f}" y1="{cape[1] - 4:.0f}" x2="{cape[0] + 52:.0f}" y2="{cape[1] + 24:.0f}" '
-             f'stroke="{ADDED}" stroke-width="6" marker-end="url(#ls-hd)"/>')
     xs, ys = east_shore(35.50)
     s.append(label(xs + 50, ys + 4, "sand drifts south;\nthicker arrow = more sand", size=15))
 
-    # a smaller drift along the south-facing shore: east, toward the cape
-    sx, sy = south_shore(cape[0] - 120)
-    sy += 14
-    s.append(f'<line x1="{sx - 60:.0f}" y1="{sy + 8:.0f}" x2="{sx + 50:.0f}" y2="{sy - 4:.0f}" stroke="{ADDED}" '
-             f'stroke-width="3" marker-end="url(#ls-hd)"/>')
-    s.append(label(cape[0] + 40, cape[1] + 150, "the drifts meet at the cape and build\nCape Point and Diamond Shoals",
-                   anchor="start", size=15))
+    s.append(label(cape[0] + 30, cape[1] + 40, "the drift ends at Cape Point,\nwhere sand builds up", size=15))
 
     # places
     for name, lon, lat, dx, anchor in (("Oregon Inlet", -75.53, 35.79, -14, "end"), ("Rodanthe", -75.47, 35.59, -16, "end"),
