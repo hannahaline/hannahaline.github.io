@@ -9,7 +9,7 @@ nav: false
 {% include hatteras/subnav.liquid %}
 
 <p class="hat-lead">
-CASCADE is a computer model of a barrier island and the people who manage it.
+CASCADE is a computer model of a {% include hatteras/term.liquid id="barrier-island" text="barrier island" %} and the people who manage it.
 It starts from a detailed map of the island's elevation, applies the storms, waves, and sea-level rise that actually happened, and lets the island change, year by year.
 </p>
 

@@ -13,7 +13,7 @@ chart:
 
 <p class="hat-lead">
 Satellites have photographed Hatteras Island many times a year since the 1980s.
-By tracing the shoreline in each image, we can see where the beach has moved landward, where it has grown, and when the big changes happened.
+By tracing the {% include hatteras/term.liquid id="shoreline" text="shoreline" %} in each image, we can see where the beach has moved landward, where it has grown, and when the big changes happened.
 </p>
 
 ## Where is the shoreline eroding or growing?
@@ -30,7 +30,7 @@ Over the whole satellite record, the island as a whole has held roughly steady: 
 That average hides large differences from place to place.
 
 - **Cape Point** has grown seaward faster than anywhere else, by about 2.4 m per year on average (roughly 24 m per decade).
-- **Buxton** lost ground through the 1990s and 2000s, about 1.4 m per year from 1996 to 2015. Since then, beach nourishment in 2017 and 2022 has added sand, and the record shows growth.
+- **Buxton** lost ground through the 1990s and 2000s, about 1.4 m per year from 1996 to 2015. Since then, {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %} in 2017 and 2022 has added sand, and the record shows growth.
 - **Avon** sits on a shoreline that swings between eroding and growing stretches a few kilometres apart. Its nourished stretch jumped seaward after the 2022 fill.
 - **The long stretch between Avon and Salvo** has changed least, staying within a metre per year of no change along about three-quarters of its length.
 - **Salvo, Waves and Rodanthe** have moved landward on average, about 0.5 m per year over the whole record, with local hot spots of 2 to 3 m per year.
@@ -44,9 +44,9 @@ Rates that include the last few years are pushed seaward by an island-wide shift
 <summary>Go deeper: how shoreline change is measured</summary>
 
 Shoreline positions come from [CoastSat](https://github.com/kvos/CoastSat), an open-source toolkit that finds the water's edge in Landsat and Sentinel-2 satellite images and corrects it for the tide.
-Positions are measured along transects, shore-normal lines spaced every 50 m along the island.
+Positions are measured along {% include hatteras/term.liquid id="transect" text="transects" %}, shore-normal lines spaced every 50 m along the island.
 The rate at each transect is the slope of a straight-line fit through every position in the period (a *linear regression rate*), reported in metres per year.
-Negative rates mean erosion, and positive rates mean accretion.
+Negative rates mean {% include hatteras/term.liquid id="erosion" text="erosion" %}, and positive rates mean {% include hatteras/term.liquid id="accretion" text="accretion" %}.
 A rate is shown as "no clear trend" when it is smaller than its 95% uncertainty.
 The smoothed line on the chart is a LOWESS fit over about 3.5 km (seven 500 m model domains). Near Cape Point (the first 5 km) it is replaced by the average of each 500 m stretch, because the shoreline there changes too sharply to smooth.
 Periods run from 1 January of the first year to 31 December of the last.
@@ -74,7 +74,7 @@ Between 2020 and 2021, the shoreline moved seaward by about 17 m almost everywhe
 This was twice as large as any other year-to-year change in the record. It happened on beaches that were never nourished, a year before the 2022 projects.
 Several checks show that it is a real change in the beach, not a quirk of the satellite images:
 
-- the dune line, traced separately from aerial photos, moved seaward by the same amount between 2009 and 2023;
+- the {% include hatteras/term.liquid id="dune-line" text="dune line" %}, traced separately from aerial photos, moved seaward by the same amount between 2009 and 2023;
 - the jump appears in every season of imagery on its own;
 - neighbouring stretches of beach agree closely, while stretches farther apart differ.
 

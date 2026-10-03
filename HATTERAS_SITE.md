@@ -96,6 +96,7 @@ This file is excluded from the build.
    - Automatic matching (SIFT + RANSAC, tried in a scratch OpenCV install) was unstable: about 10 matches agree, and the fit moved 20-200 px with the settings. Don't go back to it for these pairs.
    - Frisco, Hatteras Village and Pea Island stay side by side: their photos were taken from different flight lines, so no single warp fits the front and back rows. In Frisco, front-row houses match at ~0 px offset but the back row is ~270 px out.
    - `_includes/hatteras/photo_slider.liquid` is reusable for any pre-aligned pair.
+3d. Glossary: **BUILT 2026-10-03** (Hannah asked for a site-wide one). `_data/hatteras_glossary.yml` (23 terms) feeds `/hatteras/glossary/` (menu: More), the Key terms box on How the island works (`glossary_list.liquid ids=...`), and in-text links (`{% include hatteras/term.liquid id="..." %}`: dotted underline, definition on hover). First plain use per page is linked; terms the sentence itself defines, headings, place names and card text are not. Definitions are drafts for Hannah to check.
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
 

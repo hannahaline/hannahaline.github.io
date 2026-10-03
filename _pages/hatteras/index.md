@@ -22,7 +22,7 @@ It also introduces a computer model that recreates this history, so that we can 
 </p>
 
 <div class="hat-keypoint">
-<b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of beach nourishment, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
+<b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
 </div>
 
 {% include hatteras/todo.liquid text="Swap the hero photo for a Hatteras-specific aerial (Rodanthe S-curves or Buxton) once imagery sources are settled." %}

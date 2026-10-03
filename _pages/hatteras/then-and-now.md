@@ -9,7 +9,7 @@ nav: false
 {% include hatteras/subnav.liquid %}
 
 <p class="hat-lead">
-Aerial photos show change that numbers can hide: a road moved, a breach opened, a beach widened by nourishment.
+Aerial photos show change that numbers can hide: a road moved, a {% include hatteras/term.liquid id="breach" text="breach" %} opened, a beach widened by {% include hatteras/term.liquid id="beach-nourishment" text="nourishment" %}.
 Compare any two years from 1993 to 2024 at four places on the island.
 </p>
 

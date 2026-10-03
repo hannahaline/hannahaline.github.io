@@ -1,0 +1,17 @@
+{% comment %}
+  Glossary entries from _data/hatteras_glossary.yml. ids="a,b,c" shows only those, in that order (the Key terms box);
+  with no ids, every entry with an anchor (the glossary page).
+{% endcomment %}
+<dl class="hat-terms">
+{% if include.ids %}
+  {% assign ids = include.ids | split: "," %}
+  {% for id in ids %}
+    {% assign t = site.data.hatteras_glossary | where: "id", id | first %}
+    {% if t %}<dt>{{ t.term }}</dt><dd>{{ t.def }}</dd>{% endif %}
+  {% endfor %}
+{% else %}
+  {% for t in site.data.hatteras_glossary %}
+    <dt id="{{ t.id }}">{{ t.term }}</dt><dd>{{ t.def }}</dd>
+  {% endfor %}
+{% endif %}
+</dl>

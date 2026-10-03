@@ -21,10 +21,10 @@ The model also leaves out the sand dredged from Oregon Inlet's navigation channe
 
 ## Dune building
 
-Along most of Hatteras Island, a line of dunes stands between the ocean and NC-12. After storms, sand washed onto the road is pushed back onto the dunes, and low or broken dunes are rebuilt.
+Along most of Hatteras Island, a line of dunes stands between the ocean and {% include hatteras/term.liquid id="nc-12" %}. After storms, sand washed onto the road is pushed back onto the dunes, and low or broken dunes are rebuilt.
 A tall, continuous dune keeps small and medium storms off the road and out of the villages.
-It also stops overwash, the natural process that carries sand onto the island and lets it build upward as the sea rises.
-An island held behind a fixed dune line can grow lower and narrower over time, compared with one that is free to roll landward.
+It also stops {% include hatteras/term.liquid id="overwash" text="overwash" %}, the natural process that carries sand onto the island and lets it build upward as the sea rises.
+An island held behind a fixed {% include hatteras/term.liquid id="dune-line" text="dune line" %} can grow lower and narrower over time, compared with one that is free to roll landward.
 
 {% include hatteras/todo.liquid text="The history of the artificial dune line on the Outer Banks (when it was built, by whom): add with a source." %}
 
@@ -35,7 +35,7 @@ The model follows the same rules every year:
 
 - **Along the road**, whenever a storm lowers the dune in front of NC-12 below a minimum height, the dune is rebuilt to a set design height. Overwash sand that lands on the road is pushed back onto the dune.
 - **In the villages** (Buxton, Avon, and Salvo–Waves–Rodanthe), part of the overwash that lands among houses is removed, as people clear streets and yards. The model removes 40%, the residential end of the range measured by Rogers and others (2015).
-- **Where no road or village needs protecting**, such as Cape Point and the stretch where the Jug Handle Bridge now carries the road over the sound, dunes are left to change naturally.
+- **Where no road or village needs protecting**, such as Cape Point and the stretch where the Jug Handle Bridge now carries the road over the {% include hatteras/term.liquid id="sound" text="sound" %}, dunes are left to change naturally.
 
 </details>
 
@@ -46,7 +46,7 @@ Where the ocean has come too close, the road has been moved:
 
 - **1989, the S-curves north of Rodanthe.** The road was rebuilt farther inland, by up to about 110 m.
 - **1999, north of Buxton.** After Hurricane Dennis, a stretch of road was moved inland by up to about 75 m.
-- **2011 and 2017, New Inlet on Pea Island.** Hurricane Irene cut through the island, and the road now crosses the breach on a bridge.
+- **2011 and 2017, New Inlet on Pea Island.** Hurricane Irene cut through the island, and the road now crosses the {% include hatteras/term.liquid id="breach" text="breach" %} on a bridge.
 - **2022, the Jug Handle Bridge.** The road at the S-curves now leaves the island and crosses Pamlico Sound, so that stretch of beach no longer has a road behind it.
 
 We measured how far the road moved by comparing digitised road lines from 1978 and 2008, and the model moves the road by the same distances in the years the moves happened.

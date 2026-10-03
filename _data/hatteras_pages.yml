@@ -33,6 +33,10 @@
   url: /hatteras/looking-ahead/
   group: What we can do
   ready: false
+- title: Glossary
+  url: /hatteras/glossary/
+  group: More
+  ready: true
 - title: About
   url: /hatteras/about/
   group: More

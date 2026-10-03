@@ -1,0 +1,4 @@
+{% comment %}
+  A glossary term in running text: links to its glossary entry and shows the definition on hover.
+  Usage: {% include hatteras/term.liquid id="overwash" text="overwash" %}  (text defaults to the term)
+{% endcomment %}{% assign t = site.data.hatteras_glossary | where: "id", include.id | first %}<a class="hat-term" href="{{ '/hatteras/glossary/' | relative_url }}#{{ include.id }}" title="{{ t.def | escape }}">{{ include.text | default: t.term }}</a>

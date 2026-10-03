@@ -1008,3 +1008,27 @@ table.hat-table {
     border-top-width: 2px;
   }
 }
+
+// Glossary term in running text: dotted underline, the definition in the title tooltip
+a.hat-term {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--global-theme-color);
+  text-underline-offset: 0.18em;
+  cursor: help;
+
+  &:hover {
+    color: var(--global-theme-color);
+  }
+}
+
+// Glossary page: entries jumped to from a term link are briefly highlighted
+.hat-terms dt {
+  scroll-margin-top: 5rem;  // clear the fixed site header when jumped to
+}
+
+.hat-terms dt:target,
+.hat-terms dt:target + dd {
+  background: #fff4d6;
+}
+

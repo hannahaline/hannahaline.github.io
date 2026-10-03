@@ -1,0 +1,72 @@
+# Site-wide glossary for the Hatteras pages, alphabetical. Shown on /hatteras/glossary/, in the "Key terms" box on
+# How the island works (by id), and as hover definitions wherever a page links a term with hatteras/term.liquid.
+# Keep definitions plain, one or two sentences, and consistent with the page text.
+- id: accretion
+  term: Accretion
+  def: The shoreline moving seaward as sand builds up on the beach. The opposite of erosion.
+- id: barrier-island
+  term: Barrier island
+  def: A long, narrow island of sand that runs along the coast, separated from the mainland by a sound. It takes the brunt of the ocean's waves and storms. Hatteras Island is one.
+- id: beach-nourishment
+  term: Beach nourishment
+  def: Pumping or trucking sand onto a beach to widen it. One project is often called a fill.
+- id: berm
+  term: Berm
+  def: The nearly flat top of the beach, above the reach of everyday waves. Water above the berm reaches the dunes.
+- id: breach
+  term: Breach
+  def: A channel that a storm cuts through the island, letting ocean water run into the sound. Some fill back in on their own; others stay open as inlets.
+- id: dune-line
+  term: Dune line
+  def: The seaward edge, or toe, of the dunes, traced from aerial photos.
+- id: erosion
+  term: Erosion
+  def: The shoreline moving landward as sand is lost from the beach. The opposite of accretion.
+- id: groin
+  term: Groin
+  def: A wall of rock or other hard material built out across the beach to trap sand moving along the shore. The Buxton groins near the lighthouse were built in 1969.
+- id: high-water-event
+  term: High-water event
+  def: A time when tide, storm surge and waves together pushed water high up the beach.
+- id: hindcast
+  term: Hindcast
+  def: Running a model over a stretch of the past and comparing what it produces with what actually happened. The opposite of a forecast.
+- id: inlet
+  term: Inlet
+  def: A gap through the barrier islands where tides flow between the ocean and the sound. Oregon Inlet is at the north end of Hatteras Island.
+- id: longshore-transport
+  term: Longshore transport
+  def: Sand carried along the beach by waves arriving at an angle.
+- id: mean-high-water
+  term: Mean high water
+  def: The average height of high tide over many years. Water levels on these pages are measured from it.
+- id: nc-12
+  term: NC-12
+  def: The state highway that runs the length of Hatteras Island, and the only road on and off it.
+- id: oblique-photo
+  term: Oblique aerial photo
+  def: A photo taken from a plane at an angle, looking across the land, rather than straight down like a map photo.
+- id: overwash
+  term: Overwash
+  def: Storm waves and water running over the dunes and carrying sand inland.
+- id: relative-sea-level-rise
+  term: Relative sea-level rise
+  def: The rise of the sea measured against the land, including any sinking of the land. It is what matters for the island.
+- id: shoreline
+  term: Shoreline
+  def: The line where the ocean meets the beach. In this project it is measured from satellite images.
+- id: sound
+  term: Sound
+  def: The shallow water between a barrier island and the mainland. Behind Hatteras Island it is Pamlico Sound.
+- id: storm-surge
+  term: Storm surge
+  def: Extra water that a storm's winds and low air pressure push onto the coast, on top of the tide.
+- id: tide-gauge
+  term: Tide gauge
+  def: An instrument that records the water level at one spot, around the clock, for years. The nearest long record to Hatteras Island is the NOAA gauge at Duck.
+- id: transect
+  term: Transect
+  def: A fixed line drawn across the beach, along which the shoreline's position is measured in every image. The transects on these pages are 50 m apart.
+- id: trend
+  term: Trend
+  def: The straight line that best fits a set of measurements through time. Its slope is the rate of change, such as millimetres or metres per year.

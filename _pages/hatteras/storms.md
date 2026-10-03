@@ -10,22 +10,22 @@ nav: false
 
 <p class="hat-lead">
 A big storm can reshape the beach in a few days.
-This page shows every high-water event since 1984, then looks closely at three hurricanes.
+This page shows every {% include hatteras/term.liquid id="high-water-event" text="high-water event" %} since 1984, then looks closely at three hurricanes.
 </p>
 
 ## Every high-water event since 1984
 
-Each dot is one high-water event: a time when tide, storm surge and waves together pushed water high up the beach. The taller the stem, the higher the water reached.
+Each dot is one high-water event: a time when tide, {% include hatteras/term.liquid id="storm-surge" text="storm surge" %} and waves together pushed water high up the beach. The taller the stem, the higher the water reached.
 The beach projects and road moves of the same years are on the [management page]({{ '/hatteras/management/' | relative_url }}).
 
 {% include hatteras/timeline.liquid mode="storms" %}
 
 ## Hurricane Isabel, 2003
 
-Isabel brought the highest water of the whole record: an estimated 5.2 m above mean high water at the shore in September 2003, almost a metre higher than any storm since.
-There are no map-ready aerial photos from just after Isabel, so the [Then and now]({{ '/hatteras/then-and-now/' | relative_url }}) comparison jumps from 2002 to 2007. Oblique photos taken from a plane fill that gap.
+Isabel brought the highest water of the whole record: an estimated 5.2 m above {% include hatteras/term.liquid id="mean-high-water" text="mean high water" %} at the shore in September 2003, almost a metre higher than any storm since.
+There are no map-ready aerial photos from just after Isabel, so the [Then and now]({{ '/hatteras/then-and-now/' | relative_url }}) comparison jumps from 2002 to 2007. {% include hatteras/term.liquid id="oblique-photo" text="Oblique photos" %} taken from a plane fill that gap.
 
-The worst damage was just south-west of Cape Point, beyond the stretch this research models. There, Isabel cut a new breach about 500 m wide that completely severed the island, and it overwashed the villages of Frisco and Hatteras Village.
+The worst damage was just south-west of Cape Point, beyond the stretch this research models. There, Isabel cut a new {% include hatteras/term.liquid id="breach" text="breach" %} about 500 m wide that completely severed the island, and it {% include hatteras/term.liquid id="overwash" text="overwashed" %} the villages of Frisco and Hatteras Village.
 The U.S. Geological Survey photographed the same places before the storm and three days after it.
 
 {% assign isabel = '/assets/hatteras/img/isabel/' | relative_url %}

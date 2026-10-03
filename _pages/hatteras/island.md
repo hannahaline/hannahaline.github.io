@@ -9,7 +9,7 @@ nav: false
 {% include hatteras/subnav.liquid %}
 
 <p class="hat-lead">
-Barrier islands are long, narrow strips of sand between the ocean and a sound.
+Barrier islands are long, narrow strips of sand between the ocean and a {% include hatteras/term.liquid id="sound" text="sound" %}.
 They are not fixed in place. Over decades to centuries, waves, storms, and rising seas move their sand, and the island slowly shifts.
 </p>
 
@@ -51,11 +51,11 @@ On Hatteras, many of today's dunes were built or rebuilt by people, which is cov
 ## Rising seas
 
 Sea level on the Outer Banks is rising.
-At the NOAA tide gauge at Duck, the nearest long record, the sea has risen by about 4.9 mm a year since 1978: about 23 cm (9 inches) in all.
+At the NOAA {% include hatteras/term.liquid id="tide-gauge" text="tide gauge" %} at Duck, the nearest long record, the sea has risen by about 4.9 mm a year since 1978: about 23 cm (9 inches) in all.
 Higher water lets storms reach farther, and over time it pushes the whole island landward.
 
 The rise has not been steady.
-Over the first period the model recreates, 1996–2015, the trend was about 3.8 mm a year. Over the second, 2010–2026, it was about 5.5 mm a year.
+Over the first period the model recreates, 1996–2015, the {% include hatteras/term.liquid id="trend" text="trend" %} was about 3.8 mm a year. Over the second, 2010–2026, it was about 5.5 mm a year.
 
 {% include hatteras/sea_level.liquid %}
 
@@ -77,14 +77,9 @@ The model raises sea level at each period's rate, rounded to the nearest millime
 <details class="hat-deeper" markdown="1">
 <summary>Key terms</summary>
 
-<dl class="hat-terms">
-  <dt>Shoreline</dt><dd>The line where the ocean meets the beach. In this project it is measured from satellite images.</dd>
-  <dt>Dune line</dt><dd>The seaward edge, or toe, of the dunes, traced from aerial photos.</dd>
-  <dt>Erosion / accretion</dt><dd>The shoreline moving landward (erosion) or seaward (accretion).</dd>
-  <dt>Overwash</dt><dd>Storm waves and water running over the dunes and carrying sand inland.</dd>
-  <dt>Longshore transport</dt><dd>Sand carried along the beach by waves arriving at an angle.</dd>
-  <dt>Nourishment</dt><dd>Pumping or trucking sand onto a beach to widen it.</dd>
-</dl>
+{% include hatteras/glossary_list.liquid ids="shoreline,dune-line,erosion,accretion,overwash,longshore-transport,beach-nourishment" %}
+
+Every term used on these pages is in the [glossary]({{ '/hatteras/glossary/' | relative_url }}).
 
 </details>
 
