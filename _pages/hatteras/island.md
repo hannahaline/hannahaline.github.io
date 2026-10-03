@@ -23,6 +23,11 @@ They are not fixed in place. Over decades to centuries, waves, storms, and risin
 Waves rarely hit the beach head-on. When they arrive at an angle, they push sand along the shore in a slow, steady current called *longshore transport*.
 Where more sand arrives than leaves, the beach grows. Where more leaves than arrives, it erodes.
 
+<figure class="hat-model-figure">
+{% include hatteras/longshore.svg %}
+<figcaption class="hat-caption">Simplified. On Hatteras Island's long east-facing shore, waves from the northeast drive sand south toward Cape Hatteras; on the shorter south-facing shore, a smaller drift runs toward the cape. Sand from both sides collects at Cape Point and on Diamond Shoals (<a href="https://www.usgs.gov/centers/whcmsc/science/coastal-change-processes-cape-hatteras-nc">USGS</a>). Island outline © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</figcaption>
+</figure>
+
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: wave angle and shoreline shape</summary>
 
@@ -38,6 +43,11 @@ The model represents this with two settings: how often waves arrive at a steep a
 
 During big storms, water levels rise and waves can run over the dunes. This is called *overwash*. It carries sand from the beach onto the island and into the sound.
 Overwash can bury roads and houses, but it is also how a barrier island builds itself higher and moves landward as the sea rises.
+
+<figure class="hat-model-figure">
+{% include hatteras/overwash.svg %}
+<figcaption class="hat-caption">Not to scale. A storm surge raises the water, and waves run up the beach and over a low dune, laying down a new layer of sand across the island.</figcaption>
+</figure>
 
 {% include hatteras/todo.liquid text="Overwash photo (NC-12 after a storm), public domain with the source noted. USGS coastal oblique photos are a candidate." %}
 
