@@ -23,9 +23,13 @@ Where more sand arrives than leaves, the beach grows. Where more leaves than arr
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: wave angle and shoreline shape</summary>
 
-The shape of the coast is itself set by the waves. Along the Outer Banks, waves come from both the northeast and the southeast. Differences in how much sand they move create the capes and the curves between them.
+The shape of the coast is itself set by the waves. Along the Outer Banks, large waves arrive from both the northeast and the southeast.
+When waves come in at a steep angle to the shore, small bumps in the coastline tend to grow rather than smooth out. Over centuries, this is thought to build the great capes of the Carolinas, including Cape Hatteras (Ashton, Murray and Arnoult, 2001, *Nature*).
+Near a cape, small shifts in wave direction can turn one stretch of beach from eroding to growing. That is part of why Cape Point behaves so differently from the rest of the island.
 
-{% include hatteras/todo.liquid text="Two or three sentences on high-angle waves and cape formation, with a citation." %}
+The model represents this with two settings: how often waves arrive at a steep angle, and whether more of them come from the north or the south.
+
+{% include hatteras/todo.liquid text="Check the citation: Ashton, Murray and Arnoult (2001), Formation of coastline features by large-scale instabilities induced by high-angle waves, Nature 414." %}
 
 </details>
 
@@ -34,7 +38,7 @@ The shape of the coast is itself set by the waves. Along the Outer Banks, waves 
 During big storms, water levels rise and waves can run over the dunes. This is called *overwash*. It carries sand from the beach onto the island and into the sound.
 Overwash can bury roads and houses, but it is also how a barrier island builds itself higher and moves landward as the sea rises.
 
-{% include hatteras/todo.liquid text="Overwash photo (NC-12 after Irene 2011 or similar), with the source and licence noted." %}
+{% include hatteras/todo.liquid text="Overwash photo (NC-12 after a storm), public domain with the source noted. USGS coastal oblique photos are a candidate." %}
 
 ## Dunes are the island's first defence
 
@@ -43,10 +47,19 @@ On Hatteras, many of today's dunes were built or rebuilt by people, which is cov
 
 ## Rising seas
 
-Sea level along the Outer Banks has risen over the last century, and the rate has increased in recent decades.
+Sea level on the Outer Banks is rising, and it has risen faster in recent decades.
+At the NOAA tide gauge at Duck, the nearest long record, sea level rose about 4 mm per year from 1984 to 2004 and about 6.4 mm per year from 2004 to 2024.
+That is roughly 6 cm every decade.
 Higher water lets storms reach farther, and over time it pushes the whole island landward.
 
-{% include hatteras/todo.liquid text="Add the local sea-level trend from the tide-gauge record in plain units (centimetres per decade), with the gauge named." %}
+<details class="hat-deeper" markdown="1">
+<summary>Go deeper: the sea-level numbers</summary>
+
+The rates are straight-line fits to the monthly mean water level at Duck (NOAA station 8651370), with the seasonal cycle removed: 3.9 ± 1.3 mm per year for 1984–2004 and 6.4 ± 1.3 mm per year for 2004–2024 (95% ranges).
+This is *relative* sea-level rise: it includes the land sinking, which is what matters for the island.
+The model uses the rate for each period it recreates.
+
+</details>
 
 <details class="hat-deeper" markdown="1">
 <summary>Key terms</summary>

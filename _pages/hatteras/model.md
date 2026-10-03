@@ -43,7 +43,16 @@ CASCADE couples two existing models. **Barrier3D** simulates the cross-shore pro
 Human-management modules sit on top: beach and dune management, roadway management, and, in this project, a groin module.
 The model is open source ([CASCADE on GitHub](https://github.com/UNC-CECL/CASCADE)).
 
-{% include hatteras/todo.liquid text="Add citations: Anarde et al. for CASCADE, Reeves et al. for Barrier3D, Nienhuis and Lorenzo-Trueba for BRIE. Add the domain size and number of domains in plain words." %}
+For Hatteras, the island from Cape Point to just north of Rodanthe (about 45 km) is divided into 90 stretches, each 500 m long. Each stretch is a grid of 10 m cells running from the ocean across the island.
+Sand moves across each stretch in storms, and between neighbouring stretches with the waves.
+
+**References**
+
+- Anarde, K., Moore, L. J., Murray, A. B., and Reeves, I. R. B. (2024). The future of developed barrier systems, Part I: Pathways toward uninhabitability, drowning, and rebound. [Preprint, EarthArXiv](https://doi.org/10.31223/X5P947).
+- Reeves, I. R. B., Moore, L. J., Murray, A. B., Anarde, K. A., and Goldstein, E. B. (2021). Dune dynamics drive discontinuous barrier retreat. *Geophysical Research Letters*.
+- Nienhuis, J. H., and Lorenzo-Trueba, J. (2019). Simulating barrier island response to sea level rise with the barrier island and inlet environment (BRIE) model v1.0. *Geoscientific Model Development*.
+
+{% include hatteras/todo.liquid text="Check the author lists and add DOIs for Reeves et al. (2021) and Nienhuis and Lorenzo-Trueba (2019); confirm Anarde et al. is still the preprint." %}
 
 </details>
 
