@@ -171,23 +171,23 @@ def main() -> None:
     ax.text(0.05, 0.21, spaced_caps("Chesapeake Bay"), transform=ax.transAxes, ha="left", rotation=62, **TEXT)
     ax.text(0.27, 0.52, "Delmarva\nPeninsula", transform=ax.transAxes, ha="center", fontstyle="italic", **TEXT)
 
-    # Top row: (a), the locator (b), then the north arrow, all on one top margin
+    # Top row: the locator (b) upper left with the north arrow beside it, (a) upper right, one top margin
     top = 0.988
-    letter(ax, 0, 0.012, top)
+    letter(ax, 0, 0.988, top, ha="right")
     ih = 0.24
     iw = ih * fig.get_size_inches()[1] / fw * 1.15
-    ax_in = fig.add_axes([0.075, top - ih, iw, ih])
+    ax_in = fig.add_axes([0.012, top - ih, iw, ih])
     locator(ax_in, (LON0, LON1, LAT0, LAT1))
     ax_in.apply_aspect()
     letter(ax_in, 1, 0.03, 0.97)
     p = ax_in.get_position()
     north_dart(ax, (x0 + (p.x1 + 0.05) * (x1 - x0), y0 + (top - 0.045) * (y1 - y0)))
 
-    # (c) the oystercatcher, framed over open ocean, lower right
+    # (c) the oystercatcher, framed over open ocean, lower right; the scale bar in open water beside it
     photo = Image.open(PHOTO).convert("RGB")
     pw = 0.36
     ph = pw * fw / fig.get_size_inches()[1] * photo.height / photo.width
-    ax_ph = fig.add_axes([0.985 - pw, 0.115, pw, ph])
+    ax_ph = fig.add_axes([0.985 - pw, 0.045, pw, ph])
     ax_ph.imshow(photo)
     ax_ph.set_xticks([])
     ax_ph.set_yticks([])
@@ -198,7 +198,7 @@ def main() -> None:
     ax_ph.text(0.98, 0.04, "American Oystercatcher", transform=ax_ph.transAxes, ha="right", va="bottom",
                fontstyle="italic", **TEXT)
 
-    scale_bar(ax, 0.64, 0.055)
+    scale_bar(ax, 0.40, 0.06)
     ax.text(0.988, 0.012, "Imagery: Esri World Imagery · Islands: © OpenStreetMap contributors",
             transform=ax.transAxes, ha="right", va="bottom", fontsize=6.5, color=INK_MUTED, zorder=25,
             bbox=dict(facecolor="white", alpha=0.7, edgecolor="none", boxstyle="square,pad=0.15"))
