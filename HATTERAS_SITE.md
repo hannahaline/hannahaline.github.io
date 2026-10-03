@@ -4,6 +4,34 @@ Public-facing pages on Hatteras Island shoreline change, management, and the CAS
 Cape Hatteras National Seashore, NCDOT, Dare County and residents, and the Mountains to Sea Fellowship (NC WRRI + NC Sea Grant).
 This file is excluded from the build.
 
+## Where we left off (2026-10-02, paused)
+
+**Done and committed on `hatteras-site` (not pushed, not public):**
+- Nine pages: Overview, The island, Shoreline change, Storms, Then and now, Management, The model, Looking ahead (hidden), About.
+- The shoreline page was split three ways on 10-02: Shoreline change (map, record, fills, 2021 shift), Storms (timeline, Isabel, Irene, Dorian placeholder), and Then and now (photo slider).
+- Built so far: the shoreline map, the storms and management timeline, the photo slider (saved photos), the study-area map with the Jug Handle Bridge, the cross-section (textbook style), the Isabel and Irene USGS photos, and a first draft of all page text.
+
+**Paused in the middle of: Dorian before/after (Storms page; there is a to-do on the page).**
+- USGS has no ready-made Dorian pair for Hatteras. Its one pair (usgs.gov/media/images/cape-hatteras-national-seashore-10) is captioned "Cape Hatteras National Seashore", but the images are labelled **North Core Banks**, in Cape Lookout National Seashore. Don't use it as Hatteras.
+- Hannah chose a **Hatteras pair from map photos**: NOAA 7 Sep 2019 (already saved for the slider) against NC OneMap Jan–Feb 2016, with a "Dorian" spot added to the slider.
+- Caution before picking a place: the overwash record has one post-Dorian image (OBS-024, 2019-09-10), marked "Cloudy" with no overwash recorded on the modelled island. The storm sheet says "NC-12 closed ~3 months; expect major overwash; look Oct 2019". Next step: look at the 2016 vs 2019 sheet (`dorian_check.jpg` was made in the scratchpad; re-make it from `assets/hatteras/img/compare/<spot>/2016.jpg` and `2019.jpg`) and scan the NOAA layer along the island for real overwash. If there is no clear Dorian change on Hatteras, **tell Hannah rather than pick a weak pair**. One option is to say Dorian's water level (about 3.0 m) and show what the photos show.
+
+**Next, in order:**
+1. Finish Dorian, as above.
+2. Refresh the private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE, at version 5, from before the split). In the session scratchpad, `make_preview.py` already lists `storms` and `then-and-now`. The scratchpad is temporary, so if it is gone, rebuild the flattening script from the description under Preview below.
+3. Work through the to-do notes (`grep -rn "hatteras/todo.liquid" _pages/hatteras`), starting with the ones only Hannah can answer:
+   - collaborators' full names;
+   - the reference author lists;
+   - NC Sea Grant acknowledgement wording;
+   - how much of the 2021 shift to show before the paper.
+4. Remaining panels: model-vs-observed (unpublished; waits on the model update with Buxton 2017), the nourishment explorer, and Looking ahead (forecasts).
+5. Launch checklist (below), only when Hannah says so.
+
+**Loose ends to remember:**
+- `HATTERAS_ROAD_EVENTS` in CASCADE's config says "Pea Island" for the 1989 move. The timeline sheet calls it the S-curves relocation (GIS 84–87). Flagged to Hannah, not changed.
+- Local previews: Terser drops `assets/hatteras/js/*.js` without Node (see Preview). The review server was `python -m http.server 4123` in the scratchpad build folder; it stops when the session ends.
+- Another session left uncommitted edits in `_projects/*.md` in this repo. Leave them alone and commit by path.
+
 ## Where things are
 
 | What | Where |

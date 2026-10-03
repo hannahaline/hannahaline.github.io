@@ -189,7 +189,7 @@
         text(g, tx, cy + 4, label, { "font-size": 11.5, fill: INK, "text-anchor": flip ? "end" : "start", "paint-order": "stroke", stroke: "#fff", "stroke-width": 3 });
         var html = "<b>" + m.year + ": " + m.title + "</b><br>" + m.detail +
           (m.model ? "" : "<br><span class='hat-tip-hint'>Not in the model</span>") +
-          (m.km ? "<br><span class='hat-tip-hint'>Highlighted on the map above</span>" : "");
+          (m.km && document.getElementById("shoremap") ? "<br><span class='hat-tip-hint'>Highlighted on the map</span>" : "");
         var on = function (e) { self.showTip(html, e); if (m.km) reach({ km: m.km, label: m.year + " " + m.title }); };
         var off = function () { self.hideTip(); reach(null); };
         g.addEventListener("mousemove", on);

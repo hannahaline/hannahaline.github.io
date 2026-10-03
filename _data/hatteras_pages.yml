@@ -9,6 +9,12 @@
 - title: Shoreline change
   url: /hatteras/shoreline-change/
   ready: true
+- title: Storms
+  url: /hatteras/storms/
+  ready: true
+- title: Then and now
+  url: /hatteras/then-and-now/
+  ready: true
 - title: Management
   url: /hatteras/management/
   ready: true

@@ -36,7 +36,15 @@ It also introduces a computer model that recreates this history, so that we can 
   </a>
   <a class="hat-card" href="{{ '/hatteras/shoreline-change/' | relative_url }}">
     <h3>Shoreline change</h3>
-    <p>Where the beach has retreated or grown since 1996, and the storms and projects that show up in the record.</p>
+    <p>Where the beach has retreated or grown since 1996, measured from satellite images.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/storms/' | relative_url }}">
+    <h3>Storms</h3>
+    <p>Every high-water event since 1984, and what Isabel, Irene and Dorian did to the island.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/then-and-now/' | relative_url }}">
+    <h3>Then and now</h3>
+    <p>Aerial photos from 1993 to 2024, side by side at four places on the island.</p>
   </a>
   <a class="hat-card" href="{{ '/hatteras/management/' | relative_url }}">
     <h3>Management</h3>

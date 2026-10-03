@@ -1,0 +1,91 @@
+---
+layout: page
+title: Storms
+permalink: /hatteras/storms/
+description: Every high-water event on Hatteras Island since 1984, and what the biggest storms did to the beach.
+nav: false
+---
+
+{% include hatteras/subnav.liquid %}
+
+<p class="hat-lead">
+A big storm can reshape the beach in a few days.
+This page sets every high-water event since 1984 beside the projects that changed the beach and the road, then looks closely at three hurricanes.
+</p>
+
+## Every high-water event since 1984
+
+Each dot is one high-water event: a time when tide, storm surge and waves together pushed water high up the beach. The taller the stem, the higher the water reached. Below are the management projects that changed the beach and the road.
+
+{% include hatteras/timeline.liquid %}
+
+## Hurricane Isabel, 2003
+
+Isabel brought the highest water of the whole record: an estimated 5.2 m above mean high water at the shore in September 2003, almost a metre higher than any storm since.
+There are no map-ready aerial photos from just after Isabel, so the [Then and now]({{ '/hatteras/then-and-now/' | relative_url }}) comparison jumps from 2002 to 2007. Oblique photos taken from a plane fill that gap.
+
+The worst damage was just south-west of Cape Point, beyond the stretch this research models. There, Isabel cut a new breach about 500 m wide that completely severed the island, and it overwashed the villages of Frisco and Hatteras Village.
+The U.S. Geological Survey photographed the same places before the storm and three days after it.
+
+{% assign isabel = '/assets/hatteras/img/isabel/' | relative_url %}
+<figure class="hat-photo-wide">
+<img src="{{ isabel }}breach_2003.jpg" alt="Oblique aerial photo of Hatteras Island after Hurricane Isabel, with ocean water running through a wide breach that cuts the island in two" loading="lazy">
+<figcaption class="hat-caption">21 September 2003, three days after Isabel: the breach that cut Hatteras Island in two, between Frisco and Hatteras Village. Photo: U.S. Geological Survey.</figcaption>
+</figure>
+
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ isabel }}frisco_1999.jpg" alt="Frisco from the air in 1999: houses behind vegetated dunes and a wide beach" loading="lazy"><figcaption>8 Sep 1999, before</figcaption></figure>
+<figure><img src="{{ isabel }}frisco_2003.jpg" alt="The same houses in Frisco after Isabel: the dunes are gone and sand covers the ground between the houses" loading="lazy"><figcaption>21 Sep 2003, after</figcaption></figure>
+</div>
+<figcaption class="hat-caption"><b>Frisco.</b> Storm surge and waves washed over the dunes in front of the first row of houses and spread that sand across the island. The dunes were completely removed.</figcaption>
+</figure>
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ isabel }}hatteras_village_1999.jpg" alt="Hatteras Village from the air in 1999: hotels behind a dune line, with the water tower behind them" loading="lazy"><figcaption>8 Sep 1999, before</figcaption></figure>
+<figure><img src="{{ isabel }}hatteras_village_2003.jpg" alt="The same hotels in Hatteras Village after Isabel: the dunes are gone and sand covers the roads and lots" loading="lazy"><figcaption>21 Sep 2003, after</figcaption></figure>
+</div>
+<figcaption class="hat-caption"><b>Hatteras Village.</b> Surge and waves destroyed the dunes protecting the hotels, washed buildings from their foundations and covered roads with sand.</figcaption>
+</figure>
+</div>
+
+<p class="hat-caption">Photos and descriptions: Karen L. M. Morgan, U.S. Geological Survey, <a href="https://pubs.usgs.gov/publication/fs20093025">Coastal Change During Hurricane Isabel 2003</a> (Fact Sheet 2009-3025). Public domain.</p>
+
+## Hurricane Irene, 2011
+
+In August 2011, Irene cut through Pea Island, opening a breach now called New Inlet. NC-12 was carried across it by a temporary bridge from October 2011, replaced by the permanent Etheridge Bridge in 2017.
+You can see the breach in the [New Inlet comparison]({{ '/hatteras/then-and-now/#spot=newinlet' | relative_url }}), and the bridges on the [management page]({{ '/hatteras/management/' | relative_url }}).
+
+Irene cut five breaches through the island between Cape Hatteras and Oregon Inlet, severing NC-12 in several places. The U.S. Geological Survey photographed two of the breach sites before and after the storm.
+
+{% assign irene = '/assets/hatteras/img/irene/' | relative_url %}
+<figure class="hat-storm-place">
+<div class="hat-storm-grid">
+<figure class="hat-storm-over"><img src="{{ irene }}rodanthe_overview_2011.jpg" alt="Oblique aerial photo looking along Rodanthe after Hurricane Irene, with NC-12 broken where water cut across the island beside a line of sandbags" loading="lazy"></figure>
+<div class="hat-storm-pair">
+<figure><img src="{{ irene }}rodanthe_2008.jpg" alt="Rodanthe in May 2008: houses behind the road, with a wide beach in front" loading="lazy"></figure>
+<figure><img src="{{ irene }}rodanthe_2011.jpg" alt="The same houses in August 2011: water has cut a channel across the island and the road" loading="lazy"></figure>
+</div>
+</div>
+<figcaption class="hat-caption"><b>Rodanthe.</b> A breach was carved through the island here, severing NC-12. Left: looking along the coast on 30 August 2011. Right: the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same cottage.</figcaption>
+</figure>
+
+<figure class="hat-storm-place">
+<div class="hat-storm-grid">
+<figure class="hat-storm-over"><img src="{{ irene }}pea_island_overview_2011.jpg" alt="Oblique aerial photo looking north along Pea Island after Hurricane Irene, with channels cut across the island and the road" loading="lazy"></figure>
+<div class="hat-storm-pair">
+<figure><img src="{{ irene }}pea_island_2008.jpg" alt="Buildings and a parking area on Pea Island in May 2008, behind a wide beach" loading="lazy"></figure>
+<figure><img src="{{ irene }}pea_island_2011.jpg" alt="The same buildings in August 2011, cut off by channels of water on both sides" loading="lazy"></figure>
+</div>
+</div>
+<figcaption class="hat-caption"><b>Pea Island National Wildlife Refuge.</b> Two breaches were carved through the island here, severing NC-12. Left: looking north on 30 August 2011. Right: the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same building.</figcaption>
+</figure>
+
+<p class="hat-caption">Photos: Karen Morgan, U.S. Geological Survey St. Petersburg Coastal and Marine Science Center, from <a href="https://www.usgs.gov/centers/spcmsc/news/aerial-photographs-outer-banks-show-coastal-damage-hurricane-irene">Aerial Photographs of Outer Banks Show Coastal Damage from Hurricane Irene</a>. Public domain.</p>
+
+## Hurricane Dorian, 2019
+
+{% include hatteras/todo.liquid text="Dorian before/after on Hatteras: NOAA 7 Sep 2019 against NC OneMap, being added." %}
+
+{% include hatteras/pager.liquid %}
