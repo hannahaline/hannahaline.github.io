@@ -195,7 +195,7 @@ def main() -> None:
     ox, oy = to_utm(-75.535, 35.775)
     ax.text(ox, oy, "Oregon Inlet", ha="center", va="bottom", fontstyle="italic", **TEXT)
     ax.text(0.80, 0.55, spaced_caps("Atlantic Ocean"), transform=ax.transAxes, ha="center", rotation=90, **TEXT)
-    ax.text(0.22, 0.62, spaced_caps("Pamlico Sound"), transform=ax.transAxes, ha="center", rotation=90, **TEXT)
+    ax.text(0.22, 0.42, spaced_caps("Pamlico Sound"), transform=ax.transAxes, ha="center", rotation=90, **TEXT)
 
     handles = [
         Line2D([], [], color=ROAD, lw=2.2, label="NC-12", path_effects=[mpl.patheffects.withStroke(linewidth=3.6, foreground="0.1")]),
@@ -208,8 +208,10 @@ def main() -> None:
         Line2D([], [], marker="o", ls="none", ms=5, mfc="white", mec="0.1", label="Village"),
     ]
     ax.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.985, 0.015), **MAP_LEGEND)
-    scale_bar_km(ax, 10_000, x=0.05, y=0.055)
-    north_dart(ax, (x0 + 0.08 * (x1 - x0), y0 + 0.30 * (y1 - y0)), arrow_m=3000)
+    # scale bar under the locator (upper left), north arrow above the legend (lower right)
+    on_water = dict(color="white", path_effects=HALO)
+    scale_bar_km(ax, 10_000, x=0.035, y=0.665, text_kw=on_water)
+    north_dart(ax, (x0 + 0.93 * (x1 - x0), y0 + 0.16 * (y1 - y0)), arrow_m=3000, text_kw=on_water)
     ax.text(0.015, 0.006, "Imagery: Esri World Imagery",
             transform=ax.transAxes, ha="left", va="bottom",
             fontsize=6, color="white", path_effects=HALO, zorder=12)
