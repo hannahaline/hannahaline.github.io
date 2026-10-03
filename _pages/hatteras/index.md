@@ -25,6 +25,11 @@ It also introduces a computer model that recreates this history, so that we can 
 <b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
 </div>
 
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/buxton_houses_2025.jpg' | relative_url }}" alt="Oceanfront houses on pilings standing in the surf at Buxton, one collapsed into the water, with debris on the wet sand" loading="lazy">
+<figcaption class="hat-caption">Houses in the surf at Buxton on 30 September 2025, the day five unoccupied houses there collapsed. Photo: <a href="https://www.nps.gov/caha/learn/news/five-unoccupied-houses-collapse-in-buxton-september-30-2025.htm">National Park Service</a>.</figcaption>
+</figure>
+
 {% include hatteras/todo.liquid text="Swap the hero photo for a Hatteras-specific aerial (Rodanthe S-curves or Buxton) once imagery sources are settled." %}
 
 ## Explore
