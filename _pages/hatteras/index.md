@@ -50,11 +50,14 @@ It also introduces a computer model that recreates this history, so that we can 
 
 ## The study area
 
-The research covers about 45 km of Hatteras Island, from Cape Point north to Pea Island, including the villages of Buxton, Avon, Salvo, Waves, and Rodanthe.
+The research covers Hatteras Island from Cape Point north to Oregon Inlet, including the villages of Buxton, Avon, Salvo, Waves, and Rodanthe.
 Most of the island lies within Cape Hatteras National Seashore. NC-12, the only road on and off the island, runs its full length.
 
-{% include figure.liquid loading="lazy" path="assets/img/research/hatteras_study_area.jpg" alt="Map of the Hatteras Island study area from Cape Point to Pea Island" class="img-fluid rounded" caption="The study area, from Cape Point to Pea Island." %}
+<figure class="hat-studymap">
+<img src="{{ '/assets/hatteras/img/study_area_map.jpg' | relative_url }}" alt="Map of Hatteras Island from Cape Point to Oregon Inlet, showing the villages of Buxton, Avon, Salvo, Waves and Rodanthe, NC-12, the beach nourishment reaches at Buxton, Avon and the Rodanthe S-curves, and the Buxton groins" loading="lazy">
+<figcaption class="hat-caption">Hatteras Island from Cape Point to Oregon Inlet. Gold bars mark the beaches nourished at Buxton (2017 and 2022), Avon (2022) and the Rodanthe S-curves (2014).</figcaption>
+</figure>
 
-{% include hatteras/todo.liquid text="Replace with a stakeholder version of the study-area map: villages, NC-12, the nourishment reaches, and the Buxton groins labelled." %}
+{% include hatteras/todo.liquid text="The NC-12 line on this map is the pre-2022 alignment: add the Jug Handle Bridge." %}
 
 {% include hatteras/pager.liquid %}

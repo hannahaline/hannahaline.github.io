@@ -576,11 +576,26 @@ table.hat-table {
   position: relative;
 }
 
-#imgcompare-map {
-  height: min(70vh, 640px);
-  min-height: 360px;
+.hat-compare-photos {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  max-width: 100%;
+  max-height: 78vh;
+  margin: 0 auto;
+  overflow: hidden;
   border-radius: 4px;
   background: #a8c8e0;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
 }
 
 .hat-compare-tag {
@@ -595,7 +610,7 @@ table.hat-table {
   pointer-events: none;
 
   &.left {
-    left: 3.4rem;
+    left: 0.6rem;
   }
 
   &.right {
@@ -637,7 +652,7 @@ table.hat-table {
   }
 }
 
-// The range input spans the map but only its thumb takes the pointer, so the map still pans
+// The range input spans the photos but only its thumb takes the pointer
 .hat-compare-range {
   position: absolute;
   inset: 0;
@@ -801,5 +816,46 @@ table.hat-table {
 
   .hat-tip-hint {
     color: #6b7378;
+  }
+}
+
+// Island cross-section (_includes/hatteras/cross_section.svg)
+.hat-xsection-wrap {
+  margin: 1.2rem 0 1.8rem;
+  overflow-x: auto;
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 560px;
+    height: auto;
+  }
+
+  .xs-label {
+    font-size: 17px;
+    font-weight: 600;
+    fill: #1a1a1a;
+  }
+
+  .xs-sub {
+    font-size: 14px;
+    fill: #5b6469;
+  }
+
+  .xs-small {
+    font-size: 13px;
+    fill: #5b6469;
+  }
+}
+
+// Study-area map on the overview page
+.hat-studymap {
+  max-width: 34rem;
+  margin: 1rem auto 1.5rem;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
   }
 }

@@ -13,7 +13,10 @@ Barrier islands are long, narrow strips of sand between the ocean and a sound.
 They are not fixed in place. Over decades to centuries, waves, storms, and rising seas move their sand, and the island slowly shifts.
 </p>
 
-{% include hatteras/todo.liquid text="Add a labelled cross-section diagram: ocean, beach, dune, island interior, marsh, Pamlico Sound. Show where NC-12 and the villages sit." %}
+<figure class="hat-xsection-wrap">
+{% include hatteras/cross_section.svg %}
+<figcaption class="hat-caption">A slice across Hatteras Island, from Pamlico Sound to the Atlantic. NC-12 runs just behind the dune along much of the island, and the villages sit on the island interior.</figcaption>
+</figure>
 
 ## Waves move sand along the coast
 

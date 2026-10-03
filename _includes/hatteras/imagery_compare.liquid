@@ -1,8 +1,8 @@
 {% comment %}
-  Before/after aerial photo slider. Layers and spots: _data/hatteras_imagery.yml. Script: assets/hatteras/js/imagery-compare.js.
-  The page needs `map: true` in its front matter (the theme then loads Leaflet).
+  Before/after aerial photo slider. Layers and spots: _data/hatteras_imagery.yml; photos saved by
+  tools/hatteras_imagery_data.py into assets/hatteras/img/compare/. Script: assets/hatteras/js/imagery-compare.js.
 {% endcomment %}
-<div class="hat-compare hat-bleed" id="imgcompare">
+<div class="hat-compare hat-bleed" id="imgcompare" data-img="{{ '/assets/hatteras/img/compare/' | relative_url }}" data-index="{{ '/assets/hatteras/data/imagery_compare.json' | relative_url }}">
   <div class="hat-shoremap-inner">
     <div class="hat-controls">
       <div class="hat-seg" role="group" aria-label="Place" id="imgcompare-spots"></div>
@@ -12,7 +12,10 @@
       <label>Right <select id="imgcompare-after"></select></label>
     </div>
     <div class="hat-compare-stage">
-      <div id="imgcompare-map" role="region" aria-label="Aerial photos compared side by side"></div>
+      <div class="hat-compare-photos" role="region" aria-label="Aerial photos compared side by side">
+        <img id="imgcompare-before-img" alt="" decoding="async">
+        <img id="imgcompare-after-img" alt="" decoding="async">
+      </div>
       <span class="hat-compare-tag left" id="imgcompare-tag-before"></span>
       <span class="hat-compare-tag right" id="imgcompare-tag-after"></span>
       <div class="hat-compare-divider" id="imgcompare-divider"><span></span></div>

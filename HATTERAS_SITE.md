@@ -25,6 +25,11 @@ This file is excluded from the build.
 - Contact by email only. The split-windows explorer is linked from the shoreline page, not folded in.
 - Model results are unpublished: keep them out of the public site until the paper is accepted.
 
+## Figures
+
+- `assets/hatteras/img/study_area_map.jpg`, from `tools/hatteras_stakeholder_map.py`: north-up, Esri imagery, villages, NC-12, nourishment reaches (read from shoreline_rates.json), groins, and a locator. The NC-12 line is `nc12_current.geojson`, which predates the Jug Handle Bridge.
+- `_includes/hatteras/cross_section.svg`, from `tools/hatteras_cross_section.py`: a schematic sound-to-ocean slice, inline so it takes the page font.
+
 ## Panels to build
 
 1. `shoreline-map`: **BUILT 2026-10-02.** Cape Point to Oregon Inlet (GIS 1–120, 1222 transects), with windows for the whole record (1996–2026), 1996–2015 and 2010–2026.
@@ -42,7 +47,8 @@ This file is excluded from the build.
 3. `imagery-compare`: **BUILT 2026-10-02.** A swipe slider. Layers and places live in `_data/hatteras_imagery.yml`, which you can edit by hand.
    - Layers: 11 public layers, all loaded live with nothing re-hosted. NC OneMap gives 1993, 1996, 1998 CIR, 2002, 2007, 2010, Feb–Mar 2012, Jan–Feb 2016, Feb 2020 and Mar 2024 (mosaic dates read from the Dare County tile names). NOAA adds Dorian, 7 Sep 2019.
    - Places: the S-curves and Jug Handle Bridge, New Inlet (located on the 2012 photo), Avon, and Buxton.
-   - Every caption fact comes from the timeline xlsx or the config. Links like `#spot=<id>` open a given place.
+   - Every caption fact comes from the timeline xlsx or the config.
+   - **Since 2026-10-02 the photos are saved, not live.** NC OneMap renders year layers on request and slowed to 15–60 s per tile, so old years never loaded. `python tools/hatteras_imagery_data.py` saves one JPEG per place and layer into `assets/hatteras/img/compare/` (44 images, about 10 MB). The slider clips the right-hand image; Leaflet is no longer used. Re-run it after changing places or layers in the yml.
    - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
