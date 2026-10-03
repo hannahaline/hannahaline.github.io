@@ -47,6 +47,9 @@ On Hatteras Island, I use numerical modeling and remote sensing to evaluate mana
       <li>Shorebird habitat and coastal wildlife conservation</li>
       <li>Human dimensions of coastal change</li>
     </ul>
+    <div class="about-field-photo mt-3">
+      {% include figure.liquid loading="lazy" path="assets/img/photos/hatteras-dunes.jpg" alt="Hannah standing among dune grasses on a barrier island" class="img-fluid rounded z-depth-1" %}
+    </div>
   </div>
   <div class="col-md-6">
     <h3>Education</h3>

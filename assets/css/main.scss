@@ -449,3 +449,11 @@ ul.highlights-list {
 p.skills {
   line-height: 1.75;
 }
+
+// Field photo under the interests list on the home page
+.about-field-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 40%;
+}
