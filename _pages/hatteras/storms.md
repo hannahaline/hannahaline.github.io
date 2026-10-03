@@ -86,6 +86,15 @@ Irene cut five breaches through the island between Cape Hatteras and Oregon Inle
 
 ## Hurricane Dorian, 2019
 
-{% include hatteras/todo.liquid text="Dorian before/after on Hatteras: NOAA 7 Sep 2019 against NC OneMap, being added." %}
+Dorian made landfall at Cape Hatteras on the morning of 6 September 2019.
+At the shore, water reached an estimated 3.0 m above mean high water and stayed above the top of the beach for about 31 hours. Isabel's water stayed that high for about 100 hours.
+
+Even so, the ocean side of the island came through largely intact.
+NOAA photographed the island from the air the next day. Comparing those photos with ones from 2016, we found no fresh sheets of washed-over sand across NC-12 anywhere between Buxton and Oregon Inlet.
+You can look for yourself: the 7 September 2019 photo is one of the years in [Then and now]({{ '/hatteras/then-and-now/' | relative_url }}).
+
+High water on its own does not decide what a storm does to the island. The height of the dunes, the width of the beach and how long the water stays high all matter too, and these are what the model weighs storm by storm.
+
+{% comment %} Sources: landfall time and place from HURDAT2 (AL052019, 6 Sep 12:30 UTC, 35.2N 75.6W). Water level and hours above the berm from storm_record_1996_2024_labelled_events.csv (Dorian 3.022 m MHW, 31 h; Isabel 100 h). "No fresh overwash" from the 2016 vs 2019 photo check on 2026-10-03 (NC-12 sampled every 2 km plus eight close-ups) and the overwash record (OBS-024: no overwash on the modelled island). Category left out on purpose: HURDAT2 has 85 kt (Category 2), but the match table says Category 1. {% endcomment %}
 
 {% include hatteras/pager.liquid %}

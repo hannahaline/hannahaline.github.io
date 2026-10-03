@@ -8,16 +8,17 @@ This file is excluded from the build.
 
 **Done and committed on `hatteras-site` (not pushed, not public):**
 - Nine pages: Overview, The island, Shoreline change, Storms, Then and now, Management, The model, Looking ahead (hidden), About.
-- The shoreline page was split three ways on 10-02: Shoreline change (map, record, fills, 2021 shift), Storms (timeline, Isabel, Irene, Dorian placeholder), and Then and now (photo slider).
+- The shoreline page was split three ways on 10-02: Shoreline change (map, record, fills, 2021 shift), Storms (timeline, Isabel, Irene, Dorian), and Then and now (photo slider).
 - Built so far: the shoreline map, the storms and management timeline, the photo slider (saved photos), the study-area map with the Jug Handle Bridge, the cross-section (textbook style), the Isabel and Irene USGS photos, and a first draft of all page text.
 
-**Paused in the middle of: Dorian before/after (Storms page; there is a to-do on the page).**
-- USGS has no ready-made Dorian pair for Hatteras. Its one pair (usgs.gov/media/images/cape-hatteras-national-seashore-10) is captioned "Cape Hatteras National Seashore", but the images are labelled **North Core Banks**, in Cape Lookout National Seashore. Don't use it as Hatteras.
-- Hannah chose a **Hatteras pair from map photos**: NOAA 7 Sep 2019 (already saved for the slider) against NC OneMap Jan–Feb 2016, with a "Dorian" spot added to the slider.
-- Caution before picking a place: the overwash record has one post-Dorian image (OBS-024, 2019-09-10), marked "Cloudy" with no overwash recorded on the modelled island. The storm sheet says "NC-12 closed ~3 months; expect major overwash; look Oct 2019". Next step: look at the 2016 vs 2019 sheet (`dorian_check.jpg` was made in the scratchpad; re-make it from `assets/hatteras/img/compare/<spot>/2016.jpg` and `2019.jpg`) and scan the NOAA layer along the island for real overwash. If there is no clear Dorian change on Hatteras, **tell Hannah rather than pick a weak pair**. One option is to say Dorian's water level (about 3.0 m) and show what the photos show.
+**Dorian: DONE 2026-10-03, written as text with no photo pair.**
+- Checked the NOAA 7 Sep 2019 photos (the only Dorian flight over NC-12) against NC OneMap 2016: the four slider spots, NC-12 every 2 km from Buxton to Oregon Inlet, and close-ups at km 18-24, 44, 46, 50 and 54. No fresh washover anywhere, which matches OBS-024. The 2019 photo at the S-curves shows equipment on NC-12; the cause is unknown, so don't caption it.
+- The page gives the landfall (HURDAT2), the water level and hours above the berm (storm record), the "largely intact" finding, and a pointer to the 2019 photo in Then and now. Sources are in a Liquid comment under the section.
+- Left out on purpose: the category (HURDAT2 has 85 kt = Category 2, but the match table says Cat 1), the 4-7 ft surge (no citable link in the repo), and the storm sheet's "NC-12 closed ~3 months" (possibly Ocracoke; unchecked).
+- Don't use the USGS "Cape Hatteras" Dorian pair: its photos are North Core Banks.
 
 **Next, in order:**
-1. Finish Dorian, as above.
+1. ~~Finish Dorian~~ (done 10-03).
 2. Refresh the private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE, at version 5, from before the split). In the session scratchpad, `make_preview.py` already lists `storms` and `then-and-now`. The scratchpad is temporary, so if it is gone, rebuild the flattening script from the description under Preview below.
 3. Work through the to-do notes (`grep -rn "hatteras/todo.liquid" _pages/hatteras`), starting with the ones only Hannah can answer:
    - collaborators' full names;
