@@ -30,6 +30,11 @@ This file is excluded from the build.
 - `assets/hatteras/img/study_area_map.jpg`, from `tools/hatteras_stakeholder_map.py`: north-up, Esri imagery, villages, NC-12, nourishment reaches (read from shoreline_rates.json), groins, and a locator. NC-12 is `nc12_current.geojson`, which already follows the Jug Handle Bridge (within 3 m of OpenStreetMap); the dashed beach road it bypassed is cut from `nc12_2008.geojson` between the bridge's ends.
 - `_includes/hatteras/cross_section.svg`, from `tools/hatteras_cross_section.py`: a schematic sound-to-ocean slice, inline so it takes the page font.
 
+- `assets/hatteras/img/isabel/`: USGS oblique photos, public domain.
+  - The 1999 and 2003 pairs for Frisco and Hatteras Village were extracted from the high-resolution PDF of Fact Sheet 2009-3025 with `pdfimages`. The PDF stores them flipped top to bottom, so they were flipped back; check that the camera date stamp reads "21 16 27".
+  - `breach_2003.jpg` is from usgs.gov/media/images/hatteras-island-post-hurricane-isabel.
+  - Both places are south-west of Cape Point, outside the modelled reach; the page says so.
+
 ## Panels to build
 
 1. `shoreline-map`: **BUILT 2026-10-02.** Cape Point to Oregon Inlet (GIS 1–120, 1222 transects), with windows for the whole record (1996–2026), 1996–2015 and 2010–2026.

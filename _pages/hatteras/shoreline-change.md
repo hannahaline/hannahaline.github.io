@@ -67,9 +67,35 @@ Each dot is one high-water event: a time when tide, storm surge and waves togeth
 ### Hurricane Isabel, 2003
 
 Isabel brought the highest water of the whole record: an estimated 5.2 m above mean high water at the shore in September 2003, almost a metre higher than any storm since.
-There are no aerial photos of Hatteras taken just after Isabel that are corrected to match a map, so the photo comparison below jumps from 2002 to 2007.
+There are no map-ready aerial photos from just after Isabel, so the photo comparison further down jumps from 2002 to 2007. Oblique photos taken from a plane fill that gap.
 
-{% include hatteras/todo.liquid text="Isabel's inlet near Hatteras Village (south-west of this study area) and the post-Isabel emergency fill on Pea Island: add with a source. Consider USGS oblique photos (Data Series 761) for a before/after." %}
+The worst damage was just south-west of Cape Point, beyond the stretch this research models. There, Isabel cut a new breach about 500 m wide that completely severed the island, and it overwashed the villages of Frisco and Hatteras Village.
+The U.S. Geological Survey photographed the same places before the storm and three days after it.
+
+{% assign isabel = '/assets/hatteras/img/isabel/' | relative_url %}
+<figure class="hat-photo-wide">
+<img src="{{ isabel }}breach_2003.jpg" alt="Oblique aerial photo of Hatteras Island after Hurricane Isabel, with ocean water running through a wide breach that cuts the island in two" loading="lazy">
+<figcaption class="hat-caption">21 September 2003, three days after Isabel: the breach that cut Hatteras Island in two, between Frisco and Hatteras Village. Photo: U.S. Geological Survey.</figcaption>
+</figure>
+
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ isabel }}frisco_1999.jpg" alt="Frisco from the air in 1999: houses behind vegetated dunes and a wide beach" loading="lazy"><figcaption>8 Sep 1999, before</figcaption></figure>
+<figure><img src="{{ isabel }}frisco_2003.jpg" alt="The same houses in Frisco after Isabel: the dunes are gone and sand covers the ground between the houses" loading="lazy"><figcaption>21 Sep 2003, after</figcaption></figure>
+</div>
+<figcaption class="hat-caption"><b>Frisco.</b> Storm surge and waves washed over the dunes in front of the first row of houses and spread that sand across the island. The dunes were completely removed.</figcaption>
+</figure>
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ isabel }}hatteras_village_1999.jpg" alt="Hatteras Village from the air in 1999: hotels behind a dune line, with the water tower behind them" loading="lazy"><figcaption>8 Sep 1999, before</figcaption></figure>
+<figure><img src="{{ isabel }}hatteras_village_2003.jpg" alt="The same hotels in Hatteras Village after Isabel: the dunes are gone and sand covers the roads and lots" loading="lazy"><figcaption>21 Sep 2003, after</figcaption></figure>
+</div>
+<figcaption class="hat-caption"><b>Hatteras Village.</b> Surge and waves destroyed the dunes protecting the hotels, washed buildings from their foundations and covered roads with sand.</figcaption>
+</figure>
+</div>
+
+<p class="hat-caption">Photos and descriptions: Karen L. M. Morgan, U.S. Geological Survey, <a href="https://pubs.usgs.gov/publication/fs20093025">Coastal Change During Hurricane Isabel 2003</a> (Fact Sheet 2009-3025). Public domain.</p>
 
 ### Hurricane Irene, 2011
 

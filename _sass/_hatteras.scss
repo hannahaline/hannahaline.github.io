@@ -859,3 +859,58 @@ table.hat-table {
     border-radius: 4px;
   }
 }
+
+// Before/after photo pairs and wide photos (Isabel)
+.hat-photo-wide {
+  margin: 1rem 0 1.5rem;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+.hat-pairs {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1rem 0 1rem;
+}
+
+.hat-pair {
+  margin: 0;
+
+  .hat-pair-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+
+    figure {
+      margin: 0;
+      position: relative;
+      min-width: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0.4rem;
+      left: 0.4rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      background: rgba(26, 26, 26, 0.72);
+      color: #fff;
+      font-size: 0.875rem;
+    }
+  }
+}
