@@ -8,12 +8,15 @@ nav: false
 
 {% include hatteras/subnav.liquid %}
 
-<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/hatteras/img/hero_lighthouse_2024.jpg' | relative_url }}'); --hat-hero-pos: center 20%">
+<section class="hat-hero hat-hero-split hat-bleed">
   <div class="hat-hero-text">
     <h2>Living with a changing coast</h2>
     <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
   </div>
-  <span class="hat-hero-credit">Cape Hatteras Lighthouse during its 2024 restoration. Photo: <a href="https://www.flickr.com/photos/106602675@N05/53554250733/">National Park Service</a></span>
+  <figure class="hat-hero-photo">
+    <img src="{{ '/assets/hatteras/img/hero_lighthouse_beach.jpg' | relative_url }}" alt="Aerial view of the Cape Hatteras Lighthouse standing in maritime forest behind a wide beach and the surf">
+    <figcaption class="hat-hero-credit">Cape Hatteras Lighthouse, 2004. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a></figcaption>
+  </figure>
 </section>
 
 <p class="hat-lead">

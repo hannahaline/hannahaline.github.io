@@ -1124,21 +1124,66 @@ ol.hat-model-parts {
   }
 }
 
-// Photo credit in the corner of the overview hero
-.hat-hero {
-  position: relative;
+// Overview hero, split: headline on a dark teal panel, the photo beside it (portrait photos that a wide
+// text-over-photo banner would crop away); stacked on phones
+.hat-hero.hat-hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
+  align-items: stretch;
+  min-height: 0;
+  background: #1f4f5c;
+
+  .hat-hero-text {
+    align-self: center;
+    max-width: none;
+    margin: 0;
+    // left edge on the page's 930px text column
+    padding: 3rem 2.5rem 3rem max(1rem, calc((100vw - 930px) / 2 + 1rem));
+  }
+
+  h2,
+  p {
+    text-shadow: none;
+  }
+
+  .hat-hero-photo {
+    position: relative;
+    margin: 0;
+    height: min(80vh, 600px);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 30% 8%;
+    }
+  }
 
   .hat-hero-credit {
     position: absolute;
-    right: 0.8rem;
-    bottom: 0.5rem;
+    right: 0.6rem;
+    bottom: 0.4rem;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 
     a {
       color: inherit;
       text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+    .hat-hero-text {
+      margin: 0;
+      padding: 2rem 1rem 1.5rem;
+    }
+
+    .hat-hero-photo {
+      height: 70vw;
     }
   }
 }
