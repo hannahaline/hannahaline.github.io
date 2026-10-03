@@ -8,11 +8,12 @@ nav: false
 
 {% include hatteras/subnav.liquid %}
 
-<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/img/photos/hatteras-aerial.jpg' | relative_url }}')">
+<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/hatteras/img/hero_lighthouse_2024.jpg' | relative_url }}'); --hat-hero-pos: center 20%">
   <div class="hat-hero-text">
     <h2>Living with a changing coast</h2>
     <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
   </div>
+  <span class="hat-hero-credit">Cape Hatteras Lighthouse during its 2024 restoration. Photo: <a href="https://www.flickr.com/photos/106602675@N05/53554250733/">National Park Service</a></span>
 </section>
 
 <p class="hat-lead">
@@ -29,8 +30,6 @@ It also introduces a computer model that recreates this history, so that we can 
 <img src="{{ '/assets/hatteras/img/buxton_houses_2025.jpg' | relative_url }}" alt="Oceanfront houses on pilings standing in the surf at Buxton, one collapsed into the water, with debris on the wet sand" loading="lazy">
 <figcaption class="hat-caption">Houses in the surf at Buxton on 30 September 2025, the day five unoccupied houses there collapsed. Photo: <a href="https://www.nps.gov/caha/learn/news/five-unoccupied-houses-collapse-in-buxton-september-30-2025.htm">National Park Service</a>.</figcaption>
 </figure>
-
-{% include hatteras/todo.liquid text="Swap the hero photo for a Hatteras-specific aerial (Rodanthe S-curves or Buxton) once imagery sources are settled." %}
 
 ## Explore
 

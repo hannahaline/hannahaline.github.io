@@ -85,7 +85,7 @@ $hat-muted: #6b7378;
   margin-bottom: 2.5rem;
   background:
     linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.65)),
-    var(--hat-hero-img) center 55% / cover no-repeat;
+    var(--hat-hero-img) var(--hat-hero-pos, center 55%) / cover no-repeat;
   color: #fff;
 
   .hat-hero-text {
@@ -1121,6 +1121,25 @@ ol.hat-model-parts {
   li::marker {
     color: var(--global-theme-color);
     font-weight: 700;
+  }
+}
+
+// Photo credit in the corner of the overview hero
+.hat-hero {
+  position: relative;
+
+  .hat-hero-credit {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 }
 
