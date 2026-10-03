@@ -1,0 +1,21 @@
+{% comment %}
+  Storms and management timeline. Data from tools/hatteras_timeline_data.py; script assets/hatteras/js/timeline.js.
+  mode="management" leaves the storms out. Hovering a management event lights its reach on the shoreline map, if the page has one.
+{% endcomment %}
+<div class="hat-timeline hat-bleed" data-src="{{ '/assets/hatteras/data/timeline.json' | relative_url }}" data-mode="{{ include.mode | default: 'all' }}">
+  <div class="hat-shoremap-inner">
+    {% unless include.mode == "management" %}
+    <div class="hat-controls">
+      <div class="hat-seg" role="group" aria-label="Which high-water events">
+        <button type="button" data-show="all" class="on">All high-water events</button>
+        <button type="button" data-show="tropical">Tropical storms and hurricanes only</button>
+      </div>
+    </div>
+    {% endunless %}
+    <div class="hat-tl-legend"></div>
+    <div class="hat-tl-chart" role="img" aria-label="Timeline of storms and management on Hatteras Island"></div>
+    <div class="hat-tl-tip" role="status" hidden></div>
+    <p class="hat-caption hat-tl-caption"></p>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/timeline.js' | relative_url }}"></script>

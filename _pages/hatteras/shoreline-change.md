@@ -46,7 +46,9 @@ Periods run from 1 January of the first year to 31 December of the last.
 The shoreline does not change smoothly. Storms take sand away in days, and nourishment projects add it back in weeks.
 These events stand out in the record.
 
-{% include hatteras/panel.liquid id="events-timeline" title="Storms and management, 1996–2024" plan="Timeline of the major storms (HURDAT2 tropical cyclones and nor'easters, coloured as in the storm figures) alongside the nourishments, NC-12 relocations, and bridge openings. Hovering an event highlights the reach it affected on the map above." %}
+Each dot is one high-water event: a time when tide, storm surge and waves together pushed water high up the beach. The taller the stem, the higher the water reached. Below are the management projects that changed the beach and the road. Hover over a project to see its stretch of beach on the map above.
+
+{% include hatteras/timeline.liquid %}
 
 ### Hurricane Isabel, 2003
 
@@ -56,9 +58,9 @@ These events stand out in the record.
 
 {% include hatteras/todo.liquid text="Irene breached the island at Pea Island and near Rodanthe. Describe what the record shows, and link to the management page for the bridges that followed." %}
 
-### Beach nourishment, 2014 and 2022
+### Beach nourishment, 2014 to 2022
 
-{% include hatteras/todo.liquid text="How the Buxton, Rodanthe, and Avon fills show up as sudden seaward jumps, and how long the added width lasts." %}
+{% include hatteras/todo.liquid text="How the Rodanthe 2014, Buxton 2017 and 2022, and Avon 2022 fills show up as sudden seaward jumps, and how long the added width lasts." %}
 
 ### The 2021 shift
 

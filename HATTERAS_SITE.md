@@ -32,7 +32,13 @@ This file is excluded from the build.
    - Clicking a transect shows plain-language rates for all three windows and the full CoastSat time series with the window's fit. The profile shows the 7-domain LOWESS (GIS 1–10 as domain means), and there is a table view.
    - Share links: `#t=<transect id>`.
    - Data: `python tools/hatteras_shoreline_data.py`. It refits the LRR from the time series and refuses to write if the fit differs from the published `lrr/<window>/` tables. GIS 91–120 is refit only; it matches `lrr/1996_2024/ext` for 1996–2024.
-2. `events-timeline` / `management-timeline`: one timeline engine with storms (HURDAT2 type colours) and management actions.
+2. `timeline`: **BUILT 2026-10-02.** One SVG engine, `_includes/hatteras/timeline.liquid`. The shoreline page shows everything; the management page uses `mode="management"` and shows management events only.
+   - Storms: 421 high-water events, 1984–2025. They come from the hindcast series (1984_2004 up to 1995, 1996_2015 for 1996–2009, 2010_2026 from 2010), with peaks rebuilt and Rhigh-checked through `storm_figures.py`, and HURDAT2 classes and names in the house colours.
+   - 2025 events (Erin among them) are drawn hollow, at their midpoint: the WIS record ends in 2024, so their peaks can't be checked.
+   - Management: from `HATTERAS_ROAD_EVENTS`, `HATTERAS_NOURISHMENT_PROJECTS` and the bridge rows of the timeline sheet. Open marks are not in the model.
+   - Hovering a management event fires `hat:reach`, which lights its km range on the shoreline map and profile.
+   - Data: `python tools/hatteras_timeline_data.py`, run with the CASCADE venv.
+   - Map fill bands now also read `HATTERAS_NOURISHMENT_PROJECTS`; fills on the same reach share a band. Re-run both tools whenever the config changes.
 3. `imagery-compare`: **BUILT 2026-10-02.** A swipe slider. Layers and places live in `_data/hatteras_imagery.yml`, which you can edit by hand.
    - Layers: 11 public layers, all loaded live with nothing re-hosted. NC OneMap gives 1993, 1996, 1998 CIR, 2002, 2007, 2010, Feb–Mar 2012, Jan–Feb 2016, Feb 2020 and Mar 2024 (mosaic dates read from the Dare County tile names). NOAA adds Dorian, 7 Sep 2019.
    - Places: the S-curves and Jug Handle Bridge, New Inlet (located on the 2012 photo), Avon, and Buxton.

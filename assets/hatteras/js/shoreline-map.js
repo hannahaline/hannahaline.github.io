@@ -14,6 +14,7 @@
   var INK = "#1a1a1a", MUTED = "#6b7378", GRID = "#e6e9eb", TEAL = "#2f7f93", FILL = "#c8880f", FILL_BG = "rgba(246, 227, 184, 0.55)";
 
   var data, map, lines = [], casing = [], highlight, win = 0, selected = null, tsChart, profileChart, bases = {};
+  var reachKm = null;  // [south, north] km lit by the timeline (hat:reach)
   var cache = {};
 
   function cls(r) {
@@ -130,7 +131,20 @@
   // Dark outlines help single lines read on the photo up close, but turn the whole ribbon dark at island scale
   function setCasing() {
     var on = map.getZoom() >= 13;
-    casing.forEach(function (c) { c.setStyle({ opacity: on ? 0.55 : 0 }); });
+    casing.forEach(function (c, k) {
+      var km = data.transects[k].km, lit = reachKm && km >= reachKm[0] && km <= reachKm[1];
+      c.setStyle(lit ? { color: "#fff", weight: 11, opacity: 1 } : { color: INK, weight: 6, opacity: on ? 0.55 : 0 });
+    });
+  }
+
+  // A timeline event's stretch of beach: white halo on the map and a teal band on the profile
+  function setReach(detail) {
+    reachKm = detail ? detail.km : null;
+    setCasing();
+    if (profileChart) {
+      profileChart.options.plugins.hatBands.bands = profileBands();
+      profileChart.update();
+    }
   }
 
   function tooltip(k) {
@@ -173,7 +187,7 @@
       "<h4>" + nearPlace(t.km) + "</h4>" +
       '<p class="hat-detail-sub">' + t.km.toFixed(1) + " km north of Cape Point</p>" +
       '<table class="hat-detail-table">' + rows + "</table>" +
-      (fills.length ? '<p class="hat-detail-note">This beach was nourished in ' + fills.map(function (n) { return n.year; }).join(" and ") + ".</p>" : "");
+      (fills.length ? '<p class="hat-detail-note">This beach was nourished in ' + [].concat.apply([], fills.map(function (n) { return n.years; })).join(" and ") + ".</p>" : "");
     updateProfile();
     loadSeries(t).then(function (s) { if (selected === k) drawSeries(t, s, fills); });
   }
@@ -223,7 +237,7 @@
     var w = data.windows[win];
     var pts = s.pts.map(function (p) { return { x: p[0], y: p[1] }; });
     var bands = [{ from: w.start, to: w.end + 1, fill: "rgba(47, 127, 147, 0.08)" }];
-    fills.forEach(function (n) { bands.push({ from: n.year, to: n.year + 1, fill: FILL_BG, label: "fill", ink: "#8a5d06", labelTop: true }); });
+    fills.forEach(function (n) { n.years.forEach(function (y) { bands.push({ from: y, to: y + 1, fill: FILL_BG, label: "fill", ink: "#8a5d06", labelTop: true }); }); });
     var cfg = {
       type: "scatter",
       data: {
@@ -265,7 +279,7 @@
         onClick: function (e, els) { var el = els.filter(function (x) { return x.datasetIndex === 0; })[0]; if (el) select(el.index); },
         plugins: {
           legend: { display: false },
-          hatBands: { bands: data.nourishments.map(function (n) { return { from: n.km[0], to: n.km[1], fill: FILL_BG, label: n.name.split(" ")[0] + " " + n.year, ink: "#8a5d06" }; }) },
+          hatBands: { bands: profileBands() },
           tooltip: { filter: function (c) { return c.datasetIndex === 0; }, callbacks: { label: function (c) {
             var t = data.transects[c.dataIndex]; return nearPlace(t.km) + ": " + (c.raw.y >= 0 ? "+" : "−") + fmt(c.raw.y, 2) + " m/yr";
           } } }
@@ -281,6 +295,12 @@
     };
     profileChart = new Chart(document.getElementById("shoremap-profile"), cfg);
     updateProfile();
+  }
+
+  function profileBands() {
+    var b = data.nourishments.map(function (n) { return { from: n.km[0], to: n.km[1], fill: FILL_BG, label: n.name + " " + n.years.join(", "), ink: "#8a5d06" }; });
+    if (reachKm) b.push({ from: reachKm[0], to: reachKm[1], fill: "rgba(47, 127, 147, 0.22)" });
+    return b;
   }
 
   // Village names along the top of the profile; these drop a row to clear their neighbours
@@ -347,6 +367,7 @@
       buildMap();
       buildProfile();
       buildTable();
+      window.addEventListener("hat:reach", function (e) { setReach(e.detail); });
       var m = /t=([\w]+)/.exec(location.hash);
       var k = m ? data.transects.findIndex(function (t) { return t.id === m[1]; }) : -1;
       if (k >= 0) select(k);

@@ -686,3 +686,120 @@ table.hat-table {
 .hat-compare-stage:focus-within .hat-compare-divider span {
   outline: 2px solid #1a1a1a;
 }
+
+// Storms and management timeline (_includes/hatteras/timeline.liquid)
+.hat-timeline {
+  background: #f6f9fa;
+  border-top: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid var(--global-divider-color);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 0;
+
+  .hat-shoremap-inner {
+    position: relative;
+  }
+}
+
+.hat-tl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font-size: 0.94rem;
+  margin-bottom: 0.5rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  i {
+    display: inline-block;
+  }
+
+  .dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+
+    &.small {
+      width: 0.55rem;
+      height: 0.55rem;
+    }
+  }
+
+  .bar {
+    width: 1.2rem;
+    height: 0.7rem;
+    border-radius: 2px;
+    background: #f6e3b8;
+    border: 1px solid #c8880f;
+  }
+
+  .diamond {
+    width: 0.6rem;
+    height: 0.6rem;
+    background: #1a1a1a;
+    transform: rotate(45deg);
+  }
+
+  .square {
+    width: 0.65rem;
+    height: 0.65rem;
+    background: #1a1a1a;
+
+    &.open {
+      background: #fff;
+      border: 1.5px solid #1a1a1a;
+    }
+  }
+}
+
+.hat-tl-chart {
+  background: #fff;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  overflow: hidden;
+
+  svg {
+    display: block;
+    font-family: inherit;
+  }
+
+  circle:focus,
+  .hat-tl-event:focus {
+    outline: none;
+  }
+
+  circle:focus-visible {
+    stroke: #1a1a1a;
+    stroke-width: 2;
+  }
+
+  .hat-tl-event {
+    cursor: default;
+  }
+
+  .hat-tl-event:focus-visible text {
+    text-decoration: underline;
+  }
+}
+
+.hat-tl-tip {
+  position: absolute;
+  z-index: 20;
+  max-width: 18rem;
+  background: #fff;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  pointer-events: none;
+
+  .hat-tip-hint {
+    color: #6b7378;
+  }
+}

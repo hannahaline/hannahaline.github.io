@@ -14,7 +14,7 @@ For nearly a century, people have built dunes, paved and moved a highway, pumped
 Each of these changes how sand moves, and therefore how the island changes.
 </p>
 
-{% include hatteras/panel.liquid id="management-timeline" title="A century of management on Hatteras" plan="Same timeline engine as the shoreline page, filtered to management actions: 1930s dune line, NC-12 paving, the Buxton groins, the lighthouse move, nourishments, relocations, and bridges. Each item links to its section below." %}
+{% include hatteras/timeline.liquid mode="management" %}
 
 ## Dune building
 

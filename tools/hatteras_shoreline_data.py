@@ -28,6 +28,7 @@ SITE = Path(__file__).resolve().parents[1]
 CASCADE = SITE.parent / "CASCADE"
 sys.path.insert(0, str(CASCADE / "scripts"))
 from cascade_pipeline.coastsat_lowess import compute_domain_means, lowess_transect_values  # noqa: E402
+from site_layer.hatteras_site_config import HATTERAS_NOURISHMENT_PROJECTS  # noqa: E402
 
 SCR = CASCADE / "data/hatteras_init/5-scr"
 FRAME = SCR / "2-transect-frame/transect_domains"
@@ -59,12 +60,16 @@ PLACES = [
 ]
 GROIN_GIS = 5.5
 
-# The fills the model is forced with (HATTERAS_NOURISHMENT_PROJECTS)
-NOURISHMENTS = [
-    {"name": "Rodanthe (S-curves)", "year": 2014, "gis": [84, 89]},
-    {"name": "Buxton", "year": 2022, "gis": [6, 15]},
-    {"name": "Avon", "year": 2022, "gis": [21, 28]},
-]
+
+
+def nourishments():
+    """The fills the model is forced with, one band per reach: [{name, years, gis}], same-reach projects merged."""
+    bands = {}
+    for p in sorted(HATTERAS_NOURISHMENT_PROJECTS, key=lambda p: p.year):
+        g = (min(p.gis_domains), max(p.gis_domains))
+        b = bands.setdefault(g, {"name": p.name.split()[0], "years": [], "gis": list(g)})
+        b["years"].append(p.year)
+    return list(bands.values())
 
 
 def km_north(gis):
@@ -209,7 +214,7 @@ def main():
         "places": [dict(p, km=round(km_north(p["gis"]) + 0.25, 2), ll=landward_end(frame, lines, p["gis"]))
                    for p in PLACES],
         "groin": {"km": round(km_north(GROIN_GIS) + 0.5, 2), "ll": landward_end(frame, lines, GROIN_GIS + 0.5)},
-        "nourishments": [dict(n, km=[km_north(n["gis"][0]), km_north(n["gis"][1] + 1)]) for n in NOURISHMENTS],
+        "nourishments": [dict(n, km=[km_north(n["gis"][0]), km_north(n["gis"][1] + 1)]) for n in nourishments()],
         "nc12": nc12_line(),
     }
 
