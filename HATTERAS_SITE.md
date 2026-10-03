@@ -27,7 +27,11 @@ This file is excluded from the build.
 
 ## Panels to build
 
-1. `shoreline-map`: Leaflet map, CoastSat LRR 1996–2024 by transect, RdBu, click for a time series.
+1. `shoreline-map`: **BUILT 2026-10-02.** Cape Point to Oregon Inlet (GIS 1–120, 1222 transects), with windows for the whole record (1996–2026), 1996–2015 and 2010–2026.
+   - Map: transects coloured in 9 RdBu classes, with NC-12, the villages and the groins. Background is NC OneMap over USGS imagery, or the plain map.
+   - Clicking a transect shows plain-language rates for all three windows and the full CoastSat time series with the window's fit. The profile shows the 7-domain LOWESS (GIS 1–10 as domain means), and there is a table view.
+   - Share links: `#t=<transect id>`.
+   - Data: `python tools/hatteras_shoreline_data.py`. It refits the LRR from the time series and refuses to write if the fit differs from the published `lrr/<window>/` tables. GIS 91–120 is refit only; it matches `lrr/1996_2024/ext` for 1996–2024.
 2. `events-timeline` / `management-timeline`: one timeline engine with storms (HURDAT2 type colours) and management actions.
 3. `imagery-compare`: before/after swipe slider at four spots. Sources pending the online search; D: drive as the fallback.
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
@@ -55,6 +59,8 @@ Do not use Esri Wayback or Google Earth: their licences forbid it. Cross-origin 
     bundle exec jekyll serve --config _config.yml,_config_local.yml
 
 Then open http://localhost:4000/hatteras/.
+
+**Local catch:** jekyll-terser minifies the site's own JS. With no Node installed, ExecJS falls back to Windows JScript, which can't run Terser, so `assets/hatteras/js/*.js` is silently missing from local builds. The GitHub build is fine. To fix it locally, install Node LTS (`winget install OpenJS.NodeJS.LTS`). The alternative is to copy `assets/hatteras/js/` into `_site/assets/hatteras/js/` after each build.
 
 ## Launch checklist
 

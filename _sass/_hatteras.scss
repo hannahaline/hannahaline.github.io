@@ -262,3 +262,278 @@ dl.hat-terms {
   border-top: 1px solid var(--global-divider-color);
   font-weight: 600;
 }
+
+// Shoreline change map (_includes/hatteras/shoreline_map.liquid)
+.hat-shoremap {
+  background: #f6f9fa;
+  border-top: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid var(--global-divider-color);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 0 1.4rem;
+}
+
+.hat-shoremap-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hat-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.hat-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 4px;
+  overflow: hidden;
+
+  button {
+    border: 0;
+    background: #fff;
+    color: var(--global-theme-color);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.94rem;
+    cursor: pointer;
+
+    & + button {
+      border-left: 1px solid var(--global-theme-color);
+    }
+
+    &.on {
+      background: var(--global-theme-color);
+      color: #fff;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #1a1a1a;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.hat-shoremap-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+#shoremap-map {
+  background: #a8c8e0; // house WATER: shows through where the imagery has no tiles
+  height: min(78vh, 760px);
+  min-height: 420px;
+  border-radius: 4px;
+  border: 1px solid var(--global-divider-color);
+}
+
+.hat-shoremap-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.hat-legend {
+  background: #fff;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.94rem;
+
+  .hat-legend-title {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .hat-legend-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .hat-legend-head {
+    display: block;
+    color: #6b7378;
+    margin-bottom: 0.2rem;
+  }
+
+  .hat-legend-row,
+  .hat-legend-mid {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    line-height: 1.6;
+  }
+
+  .hat-legend-mid {
+    margin-top: 0.35rem;
+  }
+
+  .hat-swatch {
+    display: inline-block;
+    width: 1.6rem;
+    height: 0.7rem;
+    border: 1px solid rgba(26, 26, 26, 0.45);
+    border-radius: 2px;
+  }
+
+  .hat-key-road {
+    display: inline-block;
+    width: 1.6rem;
+    height: 3px;
+    background: #ffd23f;
+    box-shadow: 0 0 0 1px rgba(26, 26, 26, 0.35);
+  }
+
+  .hat-key-groin {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: #d7191c;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(26, 26, 26, 0.35);
+  }
+}
+
+.hat-detail {
+  background: #fff;
+  border: 1px solid var(--global-divider-color);
+  border-left: 4px solid var(--global-theme-color);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+
+  h4 {
+    font-family: $hat-heading-font;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .hat-detail-prompt {
+    margin: 0;
+    color: #6b7378;
+  }
+
+  .hat-detail-sub {
+    color: #6b7378;
+    margin: 0 0 0.5rem;
+    font-size: 0.94rem;
+  }
+
+  .hat-detail-note {
+    margin: 0.5rem 0 0;
+    font-size: 0.94rem;
+  }
+}
+
+.hat-detail-table {
+  width: 100%;
+  font-size: 0.94rem;
+
+  th {
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 0.2rem 0.8rem 0.2rem 0;
+    vertical-align: top;
+    color: #6b7378;
+  }
+
+  td {
+    padding: 0.2rem 0;
+  }
+
+  tr.on th {
+    color: var(--global-theme-color);
+  }
+}
+
+.hat-ts-wrap {
+  background: #fff;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  padding: 0.5rem 0.6rem;
+  height: 270px;
+}
+
+.hat-profile {
+  margin-top: 1.2rem;
+
+  .hat-profile-title {
+    font-family: $hat-heading-font;
+    font-size: 1.2rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .hat-profile-wrap {
+    background: #fff;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 4px;
+    padding: 0.5rem 0.6rem;
+    height: 320px;
+  }
+}
+
+.hat-caption {
+  color: #6b7378;
+  font-size: 0.94rem;
+  margin: 0.5rem 0 0;
+}
+
+// Map labels and tooltips
+.hat-place span {
+  display: inline-block;
+  transform: translate(8px, -50%);
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #fff;
+  text-shadow: 0 0 3px #000, 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.leaflet-tooltip.hat-tip {
+  font-size: 0.875rem;
+  line-height: 1.35;
+
+  .hat-tip-hint {
+    color: #6b7378;
+  }
+}
+
+.hat-table-scroll {
+  max-height: 24rem;
+  overflow: auto;
+}
+
+table.hat-table {
+  width: 100%;
+  font-size: 0.94rem;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.25rem 0.6rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    text-align: right;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    text-align: left;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+  }
+}

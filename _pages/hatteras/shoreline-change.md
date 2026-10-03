@@ -5,6 +5,8 @@ permalink: /hatteras/shoreline-change/
 description: Where Hatteras Island's shoreline has retreated or grown since 1996, and the events that show up in the record.
 nav: false
 map: true
+chart:
+  chartjs: true
 ---
 
 {% include hatteras/subnav.liquid %}
@@ -16,7 +18,11 @@ By tracing the shoreline in each image, we can see where the beach has moved lan
 
 ## Where is the shoreline eroding or growing?
 
-{% include hatteras/panel.liquid id="shoreline-map" wide=true title="Shoreline change along Hatteras Island, 1996–2024" plan="Leaflet map of the island coloured by rate of change (RdBu: red is erosion, blue is growth), with village labels and NC-12. Clicking a stretch of beach opens its shoreline position through time. Data: CoastSat LRR 1996–2024 by transect, LOWESS 7-domain smoothing, exported to assets/hatteras/data/." %}
+Each coloured line on the map is a survey line across the beach, from Cape Point to Oregon Inlet.
+Red lines show where the shoreline has moved landward, and blue lines show where it has moved seaward.
+Use the buttons to compare the whole satellite record with the two periods the model recreates.
+
+{% include hatteras/shoreline_map.liquid %}
 
 {% include hatteras/todo.liquid text="Two or three plain-language sentences per village (Rodanthe, Avon, Buxton, Pea Island) once the map is in. Keep numbers in metres per year AND 'about the length of a ... per decade'." %}
 
@@ -24,11 +30,14 @@ By tracing the shoreline in each image, we can see where the beach has moved lan
 <summary>Go deeper: how shoreline change is measured</summary>
 
 Shoreline positions come from [CoastSat](https://github.com/kvos/CoastSat), an open-source toolkit that finds the water's edge in Landsat and Sentinel-2 satellite images and corrects it for the tide.
-Positions are measured along transects, shore-normal lines spaced every 100 m along the island.
+Positions are measured along transects, shore-normal lines spaced every 50 m along the island.
 The rate at each transect is the slope of a straight-line fit through every position in the period (a *linear regression rate*), reported in metres per year.
 Negative rates mean erosion, and positive rates mean accretion.
+A rate is shown as "no clear trend" when it is smaller than its 95% uncertainty.
+The smoothed line on the chart is a LOWESS fit over about 3.5 km (seven 500 m model domains). Near Cape Point (the first 5 km) it is replaced by the average of each 500 m stretch, because the shoreline there changes too sharply to smooth.
+Periods run from 1 January of the first year to 31 December of the last.
 
-{% include hatteras/todo.liquid text="Confirm the transect spacing and the tide/slope correction settings against the CoastSat run, and add the uncertainty in plain words." %}
+{% include hatteras/todo.liquid text="Confirm the tide and beach-slope correction settings against the CoastSat run." %}
 
 </details>
 
