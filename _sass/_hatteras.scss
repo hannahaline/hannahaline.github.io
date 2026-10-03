@@ -831,19 +831,19 @@ table.hat-table {
     height: auto;
   }
 
-  .xs-label {
-    font-size: 17px;
+  .xs-zone {
+    font-size: 15px;
     font-weight: 600;
-    fill: #1a1a1a;
+    fill: #2b2f31;
   }
 
-  .xs-sub {
+  .xs-callout {
     font-size: 14px;
-    fill: #5b6469;
+    fill: #2b2f31;
   }
 
   .xs-small {
-    font-size: 13px;
+    font-size: 12px;
     fill: #5b6469;
   }
 }
@@ -913,4 +913,37 @@ table.hat-table {
       font-size: 0.875rem;
     }
   }
+}
+
+// Storm photo sets: a tall overview beside a before/after pair (Irene)
+.hat-storm-place {
+  margin: 1rem 0 1.5rem;
+}
+
+.hat-storm-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1fr;
+  gap: 0.5rem;
+  align-items: start;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+
+  figure {
+    margin: 0;
+    min-width: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+.hat-storm-pair {
+  display: grid;
+  gap: 0.5rem;
 }

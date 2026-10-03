@@ -102,7 +102,32 @@ The U.S. Geological Survey photographed the same places before the storm and thr
 In August 2011, Irene cut through Pea Island, opening a breach now called New Inlet. NC-12 was carried across it by a temporary bridge from October 2011, replaced by the permanent Etheridge Bridge in 2017.
 You can see the breach in the "New Inlet" comparison below, and the bridges on the [management page]({{ '/hatteras/management/' | relative_url }}).
 
-{% include hatteras/todo.liquid text="Irene's other damage near Rodanthe (the S-curves): add with a source." %}
+Irene cut five breaches through the island between Cape Hatteras and Oregon Inlet, severing NC-12 in several places. The U.S. Geological Survey photographed two of the breach sites before and after the storm.
+
+{% assign irene = '/assets/hatteras/img/irene/' | relative_url %}
+<figure class="hat-storm-place">
+<div class="hat-storm-grid">
+<figure class="hat-storm-over"><img src="{{ irene }}rodanthe_overview_2011.jpg" alt="Oblique aerial photo looking along Rodanthe after Hurricane Irene, with NC-12 broken where water cut across the island beside a line of sandbags" loading="lazy"></figure>
+<div class="hat-storm-pair">
+<figure><img src="{{ irene }}rodanthe_2008.jpg" alt="Rodanthe in May 2008: houses behind the road, with a wide beach in front" loading="lazy"></figure>
+<figure><img src="{{ irene }}rodanthe_2011.jpg" alt="The same houses in August 2011: water has cut a channel across the island and the road" loading="lazy"></figure>
+</div>
+</div>
+<figcaption class="hat-caption"><b>Rodanthe.</b> A breach was carved through the island here, severing NC-12. Left: looking along the coast on 30 August 2011. Right: the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same cottage.</figcaption>
+</figure>
+
+<figure class="hat-storm-place">
+<div class="hat-storm-grid">
+<figure class="hat-storm-over"><img src="{{ irene }}pea_island_overview_2011.jpg" alt="Oblique aerial photo looking north along Pea Island after Hurricane Irene, with channels cut across the island and the road" loading="lazy"></figure>
+<div class="hat-storm-pair">
+<figure><img src="{{ irene }}pea_island_2008.jpg" alt="Buildings and a parking area on Pea Island in May 2008, behind a wide beach" loading="lazy"></figure>
+<figure><img src="{{ irene }}pea_island_2011.jpg" alt="The same buildings in August 2011, cut off by channels of water on both sides" loading="lazy"></figure>
+</div>
+</div>
+<figcaption class="hat-caption"><b>Pea Island National Wildlife Refuge.</b> Two breaches were carved through the island here, severing NC-12. Left: looking north on 30 August 2011. Right: the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same building.</figcaption>
+</figure>
+
+<p class="hat-caption">Photos: Karen Morgan, U.S. Geological Survey St. Petersburg Coastal and Marine Science Center, from <a href="https://www.usgs.gov/centers/spcmsc/news/aerial-photographs-outer-banks-show-coastal-damage-hurricane-irene">Aerial Photographs of Outer Banks Show Coastal Damage from Hurricane Irene</a>. Public domain.</p>
 
 ### Beach nourishment, 2014 to 2022
 

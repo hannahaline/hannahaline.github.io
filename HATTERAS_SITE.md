@@ -35,6 +35,9 @@ This file is excluded from the build.
   - `breach_2003.jpg` is from usgs.gov/media/images/hatteras-island-post-hurricane-isabel.
   - Both places are south-west of Cape Point, outside the modelled reach; the page says so.
 
+- `assets/hatteras/img/irene/`: USGS oblique photos (Karen Morgan, SPCMSC), public domain. Each place is cut from one USGS composite into its three panels (overview 30 Aug 2011, 6 May 2008, 31 Aug 2011) by finding the white separator rows. Sources: usgs.gov/media/images/oblique-aerial-photograph-rodanthe-nc-enlarged-details and ...-pea-island-nc-enlarged-details.
+- The cross-section was redrawn 2026-10-02 in a textbook style: zone brackets, stippled sand, and outline symbols (houses on pilings, maritime oaks, shrubs, dune and marsh grass).
+
 ## Panels to build
 
 1. `shoreline-map`: **BUILT 2026-10-02.** Cape Point to Oregon Inlet (GIS 1–120, 1222 transects), with windows for the whole record (1996–2026), 1996–2015 and 2010–2026.
