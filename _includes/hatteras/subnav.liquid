@@ -21,3 +21,11 @@
     </div>
   {% endfor %}
 </nav>
+{% comment %} On phones a wide diagram scrolls sideways; data-scroll-start="0.5" opens it at that fraction of its width {% endcomment %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-scroll-start]").forEach(function (f) {
+      f.scrollLeft = (f.scrollWidth - f.clientWidth) * parseFloat(f.getAttribute("data-scroll-start"));
+    });
+  });
+</script>

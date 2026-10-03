@@ -15,7 +15,7 @@ It starts from a detailed map of the island's elevation, applies the storms, wav
 
 ## How it works, in four parts
 
-<figure class="hat-model-figure">
+<figure class="hat-model-figure" data-scroll-start="0.15">
 {% include hatteras/model_diagram.svg %}
 </figure>
 

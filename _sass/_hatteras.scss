@@ -5,6 +5,12 @@ $hat-heading-font: "Playfair Display", Georgia, "Times New Roman", serif;
 $hat-tint: #eef5f7;
 $hat-muted: #6b7378;
 
+// Full-width bands are 100vw, which includes the scrollbar; clip the few pixels that would otherwise scroll the page
+// sideways on every Hatteras page
+html:has(.hat-bleed) {
+  overflow-x: clip;
+}
+
 // Full-width band that breaks out of the 930px text column
 .hat-bleed {
   margin-left: calc(50% - 50vw);
@@ -1098,16 +1104,29 @@ a.hat-term {
   .storm {
     color: #6b7378;
   }
+
+  .flip b {
+    left: auto;
+    right: 3px;
+  }
 }
 
 // How the model works (_includes/hatteras/model_diagram.svg) and its numbered parts
 .hat-model-figure {
   margin: 1rem 0 0.5rem;
+  overflow-x: auto;   // on phones the diagram keeps a readable width and scrolls sideways, like the cross-section
 
   svg {
     display: block;
     width: 100%;
+    min-width: 720px;
     height: auto;
+  }
+
+  figcaption {
+    position: sticky;
+    left: 0;
+    max-width: calc(100vw - 2rem);
   }
 }
 

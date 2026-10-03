@@ -224,6 +224,11 @@
     var y0 = years.years[0], span = years.years[n - 1] - y0;
     var marks = [];
     data.nourishments.forEach(function (f) { f.years.forEach(function (y) { marks.push({ y: y, t: f.name + " fill", fill: true }); }); });
+    var lastW = 0;
+    window.addEventListener("resize", function () {
+      var w = document.getElementById("shoremap-ticks").clientWidth;
+      if (w && w !== lastW) { lastW = w; draw(); }
+    });
     fetch(BASE + "timeline.json").then(function (r) { return r.json(); }).then(function (d) {
       var best = {};
       d.storms.forEach(function (s) { if (s.name && s.type === "tropical" && s.wl >= 3.5 && (!best[s.name] || s.wl > best[s.name].wl)) best[s.name] = s; });
@@ -239,14 +244,23 @@
         else merged[key] = { y: m.y, fill: m.fill, names: [m.t.replace(" fill", "")] };
       });
       var list = Object.keys(merged).map(function (k) { return merged[k]; }).sort(function (a, b) { return a.y - b.y; });
-      var rowEnd = [], YEARS_PER_CHAR = 0.42;
-      document.getElementById("shoremap-ticks").innerHTML = list.map(function (m) {
+      // rows by measured width: a label takes about 6.5 px a character on the track's real width; past MAX_ROWS a
+      // mark keeps its tick and shows its name on hover only (narrow screens)
+      var box = document.getElementById("shoremap-ticks"), MAX_ROWS = 3, PX_PER_CHAR = 6.5;
+      var yearsPerPx = span / Math.max(box.clientWidth, 1);
+      var rowEnd = [];
+      box.innerHTML = list.map(function (m) {
         var text = m.names.join(" + ") + (m.fill ? " fill" : ""), row = 0;
-        while (rowEnd[row] !== undefined && rowEnd[row] > m.y - 0.3) row++;
-        rowEnd[row] = m.y + text.length * YEARS_PER_CHAR;
-        return '<span class="' + (m.fill ? "fill" : "storm") + '" style="left:' + ((m.y - y0) / span * 100) + "%;--row:" + row +
-          '" title="' + m.y + ": " + text + '"><i></i><b>' + text + "</b></span>";
+        var w = (text.length * PX_PER_CHAR + 6) * yearsPerPx;
+        var flip = m.y + w > y0 + span;                  // would run off the right end: sit on the tick's left
+        var start = flip ? m.y - w : m.y - 2 * yearsPerPx, end = flip ? m.y + 2 * yearsPerPx : m.y + w;
+        while (rowEnd[row] !== undefined && rowEnd[row] > start) row++;
+        var shown = row < MAX_ROWS;
+        if (shown) rowEnd[row] = end;
+        return '<span class="' + (m.fill ? "fill" : "storm") + (flip ? " flip" : "") + '" style="left:' + ((m.y - y0) / span * 100) + "%;--row:" + (shown ? row : 0) +
+          '" title="' + m.y + ": " + text + '"><i></i>' + (shown ? "<b>" + text + "</b>" : "") + "</span>";
       }).join("");
+      rowEnd.length = Math.min(rowEnd.length, MAX_ROWS);
       document.getElementById("shoremap-ticks").style.setProperty("--rows", rowEnd.length);
     }
   }
