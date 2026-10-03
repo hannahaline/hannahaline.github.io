@@ -21,6 +21,9 @@ By tracing the {% include hatteras/term.liquid id="shoreline" text="shoreline" %
 Each coloured line on the map is a survey line across the beach, from Cape Point to Oregon Inlet.
 Red lines show where the shoreline has moved landward, and blue lines show where it has moved seaward.
 Use the buttons to compare the whole satellite record with the two periods the model recreates.
+Or switch to **Change year by year** and press play to watch where the shoreline sat each year since the mid-1980s.
+
+{% include hatteras/todo.liquid text="Before launch, decide how the year-by-year player shows the 2021 shift (Hannah, 10-03: decide later). It currently runs to 2025." %}
 
 {% include hatteras/shoreline_map.liquid %}
 

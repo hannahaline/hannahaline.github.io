@@ -87,6 +87,11 @@ This file is excluded from the build.
    - Every caption fact comes from the timeline xlsx or the config.
    - **Since 2026-10-02 the photos are saved, not live.** NC OneMap renders year layers on request and slowed to 15–60 s per tile, so old years never loaded. `python tools/hatteras_imagery_data.py` saves one JPEG per place and layer into `assets/hatteras/img/compare/` (44 images, about 10 MB). The slider clips the right-hand image; Leaflet is no longer used. Re-run it after changing places or layers in the yml.
    - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
+3a. Shoreline map "Change year by year" mode: **BUILT 2026-10-03** (Hannah's picks: position not rate, 1984-2025, a mode on the map, 2021 decided before launch).
+   - `python tools/hatteras_shoreline_years.py` writes `shoreline_years.json`: each transect's yearly mean CoastSat position minus its 1984-86 mean, smoothed with the same 7-domain LOWESS (GIS 1-10 domain means) as the rate profile; <2 shorelines in a year = empty. The 1984 baseline alone has ~5 shorelines, hence 1984-86.
+   - Map colours in metres (5/25/50/75 classes, same RdBu), the profile on a fixed axis, a play bar with fill years and named storms of at least 3.5 m from timeline.json. The data loads only when the mode opens. Run it after `hatteras_shoreline_data.py`; it refuses to write if the transects differ.
+   - Not a sliding-window rate: short windows are unstable on Hatteras (window convergence work), so a rate per year would mostly animate noise.
+   - Cape Point reads -50 m in 2020 and about +190 m in 2025; that is the post-2021 growth, consistent with its positive 1996-2026 rate.
 3b. `sea-level`: **BUILT 2026-10-03** on the How the island works page (Hannah's picks: record + trends, interactive SVG, model periods).
    - The Duck monthly record (faded), yearly means for full years (2012 is missing a month, so the line breaks), NOAA's whole-record trend dashed, and the 1996–2015 and 2010–2026 trends in the house red and blue. Hover or the arrow keys pick a year.
    - Data: `python tools/hatteras_sealevel_data.py` reads CASCADE `2-rslr/record` and `fits/duck_rslr_rates.csv`, refits each period, and refuses to write if the slope or month count differs from the table. Re-run it if the record or the periods change.

@@ -1,5 +1,6 @@
 // Shoreline change map for /hatteras/shoreline-change/ (markup in _includes/hatteras/shoreline_map.liquid).
-// Data: assets/hatteras/data/shoreline_rates.json and timeseries/d<NNN>.json, from tools/hatteras_shoreline_data.py.
+// Data: assets/hatteras/data/shoreline_rates.json and timeseries/d<NNN>.json, from tools/hatteras_shoreline_data.py;
+// the "Change year by year" mode adds shoreline_years.json (tools/hatteras_shoreline_years.py), loaded on first use.
 (function () {
   "use strict";
 
@@ -13,16 +14,24 @@
   var LABELS = ["more than 3", "2 to 3", "1 to 2", "0.25 to 1", "less than 0.25", "0.25 to 1", "1 to 2", "2 to 3", "more than 3"];
   var INK = "#1a1a1a", MUTED = "#6b7378", GRID = "#e6e9eb", TEAL = "#2f7f93", FILL = "#c8880f", FILL_BG = "rgba(246, 227, 184, 0.55)";
 
+  // Year-by-year mode: metres from the 1984-86 average, same colours
+  var BREAKS_M = [-75, -50, -25, -5, 5, 25, 50, 75];
+  var LABELS_M = ["more than 75", "50 to 75", "25 to 50", "5 to 25", "less than 5", "5 to 25", "25 to 50", "50 to 75", "more than 75"];
+  var FRAME_MS = 650;
+
   var data, map, lines = [], casing = [], highlight, win = 0, selected = null, tsChart, profileChart, bases = {};
+  var mode = "rates", years = null, yi = 0, timer = null;
   var reachKm = null;  // [south, north] km lit by the timeline (hat:reach)
   var cache = {};
 
-  function cls(r) {
+  function cls(r, breaks) {
     if (r === null || r === undefined) return -1;
-    for (var i = 0; i < BREAKS.length; i++) if (r < BREAKS[i]) return i;
-    return BREAKS.length;
+    for (var i = 0; i < breaks.length; i++) if (r < breaks[i]) return i;
+    return breaks.length;
   }
-  function color(r) { var c = cls(r); return c < 0 ? "#9aa0a3" : COLORS[c]; }
+  function color(r) { var c = cls(r, mode === "years" ? BREAKS_M : BREAKS); return c < 0 ? "#9aa0a3" : COLORS[c]; }
+  // the value each transect is drawn with: its rate for the period, or its position in the chosen year
+  function value(k) { return mode === "years" ? years.v[yi][k] : data.transects[k].r[win]; }
 
   function fmt(x, d) { return Math.abs(x).toFixed(d === undefined ? 1 : d); }
 
@@ -61,6 +70,11 @@
     document.querySelectorAll("#shoremap-basemaps button").forEach(function (b) {
       b.addEventListener("click", function () { setBase(b.getAttribute("data-base")); });
     });
+    document.querySelectorAll("#shoremap-modes button").forEach(function (b) {
+      b.addEventListener("click", function () { setMode(b.getAttribute("data-mode")); });
+    });
+    document.getElementById("shoremap-year").addEventListener("input", function (e) { stop(); setYear(+e.target.value); });
+    document.getElementById("shoremap-play").addEventListener("click", function () { if (timer) stop(); else play(); });
     var end = new Date(data.record_end + "T00:00:00");
     document.querySelectorAll(".shoremap-end").forEach(function (s) {
       s.textContent = end.toLocaleString("en-US", { month: "long", year: "numeric" });
@@ -69,16 +83,18 @@
 
   function buildLegend() {
     var el = document.getElementById("shoremap-legend");
-    var html = '<div class="hat-legend-title">Shoreline change, metres per year</div><div class="hat-legend-rows">';
-    html += '<div class="hat-legend-col"><span class="hat-legend-head">Moving landward (eroding)</span>';
+    var yr = mode === "years", labels = yr ? LABELS_M : LABELS;
+    var html = '<div class="hat-legend-title">' + (yr ? "Shoreline position, metres from its 1984–86 average" : "Shoreline change, metres per year") +
+      '</div><div class="hat-legend-rows">';
+    html += '<div class="hat-legend-col"><span class="hat-legend-head">' + (yr ? "Landward (eroded)" : "Moving landward (eroding)") + "</span>";
     for (var i = 0; i < 4; i++) html += row(i);
-    html += '</div><div class="hat-legend-col"><span class="hat-legend-head">Moving seaward (growing)</span>';
+    html += '</div><div class="hat-legend-col"><span class="hat-legend-head">' + (yr ? "Seaward (grown)" : "Moving seaward (growing)") + "</span>";
     for (var j = 8; j > 4; j--) html += row(j);
-    html += "</div></div>" + '<div class="hat-legend-mid">' + swatch(4) + " Little change: " + LABELS[4] + "</div>";
+    html += "</div></div>" + '<div class="hat-legend-mid">' + swatch(4) + " Little change: " + labels[4] + "</div>";
     html += '<div class="hat-legend-mid"><span class="hat-key-road"></span> NC-12 &nbsp; <span class="hat-key-groin"></span> Buxton groins</div>';
     el.innerHTML = html;
     function swatch(k) { return '<span class="hat-swatch" style="background:' + COLORS[k] + '"></span>'; }
-    function row(k) { return '<div class="hat-legend-row">' + swatch(k) + LABELS[k] + "</div>"; }
+    function row(k) { return '<div class="hat-legend-row">' + swatch(k) + labels[k] + "</div>"; }
   }
 
   // ---- map -------------------------------------------------------------------------------------
@@ -148,8 +164,10 @@
   }
 
   function tooltip(k) {
-    var t = data.transects[k], r = t.r[win];
-    return "<b>" + nearPlace(t.km) + "</b><br>" + (r === null ? "no rate" : (r < 0 ? "−" : "+") + fmt(r, 2) + " m per year") + "<br><span class='hat-tip-hint'>click for details</span>";
+    var t = data.transects[k], r = value(k), what;
+    if (mode === "years") what = r === null ? "no shorelines this year" : years.years[yi] + ": " + fmt(r, 0) + " m " + (r < 0 ? "landward" : "seaward") + " of 1984–86";
+    else what = r === null ? "no rate" : (r < 0 ? "−" : "+") + fmt(r, 2) + " m per year";
+    return "<b>" + nearPlace(t.km) + "</b><br>" + what + "<br><span class='hat-tip-hint'>click for details</span>";
   }
 
   function setBase(name) {
@@ -163,9 +181,99 @@
   function setWindow(i) {
     win = i;
     document.querySelectorAll("#shoremap-windows button").forEach(function (b, j) { b.classList.toggle("on", j === i); });
-    lines.forEach(function (l, k) { l.setStyle({ color: color(data.transects[k].r[win]) }); });
+    recolour();
     updateProfile();
     if (selected !== null) select(selected, true);
+  }
+
+  function recolour() { lines.forEach(function (l, k) { l.setStyle({ color: color(value(k)) }); }); }
+
+  // ---- year-by-year mode -----------------------------------------------------------------------
+  function setMode(m) {
+    if (m === mode) return;
+    if (m === "years" && !years) {
+      fetch(BASE + "shoreline_years.json").then(function (r) { return r.json(); }).then(function (d) {
+        years = d;
+        yi = 0;
+        years.lo = Infinity;
+        years.hi = -Infinity;
+        d.v.forEach(function (row) { row.forEach(function (x) { if (x !== null) { years.lo = Math.min(years.lo, x); years.hi = Math.max(years.hi, x); } }); });
+        buildPlayer();
+        setMode("years");
+      });
+      return;
+    }
+    stop();
+    mode = m;
+    document.querySelectorAll("#shoremap-modes button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-mode") === m); });
+    document.getElementById("shoremap-windows").hidden = m === "years";
+    document.getElementById("shoremap-player").hidden = m !== "years";
+    document.querySelector(".shoremap-cap-rates").hidden = m === "years";
+    document.querySelector(".shoremap-cap-years").hidden = m !== "years";
+    buildLegend();
+    if (m === "years") setYear(yi);
+    else { recolour(); updateProfile(); }
+  }
+
+  // Ticks under the play bar: fill years (gold) and the big named storms, from the timeline data
+  function buildPlayer() {
+    var range = document.getElementById("shoremap-year"), n = years.years.length;
+    range.max = n - 1;
+    var y0 = years.years[0], span = years.years[n - 1] - y0;
+    var marks = [];
+    data.nourishments.forEach(function (f) { f.years.forEach(function (y) { marks.push({ y: y, t: f.name + " fill", fill: true }); }); });
+    fetch(BASE + "timeline.json").then(function (r) { return r.json(); }).then(function (d) {
+      var best = {};
+      d.storms.forEach(function (s) { if (s.name && s.type === "tropical" && s.wl >= 3.5 && (!best[s.name] || s.wl > best[s.name].wl)) best[s.name] = s; });
+      Object.keys(best).forEach(function (k) { marks.push({ y: Math.floor(best[k].y), t: k.replace(/ [0-9]{4}$/, ""), fill: false }); });
+      draw();
+    }, draw);
+    function draw() {
+      // one label per year and kind (two fills in 2022 share one), then rows so neighbours do not overlap
+      var merged = {};
+      marks.filter(function (m) { return m.y >= y0 && m.y <= y0 + span; }).forEach(function (m) {
+        var key = m.y + (m.fill ? "f" : "s");
+        if (merged[key]) merged[key].names.push(m.t.replace(" fill", ""));
+        else merged[key] = { y: m.y, fill: m.fill, names: [m.t.replace(" fill", "")] };
+      });
+      var list = Object.keys(merged).map(function (k) { return merged[k]; }).sort(function (a, b) { return a.y - b.y; });
+      var rowEnd = [], YEARS_PER_CHAR = 0.42;
+      document.getElementById("shoremap-ticks").innerHTML = list.map(function (m) {
+        var text = m.names.join(" + ") + (m.fill ? " fill" : ""), row = 0;
+        while (rowEnd[row] !== undefined && rowEnd[row] > m.y - 0.3) row++;
+        rowEnd[row] = m.y + text.length * YEARS_PER_CHAR;
+        return '<span class="' + (m.fill ? "fill" : "storm") + '" style="left:' + ((m.y - y0) / span * 100) + "%;--row:" + row +
+          '" title="' + m.y + ": " + text + '"><i></i><b>' + text + "</b></span>";
+      }).join("");
+      document.getElementById("shoremap-ticks").style.setProperty("--rows", rowEnd.length);
+    }
+  }
+
+  function setYear(i) {
+    yi = Math.max(0, Math.min(years.years.length - 1, i));
+    document.getElementById("shoremap-year").value = yi;
+    document.getElementById("shoremap-yearlabel").textContent = years.years[yi];
+    recolour();
+    updateProfile();
+  }
+
+  function play() {
+    if (yi >= years.years.length - 1) setYear(0);
+    var btn = document.getElementById("shoremap-play");
+    btn.innerHTML = "&#10073;&#10073;";
+    btn.setAttribute("aria-label", "Pause");
+    timer = setInterval(function () {
+      if (yi >= years.years.length - 1) return stop();
+      setYear(yi + 1);
+    }, FRAME_MS);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    var btn = document.getElementById("shoremap-play");
+    btn.innerHTML = "&#9654;";
+    btn.setAttribute("aria-label", "Play");
   }
 
   // ---- selection: detail text and time series --------------------------------------------------
@@ -281,7 +389,8 @@
           legend: { display: false },
           hatBands: { bands: profileBands() },
           tooltip: { filter: function (c) { return c.datasetIndex === 0; }, callbacks: { label: function (c) {
-            var t = data.transects[c.dataIndex]; return nearPlace(t.km) + ": " + (c.raw.y >= 0 ? "+" : "−") + fmt(c.raw.y, 2) + " m/yr";
+            var t = data.transects[c.dataIndex];
+            return nearPlace(t.km) + ": " + (c.raw.y >= 0 ? "+" : "−") + (mode === "years" ? fmt(c.raw.y, 0) + " m" : fmt(c.raw.y, 2) + " m/yr");
           } } }
         },
         scales: {
@@ -329,13 +438,18 @@
 
   function updateProfile() {
     if (!profileChart) return;
-    var ds = profileChart.data.datasets;
-    ds[0].data = data.transects.map(function (t) { return { x: t.km, y: t.r[win] }; });
-    ds[0].backgroundColor = data.transects.map(function (t) { return color(t.r[win]); });
+    var ds = profileChart.data.datasets, yr = mode === "years", y = profileChart.options.scales.y;
+    ds[0].data = data.transects.map(function (t, k) { return { x: t.km, y: value(k) }; });
+    ds[0].backgroundColor = data.transects.map(function (t, k) { return color(value(k)); });
     ds[0].borderColor = "rgba(26,26,26,0.35)";
     ds[0].borderWidth = 0.5;
-    ds[1].data = data.transects.map(function (t) { return { x: t.km, y: t.s[win] }; });
-    ds[2].data = selected === null ? [] : [{ x: data.transects[selected].km, y: data.transects[selected].r[win] }];
+    // the yearly values are already smoothed, so the line is the same values; rates draw their own smoothed line
+    ds[1].data = data.transects.map(function (t, k) { return { x: t.km, y: yr ? value(k) : t.s[win] }; });
+    ds[2].data = selected === null ? [] : [{ x: data.transects[selected].km, y: value(selected) }];
+    // fixed y range while playing, so motion reads as change rather than rescaling
+    y.min = yr ? Math.floor(years.lo / 25) * 25 : undefined;
+    y.max = yr ? Math.ceil(years.hi / 25) * 25 : undefined;
+    y.title.text = yr ? "metres from the 1984–86 average (+ seaward)" : "m per year (+ seaward, − landward)";
     profileChart.update();
   }
 

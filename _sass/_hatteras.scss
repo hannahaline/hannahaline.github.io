@@ -1011,3 +1011,92 @@ a.hat-term {
   background: #fff4d6;
 }
 
+// Shoreline map: controls hidden by mode must stay hidden whatever their display rule
+.hat-shoremap [hidden] {
+  display: none !important;
+}
+
+// Shoreline map, "Change year by year": play button, year slider with event ticks, big year readout
+.hat-player {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 0.2rem 0 0.9rem;
+
+  .hat-player-play {
+    flex: none;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 0;
+    background: var(--global-theme-color);
+    color: #fff;
+    font-size: 1rem;
+    line-height: 2.6rem;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 3px solid #fff4d6;
+    }
+  }
+
+  .hat-player-track {
+    flex: 1;
+    min-width: 0;
+    padding-top: 0.55rem;
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--global-theme-color);
+      margin: 0;
+    }
+  }
+
+  .hat-player-year {
+    flex: none;
+    min-width: 3.6rem;
+    font-family: $hat-heading-font;
+    font-size: 1.9rem;
+    line-height: 2.6rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.hat-player-ticks {
+  position: relative;
+  height: calc(0.5rem + var(--rows, 1) * 1.05rem);
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+
+  span {
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+
+  i {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 2px;
+    height: calc(0.45rem + var(--row) * 1.05rem);
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  b {
+    position: absolute;
+    left: 3px;
+    top: calc(0.3rem + var(--row) * 1.05rem);
+    font-weight: 500;
+  }
+
+  .fill {
+    color: #8a5d06;
+  }
+
+  .storm {
+    color: #6b7378;
+  }
+}
+
