@@ -91,6 +91,11 @@ This file is excluded from the build.
    - The Duck monthly record (faded), yearly means for full years (2012 is missing a month, so the line breaks), NOAA's whole-record trend dashed, and the 1996–2015 and 2010–2026 trends in the house red and blue. Hover or the arrow keys pick a year.
    - Data: `python tools/hatteras_sealevel_data.py` reads CASCADE `2-rslr/record` and `fits/duck_rslr_rates.csv`, refits each period, and refuses to write if the slope or month count differs from the table. Re-run it if the record or the periods change.
    - Text: 4.9 mm/yr and about 23 cm since 1978 (NOAA trend line), 3.8 and 5.5 mm/yr for the periods, and the point that 2010–2024 gives 6.5, so short-window rates move. The model uses 4 and 5 mm/yr (config, rounded).
+3c. `photo-slider` (Storms page): **BUILT 2026-10-03 for Rodanthe (Irene) only.** Hannah chose "align, then slide".
+   - `python tools/hatteras_align_photos.py` warps the 2008 photo onto the 2011 one with a homography fitted to 9 hand-picked points (listed in the script; median 11 px off), and crops both below the USGS date labels. The caption says the photo was warped.
+   - Automatic matching (SIFT + RANSAC, tried in a scratch OpenCV install) was unstable: about 10 matches agree, and the fit moved 20-200 px with the settings. Don't go back to it for these pairs.
+   - Frisco, Hatteras Village and Pea Island stay side by side: their photos were taken from different flight lines, so no single warp fits the front and back rows. In Frisco, front-row houses match at ~0 px offset but the back row is ~270 px out.
+   - `_includes/hatteras/photo_slider.liquid` is reusable for any pre-aligned pair.
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
 

@@ -62,14 +62,9 @@ Irene cut five breaches through the island between Cape Hatteras and Oregon Inle
 
 {% assign irene = '/assets/hatteras/img/irene/' | relative_url %}
 <figure class="hat-storm-place">
-<div class="hat-storm-grid">
-<figure class="hat-storm-over"><img src="{{ irene }}rodanthe_overview_2011.jpg" alt="Oblique aerial photo looking along Rodanthe after Hurricane Irene, with NC-12 broken where water cut across the island beside a line of sandbags" loading="lazy"></figure>
-<div class="hat-storm-pair">
-<figure><img src="{{ irene }}rodanthe_2008.jpg" alt="Rodanthe in May 2008: houses behind the road, with a wide beach in front" loading="lazy"></figure>
-<figure><img src="{{ irene }}rodanthe_2011.jpg" alt="The same houses in August 2011: water has cut a channel across the island and the road" loading="lazy"></figure>
-</div>
-</div>
-<figcaption class="hat-caption"><b>Rodanthe.</b> A breach was carved through the island here, severing NC-12. Left: looking along the coast on 30 August 2011. Right: the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same cottage.</figcaption>
+{% include hatteras/photo_slider.liquid before="/assets/hatteras/img/irene/rodanthe_before_aligned.jpg" after="/assets/hatteras/img/irene/rodanthe_after_aligned.jpg" before_label="6 May 2008" after_label="31 Aug 2011" before_alt="Rodanthe in May 2008: houses behind NC-12, with a wide beach in front" after_alt="The same houses in August 2011: water has cut a channel across the island and the road" ratio="857 / 464" %}
+<figure class="hat-photo-narrow"><img src="{{ irene }}rodanthe_overview_2011.jpg" alt="Oblique aerial photo looking along Rodanthe after Hurricane Irene, with NC-12 broken where water cut across the island beside a line of sandbags" loading="lazy"></figure>
+<figcaption class="hat-caption"><b>Rodanthe.</b> A breach was carved through the island here, severing NC-12. Drag the slider to compare the same spot on 6 May 2008 and 31 August 2011; the yellow arrow points to the same cottage. The 2008 photo has been warped to line up with the 2011 one, so houses on pilings may sit slightly off. Below: looking along the coast on 30 August 2011.</figcaption>
 </figure>
 
 <figure class="hat-storm-place">
