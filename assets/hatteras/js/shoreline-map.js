@@ -18,6 +18,8 @@
   var BREAKS_M = [-75, -50, -25, -5, 5, 25, 50, 75];
   var LABELS_M = ["more than 75", "50 to 75", "25 to 50", "5 to 25", "less than 5", "5 to 25", "25 to 50", "50 to 75", "more than 75"];
   var FRAME_MS = 650;
+  // smoothed yearly values colour whole stretches alike, so those lines are drawn thinner to read like the rate map
+  function weight() { return mode === "years" ? 3 : 4; }
 
   var data, map, lines = [], casing = [], highlight, win = 0, selected = null, tsChart, profileChart, bases = {};
   var mode = "rates", years = null, yi = 0, timer = null;
@@ -127,7 +129,7 @@
       casing.push(L.polyline(ll, { color: INK, weight: 6, opacity: 0.55, interactive: false, renderer: renderer }).addTo(map));
       var line = L.polyline(ll, { color: color(t.r[win]), weight: 4, opacity: 1, renderer: renderer }).addTo(map);
       line.on("mouseover", function () { line.setStyle({ weight: 7 }); });
-      line.on("mouseout", function () { line.setStyle({ weight: 4 }); });
+      line.on("mouseout", function () { line.setStyle({ weight: weight() }); });
       line.on("click", function () { select(k); });
       line.bindTooltip(function () { return tooltip(k); }, { sticky: true, direction: "top", className: "hat-tip" });
       lines.push(line);
@@ -186,7 +188,7 @@
     if (selected !== null) select(selected, true);
   }
 
-  function recolour() { lines.forEach(function (l, k) { l.setStyle({ color: color(value(k)) }); }); }
+  function recolour() { lines.forEach(function (l, k) { l.setStyle({ color: color(value(k)), weight: weight() }); }); }
 
   // ---- year-by-year mode -----------------------------------------------------------------------
   function setMode(m) {
