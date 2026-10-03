@@ -7,7 +7,7 @@ This file is excluded from the build.
 ## Where we left off (2026-10-02, paused)
 
 **Done and committed on `hatteras-site` (not pushed, not public):**
-- Nine pages: Overview, The island, Shoreline change, Storms, Then and now, Management, The model, Looking ahead (hidden), About.
+- Nine pages, in menu groups (since 10-03): The basics (Overview, How the island works), What happened (Shoreline change, Storms, Then and now), What we can do (Management, The model, Looking ahead - hidden), More (About). Groups live in `_data/hatteras_pages.yml`; the island page's URL is still /hatteras/island/.
 - The shoreline page was split three ways on 10-02: Shoreline change (map, record, fills, 2021 shift), Storms (timeline, Isabel, Irene, Dorian), and Then and now (photo slider).
 - Built so far: the shoreline map, the storms and management timeline, the photo slider (saved photos), the study-area map with the Jug Handle Bridge, the cross-section (textbook style), the Isabel and Irene USGS photos, and a first draft of all page text.
 
@@ -87,7 +87,7 @@ This file is excluded from the build.
    - Every caption fact comes from the timeline xlsx or the config.
    - **Since 2026-10-02 the photos are saved, not live.** NC OneMap renders year layers on request and slowed to 15–60 s per tile, so old years never loaded. `python tools/hatteras_imagery_data.py` saves one JPEG per place and layer into `assets/hatteras/img/compare/` (44 images, about 10 MB). The slider clips the right-hand image; Leaflet is no longer used. Re-run it after changing places or layers in the yml.
    - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
-3b. `sea-level`: **BUILT 2026-10-03** on The island page (Hannah's picks: record + trends, interactive SVG, model periods).
+3b. `sea-level`: **BUILT 2026-10-03** on the How the island works page (Hannah's picks: record + trends, interactive SVG, model periods).
    - The Duck monthly record (faded), yearly means for full years (2012 is missing a month, so the line breaks), NOAA's whole-record trend dashed, and the 1996–2015 and 2010–2026 trends in the house red and blue. Hover or the arrow keys pick a year.
    - Data: `python tools/hatteras_sealevel_data.py` reads CASCADE `2-rslr/record` and `fits/duck_rslr_rates.csv`, refits each period, and refuses to write if the slope or month count differs from the table. Re-run it if the record or the periods change.
    - Text: 4.9 mm/yr and about 23 cm since 1978 (NOAA trend line), 3.8 and 5.5 mm/yr for the periods, and the point that 2010–2024 gives 6.5, so short-window rates move. The model uses 4 and 5 mm/yr (config, rounded).

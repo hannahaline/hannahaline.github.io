@@ -31,7 +31,7 @@ It also introduces a computer model that recreates this history, so that we can 
 
 <div class="hat-cards">
   <a class="hat-card" href="{{ '/hatteras/island/' | relative_url }}">
-    <h3>The island</h3>
+    <h3>How the island works</h3>
     <p>How barrier islands work: waves, storms, overwash, and sea-level rise.</p>
   </a>
   <a class="hat-card" href="{{ '/hatteras/shoreline-change/' | relative_url }}">

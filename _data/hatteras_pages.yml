@@ -1,29 +1,39 @@
 # Pages of the Hatteras stakeholder section, in reading order.
+# group: the menu heading the page sits under.
 # ready: false shows the page greyed out in the section menu and skips it in previous/next links.
 - title: Overview
   url: /hatteras/
+  group: The basics
   ready: true
-- title: The island
+- title: How the island works
   url: /hatteras/island/
+  group: The basics
   ready: true
 - title: Shoreline change
   url: /hatteras/shoreline-change/
+  group: What happened
   ready: true
 - title: Storms
   url: /hatteras/storms/
+  group: What happened
   ready: true
 - title: Then and now
   url: /hatteras/then-and-now/
+  group: What happened
   ready: true
 - title: Management
   url: /hatteras/management/
+  group: What we can do
   ready: true
 - title: The model
   url: /hatteras/model/
+  group: What we can do
   ready: true
 - title: Looking ahead
   url: /hatteras/looking-ahead/
+  group: What we can do
   ready: false
 - title: About
   url: /hatteras/about/
+  group: More
   ready: true

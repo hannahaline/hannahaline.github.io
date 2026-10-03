@@ -1,15 +1,23 @@
-{% comment %} Section menu for the Hatteras pages, plus the draft banner while hatteras_draft is on {% endcomment %}
+{% comment %} Section menu for the Hatteras pages, grouped as in _data/hatteras_pages.yml, plus the draft banner while hatteras_draft is on {% endcomment %}
 {% if site.hatteras_draft %}
   <div class="hat-draft-banner">Draft preview, not for distribution. Results on these pages are not yet peer reviewed.</div>
 {% endif %}
 <nav class="hat-subnav" aria-label="Hatteras Island project pages">
-  {% for p in site.data.hatteras_pages %}
-    {% if p.url == page.permalink %}
-      <span class="hat-subnav-item current" aria-current="page">{{ p.title }}</span>
-    {% elsif p.ready %}
-      <a class="hat-subnav-item" href="{{ p.url | relative_url }}">{{ p.title }}</a>
-    {% else %}
-      <span class="hat-subnav-item soon" title="Coming soon">{{ p.title }}</span>
-    {% endif %}
+  {% assign groups = site.data.hatteras_pages | group_by: "group" %}
+  {% for g in groups %}
+    <div class="hat-subnav-group">
+      {% if g.name != "" and g.name != nil %}<span class="hat-subnav-label">{{ g.name }}</span>{% endif %}
+      <div class="hat-subnav-items">
+        {% for p in g.items %}
+          {% if p.url == page.permalink %}
+            <span class="hat-subnav-item current" aria-current="page">{{ p.title }}</span>
+          {% elsif p.ready %}
+            <a class="hat-subnav-item" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+          {% else %}
+            <span class="hat-subnav-item soon" title="Coming soon">{{ p.title }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   {% endfor %}
 </nav>
