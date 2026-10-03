@@ -49,7 +49,16 @@ Overwash can bury roads and houses, but it is also how a barrier island builds i
 <figcaption class="hat-caption">Not to scale. A storm surge raises the water, and waves run up the beach and over a low dune, laying down a new layer of sand across the island.</figcaption>
 </figure>
 
-{% include hatteras/todo.liquid text="Overwash photo (NC-12 after a storm), public domain with the source noted. USGS coastal oblique photos are a candidate." %}
+{% assign sandy = '/assets/hatteras/img/sandy/' | relative_url %}
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ sandy }}buxton_2011.jpg" alt="Buxton from the air in August 2011: oceanfront houses behind a wide, dry beach" loading="lazy"></figure>
+<figure><img src="{{ sandy }}buxton_2012.jpg" alt="The same houses at Buxton in November 2012: the beach is gone in front of them, the houses stand at the water's edge, and sand covers the ground and roads behind" loading="lazy"></figure>
+</div>
+<figcaption class="hat-caption"><b>Buxton, after Hurricane Sandy.</b> Looking west along the shore on 30 August 2011, just after Hurricane Irene (left), and on 4 November 2012, after Sandy (right). Erosion moved the shoreline landward until it reached the houses built on the beach, and sand on the roads shows overwash; some of that sand was already there after Irene. The yellow arrow points to the same building. Photos: U.S. Geological Survey, St. Petersburg Coastal and Marine Science Center, <a href="https://www.usgs.gov/media/images/oblique-aerial-photographs-buxton-north-carolina">Oblique aerial photographs of Buxton, North Carolina</a>. Public domain.</figcaption>
+</figure>
+</div>
 
 ## Dunes are the island's first defence
 
