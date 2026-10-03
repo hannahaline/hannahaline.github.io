@@ -14,7 +14,7 @@ This file is excluded from the build.
 **Dorian: DONE 2026-10-03, written as text with no photo pair.**
 - Checked the NOAA 7 Sep 2019 photos (the only Dorian flight over NC-12) against NC OneMap 2016: the four slider spots, NC-12 every 2 km from Buxton to Oregon Inlet, and close-ups at km 18-24, 44, 46, 50 and 54. No fresh washover anywhere, which matches OBS-024. The 2019 photo at the S-curves shows equipment on NC-12; the cause is unknown, so don't caption it.
 - The page gives the landfall (HURDAT2), the water level and hours above the berm (storm record), the "largely intact" finding, and a pointer to the 2019 photo in Then and now. Sources are in a Liquid comment under the section.
-- Left out on purpose: the category (HURDAT2 has 85 kt = Category 2, but the match table says Cat 1), the 4-7 ft surge (no citable link in the repo), and the storm sheet's "NC-12 closed ~3 months" (possibly Ocracoke; unchecked).
+- Category 2 from HURDAT2 (85 kt), Hannah's call 10-03; the CASCADE match table still says Cat 1. Left out on purpose: the 4-7 ft surge (no citable link in the repo), and the storm sheet's "NC-12 closed ~3 months" (possibly Ocracoke; unchecked).
 - Don't use the USGS "Cape Hatteras" Dorian pair: its photos are North Core Banks.
 
 **Next, in order:**
