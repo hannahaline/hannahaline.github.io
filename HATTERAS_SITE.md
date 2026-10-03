@@ -87,6 +87,10 @@ This file is excluded from the build.
    - Every caption fact comes from the timeline xlsx or the config.
    - **Since 2026-10-02 the photos are saved, not live.** NC OneMap renders year layers on request and slowed to 15–60 s per tile, so old years never loaded. `python tools/hatteras_imagery_data.py` saves one JPEG per place and layer into `assets/hatteras/img/compare/` (44 images, about 10 MB). The slider clips the right-hand image; Leaflet is no longer used. Re-run it after changing places or layers in the yml.
    - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
+3b. `sea-level`: **BUILT 2026-10-03** on The island page (Hannah's picks: record + trends, interactive SVG, model periods).
+   - The Duck monthly record (faded), yearly means for full years (2012 is missing a month, so the line breaks), NOAA's whole-record trend dashed, and the 1996–2015 and 2010–2026 trends in the house red and blue. Hover or the arrow keys pick a year.
+   - Data: `python tools/hatteras_sealevel_data.py` reads CASCADE `2-rslr/record` and `fits/duck_rslr_rates.csv`, refits each period, and refuses to write if the slope or month count differs from the table. Re-run it if the record or the periods change.
+   - Text: 4.9 mm/yr and about 23 cm since 1978 (NOAA trend line), 3.8 and 5.5 mm/yr for the periods, and the point that 2010–2024 gives 6.5, so short-window rates move. The model uses 4 and 5 mm/yr (config, rounded).
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
 

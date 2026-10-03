@@ -50,17 +50,27 @@ On Hatteras, many of today's dunes were built or rebuilt by people, which is cov
 
 ## Rising seas
 
-Sea level on the Outer Banks is rising, and it has risen faster in recent decades.
-At the NOAA tide gauge at Duck, the nearest long record, sea level rose about 4 mm per year from 1984 to 2004 and about 6.4 mm per year from 2004 to 2024.
-That is roughly 6 cm every decade.
+Sea level on the Outer Banks is rising.
+At the NOAA tide gauge at Duck, the nearest long record, the sea has risen by about 4.9 mm a year since 1978: about 23 cm (9 inches) in all.
 Higher water lets storms reach farther, and over time it pushes the whole island landward.
+
+The rise has not been steady.
+Over the first period the model recreates, 1996–2015, the trend was about 3.8 mm a year. Over the second, 2010–2026, it was about 5.5 mm a year.
+
+{% include hatteras/sea_level.liquid %}
+
+Sea level also swings up and down from month to month and year to year, so a trend fitted to 15 or 20 years shifts depending on which years it covers.
+Ending the second period in 2024 instead of early 2026, for example, gives about 6.5 mm a year instead of 5.5.
+The long-term rise is clearer than any single number.
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: the sea-level numbers</summary>
 
-The rates are straight-line fits to the monthly mean water level at Duck (NOAA station 8651370), with the seasonal cycle removed: 3.9 ± 1.3 mm per year for 1984–2004 and 6.4 ± 1.3 mm per year for 2004–2024 (95% ranges).
-This is *relative* sea-level rise: it includes the land sinking, which is what matters for the island.
-The model uses the rate for each period it recreates.
+The record is the monthly mean water level at Duck (NOAA station 8651370), with the average seasonal cycle removed.
+Each trend is a straight line fitted to the monthly values in its years, both end years included: 3.8 ± 1.4 mm per year for 1996–2015 and 5.5 ± 2.0 mm per year for 2010–2026 (95% ranges).
+The dashed line is NOAA's own trend over the whole record, 4.9 mm per year.
+This is *relative* sea-level rise: it includes any sinking of the land, which is what matters for the island.
+The model raises sea level at each period's rate, rounded to the nearest millimetre: 4 mm a year for 1996–2015 and 5 mm a year for 2010–2026.
 
 </details>
 

@@ -703,7 +703,8 @@ table.hat-table {
 }
 
 // Storms and management timeline (_includes/hatteras/timeline.liquid)
-.hat-timeline {
+.hat-timeline,
+.hat-sealevel {
   background: #f6f9fa;
   border-top: 1px solid var(--global-divider-color);
   border-bottom: 1px solid var(--global-divider-color);
@@ -946,4 +947,20 @@ table.hat-table {
 .hat-storm-pair {
   display: grid;
   gap: 0.5rem;
+}
+
+// Sea-level chart legend: line swatches
+.hat-tl-legend .line {
+  width: 1.4rem;
+  height: 0;
+  border-top: 1.5px solid;
+
+  &.thick {
+    border-top-width: 3px;
+  }
+
+  &.dashed {
+    border-top-style: dashed;
+    border-top-width: 2px;
+  }
 }

@@ -1,0 +1,12 @@
+{% comment %}
+  Sea level at the Duck gauge with the model periods' trends. Data from tools/hatteras_sealevel_data.py; script assets/hatteras/js/sea-level.js.
+{% endcomment %}
+<div class="hat-sealevel hat-bleed" data-src="{{ '/assets/hatteras/data/sea_level.json' | relative_url }}">
+  <div class="hat-shoremap-inner">
+    <div class="hat-tl-legend"></div>
+    <div class="hat-tl-chart hat-sl-chart" role="img" aria-label="Sea level at the Duck tide gauge since 1978, rising, with the trend for each model period"></div>
+    <div class="hat-tl-tip" role="status" hidden></div>
+    <p class="hat-caption hat-sl-caption"></p>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/sea-level.js' | relative_url }}"></script>
