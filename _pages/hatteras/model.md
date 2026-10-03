@@ -48,11 +48,10 @@ Sand moves across each stretch in storms, and between neighbouring stretches wit
 
 **References**
 
-- Anarde, K., Moore, L. J., Murray, A. B., and Reeves, I. R. B. (2024). The future of developed barrier systems, Part I: Pathways toward uninhabitability, drowning, and rebound. [Preprint, EarthArXiv](https://doi.org/10.31223/X5P947).
-- Reeves, I. R. B., Moore, L. J., Murray, A. B., Anarde, K. A., and Goldstein, E. B. (2021). Dune dynamics drive discontinuous barrier retreat. *Geophysical Research Letters*.
-- Nienhuis, J. H., and Lorenzo-Trueba, J. (2019). Simulating barrier island response to sea level rise with the barrier island and inlet environment (BRIE) model v1.0. *Geoscientific Model Development*.
-
-{% include hatteras/todo.liquid text="Check the author lists and add DOIs for Reeves et al. (2021) and Nienhuis and Lorenzo-Trueba (2019); confirm Anarde et al. is still the preprint." %}
+- Anarde, K. A., Moore, L. J., Murray, A. B., and Reeves, I. R. B. (2024). The future of developed barrier systems: 1. Pathways toward uninhabitability, drowning, and rebound. *Earth's Future*, 12(4), e2023EF003672. [doi:10.1029/2023EF003672](https://doi.org/10.1029/2023EF003672)
+- Anarde, K. A., Moore, L. J., Murray, A. B., and Reeves, I. R. B. (2024). The future of developed barrier systems: 2. Alongshore complexities and emergent climate change dynamics. *Earth's Future*, 12(4), e2023EF004200. [doi:10.1029/2023EF004200](https://doi.org/10.1029/2023EF004200)
+- Reeves, I. R. B., Moore, L. J., Murray, A. B., Anarde, K. A., and Goldstein, E. B. (2021). Dune dynamics drive discontinuous barrier retreat. *Geophysical Research Letters*, 48(13), e2021GL092958. [doi:10.1029/2021GL092958](https://doi.org/10.1029/2021GL092958)
+- Nienhuis, J. H., and Lorenzo-Trueba, J. (2019). Simulating barrier island response to sea level rise with the barrier island and inlet environment (BRIE) model v1.0. *Geoscientific Model Development*, 12(9), 4013–4030. [doi:10.5194/gmd-12-4013-2019](https://doi.org/10.5194/gmd-12-4013-2019)
 
 </details>
 

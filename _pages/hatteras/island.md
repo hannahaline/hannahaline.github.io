@@ -27,12 +27,10 @@ Where more sand arrives than leaves, the beach grows. Where more leaves than arr
 <summary>Go deeper: wave angle and shoreline shape</summary>
 
 The shape of the coast is itself set by the waves. Along the Outer Banks, large waves arrive from both the northeast and the southeast.
-When waves come in at a steep angle to the shore, small bumps in the coastline tend to grow rather than smooth out. Over centuries, this is thought to build the great capes of the Carolinas, including Cape Hatteras (Ashton, Murray and Arnoult, 2001, *Nature*).
+When waves come in at a steep angle to the shore, small bumps in the coastline tend to grow rather than smooth out. Over centuries, this is thought to build the great capes of the Carolinas, including Cape Hatteras (Ashton, Murray and Arnoult, 2001, [*Nature*](https://doi.org/10.1038/35104541)).
 Near a cape, small shifts in wave direction can turn one stretch of beach from eroding to growing. That is part of why Cape Point behaves so differently from the rest of the island.
 
 The model represents this with two settings: how often waves arrive at a steep angle, and whether more of them come from the north or the south.
-
-{% include hatteras/todo.liquid text="Check the citation: Ashton, Murray and Arnoult (2001), Formation of coastline features by large-scale instabilities induced by high-angle waves, Nature 414." %}
 
 </details>
 

@@ -26,7 +26,11 @@ A tall, continuous dune keeps small and medium storms off the road and out of th
 It also stops {% include hatteras/term.liquid id="overwash" text="overwash" %}, the natural process that carries sand onto the island and lets it build upward as the sea rises.
 An island held behind a fixed {% include hatteras/term.liquid id="dune-line" text="dune line" %} can grow lower and narrower over time, compared with one that is free to roll landward.
 
-{% include hatteras/todo.liquid text="The history of the artificial dune line on the Outer Banks (when it was built, by whom): add with a source." %}
+The dune line itself is largely built by people.
+Between 1936 and 1940, Civilian Conservation Corps and Works Progress Administration crews, directed by the National Park Service, put up almost 3 million feet of sand fencing to build a continuous barrier dune along the Outer Banks.
+The Park Service added to it in the late 1950s and rebuilt dunes after the 1962 Ash Wednesday storm, then stopped maintaining the dune line in the early 1970s.
+
+<p class="hat-caption">Sources: Dolan and Godfrey (1972), <a href="https://npshistory.com/publications/water/nrr-5.pdf"><i>Dune Stabilization and Beach Erosion, Cape Hatteras National Seashore</i></a>, NPS Natural Resource Report 5; National Park Service, <a href="https://www.nps.gov/subjects/geology/management-response-to-storms.htm">Management Response to Storms</a>.</p>
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: how the model represents dune management</summary>
@@ -79,10 +83,11 @@ A groin is a wall built out across the beach into the surf.
 It catches sand moving along the shore, so the beach on the side the sand comes from grows wider.
 The beach on the other side is cut off from that sand and often erodes faster.
 
-The Navy built the Buxton groins at the Cape Hatteras Lighthouse in 1969.
+In 1969–70 the US Navy built three groins at Buxton, two north and one just south of where the Cape Hatteras Lighthouse then stood, to protect its Naval Facility; they also shielded the lighthouse.
+The shore kept retreating, and in the summer of 1999 the lighthouse itself was moved 2,900 feet (880 m) to the southwest.
 The 2017 and 2022 Buxton nourishment projects start at the lighthouse groin and run north.
 
-{% include hatteras/todo.liquid text="Number of groins, the 1999 lighthouse move, and whether protecting the lighthouse was the stated purpose: add with sources." %}
+<p class="hat-caption">Sources: National Park Service, <a href="https://parkplanning.nps.gov/showFile.cfm?projectID=132446&amp;sfid=813968">Buxton Southern Groin Repair</a> (2025); Dare County, <a href="https://www.deq.nc.gov/coastal-management/proposed-groin-repairs-buxton-20250624-ncdcm/open">proposed groin repairs at Buxton</a>, NC Division of Coastal Management (2025); National Park Service, <a href="https://www.nps.gov/caha/learn/historyculture/movingthelighthouse.htm">Moving the Cape Hatteras Lighthouse</a>.</p>
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: modelling a groin</summary>
