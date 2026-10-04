@@ -1584,3 +1584,16 @@ table.hat-mvo-skill {
     }
   }
 }
+
+// Six photos, three to a row (dune building page); two to a row on tablets, one on phones
+.hat-pair.hat-six .hat-pair-photos {
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
