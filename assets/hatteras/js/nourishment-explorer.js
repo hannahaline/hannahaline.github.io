@@ -37,6 +37,8 @@
       self.controls();
       self.draw();
       // before-and-after photos, one pair per fill (tools/hatteras_nourishment_photos.py); the panel stays hidden without them
+      fetch(root.getAttribute("data-outline")).then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (o) { self.outline = o; self.drawStrip(); }).catch(function () {});
       fetch(root.getAttribute("data-photos")).then(function (r) { return r.ok ? r.json() : {}; })
         .then(function (p) { self.photos = p; self.drawPhoto(); }).catch(function () {});
       var w = self.chart.clientWidth;
@@ -82,7 +84,25 @@
     if (this.more.open) this.drawChart();
   };
 
+  // Headline and card numbers on the placement dates (tools/hatteras_nourishment_photos.py), when they are loaded
+  Explorer.prototype.numbers = function () {
+    var f = this.fills[this.fi].f, s = this.data.stretches[this.k];
+    var p = this.photos && this.photos[s.name + " " + f.year];
+    return p && p.jump_m !== undefined ? { jump: p.jump_m, left: p.left_m, year: p.left_year, refill: p.left_after_refill } :
+      { jump: f.step_m, left: f.since_before_m[String(this.data.last_year)], year: this.data.last_year, refill: false };
+  };
+
+  Explorer.prototype.drawHeadline = function () {
+    var f = this.fills[this.fi].f, s = this.data.stretches[this.k], n = this.numbers();
+    this.root.querySelector(".hat-nx-headline").innerHTML =
+      "The " + f.year + " fill at " + s.name + " moved the shoreline <b>" + Math.round(n.jump) + " m seaward</b> compared with the rest of the island. " +
+      (n.left >= 1 ? "In " + n.year + ", <b>" + Math.round(n.left) + " m</b> of it was still there" + (n.refill ? ", with the later refill's sand." : ".") :
+        "By " + n.year + ", it was gone.");
+  };
+
   Explorer.prototype.drawPhoto = function () {
+    this.drawHeadline();
+    this.drawCards();
     var fig = this.root.querySelector(".hat-nx-photo"), f = this.fills[this.fi].f, name = this.data.stretches[this.k].name;
     var p = this.photos && this.photos[name + " " + f.year];
     fig.hidden = !p;
@@ -99,16 +119,22 @@
       "chart further down compares the fill with the rest of the island. Satellite shorelines mark mean sea level, so they sit " +
       "a little landward of the wet edge in a photo taken at low tide. Photos: USDA National Agriculture Imagery Program " +
       "(public domain), via Microsoft Planetary Computer. Shorelines: CoastSat.";
-    var base = this.root.getAttribute("data-base"), refill = /refill/.test(p.moments.join(" "));
+    var base = this.root.getAttribute("data-base"), refill = /refill/.test(p.later_photos.join(" ") + "") ||
+      this.data.stretches[this.k].fills.some(function (o) { return o.year > f.year; });
     var tt = this.root.querySelector(".hat-nx-time"), pr = this.root.querySelector(".hat-nx-profile");
-    tt.hidden = pr.hidden = false;
-    tt.querySelector("img").src = base + p.through_time;
-    tt.querySelector("img").alt = "The same beach at " + name + " on the March 2024 photo, with the average shoreline before the " +
-      f.year + " fill and at " + (p.moments.length - 1) + " later times drawn from dark to pale";
-    tt.querySelector("figcaption").innerHTML = "The same 300 m of beach on the latest photo (March 2024), with the average " +
-      "satellite shoreline over 12 months at several moments: before the fill (dashed), just after it was finished, and later. " +
-      "Dark lines are early and pale lines recent, so lines stepping back toward the dashed one show the added beach wearing away." +
-      (refill ? " Lines marked as after the refill include the sand of the later fill on this stretch too." : "");
+    pr.hidden = false;
+    tt.hidden = !p.years_later;
+    if (p.years_later) {
+      tt.querySelector("img").src = base + p.years_later;
+      tt.querySelector("img").alt = "Aerial photos of the same beach at " + name + " in the years after the " + f.year +
+        " fill (" + p.later_photos.join(", ") + "), each with the satellite shoreline at the time of the photo and the shoreline before the fill";
+      tt.querySelector("figcaption").innerHTML = "The same 300 m of beach in every later aerial photo, " +
+        p.later_photos.join(", ").replace(/, ([^,]*)$/, " and $1") + ". The solid line is the satellite shoreline at the time " +
+        "of each photo, and the dashed line is the shoreline before the fill: as the added beach wears away, the solid line " +
+        "moves back toward the dashed one." + (refill ? " Photos marked as after a refill include that later fill's sand too." : "") +
+        " Photos: USDA National Agriculture Imagery Program to 2022, NC OneMap / NC Center for Geographic Information and " +
+        "Analysis in 2024. Shorelines: CoastSat.";
+    }
     pr.querySelector("img").src = base + p.profile;
     pr.querySelector("img").alt = "Chart of how far the shoreline moved along the beach around " + name + " after the " + f.year +
       " fill, with the nourished stretch shaded";
@@ -123,10 +149,7 @@
   Explorer.prototype.drawBars = function () {
     var d = this.data, s = d.stretches[this.k], f = this.fills[this.fi].f;
     var ys = Object.keys(f.since_before_m).map(Number).sort(), vals = ys.map(function (y) { return f.since_before_m[y]; });
-    var left = vals[vals.length - 1];
-    this.root.querySelector(".hat-nx-headline").innerHTML =
-      "The " + f.year + " fill at " + s.name + " moved the shoreline <b>" + Math.round(f.step_m) + " m seaward</b> compared with the rest of the island. " +
-      (left >= 1 ? "In " + d.last_year + ", <b>" + Math.round(left) + " m</b> of it was still there." : "By " + d.last_year + ", it was gone.");
+    this.drawHeadline();
     var W = Math.max(this.bars.clientWidth, 300), small = W < 640, H = small ? 240 : 270, top = 28, bottom = 44, lft = small ? 34 : 50, right = 10;
     var hi = Math.max(10, Math.ceil(Math.max.apply(null, vals.concat([0])) / 10) * 10);
     var lo = Math.min(0, Math.floor(Math.min.apply(null, vals) / 10) * 10);
@@ -165,24 +188,50 @@
 
   // Where the stretch is: the island from Cape Point to Oregon Inlet as a bar, villages above, the fills in gold
   Explorer.prototype.drawStrip = function () {
-    var d = this.data, s = d.stretches[this.k], W = Math.max(this.strip.clientWidth, 300), H = 54, L = 8, R = 8;
-    var X = function (km) { return L + km / d.island_km[1] * (W - L - R); };
+    var d = this.data, s = d.stretches[this.k], o = this.outline, W = Math.max(this.strip.clientWidth, 300), L = 8, R = 8, top = 34;
+    var pxkm = (W - L - R) / d.island_km[1];
+    var X = function (km) { return L + km * pxkm; };
+    // the island turned so north runs right, ocean side down, at true scale (tools/hatteras_island_outline.py)
+    var e0 = o ? o.east_m[0] : 0, h = o ? (o.east_m[1] - o.east_m[0]) / 1000 * pxkm : 8;
+    var Y = function (east) { return top + (east - e0) / 1000 * pxkm; };
+    var H = top + h + 18;
     this.strip.innerHTML = "";
     var svg = el("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
       "aria-label": s.name + " stretch, " + s.km[0].toFixed(1) + " to " + s.km[1].toFixed(1) + " km north of Cape Point" }, this.strip);
-    el("rect", { x: L, y: 30, width: W - L - R, height: 8, rx: 4, fill: "#e8dcb8" }, svg);
-    d.stretches.forEach(function (o) {
-      el("rect", { x: X(o.km[0]), y: 27, width: Math.max(X(o.km[1]) - X(o.km[0]), 3), height: 14, rx: 2,
-        fill: o === s ? FILL : "rgba(200, 136, 15, 0.35)", stroke: o === s ? INK : "none", "stroke-width": 1 }, svg);
+    if (o) {
+      o.rings.forEach(function (ring) {
+        el("path", { d: "M" + ring.map(function (q) { return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1); }).join("L") + "Z",
+          fill: "#e8dcb8", stroke: "#b9a67a", "stroke-width": 0.8 }, svg);
+      });
+    } else {
+      el("rect", { x: L, y: top, width: W - L - R, height: 8, rx: 4, fill: "#e8dcb8" }, svg);
+    }
+    // the ocean shoreline every 250 m, from the outline tool
+    var shore = function (km) {
+      var sh = o.shore, n = Math.max(0, Math.min(sh.length - 1, Math.round(km * 4)));
+      return sh[n][1];
+    };
+    d.stretches.forEach(function (st) {
+      if (!o) {
+        el("rect", { x: X(st.km[0]), y: top - 3, width: Math.max(X(st.km[1]) - X(st.km[0]), 3), height: 14, rx: 2,
+          fill: st === s ? FILL : "rgba(200, 136, 15, 0.35)", stroke: st === s ? INK : "none", "stroke-width": 1 }, svg);
+        return;
+      }
+      var pts = [];
+      for (var k = st.km[0]; k <= st.km[1] + 1e-9; k += 0.25) pts.push(X(k).toFixed(1) + "," + (Y(shore(k)) + 3).toFixed(1));
+      el("polyline", { points: pts.join(" "), fill: "none", stroke: st === s ? FILL : "rgba(200, 136, 15, 0.45)",
+        "stroke-width": st === s ? 6 : 4, "stroke-linecap": "round" }, svg);
+      if (st === s) el("polyline", { points: pts.join(" "), fill: "none", stroke: INK, "stroke-width": 0.8, "stroke-dasharray": "0" }, svg);
     });
-    // neighbouring names alternate between two rows so close villages (Salvo, Waves, Rodanthe) do not collide
+    // village names alternate between two rows so close villages (Salvo, Waves, Rodanthe) do not collide
     d.places.forEach(function (p, i) {
-      var row = i % 2;
-      el("line", { x1: X(p.km), x2: X(p.km), y1: 12 + row * 12, y2: 30, stroke: MUTED }, svg);
+      var row = i % 2, yb = o ? Y(shore(p.km)) - 2 : top;
+      el("line", { x1: X(p.km), x2: X(p.km), y1: 12 + row * 12, y2: Math.max(yb, 14 + row * 12), stroke: MUTED, "stroke-width": 0.8 }, svg);
       text(svg, X(p.km), 9 + row * 12, p.name, { "text-anchor": p.km < 2 ? "start" : p.km > d.island_km[1] - 3 ? "end" : "middle",
         fill: INK, "font-size": 11.5, "paint-order": "stroke", stroke: "#fff", "stroke-width": 3 });
     });
-    text(svg, W - R, H - 2, "Oregon Inlet", { fill: MUTED, "font-size": 10.5, "text-anchor": "end" });
+    text(svg, W - R, H - 3, "Oregon Inlet", { fill: MUTED, "font-size": 10.5, "text-anchor": "end" });
+    if (o) text(svg, L, H - 3, "Atlantic Ocean below, Pamlico Sound above; north is to the right", { fill: MUTED, "font-size": 10.5 });
   };
 
   Explorer.prototype.drawChart = function () {
@@ -276,16 +325,16 @@
 
   // One card per fill: what was placed, the jump, and what was left in the last full year
   Explorer.prototype.drawCards = function () {
-    var d = this.data, s = d.stretches[this.k], km = s.length_m / 1000;
+    var d = this.data, s = d.stretches[this.k], km = s.length_m / 1000, n = this.numbers();
     this.root.querySelector(".hat-nx-cards").innerHTML = [this.fills[this.fi].f].map(function (f) {
-      var left = f.since_before_m[String(d.last_year)];
-      var pct = Math.round(left / f.step_m * 100);
+      var left = n.left, pct = Math.round(left / n.jump * 100);
       return '<div class="hat-nx-card"><h4>' + s.name + " " + f.year + "</h4><dl>" +
         "<dt>Sand placed</dt><dd>" + (f.volume_cy / 1e6).toFixed(1) + " million cubic yards</dd>" +
         "<dt>Beach length</dt><dd>about " + km.toFixed(1) + " km (" + (km / 1.609).toFixed(1) + " miles)</dd>" +
         "<dt>Sand per metre of beach</dt><dd>about " + f.m3_per_m + " cubic metres</dd>" +
-        "<dt>Jump the year after</dt><dd><b>" + signed(f.step_m) + " m</b> compared with the rest of the island</dd>" +
-        "<dt>Left in " + d.last_year + "</dt><dd>" + signed(left) + " m" + (f.step_m > 0 && left > 0 ? " (about " + pct + "% of the jump)" : "") + "</dd>" +
+        "<dt>Jump after the fill</dt><dd><b>" + signed(n.jump) + " m</b> compared with the rest of the island</dd>" +
+        "<dt>Left in " + n.year + "</dt><dd>" + signed(left) + " m" + (n.jump > 0 && left > 0 && !n.refill ? " (about " + pct + "% of the jump)" :
+          n.refill ? " (with the later refill's sand)" : "") + "</dd>" +
         "</dl></div>";
     }).join("");
   };

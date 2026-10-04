@@ -18,6 +18,13 @@ The frame goes where the fill shows most clearly: the 300 m of beach (7 transect
 between the two photo dates, keeping 500 m clear of each end of the stretch. Hannah first chose the typical spot
 (change closest to the stretch average), then asked (2026-10-04) for the spot where the fill is clearly visible; the
 caption says how the spot was chosen and the JSON keeps both the spot's change and the stretch average.
+Below the pair, every later photo of the same frame (NAIP to 2022, NC OneMap March 2024), each with its own satellite
+shoreline and the before line dashed, so the added beach can be watched wearing back on real photos. The headline
+numbers for the explorer come from here too, on the placement dates: the jump is the change on the nourished stretch
+from the 12 months before sand went on to the 12 months after it was finished, minus the median change on the rest of
+the island (every transect more than 500 m from any fill) over the same months; what is left uses the last 12 months of
+the record in place of the 12 months after. The profile's dashed reference is the same median. Hannah asked
+(2026-10-04) for the headline, card, and figures to follow the placement dates instead of calendar years.
 Writes assets/hatteras/img/nourishment/<stretch>_<year>.jpg and assets/hatteras/data/nourishment_photos.json (keyed
 "<stretch> <year>" as the explorer names its fills). Photos are saved under tools/data/nourishment_photos/ so a re-run
 only redraws; pass --fetch to download them again. Needs the CASCADE repo beside this one.
@@ -70,6 +77,9 @@ FILLS = [("Rodanthe", 2014, "2012-06-28", "2014-10-17"), ("Buxton", 2017, "2016-
          ("Buxton", 2022, "2020-10-18", "2022-10-07"), ("Avon", 2022, "2020-10-18", "2022-10-07")]
 STAC = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
 SIGN = "https://planetarycomputer.microsoft.com/api/sas/v1/sign?href="
+LATER_PHOTOS = [("naip", "2014-10-17"), ("naip", "2016-09-10"), ("naip", "2018-10-29"), ("naip", "2020-10-18"),
+                ("naip", "2022-10-07"), ("nconemap", "2024-03-12")]   # NAIP dates as flown over Buxton/Avon; Rodanthe's below
+NAIP_DATE_AT = {"Rodanthe": {"2016-09-10": "2016-09-11", "2020-10-18": "2020-05-16"}}
 PHOTO_NEAREST = 3                        # a photo's line: the mean of the satellite shorelines nearest its flight
 PHOTO_MAX_DAYS = 130                     # ... none further than this (the sparse 2012 and 2020 passes reach ~4 months)
 WINDOW = 7                               # transects, 50 m apart: the frame's 300 m
@@ -214,6 +224,17 @@ REST_KM = (15, 38)                       # the reference beach: clear of every f
 SMOOTH = 5                                                       # transects (250 m) in the profile's running mean
 
 
+def rest_of_island(transects, stretches):
+    """Every transect more than 500 m from any nourished stretch."""
+    spans = [st["km"] for st in stretches.values()]
+    return [t for t in transects if not any(a - 0.5 <= t["km"] <= b + 0.5 for a, b in spans)]
+
+
+def mean_change(ts, w0, w1, how=np.mean):
+    v = [c for c in (change(t, w0, w1) for t in ts) if c is not None]
+    return float(how(v))
+
+
 def later_windows(stretch, year):
     """[(label, window)] after the fill: just after, 2 and 5 years later where they fit, and the last 12 months of the
     record, dropping any that would overlap the one before it or run past the record."""
@@ -244,6 +265,63 @@ def colours(n):
         return [TIME_COLOURS[0]]
     idx = np.round(np.linspace(0, len(TIME_COLOURS) - 1, n)).astype(int)
     return [TIME_COLOURS[i] for i in idx]
+
+
+def years_later(stretch, year, after_date, transects, box, k, halo, fetch):
+    """Every photo after the 'after' one, each with its own satellite shoreline and the before line dashed."""
+    wb_photo = None
+    shots = [(src, NAIP_DATE_AT.get(stretch, {}).get(d, d)) for src, d in LATER_PHOTOS]
+    shots = [(src, d) for src, d in shots if d > after_date]
+    if not shots:
+        return None, []
+    return shots
+
+
+def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo, fetch):
+    from matplotlib.lines import Line2D
+    lines = shorelines(transects, box, [before_date] + [d for _, d in shots])
+    n = len(shots)
+    cols = min(n, 3)
+    rows = -(-n // cols)
+    fig, axes = plt.subplots(rows, cols, figsize=(2.75 * cols, 2.75 * rows + 0.45), squeeze=False,
+                             gridspec_kw={"wspace": 0.04, "hspace": 0.06})
+    refill = [f for f in FILLS if f[0] == stretch and f[1] > year]
+    r0 = PLACED[(stretch, refill[0][1])][0] if refill else None
+    for ax in axes.flat[n:]:
+        ax.axis("off")
+    for i, ((src, d), ax) in enumerate(zip(shots, axes.flat)):
+        p = PHOTOS / f"{src}_{d}_{box[0]:.0f}_{box[1]:.0f}.jpg"
+        if fetch or not p.exists():
+            img.save(naip_export(d, box, PX) if src == "naip" else img.export_nconemap(SERVICES[2024], box, (PX, PX)), p)
+        ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
+        if lines[0]:
+            xs, ys = zip(*lines[0])
+            ax.plot(xs, ys, color=REF_LINE, lw=0.9, ls=(0, (4, 2.5)), path_effects=halo)
+        if lines[i + 1]:
+            xs, ys = zip(*lines[i + 1])
+            ax.plot(xs, ys, color=LINE, lw=1.1, path_effects=halo)
+        ax.set_xlim(box[0], box[2])
+        ax.set_ylim(box[1], box[3])
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_color("#1a1a1a")
+            sp.set_linewidth(1.0)
+        ts = pd.Timestamp(d)
+        note = f"\nafter the {refill[0][1]} refill" if r0 and d > r0 else ""
+        ax.text(0.04, 0.96, f"{ts.day} {ts:%b %Y}{note}", transform=ax.transAxes, ha="left", va="top", fontsize=8.5,
+                color="#1a1a1a", bbox=dict(boxstyle="square,pad=0.25", fc="white", ec="#1a1a1a", lw=0.7, alpha=0.92))
+    ax = axes.flat[0]
+    x0, y0 = box[0] + 0.07 * (box[2] - box[0]), box[1] + 0.07 * (box[3] - box[1])
+    ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=2.6, solid_capstyle="butt", path_effects=halo)
+    ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=8, path_effects=halo)
+    fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.1, ls=(0, (4, 2.5)), path_effects=halo, label="Shoreline before the fill"),
+                        Line2D([], [], color=LINE, lw=1.3, path_effects=halo, label="Shoreline at the time of each photo")],
+               loc="lower center", ncol=2, frameon=False, fontsize=8.5, bbox_to_anchor=(0.5, -0.01), handlelength=2.6)
+    name = f"{stretch.lower()}_{year}_years_later.jpg"
+    fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
+    plt.close(fig)
+    return name, [f"{pd.Timestamp(d).day} {pd.Timestamp(d):%B %Y}" for _, d in shots]
 
 
 def through_time(stretch, year, transects, box, k, photo, halo):
@@ -284,14 +362,13 @@ def through_time(stretch, year, transects, box, k, photo, halo):
     return name, [lab for lab, _ in wins]
 
 
-def profile(stretch, year, transects, km, places):
+def profile(stretch, year, transects, km, places, rest):
     """Shoreline change along the beach, just after the fill and at the latest window, against the 12 months before:
     single transects as faint dots, a 250 m running mean as the line, the nourished stretch shaded."""
     wb, _ = windows(stretch, year)
     later = later_windows(stretch, year)
     show = [later[0], later[-1]] if len(later) > 1 else later
     lo, hi = max(km[0] - PROFILE_MARGIN_KM, PROFILE_START_KM), km[1] + PROFILE_MARGIN_KM
-    rest = [t for t in transects if REST_KM[0] <= t["km"] <= REST_KM[1]]
     on = [t for t in transects if lo <= t["km"] <= hi]
     x = np.array([t["km"] for t in on])
     fig, ax = plt.subplots(figsize=(8, 3.6))
@@ -306,10 +383,10 @@ def profile(stretch, year, transects, km, places):
         dx = np.array(dx)
         ax.scatter(x, dx, s=5, color=col, alpha=0.25, lw=0)
         sm = pd.Series(dx).rolling(SMOOTH, center=True, min_periods=3).mean().values
-        ax.plot(x, sm, color=col, lw=2.0 if j == 0 else 1.6, label=f"{lab} ({span(w)})")
-        ref = np.nanmedian([np.nan if (c := change(t, wb, w)) is None else c for t in rest])
+        ax.plot(x, sm, color=col, lw=2.0 if j == 0 else 1.6, label=f"{lab.replace('Latest (2025)', 'Latest')} ({span(w)})")
+        ref = mean_change(rest, wb, w, np.median)
         ax.axhline(ref, color=col, lw=1.0, ls=(0, (5, 3)), alpha=0.9,
-                   label="Typical change elsewhere on the island, same months" if j == len(show) - 1 else None)
+                   label="Rest of the island (median), same months" if j == len(show) - 1 else None)
     for pl in places:
         if lo <= pl["km"] <= hi:
             ax.axvline(pl["km"], color="#999", lw=0.6, ls=":")
@@ -338,6 +415,7 @@ def main():
     rates = json.loads((sd.OUT / "shoreline_rates.json").read_text(encoding="utf-8"))
     nx = json.loads(NOURISHMENT.read_text(encoding="utf-8"))
     stretches = {s["name"]: s for s in nx["stretches"]}
+    rest = rest_of_island(rates["transects"], stretches)
     PHOTOS.mkdir(parents=True, exist_ok=True)
     OUT_IMG.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
@@ -389,15 +467,21 @@ def main():
         name = f"{stretch.lower()}_{year}.jpg"
         fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
         plt.close(fig)
-        latest = PHOTOS / f"{stretch.lower()}_{year}_{box[0]:.0f}_{box[1]:.0f}_2024.jpg"
-        if args.fetch or not latest.exists():
-            img.save(img.export_nconemap(SERVICES[2024], box, (PX, PX)), latest)
-        tt_name, tt_labels = through_time(stretch, year, rates["transects"], box, k, latest, halo)
-        pr_name, pr_labels = profile(stretch, year, rates["transects"], stretches[stretch]["km"], nx["places"])
+        shots = years_later(stretch, year, ya, rates["transects"], box, k, halo, args.fetch)
+        tt_name, tt_labels = draw_years_later(stretch, year, yb, shots, rates["transects"], box, k, halo, args.fetch)
+        pr_name, pr_labels = profile(stretch, year, rates["transects"], stretches[stretch]["km"], nx["places"], rest)
+        wb, wa = windows(stretch, year)
+        last = later_windows(stretch, year)[-1]
+        on = [t for t in rates["transects"] if stretches[stretch]["km"][0] <= t["km"] <= stretches[stretch]["km"][1]]
+        jump = mean_change(on, wb, wa) - mean_change(rest, wb, wa, np.median)
+        left = mean_change(on, wb, last[1]) - mean_change(rest, wb, last[1], np.median)
+        print(f"  jump {jump:+.1f} m, left {left:+.1f} m ({last[0]})")
         out[f"{stretch} {year}"] = {"src": f"/assets/hatteras/img/nourishment/{name}",
                                     "before": f"{pd.Timestamp(yb).day} {pd.Timestamp(yb):%B %Y}",
                                     "after": f"{pd.Timestamp(ya).day} {pd.Timestamp(ya):%B %Y}",
-                                    "through_time": f"/assets/hatteras/img/nourishment/{tt_name}", "moments": tt_labels,
+                                    "years_later": f"/assets/hatteras/img/nourishment/{tt_name}", "later_photos": tt_labels,
+                                    "jump_m": round(jump, 1), "left_m": round(left, 1), "left_year": 2025,
+                                    "left_after_refill": "refill" in last[0],
                                     "profile": f"/assets/hatteras/img/nourishment/{pr_name}", "profile_lines": pr_labels,
                                     "placed": PLACED_TEXT[(stretch, year)], "line_gap_days": gap_days,
                                     "km": round(spot["km"], 2), "change_m": round(here, 1), "stretch_change_m": round(mean, 1)}

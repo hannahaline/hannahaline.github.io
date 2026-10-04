@@ -66,13 +66,12 @@ The big storms have [their own page]({{ '/hatteras/storms/' | relative_url }}); 
 ### Beach nourishment, 2014 to 2022
 
 Beach nourishment shows up in the satellite record as a sudden seaward jump in the year after the sand is placed, on that stretch of beach only.
-Compared with the rest of the island, the shoreline jumped about 15 m at Rodanthe after the 2014 fill, 33 m at Buxton after the 2017 fill, 11 m at Avon after 2022, and 8 m at Buxton after 2022.
+Compared with the rest of the island, and measured from the year before the sand went on to the year after it was finished, the shoreline jumped about 25 m at Rodanthe after the 2014 fill, 29 m at Buxton after the 2017 fill, 22 m at Avon after 2022, and 17 m at Buxton after 2022.
 The Buxton 2022 jump is smallest; that project placed less than half as much sand per metre of beach as the 2017 one.
 
 The added width does not last equally everywhere.
-At Rodanthe it held for about three years and had worn away by 2021–22. The shoreline there then moved seaward again, to about 13 m ahead of the rest of the island by 2025.
-At Buxton, about 40% of the 2017 jump was gone within a year, and the rest held until the 2022 fill added to it.
-Avon still had about three-quarters of its 2022 jump in 2025, while the smaller Buxton 2022 jump had mostly disappeared.
+In 2025, Rodanthe was still about 25 m ahead of the rest of the island, and Buxton about 24 m ahead, counting the sand of both of its fills.
+Avon kept about 13 m of its 22 m, while the smaller Buxton 2022 fill had kept about 7 m of its 17 m.
 The [nourishment explorer]({{ '/hatteras/management/nourishment/' | relative_url }}) on the Management pages shows each stretch year by year.
 Click a nourished stretch on the [survey-line map]({{ '/hatteras/shoreline-change/survey-lines/' | relative_url }}) to see its jump, marked in gold, in the full record.
 
