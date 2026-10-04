@@ -26,8 +26,8 @@ It also introduces a computer model that recreates this history, so that we can 
 <b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
 </div>
 
-<figure class="hat-photo-wide" style="max-width: 36rem; margin-left: auto; margin-right: auto;">
-<img src="{{ '/assets/hatteras/img/hero_lighthouse_beach.jpg' | relative_url }}" alt="Aerial view of the Cape Hatteras Lighthouse standing in maritime forest behind a wide beach and the surf" loading="lazy">
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/lighthouse_aerial_2004.jpg' | relative_url }}" alt="Aerial view of the Cape Hatteras Lighthouse standing in maritime forest behind a wide beach and the surf" loading="lazy">
 <figcaption class="hat-caption">The Cape Hatteras Lighthouse at Buxton in November 2004, five years after it was moved 880 m inland to escape the retreating shoreline. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a>, public domain.</figcaption>
 </figure>
 
