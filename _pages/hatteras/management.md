@@ -53,6 +53,11 @@ Where the ocean has come too close, the road has been moved:
 - **2011 and 2017, New Inlet on Pea Island.** Hurricane Irene cut through the island, and the road now crosses the {% include hatteras/term.liquid id="breach" text="breach" %} on a bridge.
 - **2022, the Jug Handle Bridge.** The road at the S-curves now leaves the island and crosses Pamlico Sound, so that stretch of beach no longer has a road behind it.
 
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/road_moves_map.jpg' | relative_url }}" alt="Three aerial maps of NC-12: north of Buxton, where the road was moved inland in 1999; the Rodanthe S-curves, where it was moved inland in 1989 and then bypassed by the Jug Handle Bridge in 2022; and New Inlet on Pea Island in early 2012, with Hurricane Irene's breach and the temporary bridge across it" loading="lazy">
+<figcaption class="hat-caption">Where NC-12 has been moved. Dashed: the road before a move; orange: after the 1989 or 1999 move; yellow: the road today. Distances are the largest measured moves. Imagery: Esri World Imagery (left, middle); NC OneMap / NC Center for Geographic Information and Analysis, early 2012 (right).</figcaption>
+</figure>
+
 We measured how far the road moved by comparing digitised road lines from 1978 and 2008, and the model moves the road by the same distances in the years the moves happened.
 
 <figure class="hat-photo-wide" style="max-width: 34rem; margin-left: auto; margin-right: auto;">
