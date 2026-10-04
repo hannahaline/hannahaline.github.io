@@ -92,6 +92,12 @@
       var yl = text(svg, 0, 0, "m per year (+ seaward, − landward)", { fill: MUTED, "font-size": 12, "text-anchor": "middle" });
       yl.setAttribute("transform", "translate(13," + (top + (H - top - bottom) / 2) + ") rotate(-90)");
     }
+    // axes: left and bottom lines with outward ticks, as in a paper figure
+    el("line", { x1: left, x2: left, y1: top, y2: H - bottom, stroke: INK, "stroke-width": 1 }, svg);
+    el("line", { x1: left, x2: W - right, y1: H - bottom, y2: H - bottom, stroke: INK, "stroke-width": 1 }, svg);
+    for (var tv = YMIN; tv <= YMAX; tv += 2) el("line", { x1: left - 4, x2: left, y1: Y(tv), y2: Y(tv), stroke: INK }, svg);
+    for (var tk = 0; tk <= x1; tk += 5) el("line", { x1: X(tk), x2: X(tk), y1: H - bottom, y2: H - bottom + 4, stroke: INK }, svg);
+
     // places along the top
     d.places.forEach(function (p, i) {
       if (p.km > x1) return;

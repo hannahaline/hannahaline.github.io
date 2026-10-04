@@ -35,25 +35,21 @@ Y_SOUND, Y_MARSH, Y_ROAD, Y_DUNE, Y_BEACH, Y_SURF = 96, 140, 238, 286, 330, 392
 
 
 def badge(x, y, n):
-    return (f'<circle cx="{x}" cy="{y}" r="15" fill="{BADGE}" stroke="#fff" stroke-width="2"/>'
-            f'<text x="{x}" y="{y + 5.5}" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">{n}</text>')
+    """A numbered key, journal style: a thin black ring and a bold number."""
+    return (f'<circle cx="{x}" cy="{y}" r="13" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>'
+            f'<text x="{x}" y="{y + 5.5}" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a1a">{n}</text>')
 
 
 def label(x, y, text, anchor="start", size=14, color=INK, weight=400, box=False):
-    """Text at (x, y); box=True sets it on a white rounded box (for labels over the island)."""
+    """Plain text at (x, y) with a thin white halo; box is ignored (journal style, no boxes)."""
     lines = text.split("\n")
     spans = "".join(f'<tspan x="{x}" dy="{0 if i == 0 else 1.2}em">{t}</tspan>' for i, t in enumerate(lines))
-    out = ""
-    if box:
-        w = max(len(t) for t in lines) * size * 0.53 + 14
-        h = len(lines) * size * 1.2 + 8
-        bx = x - 7 if anchor == "start" else x - w / 2 if anchor == "middle" else x - w + 7
-        out = f'<rect x="{bx:.0f}" y="{y - size - 1:.0f}" width="{w:.0f}" height="{h:.0f}" rx="5" fill="#fff" fill-opacity="0.92"/>'
-    return out + (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" fill="{color}" '
-                  f'font-weight="{weight}">{spans}</text>')
+    return (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" fill="{color}" font-weight="{weight}" '
+            f'paint-order="stroke" stroke="#fff" stroke-width="3.5" stroke-opacity="0.9" stroke-linejoin="round">'
+            f'{spans}</text>')
 
 
-def arrow(x0, y0, x1, y1, w=2.6, color=ARROW, head=9):
+def arrow(x0, y0, x1, y1, w=2.0, color=ARROW, head=9):
     return (f'<line x1="{x0}" y1="{y0}" x2="{x1}" y2="{y1}" stroke="{color}" stroke-width="{w}" '
             f'marker-end="url(#md-head)"/>')
 
@@ -79,15 +75,12 @@ def main():
 
     # water: sound above, ocean below
     s.append(f'<rect x="0" y="40" width="{W}" height="{Y_MARSH - 40}" fill="{WATER_TOP}"/>')
-    s.append(f'<rect x="0" y="{Y_BEACH}" width="{W}" height="{H - Y_BEACH - 40}" fill="url(#md-sea)"/>')
+    s.append(f'<rect x="0" y="{Y_BEACH}" width="{W}" height="{H - Y_BEACH - 40}" fill="{WATER_TOP}"/>')
     # island bands, sound side to ocean side
     s.append(f'<rect x="{X0}" y="{Y_MARSH - 14}" width="{X1 - X0}" height="18" fill="{MARSH_C}"/>')
     s.append(f'<rect x="{X0}" y="{Y_MARSH}" width="{X1 - X0}" height="{Y_DUNE - Y_MARSH}" fill="{CANOPY}"/>')
     s.append(f'<rect x="{X0}" y="{Y_DUNE}" width="{X1 - X0}" height="24" fill="{GROUND}"/>')
     s.append(f'<rect x="{X0}" y="{Y_DUNE + 24}" width="{X1 - X0}" height="{Y_SURF - Y_DUNE - 24}" fill="{SAND}"/>')
-    # dune grass ticks
-    for x in range(X0 + 6, X1 - 4, 11):
-        s.append(f'<path d="M{x},{Y_DUNE + 20} l2,-9 M{x + 4},{Y_DUNE + 20} l-1,-8" stroke="{GRASS_C}" stroke-width="1.4" fill="none"/>')
     # surf line
     s.append(f'<path d="M{X0},{Y_SURF} ' + " ".join(f"Q{x + 15},{Y_SURF + 7} {x + 30},{Y_SURF}" for x in range(X0, X1, 30))
              + f'" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.9"/>')
@@ -139,6 +132,7 @@ def main():
     s.append(badge(rx0 - 2, Y_ROAD - 51, 4))
     s.append(label(rx0 + 22, Y_ROAD - 46, "dune rebuilt, sand added,\nroad protected or moved", size=16, box=True))
 
+    s.append(f'<rect x="0.75" y="40.75" width="{W - 1.5}" height="{H - 81.5}" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>')
     s.append('</svg>')
     OUT.write_text("\n".join(s) + "\n", encoding="utf-8")
     print(f"wrote {OUT}")

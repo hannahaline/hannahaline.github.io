@@ -85,20 +85,32 @@ html:has(.hat-bleed) {
 // Hero band on the overview page
 .hat-hero {
   position: relative;
-  min-height: 46vh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 2.5rem;
   background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.65)),
+    linear-gradient(to right, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.38)),
     var(--hat-hero-img) var(--hat-hero-pos, center 55%) / cover no-repeat;
   color: #fff;
 
   .hat-hero-text {
     max-width: 930px;
     margin: 0 auto;
-    padding: 3rem 1rem 2.2rem;
+    padding: 2.1rem 1rem 2.3rem;
     width: 100%;
+  }
+
+  .hat-hero-credit {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.4rem;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.85);
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 
   h2 {
@@ -513,9 +525,25 @@ dl.hat-terms {
 }
 
 .hat-caption {
-  color: #6b7378;
-  font-size: 0.94rem;
+  color: #3a3f42;
+  font-size: 0.9rem;
+  line-height: 1.45;
   margin: 0.5rem 0 0;
+}
+
+// Figures are numbered per page, as in a paper: every figure's own caption, and the captions of the interactive
+// panels (marked .hat-numbered). Credit lines are plain .hat-caption paragraphs and are not counted. A hidden caption
+// (display: none) does not count either, so the shoreline map's two mode captions share one number.
+.post article {
+  counter-reset: hat-fig;
+}
+
+figure > figcaption.hat-caption::before,
+.hat-caption.hat-numbered::before {
+  counter-increment: hat-fig;
+  content: "Figure " counter(hat-fig) ". ";
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 // Map labels and tooltips
@@ -804,8 +832,8 @@ table.hat-table {
 
 .hat-tl-chart {
   background: #fff;
-  border: 1px solid var(--global-divider-color);
-  border-radius: 4px;
+  border: 1px solid #1a1a1a;
+  border-radius: 0;
   overflow: hidden;
 
   svg {
@@ -1144,69 +1172,6 @@ ol.hat-model-parts {
   }
 }
 
-// Overview hero, split: headline on a dark teal panel, the photo beside it (portrait photos that a wide
-// text-over-photo banner would crop away); stacked on phones
-.hat-hero.hat-hero-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
-  align-items: stretch;
-  min-height: 0;
-  background: #1f4f5c;
-
-  .hat-hero-text {
-    align-self: center;
-    max-width: none;
-    margin: 0;
-    // left edge on the page's 930px text column
-    padding: 3rem 2.5rem 3rem max(1rem, calc((100vw - 930px) / 2 + 1rem));
-  }
-
-  h2,
-  p {
-    text-shadow: none;
-  }
-
-  .hat-hero-photo {
-    position: relative;
-    margin: 0;
-    height: min(80vh, 600px);
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 30% 8%;
-    }
-  }
-
-  .hat-hero-credit {
-    position: absolute;
-    right: 0.6rem;
-    bottom: 0.4rem;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-
-    .hat-hero-text {
-      margin: 0;
-      padding: 2rem 1rem 1.5rem;
-    }
-
-    .hat-hero-photo {
-      height: 70vw;
-    }
-  }
-}
 
 // Model versus observed panel (model_vs_observed.liquid): run switches, colour keys, the skill table
 .hat-mvo-arms {

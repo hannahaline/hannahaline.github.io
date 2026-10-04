@@ -101,7 +101,7 @@ def main():
     lines = {k: road(k) for k in ("1978", "2008", "current")}
 
     fig, axes = plt.subplots(1, 3, figsize=(9.6, 5.2), layout="constrained")
-    for ax, (title, doms, (lon0, lat0, lon1, lat1), draw) in zip(axes, PANELS):
+    for k, (ax, (title, doms, (lon0, lat0, lon1, lat1), draw)) in enumerate(zip(axes, PANELS)):
         x0, y0 = to_utm(lon0, lat0)
         x1, y1 = to_utm(lon1, lat1)
         # equal-aspect window: widen the narrower side so the panel is 0.75 wide per 1 tall
@@ -134,7 +134,7 @@ def main():
         ax.set_ylim(win[1], win[3])
         ax.set_xticks([])
         ax.set_yticks([])
-        ax.set_title(title, fontsize=9, loc="left")
+        ax.set_title(f"({chr(97 + k)}) {title}", fontsize=9, loc="left")
         spines_for_image(ax)
         scale_bar_km(ax, 1000, x=0.06, y=0.9, text_kw=dict(color="white", path_effects=HALO), unit="m")
 

@@ -8,15 +8,12 @@ nav: false
 
 {% include hatteras/subnav.liquid %}
 
-<section class="hat-hero hat-hero-split hat-bleed">
+<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/hatteras/img/hero_banner.jpg' | relative_url }}'); --hat-hero-pos: 50% 45%">
   <div class="hat-hero-text">
     <h2>Living with a changing coast</h2>
     <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
   </div>
-  <figure class="hat-hero-photo">
-    <img src="{{ '/assets/hatteras/img/hero_lighthouse_beach.jpg' | relative_url }}" alt="Aerial view of the Cape Hatteras Lighthouse standing in maritime forest behind a wide beach and the surf">
-    <figcaption class="hat-hero-credit">Cape Hatteras Lighthouse, 2004. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a></figcaption>
-  </figure>
+  <span class="hat-hero-credit">Cape Hatteras Lighthouse, 2004. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a></span>
 </section>
 
 <p class="hat-lead">

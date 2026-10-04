@@ -2,95 +2,12 @@
 <title id="groin-t">How a groin traps sand</title>
 <desc id="groin-d">A beach seen from above, land at the top and ocean below, with sand drifting along the shore from left to right. A groin, a short wall, runs from the beach out into the surf. On the left, the side the sand comes from, sand piles up against the groin and the beach is wider. On the right, the far side, the beach is cut off from that sand, so it is narrower and erodes.</desc>
 <defs><marker id="gr-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><marker id="gr-hd" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="2.6" markerHeight="2.6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8880f"/></marker><linearGradient id="gr-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0ec"/><stop offset="1" stop-color="#9fbfd6"/></linearGradient></defs>
-<rect x="0" y="0" width="1000" height="460" fill="url(#gr-sea)"/>
+<rect x="0" y="0" width="1000" height="460" fill="#cfe0ec"/>
 <path d="M0,0 H1000 V217.09580363161348 L1000,217.1 L990,216.9 L980,216.7 L970,216.5 L960,216.3 L950,216.1 L940,215.9 L930,215.6 L920,215.4 L910,215.1 L900,214.8 L890,214.5 L880,214.1 L870,213.8 L860,213.4 L850,213.0 L840,212.6 L830,212.1 L820,211.6 L810,211.1 L800,210.6 L790,210.0 L780,209.4 L770,208.8 L760,208.1 L750,207.4 L740,206.6 L730,205.8 L720,204.9 L710,204.0 L700,203.0 L690,202.0 L680,200.9 L670,199.8 L660,198.5 L650,197.2 L640,195.9 L630,194.4 L620,192.8 L610,191.2 L600,189.5 L590,187.6 L580,185.6 L570,183.6 L560,181.4 L550,179.0 L540,176.5 L530,173.9 L520,171.1 L510,168.1 L500,290.0 L500,290.0 L490,285.5 L480,281.3 L470,277.3 L460,273.6 L450,270.2 L440,266.9 L430,263.9 L420,261.1 L410,258.4 L400,255.9 L390,253.6 L380,251.5 L370,249.4 L360,247.5 L350,245.8 L340,244.1 L330,242.5 L320,241.1 L310,239.7 L300,238.5 L290,237.3 L280,236.1 L270,235.1 L260,234.1 L250,233.2 L240,232.4 L230,231.6 L220,230.8 L210,230.1 L200,229.5 L190,228.9 L180,228.3 L170,227.8 L160,227.3 L150,226.8 L140,226.4 L130,225.9 L120,225.6 L110,225.2 L100,224.9 L90,224.6 L80,224.3 L70,224.0 L60,223.7 L50,223.5 L40,223.3 L30,223.1 L20,222.9 L10,222.7 L0,222.5 Z" fill="#ecdfb9"/>
 <rect x="0" y="0" width="1000" height="64" fill="#d9c89a"/>
 <rect x="0" y="0" width="1000" height="30" fill="#7d9467"/>
-<path d="M6,60 l2,-9 M10,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M18,60 l2,-9 M22,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M30,60 l2,-9 M34,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M42,60 l2,-9 M46,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M54,60 l2,-9 M58,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M66,60 l2,-9 M70,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M78,60 l2,-9 M82,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M90,60 l2,-9 M94,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M102,60 l2,-9 M106,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M114,60 l2,-9 M118,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M126,60 l2,-9 M130,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M138,60 l2,-9 M142,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M150,60 l2,-9 M154,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M162,60 l2,-9 M166,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M174,60 l2,-9 M178,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M186,60 l2,-9 M190,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M198,60 l2,-9 M202,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M210,60 l2,-9 M214,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M222,60 l2,-9 M226,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M234,60 l2,-9 M238,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M246,60 l2,-9 M250,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M258,60 l2,-9 M262,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M270,60 l2,-9 M274,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M282,60 l2,-9 M286,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M294,60 l2,-9 M298,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M306,60 l2,-9 M310,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M318,60 l2,-9 M322,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M330,60 l2,-9 M334,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M342,60 l2,-9 M346,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M354,60 l2,-9 M358,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M366,60 l2,-9 M370,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M378,60 l2,-9 M382,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M390,60 l2,-9 M394,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M402,60 l2,-9 M406,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M414,60 l2,-9 M418,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M426,60 l2,-9 M430,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M438,60 l2,-9 M442,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M450,60 l2,-9 M454,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M462,60 l2,-9 M466,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M474,60 l2,-9 M478,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M486,60 l2,-9 M490,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M498,60 l2,-9 M502,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M510,60 l2,-9 M514,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M522,60 l2,-9 M526,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M534,60 l2,-9 M538,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M546,60 l2,-9 M550,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M558,60 l2,-9 M562,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M570,60 l2,-9 M574,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M582,60 l2,-9 M586,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M594,60 l2,-9 M598,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M606,60 l2,-9 M610,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M618,60 l2,-9 M622,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M630,60 l2,-9 M634,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M642,60 l2,-9 M646,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M654,60 l2,-9 M658,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M666,60 l2,-9 M670,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M678,60 l2,-9 M682,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M690,60 l2,-9 M694,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M702,60 l2,-9 M706,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M714,60 l2,-9 M718,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M726,60 l2,-9 M730,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M738,60 l2,-9 M742,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M750,60 l2,-9 M754,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M762,60 l2,-9 M766,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M774,60 l2,-9 M778,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M786,60 l2,-9 M790,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M798,60 l2,-9 M802,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M810,60 l2,-9 M814,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M822,60 l2,-9 M826,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M834,60 l2,-9 M838,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M846,60 l2,-9 M850,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M858,60 l2,-9 M862,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M870,60 l2,-9 M874,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M882,60 l2,-9 M886,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M894,60 l2,-9 M898,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M906,60 l2,-9 M910,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M918,60 l2,-9 M922,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M930,60 l2,-9 M934,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M942,60 l2,-9 M946,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M954,60 l2,-9 M958,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M966,60 l2,-9 M970,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M978,60 l2,-9 M982,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
-<path d="M990,60 l2,-9 M994,60 l-1,-8" stroke="#7f9455" stroke-width="1.4" fill="none"/>
 <line x1="0" y1="220" x2="1000" y2="220" stroke="#5b6469" stroke-width="1.5" stroke-dasharray="7 6"/>
-<text x="986" y="210" text-anchor="end" font-size="14" fill="#5b6469" font-weight="400"><tspan x="986" dy="0em">shoreline without the groin</tspan></text>
+<text x="986" y="210" text-anchor="end" font-size="14" fill="#5b6469" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="986" dy="0em">shoreline without the groin</tspan></text>
 <path d="M0,226.5 L10,226.7 L20,226.9 L30,227.1 L40,227.3 L50,227.5 L60,227.7 L70,228.0 L80,228.3 L90,228.6 L100,228.9 L110,229.2 L120,229.6 L130,229.9 L140,230.4 L150,230.8 L160,231.3 L170,231.8 L180,232.3 L190,232.9 L200,233.5 L210,234.1 L220,234.8 L230,235.6 L240,236.4 L250,237.2 L260,238.1 L270,239.1 L280,240.1 L290,241.3 L300,242.5 L310,243.7 L320,245.1 L330,246.5 L340,248.1 L350,249.8 L360,251.5 L370,253.4 L380,255.5 L390,257.6 L400,259.9 L410,262.4 L420,265.1 L430,267.9 L440,270.9 L450,274.2 L460,277.6 L470,281.3 L480,285.3 L490,289.5 L500,294.0 L500,294.0 L510,172.1 L520,175.1 L530,177.9 L540,180.5 L550,183.0 L560,185.4 L570,187.6 L580,189.6 L590,191.6 L600,193.5 L610,195.2 L620,196.8 L630,198.4 L640,199.9 L650,201.2 L660,202.5 L670,203.8 L680,204.9 L690,206.0 L700,207.0 L710,208.0 L720,208.9 L730,209.8 L740,210.6 L750,211.4 L760,212.1 L770,212.8 L780,213.4 L790,214.0 L800,214.6 L810,215.1 L820,215.6 L830,216.1 L840,216.6 L850,217.0 L860,217.4 L870,217.8 L880,218.1 L890,218.5 L900,218.8 L910,219.1 L920,219.4 L930,219.6 L940,219.9 L950,220.1 L960,220.3 L970,220.5 L980,220.7 L990,220.9 L1000,221.1" stroke="#fff" stroke-width="5" fill="none" opacity="0.85" stroke-linecap="round"/>
 <rect x="491" y="120" width="18" height="280" rx="4" fill="#8a8f93" stroke="#5b6469" stroke-width="2"/>
 <circle cx="499" cy="128" r="4" fill="#a3a8ab" stroke="#6b7378" stroke-width="1"/>
@@ -110,12 +27,13 @@
 <circle cx="498" cy="352" r="4" fill="#a3a8ab" stroke="#6b7378" stroke-width="1"/>
 <circle cx="499" cy="368" r="4" fill="#a3a8ab" stroke="#6b7378" stroke-width="1"/>
 <circle cx="497" cy="384" r="4" fill="#a3a8ab" stroke="#6b7378" stroke-width="1"/>
-<rect x="513" y="94" width="59" height="28" rx="5" fill="#fff" fill-opacity="0.92"/><text x="520" y="112" text-anchor="start" font-size="17" fill="#2b2f31" font-weight="600"><tspan x="520" dy="0em">groin</tspan></text>
+<text x="520" y="112" text-anchor="start" font-size="17" fill="#2b2f31" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="520" dy="0em">groin</tspan></text>
 <line x1="60" y1="282" x2="460" y2="282" stroke="#c8880f" stroke-width="9" marker-end="url(#gr-hd)"/>
 <line x1="540" y1="260" x2="920" y2="260" stroke="#c8880f" stroke-width="3" marker-end="url(#gr-hd)" stroke-dasharray="10 6"/>
-<rect x="53" y="308" width="245" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="60" y="324" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400"><tspan x="60" dy="0em">sand drifting along the shore</tspan></text>
-<rect x="533" y="288" width="181" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="540" y="304" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400"><tspan x="540" dy="0em">little sand gets past</tspan></text>
-<rect x="63" y="133" width="192" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="70" y="150" text-anchor="start" font-size="16" fill="#2166ac" font-weight="400"><tspan x="70" dy="0em">sand piles up:</tspan><tspan x="70" dy="1.2em">the beach grows wider</tspan></text>
-<rect x="746" y="133" width="201" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="940" y="150" text-anchor="end" font-size="16" fill="#b2182b" font-weight="400"><tspan x="940" dy="0em">cut off from the sand:</tspan><tspan x="940" dy="1.2em">the beach erodes</tspan></text>
-<text x="14" y="444" text-anchor="start" font-size="15" fill="#5b6469" font-weight="400"><tspan x="14" dy="0em">Atlantic Ocean</tspan></text>
+<text x="60" y="324" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="60" dy="0em">sand drifting along the shore</tspan></text>
+<text x="540" y="304" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="540" dy="0em">little sand gets past</tspan></text>
+<text x="70" y="150" text-anchor="start" font-size="16" fill="#2166ac" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="70" dy="0em">sand piles up:</tspan><tspan x="70" dy="1.2em">the beach grows wider</tspan></text>
+<text x="940" y="150" text-anchor="end" font-size="16" fill="#b2182b" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="940" dy="0em">cut off from the sand:</tspan><tspan x="940" dy="1.2em">the beach erodes</tspan></text>
+<text x="14" y="444" text-anchor="start" font-size="15" fill="#5b6469" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="14" dy="0em">Atlantic Ocean</tspan></text>
+<rect x="0.75" y="0.75" width="998.5" height="458.5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
 </svg>

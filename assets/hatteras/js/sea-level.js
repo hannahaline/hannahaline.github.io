@@ -92,6 +92,16 @@
       text(svg, X(yr), H - bottom + 18, yr, { "text-anchor": "middle", fill: MUTED, "font-size": 12 });
     }
 
+    // axes: left and bottom lines with outward ticks, as in a paper figure
+    el("line", { x1: left, x2: left, y1: top, y2: H - bottom, stroke: INK, "stroke-width": 1 }, svg);
+    el("line", { x1: left, x2: W - right, y1: H - bottom, y2: H - bottom, stroke: INK, "stroke-width": 1 }, svg);
+    for (var tc = Math.ceil(lo * 10) * 10; tc <= hi * 100; tc += 10) {
+      el("line", { x1: left - 4, x2: left, y1: Y(tc / 100), y2: Y(tc / 100), stroke: INK }, svg);
+    }
+    for (var ty = 1980; ty <= 2025; ty += 5) {
+      el("line", { x1: X(ty), x2: X(ty), y1: H - bottom, y2: H - bottom + 4, stroke: INK }, svg);
+    }
+
     // monthly record, yearly means (broken where a year is missing)
     el("polyline", { points: d.monthly.map(function (m) { return X(m[0]).toFixed(1) + "," + Y(m[1]).toFixed(1); }).join(" "),
       fill: "none", stroke: MONTH, "stroke-width": 1 }, svg);

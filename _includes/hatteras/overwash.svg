@@ -2,8 +2,8 @@
 <title id="overwash-t">Storms move sand across the island</title>
 <desc id="overwash-d">A slice across the island in a storm, sound on the left and ocean on the right. The water is raised well above normal high tide, and waves run over a low dune. The sand they carry is laid down as a new layer, an overwash fan, across the island interior and toward the sound.</desc>
 <defs><marker id="ow-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><linearGradient id="ow-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0ec"/><stop offset="1" stop-color="#9fbfd6"/></linearGradient><pattern id="ow-dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#c8880f" opacity="0.7"/></pattern></defs>
-<rect x="0" y="246" width="420" height="114" fill="url(#ow-sea)"/>
-<rect x="600" y="218" width="400" height="142" fill="url(#ow-sea)"/>
+<rect x="0" y="246" width="420" height="114" fill="#cfe0ec"/>
+<rect x="600" y="218" width="400" height="142" fill="#cfe0ec"/>
 <path d="M0,266 L80,258 L140,242 L200,214 L260,197 L360,191 L460,189 L560,187 L620,180 L660,158 L700,142 L735,152 L765,186 L820,222 L900,254 L1000,292 L1000,360 L0,360 Z" fill="#ecdfb9" stroke="#d9c89a" stroke-width="1.5"/>
 <ellipse cx="250" cy="192" rx="15" ry="9" fill="#7d9467" opacity="0.85"/>
 <ellipse cx="284" cy="188" rx="15" ry="9" fill="#7d9467" opacity="0.85"/>
@@ -19,13 +19,14 @@
 <path d="M700,128 L680,136 L660,145 L640,156 L620,168 L600,171 L580,174 L560,176 L540,177 L520,178 L500,179 L480,180 L460,181 L440,182 L420,183 L400,184 L380,185 L360,186 L340,187 L320,189 L300,191 L280,192 L260,194 L240,200 L220,206 L220,208 L240,203 L260,197 L280,196 L300,195 L320,193 L340,192 L360,191 L380,191 L400,190 L420,190 L440,189 L460,189 L480,189 L500,188 L520,188 L540,187 L560,187 L580,185 L600,182 L620,180 L640,169 L660,158 L680,150 L700,142 Z" fill="#f6e3b8" stroke="#c8880f" stroke-width="1.5"/>
 <path d="M700,128 L680,136 L660,145 L640,156 L620,168 L600,171 L580,174 L560,176 L540,177 L520,178 L500,179 L480,180 L460,181 L440,182 L420,183 L400,184 L380,185 L360,186 L340,187 L320,189 L300,191 L280,192 L260,194 L240,200 L220,206 L220,208 L240,203 L260,197 L280,196 L300,195 L320,193 L340,192 L360,191 L380,191 L400,190 L420,190 L440,189 L460,189 L480,189 L500,188 L520,188 L540,187 L560,187 L580,185 L600,182 L620,180 L640,169 L660,158 L680,150 L700,142 Z" fill="url(#ow-dots)"/>
 <line x1="790" y1="252" x2="1000" y2="252" stroke="#5b6469" stroke-width="1.5" stroke-dasharray="6 5"/>
-<text x="988" y="276" text-anchor="end" font-size="14" fill="#5b6469" font-weight="400"><tspan x="988" dy="0em">normal high tide</tspan></text>
+<text x="988" y="276" text-anchor="end" font-size="14" fill="#5b6469" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="988" dy="0em">normal high tide</tspan></text>
 <line x1="770" y1="218" x2="1000" y2="218" stroke="#2166ac" stroke-width="2"/>
-<rect x="677" y="223" width="284" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="954" y="239" text-anchor="end" font-size="15" fill="#2166ac" font-weight="400"><tspan x="954" dy="0em">storm water level, raised by surge</tspan></text>
+<text x="954" y="239" text-anchor="end" font-size="15" fill="#2166ac" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="954" dy="0em">storm water level, raised by surge</tspan></text>
 <line x1="975" y1="250" x2="975" y2="224" stroke="#2166ac" stroke-width="2" marker-end="url(#ow-h)"/>
-<path d="M995,215 C860,188 760,90 690,110 S520,150 430,166" stroke="#1a1a1a" stroke-width="3.5" fill="none" marker-end="url(#ow-h)"/>
-<rect x="426" y="59" width="268" height="46" rx="5" fill="#fff" fill-opacity="0.92"/><text x="560" y="76" text-anchor="middle" font-size="16" fill="#2b2f31" font-weight="400"><tspan x="560" dy="0em">storm waves run over the dune,</tspan><tspan x="560" dy="1.2em">carrying sand inland</tspan></text>
-<rect x="206" y="220" width="388" height="26" rx="5" fill="#fff" fill-opacity="0.92"/><text x="400" y="236" text-anchor="middle" font-size="15" fill="#2b2f31" font-weight="400"><tspan x="400" dy="0em">overwash fan: a new layer of sand on the island</tspan></text>
-<text x="14" y="40" text-anchor="start" font-size="15" fill="#5b6469" font-weight="400"><tspan x="14" dy="0em">Pamlico Sound</tspan></text>
-<text x="986" y="40" text-anchor="end" font-size="15" fill="#5b6469" font-weight="400"><tspan x="986" dy="0em">Atlantic Ocean</tspan></text>
+<path d="M995,215 C860,188 760,90 690,110 S520,150 430,166" stroke="#1a1a1a" stroke-width="2" fill="none" marker-end="url(#ow-h)"/>
+<text x="560" y="76" text-anchor="middle" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="560" dy="0em">storm waves run over the dune,</tspan><tspan x="560" dy="1.2em">carrying sand inland</tspan></text>
+<text x="400" y="236" text-anchor="middle" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="400" dy="0em">overwash fan: a new layer of sand on the island</tspan></text>
+<text x="14" y="40" text-anchor="start" font-size="15" fill="#5b6469" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="14" dy="0em">Pamlico Sound</tspan></text>
+<text x="986" y="40" text-anchor="end" font-size="15" fill="#5b6469" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="986" dy="0em">Atlantic Ocean</tspan></text>
+<rect x="0.75" y="0.75" width="998.5" height="358.5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
 </svg>

@@ -37,23 +37,26 @@ def head(id_, color=ARROW):
             f'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{color}"/></marker>')
 
 
-def label(x, y, text, anchor="start", size=16, color=INK, weight=400, box=True):
-    """Text at (x, y), on a white rounded box unless box=False."""
+def label(x, y, text, anchor="start", size=15, color=INK, weight=400, box=False):
+    """Plain text at (x, y), journal style: no box, a thin white halo so it reads over any fill. box is ignored and
+    kept only so older calls still run."""
     lines = text.split("\n")
     spans = "".join(f'<tspan x="{x}" dy="{0 if i == 0 else 1.2}em">{t}</tspan>' for i, t in enumerate(lines))
-    out = ""
-    if box:
-        w = max(len(t) for t in lines) * size * 0.53 + 14
-        h = len(lines) * size * 1.2 + 8
-        bx = x - 7 if anchor == "start" else x - w / 2 if anchor == "middle" else x - w + 7
-        out = f'<rect x="{bx:.0f}" y="{y - size - 1:.0f}" width="{w:.0f}" height="{h:.0f}" rx="5" fill="#fff" fill-opacity="0.92"/>'
-    return out + (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" fill="{color}" '
-                  f'font-weight="{weight}">{spans}</text>')
+    return (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" fill="{color}" font-weight="{weight}" '
+            f'paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round">'
+            f'{spans}</text>')
 
 
 def svg_open(cls, w, h, title, desc):
     return [f'<svg class="hat-process {cls}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="{cls}-t {cls}-d" '
             f'xmlns="http://www.w3.org/2000/svg">', f'<title id="{cls}-t">{title}</title>', f'<desc id="{cls}-d">{desc}</desc>']
+
+
+def svg_close(s, w, h):
+    """The thin black frame of a journal figure panel, then close."""
+    s.append(f'<rect x="0.75" y="0.75" width="{w - 1.5}" height="{h - 1.5}" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>')
+    s.append("</svg>")
+    return "\n".join(s) + "\n"
 
 
 def island_outline():
@@ -75,7 +78,7 @@ def longshore():
              f'markerHeight="2.6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{ADDED}"/></marker>'
              f'<linearGradient id="ls-sea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{WATER_TOP}"/>'
              f'<stop offset="1" stop-color="{WATER_DEEP}"/></linearGradient></defs>')
-    s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="url(#ls-sea)"/>')
+    s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="{WATER_TOP}"/>')
 
     # map frame: lon/lat to svg, equal-area at this latitude
     LON0, LAT1, PX_PER_KM = -75.80, 35.83, 8.4
@@ -109,7 +112,7 @@ def longshore():
                      f'y2="{oy + ny * half:.0f}" stroke="#fff" stroke-width="3" stroke-linecap="round" '
                      f'opacity="{0.95 - 0.15 * k:.2f}"/>')
         s.append(f'<line x1="{cx - tx * gap * (n + 1):.0f}" y1="{cy - ty * gap * (n + 1):.0f}" x2="{cx + tx * 30:.0f}" '
-                 f'y2="{cy + ty * 30:.0f}" stroke="{ARROW}" stroke-width="3" marker-end="url(#ls-h)"/>')
+                 f'y2="{cy + ty * 30:.0f}" stroke="{ARROW}" stroke-width="1.8" marker-end="url(#ls-h)"/>')
     wave_field(720, 230, 135)        # from the north-east, travelling south-west
     s.append(label(770, 110, "waves from\nthe northeast", size=15))
     wave_field(840, 520, 225)        # from the south-east, travelling north-west
@@ -141,7 +144,7 @@ def longshore():
 
     # close-up: the zig-zag that moves each grain
     bx, by, bw, bh = 24, 300, 250, 210
-    s.append(f'<rect x="{bx}" y="{by}" width="{bw}" height="{bh}" rx="8" fill="#fff" fill-opacity="0.95" stroke="{MUTED}"/>')
+    s.append(f'<rect x="{bx}" y="{by}" width="{bw}" height="{bh}" fill="#fff" fill-opacity="0.95" stroke="#1a1a1a" stroke-width="1"/>')
     s.append(f'<rect x="{bx + 10}" y="{by + 34}" width="{bw - 20}" height="70" fill="{SAND}"/>')
     s.append(f'<rect x="{bx + 10}" y="{by + 104}" width="{bw - 20}" height="66" fill="{WATER_TOP}"/>')
     zz, x = [], bx + 22
@@ -155,8 +158,7 @@ def longshore():
     s.append(label(bx + 12, by + 22, "Close-up of the beach", size=14, color=INK, weight=600, box=False))
     s.append(label(bx + 12, by + 190, "each wave pushes sand up the beach at\nan angle; it slides straight back down",
                    size=12, color=MUTED, box=False))
-    s.append("</svg>")
-    return "\n".join(s) + "\n"
+    return svg_close(s, W, H)
 
 
 def overwash():
@@ -182,8 +184,8 @@ def overwash():
     gpath = "M" + " L".join(f"{x},{y}" for x, y in ground) + f" L{W},{H} L0,{H} Z"
 
     # water: the sound a little up on the left, the ocean at the storm level on the right
-    s.append(f'<rect x="0" y="{SOUND}" width="420" height="{H - SOUND}" fill="url(#ow-sea)"/>')
-    s.append(f'<rect x="600" y="{STORM}" width="{W - 600}" height="{H - STORM}" fill="url(#ow-sea)"/>')
+    s.append(f'<rect x="0" y="{SOUND}" width="420" height="{H - SOUND}" fill="{WATER_TOP}"/>')
+    s.append(f'<rect x="600" y="{STORM}" width="{W - 600}" height="{H - STORM}" fill="{WATER_TOP}"/>')
     s.append(f'<path d="{gpath}" fill="{SAND}" stroke="{GROUND}" stroke-width="1.5"/>')
     # the island interior: vegetation on the old surface
     for x in range(250, 620, 34):
@@ -205,13 +207,12 @@ def overwash():
 
     # waves running up the beach, over the dune, and on across the island
     s.append(f'<path d="M995,{STORM - 3} C860,{STORM - 30} 760,90 690,110 S520,150 430,166" stroke="{ARROW}" '
-             f'stroke-width="3.5" fill="none" marker-end="url(#ow-h)"/>')
+             f'stroke-width="2" fill="none" marker-end="url(#ow-h)"/>')
     s.append(label(560, 76, "storm waves run over the dune,\ncarrying sand inland", anchor="middle"))
     s.append(label(400, 236, "overwash fan: a new layer of sand on the island", anchor="middle", size=15))
     s.append(label(14, 40, "Pamlico Sound", size=15, color=MUTED, box=False))
     s.append(label(W - 14, 40, "Atlantic Ocean", anchor="end", size=15, color=MUTED, box=False))
-    s.append("</svg>")
-    return "\n".join(s) + "\n"
+    return svg_close(s, W, H)
 
 
 def groin():
@@ -234,13 +235,11 @@ def groin():
         return base - 55 * math.exp(-(x - GX) / 170)   # downdrift: cut back next to the groin
 
     pts = [(x, shore(x)) for x in range(0, GX + 1, 10)] + [(x, shore(x)) for x in range(GX, W + 1, 10)]
-    s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="url(#gr-sea)"/>')
+    s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="{WATER_TOP}"/>')
     s.append('<path d="M0,0 H{W} V{y} '.format(W=W, y=pts[-1][1]) + " ".join(f"L{x},{y:.1f}" for x, y in reversed(pts))
              + f' Z" fill="{SAND}"/>')
     s.append(f'<rect x="0" y="0" width="{W}" height="64" fill="{GROUND}"/>')
     s.append(f'<rect x="0" y="0" width="{W}" height="30" fill="{CANOPY}"/>')
-    for x in range(6, W, 12):
-        s.append(f'<path d="M{x},60 l2,-9 M{x + 4},60 l-1,-8" stroke="{GRASS_C}" stroke-width="1.4" fill="none"/>')
     # the original shoreline, dashed, for comparison
     s.append(f'<line x1="0" y1="{base}" x2="{W}" y2="{base}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="7 6"/>')
     s.append(label(W - 14, base - 10, "shoreline without the groin", anchor="end", size=14, color=MUTED, box=False))
@@ -264,8 +263,7 @@ def groin():
     s.append(label(70, 150, "sand piles up:\nthe beach grows wider", size=16, color="#2166ac"))
     s.append(label(W - 60, 150, "cut off from the sand:\nthe beach erodes", anchor="end", size=16, color=ERODE))
     s.append(label(14, H - 16, "Atlantic Ocean", size=15, color=MUTED, box=False))
-    s.append("</svg>")
-    return "\n".join(s) + "\n"
+    return svg_close(s, W, H)
 
 
 def main():
