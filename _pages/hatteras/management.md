@@ -15,9 +15,9 @@ For decades, people have built dunes, paved and moved a highway, pumped sand ont
 Each of these changes how sand moves, and therefore how the island changes.
 </p>
 
-{% include hatteras/timeline.liquid mode="management" %}
+{% include hatteras/management_map.liquid %}
 
-Open marks on the timeline are projects shown for context that the model does not include.
+Dashed bridges are shown for context; the model does not include them.
 The model also leaves out the sand dredged from Oregon Inlet's navigation channel and placed on Pea Island beaches in several years (1990, 1999, 2000, 2003 and 2004), and the emergency fills on Pea Island after Hurricane Isabel (2003) and in 2013.
 
 ## Four kinds of management

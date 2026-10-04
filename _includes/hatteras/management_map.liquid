@@ -1,0 +1,32 @@
+{% comment %}
+  Where and when management happened: years across, place along the island up (Cape Point at the bottom, north up).
+  Fills, road moves, bridges and the Buxton groins from timeline.json (tools/hatteras_timeline_data.py), with the named
+  storms along the top; each mark links to its Management sub-page. Script: assets/hatteras/js/management-map.js.
+{% endcomment %}
+<div class="hat-mvo hat-mm hat-bleed"
+     data-timeline="{{ '/assets/hatteras/data/timeline.json' | relative_url }}"
+     data-places="{{ '/assets/hatteras/data/shoreline_rates.json' | relative_url }}"
+     data-fill="{{ '/hatteras/management/nourishment/' | relative_url }}"
+     data-road="{{ '/hatteras/management/nc-12/' | relative_url }}"
+     data-groin="{{ '/hatteras/management/groins/' | relative_url }}">
+  <div class="hat-shoremap-inner">
+    <div class="hat-mm-key" aria-hidden="true">
+      <span><i class="fill"></i>Beach nourishment</span>
+      <span><i class="road"></i>NC-12 moved landward</span>
+      <span><i class="bridge"></i>Bridge carrying NC-12</span>
+      <span><i class="bridge open"></i>Bridge not in the model</span>
+      <span><i class="groin"></i>Groins</span>
+      <span><i class="storm"></i>Named storm</span>
+    </div>
+    <div class="hat-mm-chart" data-scroll-start="1"></div>
+    <div class="hat-tl-tip" role="status" hidden></div>
+    <p class="hat-caption hat-numbered">
+      Where and when the island has been managed. Years run across; place along the island runs up, from Cape Point at the
+      bottom to Oregon Inlet at the top, as on a map. Each mark covers the stretch of beach it affected: gold blocks are
+      beach nourishment, orange bars are where NC-12 was moved landward, dark bands are bridges from the year they opened,
+      and the red line is the Buxton groins, built in 1969. Blue triangles along the top are named storms that raised the
+      water at the shore at least 3 m; the storm record starts in 1984. Hover over a mark for details, or click it to read more.
+    </p>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/management-map.js' | relative_url }}"></script>

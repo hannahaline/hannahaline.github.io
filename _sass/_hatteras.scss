@@ -1458,3 +1458,44 @@ table.hat-mvo-skill {
     }
   }
 }
+
+// Where and when management happened (management_map.liquid): the key, and a chart that scrolls sideways on phones
+.hat-mm {
+  .hat-mm-chart {
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 4px;
+
+    a {
+      cursor: pointer;
+    }
+  }
+
+  .hat-mm-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    i {
+      display: inline-block;
+      width: 1.1rem;
+      height: 0.8rem;
+
+      &.fill { background: #f2d79a; border: 1.5px solid #c8880f; }
+      &.road { width: 0.25rem; background: #d55e00; }
+      &.bridge { background: rgba(26, 26, 26, 0.75); border: 1.4px solid #1a1a1a; height: 0.45rem; }
+      &.bridge.open { background: none; border-style: dashed; }
+      &.groin { background: #d7191c; height: 0.3rem; }
+      &.storm { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #2166ac; }
+    }
+  }
+}
