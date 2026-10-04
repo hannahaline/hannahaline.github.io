@@ -1,0 +1,23 @@
+{% comment %}
+  Model versus observed shoreline change rate along the island, per 500 m stretch, for each model period and each
+  management run. Data from tools/hatteras_model_data.py; script assets/hatteras/js/model-vs-observed.js.
+  Unpublished results: render this only inside {% raw %}{% if site.hatteras_draft %}{% endraw %}.
+{% endcomment %}
+<div class="hat-mvo hat-bleed" data-src="{{ '/assets/hatteras/data/model_vs_observed.json' | relative_url }}">
+  <div class="hat-shoremap-inner">
+    <div class="hat-controls">
+      <div class="hat-seg hat-mvo-windows" role="group" aria-label="Model period"></div>
+    </div>
+    <div class="hat-mvo-arms" role="group" aria-label="Model runs to show"></div>
+    <div class="hat-tl-chart hat-mvo-chart" role="img" aria-label="Observed and modelled shoreline change rate along Hatteras Island, south to north"></div>
+    <div class="hat-tl-tip" role="status" hidden></div>
+    <table class="hat-table hat-mvo-skill"></table>
+    <p class="hat-caption">
+      Shoreline change rate along the island from Cape Point to just north of Rodanthe, per 500 m stretch.
+      Observed: the satellite record (grey dots), smoothed over about 3.5 km (black line), which is what the model is scored against.
+      Model: CASCADE with nothing tuned to match the observations, run with the real storms, waves and sea-level rise and the management switched on as shown.
+      Gold bands mark nourished beaches. The table compares each run with the observed line away from the two ends of the model.
+    </p>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/model-vs-observed.js' | relative_url }}"></script>

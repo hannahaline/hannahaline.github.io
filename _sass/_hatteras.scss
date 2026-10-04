@@ -733,7 +733,8 @@ table.hat-table {
 
 // Storms and management timeline (_includes/hatteras/timeline.liquid)
 .hat-timeline,
-.hat-sealevel {
+.hat-sealevel,
+.hat-mvo {
   background: #f6f9fa;
   border-top: 1px solid var(--global-divider-color);
   border-bottom: 1px solid var(--global-divider-color);
@@ -1204,6 +1205,67 @@ ol.hat-model-parts {
     .hat-hero-photo {
       height: 70vw;
     }
+  }
+}
+
+// Model versus observed panel (model_vs_observed.liquid): run switches, colour keys, the skill table
+.hat-mvo-arms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin: 0.2rem 0 0.6rem;
+  font-size: 0.92rem;
+
+  .hat-mvo-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  input {
+    margin: 0;
+    accent-color: var(--global-theme-color);
+  }
+
+  i {
+    display: inline-block;
+    width: 1.3rem;
+    height: 0.25rem;
+    border-radius: 2px;
+
+    &.obs {
+      height: 0.3rem;
+      background: #1a1a1a;
+    }
+  }
+}
+
+table.hat-mvo-skill {
+  margin: 0.8rem 0 0.4rem;
+  font-size: 0.9rem;
+
+  th i {
+    display: inline-block;
+    width: 1rem;
+    height: 0.25rem;
+    margin-right: 0.45rem;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+
+  width: auto;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.25rem 1.2rem 0.25rem 0;
+  }
+
+  td {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
   }
 }
 

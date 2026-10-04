@@ -47,7 +47,11 @@ Sand moves across each stretch in storms, and between neighbouring stretches wit
 
 ## Does it recreate the past?
 
-{% include hatteras/panel.liquid id="model-vs-observed" wide=true title="Model versus observations, with and without management" plan="The island as a line: observed shoreline change (CoastSat) against CASCADE, with a toggle for 'with management' versus 'no management'. Windows 1996–2015 and 2010–2026 to match the canonical periods. Plain summary of the skill below. UNPUBLISHED: keep it behind the draft flag until the paper is accepted." %}
+{% if site.hatteras_draft %}
+{% include hatteras/model_vs_observed.liquid %}
+{% else %}
+A comparison of the model with the observed shoreline will appear here once the results are published.
+{% endif %}
 
 {% comment %} DRAFT, unpublished results: shown only while hatteras_draft is on. Written 2026-10-03 from the CASCADE
 diagnoses (2010-2024 failure diagnosis, dune recovery diagnosis, groin option A study, the 2021 step); Hannah to check
