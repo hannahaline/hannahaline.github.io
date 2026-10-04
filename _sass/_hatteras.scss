@@ -1234,3 +1234,85 @@ table.hat-mvo-skill {
   }
 }
 
+
+// Tabs across the Shoreline change pages (_includes/hatteras/shoreline_tabs.liquid)
+.hat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  border-bottom: 2px solid var(--global-theme-color);
+  margin: 0.4rem 0 1.4rem;
+
+  .hat-tab {
+    padding: 0.45rem 0.95rem;
+    border: 1px solid var(--global-divider-color);
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    font-size: 0.95rem;
+    color: var(--global-theme-color);
+    background: #f6f9fa;
+    margin-bottom: -2px;
+    text-decoration: none;
+
+    &:hover {
+      background: #e8f0f2;
+    }
+
+    &.current {
+      background: var(--global-theme-color);
+      border-color: var(--global-theme-color);
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+
+// Profile page: the clicked spot's record sits under the chart
+.hat-profile-below {
+  margin-top: 1rem;
+
+  .hat-ts-wrap {
+    height: 270px;
+  }
+}
+
+// Shorelines through time (_includes/hatteras/decadal_map.liquid)
+.hat-decadal {
+  .hat-mvo-arms {
+    margin-bottom: 0.7rem;
+  }
+
+  .hat-decadal-wrap {
+    position: relative;
+  }
+
+  #decadal-map {
+    background: #a8c8e0;
+    height: min(78vh, 760px);
+    min-height: 420px;
+    border-radius: 4px;
+    border: 1px solid var(--global-divider-color);
+  }
+
+  .hat-decadal-loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(26, 26, 26, 0.75);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 3px;
+  }
+
+  &.loading .hat-decadal-loading {
+    display: block;
+  }
+
+  .hat-caption {
+    margin-top: 0.7rem;
+  }
+}

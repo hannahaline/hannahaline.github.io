@@ -1,11 +1,13 @@
 {% comment %}
-  Shoreline change map: Leaflet map of every CoastSat transect coloured by its rate, a time series for the
-  clicked transect, and a profile of the rates along the island. Data from tools/hatteras_shoreline_data.py.
-  "Change year by year" mode colours the same transects by position against the 1984-86 average, with a play bar;
-  its data (shoreline_years.json, from tools/hatteras_shoreline_years.py) loads only when the mode is opened.
-  The page needs `map: true` and `chart: chartjs: true` in its front matter (the theme then loads Leaflet).
+  Shoreline change viewers, one per sub-page of /hatteras/shoreline-change/. Data from tools/hatteras_shoreline_data.py.
+  part="map" (default): Leaflet map of every CoastSat transect coloured by its rate, with the clicked transect's record.
+  part="profile": the same rates plotted along the island, south to north, with the clicked transect's record and a table.
+  Both have "Change year by year", which colours by position against the 1984-86 average with a play bar; its data
+  (shoreline_years.json, from tools/hatteras_shoreline_years.py) loads only when the mode is opened.
+  The page needs `chart: chartjs: true` in its front matter, and `map: true` for part="map" (the theme then loads Leaflet).
 {% endcomment %}
-<div class="hat-shoremap hat-bleed" id="shoremap" data-base="{{ '/assets/hatteras/data/' | relative_url }}">
+{% assign part = include.part | default: "map" %}
+<div class="hat-shoremap hat-bleed" id="shoremap" data-part="{{ part }}" data-base="{{ '/assets/hatteras/data/' | relative_url }}">
   <div class="hat-shoremap-inner">
     <div class="hat-controls">
       <div class="hat-seg" role="group" aria-label="What to show" id="shoremap-modes">
@@ -13,10 +15,12 @@
         <button type="button" data-mode="years">Change year by year</button>
       </div>
       <div class="hat-seg" role="group" aria-label="Period" id="shoremap-windows"></div>
+      {% if part == "map" %}
       <div class="hat-seg" role="group" aria-label="Background map" id="shoremap-basemaps">
         <button type="button" data-base="aerial" class="on">Aerial photo</button>
         <button type="button" data-base="plain">Plain map</button>
       </div>
+      {% endif %}
     </div>
 
     <div class="hat-player" id="shoremap-player" hidden>
@@ -28,36 +32,53 @@
       <div class="hat-player-year" id="shoremap-yearlabel" aria-live="polite"></div>
     </div>
 
+    {% if part == "map" %}
     <div class="hat-shoremap-grid">
       <div id="shoremap-map" role="region" aria-label="Map of shoreline change rates along Hatteras Island"></div>
       <aside class="hat-shoremap-side">
         <div class="hat-legend" id="shoremap-legend" aria-label="Colour key"></div>
         <div class="hat-detail" id="shoremap-detail" aria-live="polite">
-          <p class="hat-detail-prompt">Click any line on the map, or any dot on the chart below, to see how the shoreline at that spot has moved since the 1980s.</p>
+          <p class="hat-detail-prompt">Click any line on the map to see how the shoreline at that spot has moved since the 1980s.</p>
         </div>
         <div class="hat-ts-wrap" hidden><canvas id="shoremap-ts" aria-label="Shoreline position through time at the selected spot"></canvas></div>
       </aside>
     </div>
-
+    <p class="hat-caption hat-numbered shoremap-cap-rates">
+      Each coloured line is one survey line across the beach; they are 50 m apart. NC-12 is drawn in yellow.
+      The satellite record ends in <span class="shoremap-end"></span>.
+    </p>
+    <p class="hat-caption hat-numbered shoremap-cap-years" hidden>
+      Where the shoreline sat each year compared with its 1984–86 average, from all of that year's satellite shorelines,
+      smoothed over about 3.5 km (single images can be off by 10 m or more).
+    </p>
+    {% else %}
     <div class="hat-profile">
-      <h4 class="hat-profile-title">Along the island, south to north</h4>
       <div class="hat-profile-wrap"><canvas id="shoremap-profile" aria-label="Rate of shoreline change along the island"></canvas></div>
       <p class="hat-caption hat-numbered shoremap-cap-rates">
         Each dot is one survey line across the beach; they are 50 m apart. The black line is the trend smoothed over about 3.5 km.
-        Gold bands mark beach nourishment projects. The satellite record ends in <span class="shoremap-end"></span>.
+        Gold bands mark beach nourishment projects and the red tick the Buxton groins. The satellite record ends in <span class="shoremap-end"></span>.
       </p>
       <p class="hat-caption hat-numbered shoremap-cap-years" hidden>
         Where the shoreline sat each year compared with its 1984–86 average, from all of that year's satellite shorelines,
         smoothed over about 3.5 km (single images can be off by 10 m or more). Gold bands mark beach nourishment projects.
       </p>
     </div>
+    <div class="hat-shoremap-grid hat-profile-below">
+      <div class="hat-detail" id="shoremap-detail" aria-live="polite">
+        <p class="hat-detail-prompt">Click any dot on the chart to see how the shoreline at that spot has moved since the 1980s.</p>
+      </div>
+      <div class="hat-ts-wrap" hidden><canvas id="shoremap-ts" aria-label="Shoreline position through time at the selected spot"></canvas></div>
+    </div>
+    {% endif %}
   </div>
 </div>
 
+{% if part == "profile" %}
 <details class="hat-deeper hat-table-view">
 <summary>View the rates as a table</summary>
 <div class="hat-table-scroll"><table class="hat-table" id="shoremap-table"></table></div>
 <p><a href="{{ '/assets/hatteras/data/shoreline_rates.json' | relative_url }}">Download the data (JSON)</a></p>
 </details>
+{% endif %}
 
 <script defer src="{{ '/assets/hatteras/js/shoreline-map.js' | relative_url }}"></script>

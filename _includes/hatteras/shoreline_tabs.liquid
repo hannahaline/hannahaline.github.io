@@ -1,0 +1,12 @@
+{% comment %} Tabs across the Shoreline change pages: the intro and its three viewers. Sub-pages set `section: /hatteras/shoreline-change/` {% endcomment %}
+{% assign tabs = "/hatteras/shoreline-change/|What happened;/hatteras/shoreline-change/survey-lines/|Survey lines;/hatteras/shoreline-change/along-the-island/|Along the island;/hatteras/shoreline-change/through-time/|Shorelines through time" | split: ";" %}
+<nav class="hat-tabs" aria-label="Shoreline change pages">
+  {% for t in tabs %}
+    {% assign parts = t | split: "|" %}
+    {% if parts[0] == page.permalink %}
+      <span class="hat-tab current" aria-current="page">{{ parts[1] }}</span>
+    {% else %}
+      <a class="hat-tab" href="{{ parts[0] | relative_url }}">{{ parts[1] }}</a>
+    {% endif %}
+  {% endfor %}
+</nav>

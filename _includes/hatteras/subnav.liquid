@@ -9,7 +9,7 @@
       {% if g.name != "" and g.name != nil %}<span class="hat-subnav-label">{{ g.name }}</span>{% endif %}
       <div class="hat-subnav-items">
         {% for p in g.items %}
-          {% if p.url == page.permalink %}
+          {% if p.url == page.permalink or p.url == page.section %}
             <span class="hat-subnav-item current" aria-current="page">{{ p.title }}</span>
           {% elsif p.ready %}
             <a class="hat-subnav-item" href="{{ p.url | relative_url }}">{{ p.title }}</a>

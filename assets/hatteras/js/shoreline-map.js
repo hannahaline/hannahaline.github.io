@@ -1,4 +1,6 @@
-// Shoreline change map for /hatteras/shoreline-change/ (markup in _includes/hatteras/shoreline_map.liquid).
+// Shoreline change viewers for the /hatteras/shoreline-change/ sub-pages (markup in _includes/hatteras/shoreline_map.liquid).
+// One script for both: the map (Survey lines) and the profile along the island (Along the island); each part is
+// built only when its element is on the page.
 // Data: assets/hatteras/data/shoreline_rates.json and timeseries/d<NNN>.json, from tools/hatteras_shoreline_data.py;
 // the "Change year by year" mode adds shoreline_years.json (tools/hatteras_shoreline_years.py), loaded on first use.
 (function () {
@@ -7,6 +9,7 @@
   var root = document.getElementById("shoremap");
   if (!root) return;
   var BASE = root.getAttribute("data-base");
+  var HAS_MAP = !!document.getElementById("shoremap-map"), HAS_PROFILE = !!document.getElementById("shoremap-profile");
 
   // RdBu classes in m/yr, red = landward (eroding), blue = seaward (growing), grey = little change
   var BREAKS = [-3, -2, -1, -0.25, 0.25, 1, 2, 3];
@@ -85,6 +88,7 @@
 
   function buildLegend() {
     var el = document.getElementById("shoremap-legend");
+    if (!el) return;
     var yr = mode === "years", labels = yr ? LABELS_M : LABELS;
     var html = '<div class="hat-legend-title">' + (yr ? "Shoreline position, metres from its 1984–86 average" : "Shoreline change, metres per year") +
       '</div><div class="hat-legend-rows">';
@@ -148,6 +152,7 @@
 
   // Dark outlines help single lines read on the photo up close, but turn the whole ribbon dark at island scale
   function setCasing() {
+    if (!map) return;
     var on = map.getZoom() >= 13;
     casing.forEach(function (c, k) {
       var km = data.transects[k].km, lit = reachKm && km >= reachKm[0] && km <= reachKm[1];
@@ -210,8 +215,8 @@
     document.querySelectorAll("#shoremap-modes button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-mode") === m); });
     document.getElementById("shoremap-windows").hidden = m === "years";
     document.getElementById("shoremap-player").hidden = m !== "years";
-    document.querySelector(".shoremap-cap-rates").hidden = m === "years";
-    document.querySelector(".shoremap-cap-years").hidden = m !== "years";
+    document.querySelectorAll(".shoremap-cap-rates").forEach(function (c) { c.hidden = m === "years"; });
+    document.querySelectorAll(".shoremap-cap-years").forEach(function (c) { c.hidden = m !== "years"; });
     buildLegend();
     if (m === "years") setYear(yi);
     else { recolour(); updateProfile(); }
@@ -297,10 +302,12 @@
     selected = k;
     if (history.replaceState) history.replaceState(null, "", "#t=" + data.transects[k].id);
     var t = data.transects[k];
-    if (highlight) map.removeLayer(highlight);
-    highlight = L.polyline(t.line.map(function (p) { return [p[1], p[0]]; }), { color: "#fff", weight: 10, opacity: 0.9, interactive: false }).addTo(map);
-    lines[k].bringToFront();
-    if (!keepView && !map.getBounds().contains(highlight.getBounds())) map.panTo(highlight.getBounds().getCenter());
+    if (map) {
+      if (highlight) map.removeLayer(highlight);
+      highlight = L.polyline(t.line.map(function (p) { return [p[1], p[0]]; }), { color: "#fff", weight: 10, opacity: 0.9, interactive: false }).addTo(map);
+      lines[k].bringToFront();
+      if (!keepView && !map.getBounds().contains(highlight.getBounds())) map.panTo(highlight.getBounds().getCenter());
+    }
 
     var rows = data.windows.map(function (w, i) {
       var label = i === 0 ? "Whole record" : w.label;
@@ -471,6 +478,7 @@
 
   // ---- table view (domain means) ---------------------------------------------------------------
   function buildTable() {
+    if (!document.getElementById("shoremap-table")) return;
     var groups = {};
     data.transects.forEach(function (t) { (groups[t.d] = groups[t.d] || []).push(t); });
     var head = "<thead><tr><th>km north of Cape Point</th><th>Place</th>" +
@@ -489,13 +497,13 @@
   }
 
   function start() {
-    if (typeof L === "undefined" || typeof Chart === "undefined") return setTimeout(start, 100);
+    if ((HAS_MAP && typeof L === "undefined") || typeof Chart === "undefined") return setTimeout(start, 100);
     fetch(BASE + "shoreline_rates.json").then(function (r) { return r.json(); }).then(function (d) {
       data = d;
       buildControls();
       buildLegend();
-      buildMap();
-      buildProfile();
+      if (HAS_MAP) buildMap();
+      if (HAS_PROFILE) buildProfile();
       buildTable();
       window.addEventListener("hat:reach", function (e) { setReach(e.detail); });
       var m = /t=([\w]+)/.exec(location.hash);

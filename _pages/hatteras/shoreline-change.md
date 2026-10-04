@@ -4,28 +4,35 @@ title: Historic shoreline change
 permalink: /hatteras/shoreline-change/
 description: Where Hatteras Island's shoreline has retreated or grown since 1996, and the events that show up in the record.
 nav: false
-map: true
-chart:
-  chartjs: true
 ---
 
 {% include hatteras/subnav.liquid %}
+{% include hatteras/shoreline_tabs.liquid %}
 
 <p class="hat-lead">
 Satellites have photographed Hatteras Island many times a year since the 1980s.
 By tracing the {% include hatteras/term.liquid id="shoreline" text="shoreline" %} in each image, we can see where the beach has moved landward, where it has grown, and when the big changes happened.
 </p>
 
-## Where is the shoreline eroding or growing?
+## Three ways to look at the record
 
-Each coloured line on the map is a survey line across the beach, from Cape Point to Oregon Inlet.
-Red lines show where the shoreline has moved landward, and blue lines show where it has moved seaward.
-Use the buttons to compare the whole satellite record with the two periods the model recreates.
-Or switch to **Change year by year** and press play to watch where the shoreline sat each year since the mid-1980s.
+<div class="hat-cards">
+  <a class="hat-card" href="{{ '/hatteras/shoreline-change/survey-lines/' | relative_url }}">
+    <h3>Survey lines</h3>
+    <p>A map of every survey line across the beach, coloured by how fast the shoreline there has moved. Click a line to see its whole record, or press play to watch the shoreline year by year.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/shoreline-change/along-the-island/' | relative_url }}">
+    <h3>Along the island</h3>
+    <p>The same measurements as one chart, from Cape Point north to Oregon Inlet, so the patterns between villages are easy to compare.</p>
+  </a>
+  <a class="hat-card" href="{{ '/hatteras/shoreline-change/through-time/' | relative_url }}">
+    <h3>Shorelines through time</h3>
+    <p>The average shoreline every ten years since the 1980s, drawn over aerial photos from 1993 to 2024.</p>
+  </a>
+</div>
 
-{% include hatteras/shoreline_map.liquid %}
+## What the record shows
 
-### What the record shows
 
 Over the whole satellite record, the island as a whole has held roughly steady: about half of the beach has moved landward and half seaward.
 That average hides large differences from place to place.
@@ -66,13 +73,13 @@ The added width does not last equally everywhere.
 At Rodanthe it held for about three years and had mostly worn away by 2021, although the record there jumps around afterwards.
 At Buxton, about a third of the 2017 jump was gone within a year, and the rest held until the 2022 fill added to it.
 Avon still had about two-thirds of its 2022 jump in 2024, while the smaller Buxton 2022 jump had almost disappeared.
-Click a nourished stretch on the map to see its jump, marked in gold, in the full record.
+Click a nourished stretch on the [survey-line map]({{ '/hatteras/shoreline-change/survey-lines/' | relative_url }}) to see its jump, marked in gold, in the full record.
 
 ### The 2021 shift
 
 Between 2020 and 2021, the shoreline moved seaward by about 17 m almost everywhere on the island, in a single year.
 We are writing up what this shift was, and will share it here once it is published.
-Because it falls near the end of the record, this one event has a large effect on any rate that includes it, so it is worth keeping in mind when reading the 2010–2026 rates and the year-by-year view of the map.
+Because it falls near the end of the record, this one event has a large effect on any rate that includes it, so it is worth keeping in mind when reading the 2010–2026 rates and the year-by-year views.
 
 ## Explore further
 

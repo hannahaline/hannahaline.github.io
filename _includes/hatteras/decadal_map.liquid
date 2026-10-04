@@ -1,0 +1,37 @@
+{% comment %}
+  Shorelines through time: average shoreline per decade (tools/hatteras_decadal_shorelines.py) over a choice of
+  NC OneMap aerial photos. Script: assets/hatteras/js/decadal-shorelines.js. The page needs `map: true`.
+{% endcomment %}
+<div class="hat-shoremap hat-bleed hat-decadal" id="decadal" data-src="{{ '/assets/hatteras/data/decadal_shorelines.json' | relative_url }}">
+  <div class="hat-shoremap-inner">
+    <div class="hat-controls">
+      <div class="hat-seg" role="group" aria-label="Aerial photo underneath" id="decadal-photos">
+        <button type="button" data-photo="latest" class="on">Latest photo</button>
+        <button type="button" data-photo="1993">1993</button>
+        <button type="button" data-photo="2002">2002</button>
+        <button type="button" data-photo="2016">2016</button>
+        <button type="button" data-photo="2024">2024</button>
+      </div>
+      <div class="hat-seg" role="group" aria-label="Zoom to a place">
+        <button type="button" data-goto="35.245,-75.525,14">Cape Point</button>
+        <button type="button" data-goto="35.262,-75.518,15">Buxton</button>
+        <button type="button" data-goto="35.346,-75.502,15">Avon</button>
+        <button type="button" data-goto="35.590,-75.463,15">Rodanthe</button>
+        <button type="button" data-goto="35.695,-75.485,14">Pea Island</button>
+      </div>
+    </div>
+    <div class="hat-mvo-arms" id="decadal-years" aria-label="Shorelines shown"></div>
+    <div class="hat-decadal-wrap">
+      <div id="decadal-map" role="region" aria-label="Map of the average shoreline in each decade since the 1980s"></div>
+      <div class="hat-decadal-loading" aria-hidden="true">Loading photo…</div>
+    </div>
+    <p class="hat-caption hat-numbered">
+      The average shoreline in five-year windows centred on 1985, 1995, 2005, 2015 and 2025, from every satellite shoreline
+      in each window (the last window ends with the record in January 2026). Each line joins the average position on the
+      survey lines, 50 m apart; a gap means too few clear images. Satellite shorelines mark the water's edge at mean sea level,
+      so they sit on the wet beach in the photos, not at the dunes.
+      Photos: NC OneMap / NC Center for Geographic Information and Analysis; latest photo with USGS The National Map at island scale.
+    </p>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/decadal-shorelines.js' | relative_url }}"></script>
