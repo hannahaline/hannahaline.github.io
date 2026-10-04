@@ -13,13 +13,13 @@ It is written for the people who live on, manage, and plan for the island.
 
 I work in the Coastal Environmental Change Lab at UNC Chapel Hill, advised by Dr. Laura Moore. My collaborators on this work are L. Moore, K. Anarde, A. B. Murray, S. Dalyander, B. Franklin and R. Sahraei.
 
-{% include hatteras/todo.liquid text="Write the collaborators' full names, and thank the agencies and people who shared data or local knowledge." %}
+Thanks to the National Park Service at Cape Hatteras National Seashore, the North Carolina Department of Transportation and Dare County for data and local knowledge, and to the US Army Corps of Engineers, the US Geological Survey and NOAA, whose surveys and records this work relies on.
+
+{% include hatteras/todo.liquid text="Collaborators' full names and affiliations, from Hannah." %}
 
 ## Funding
 
 This work is supported by a Mountains to Sea Graduate Research Fellowship from the North Carolina Water Resources Research Institute and North Carolina Sea Grant, and by NOAA and the National Science Foundation through the Long Term Ecological Research (LTER) program.
-
-{% include hatteras/todo.liquid text="Check NC Sea Grant / WRRI acknowledgement requirements: exact wording, award number, disclaimer, and logo use." %}
 
 ## Data sources
 
