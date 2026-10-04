@@ -7,10 +7,10 @@ Hannah's choice (2026-10-03): simplified versions of CASCADE's input figures (ou
 the 1996-2015 run, with plain labels. Every panel reads the same files the run reads, through the loaders of
 scripts/figure_making/pipeline/inputs_overview_figure.py in the CASCADE repo beside this one; the storms come from
 this site's timeline.json (the same hindcast storm record), because CASCADE's storm loader has no 1996-2015 period.
-Writes assets/hatteras/img/model_steps/step1.png ... step6.png.
+Writes assets/hatteras/img/model_steps/step2.png ... step6.png; step1.png (one stretch as photo, lidar and grid) and
+step5_road.png come from tools/hatteras_model_stretch.py.
 
-    1 the starting island        elevation of every 10 m cell at the start of the run
-    2 cut into 500 m stretches   a close-up of six stretches and the cells of one
+    2 the whole island           elevation of every 10 m cell at the start of the run, 90 stretches of 500 m
     3 storms                     every storm event in the run, by how high the water reached
     4 waves and sea level        the Duck sea-level record with the run's rate, and the wave settings
     5 what people did            the road's distance back from the dunes, the managed villages, the 1999 move, the 2014 fill
@@ -85,7 +85,7 @@ def save(fig, n):
     print(f"wrote step{n}.png")
 
 
-def step1(canvas, cmap, norm, ticks, water):
+def step2(canvas, cmap, norm, ticks, water):
     fig, ax = plt.subplots(figsize=(W_IN, 3.1))
     rows_km = canvas.shape[0] * io.init.CELL_SIZE_M / 1000
     im = ax.imshow(np.ma.masked_less(np.ma.masked_invalid(canvas), 0.0), cmap=cmap, norm=norm, origin="lower",
@@ -98,41 +98,12 @@ def step1(canvas, cmap, norm, ticks, water):
     ax.text(0.995, 0.03, "beach (ocean side)", transform=ax.transAxes, ha="right", fontsize=9.5, color=INK, path_effects=halo)
     ax.text(0.995, 0.93, "Pamlico Sound", transform=ax.transAxes, ha="right", va="top", fontsize=9.5, color="white")
     villages(ax)
+    for g in range(1, 91):                       # the 500 m stretches, as ticks along the beach edge
+        ax.plot([g * DOMAIN_KM] * 2, [0, 0.08], color="white", lw=0.6)
     cb = fig.colorbar(im, ax=ax, ticks=ticks, pad=0.01, fraction=0.03, aspect=10)
     cb.set_label("height above\nhigh tide (m)", fontsize=9.5)
     cb.ax.tick_params(labelsize=9)
     frame(ax)
-    save(fig, 1)
-
-
-def step2(canvas, cmap, norm, ticks, water):
-    first, last, pick = 5, 10, 7                     # GIS domains shown, and the one whose cells are drawn
-    cells = int(DOMAIN_KM * 1000 / io.init.CELL_SIZE_M)
-    rows = 110
-    sub = canvas[:rows, (first - 1) * cells:last * cells]
-    fig, ax = plt.subplots(figsize=(W_IN, W_IN * rows / sub.shape[1] + 0.6))
-    x0 = (first - 1) * DOMAIN_KM * 1000
-    ax.imshow(np.ma.masked_less(np.ma.masked_invalid(sub), 0.0), cmap=cmap, norm=norm, origin="lower",
-              extent=(x0, x0 + sub.shape[1] * 10, 0, rows * 10), interpolation="nearest")
-    ax.set_facecolor(water)
-    for g in range(first - 1, last + 1):
-        ax.axvline(g * 500, color="white", lw=2, path_effects=[pe.withStroke(linewidth=3.5, foreground=INK)])
-    a = (pick - 1) * 500
-    for xx in np.arange(a, a + 501, 10):
-        ax.plot([xx, xx], [0, rows * 10], color="white", lw=0.35, alpha=0.7)
-    for yy in np.arange(0, rows * 10 + 1, 10):
-        ax.plot([a, a + 500], [yy, yy], color="white", lw=0.35, alpha=0.7)
-    ax.add_patch(Rectangle((a, 0), 500, rows * 10, fill=False, ec="#ffd23f", lw=2.5))
-    ax.set_title("Six stretches near Buxton; one of them drawn with its 10 m cells", fontsize=10.5, loc="left", color=INK)
-    ax.text(-0.01, 0.02, "beach\n(ocean side)", transform=ax.transAxes, ha="right", va="bottom", fontsize=9, color=INK)
-    ax.text(-0.01, 0.98, "sound\nside", transform=ax.transAxes, ha="right", va="top", fontsize=9, color=INK)
-    ax.set_xticks(np.arange(first - 1, last + 1) * 500)
-    ax.set_xticklabels([f"{v:g}" for v in np.arange(first - 1, last + 1) * DOMAIN_KM])
-    ax.set_yticks([])
-    ax.set_xlabel("km north of Cape Point (near Buxton)", fontsize=10)
-    ax.set_ylim(0, rows * 10)
-    frame(ax)
-    ax.spines["left"].set_visible(False)
     save(fig, 2)
 
 
@@ -245,7 +216,6 @@ def main():
     plt.rcParams.update({"font.family": "DejaVu Sans"})
     canvas = io.init.detrended_canvas(START, include_buffers=False)
     cmap, norm, ticks, water = io.init.scheme_colours(io.ELEVATION_SCHEME)
-    step1(canvas, cmap, norm, ticks, water)
     step2(canvas, cmap, norm, ticks, water)
     step3()
     step4()
