@@ -8,12 +8,12 @@ nav: false
 
 {% include hatteras/subnav.liquid %}
 
-<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/hatteras/img/hero_banner.jpg' | relative_url }}'); --hat-hero-pos: 50% 45%">
+<section class="hat-hero hat-bleed" style="--hat-hero-img: url('{{ '/assets/hatteras/img/hero_banner.jpg' | relative_url }}'); --hat-hero-pos: 50% 55%">
   <div class="hat-hero-text">
     <h2>Living with a changing coast</h2>
     <p>Hatteras Island is always changing. Storms, waves, and rising seas reshape it, and so do the roads, dunes, and beach projects that keep it livable.</p>
   </div>
-  <span class="hat-hero-credit">Cape Hatteras Lighthouse, 2004. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a></span>
+  <span class="hat-hero-credit">The beach below the Cape Hatteras Lighthouse, 2004. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a></span>
 </section>
 
 <p class="hat-lead">
@@ -26,9 +26,9 @@ It also introduces a computer model that recreates this history, so that we can 
 <b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
 </div>
 
-<figure class="hat-photo-wide">
-<img src="{{ '/assets/hatteras/img/buxton_houses_2025.jpg' | relative_url }}" alt="Oceanfront houses on pilings standing in the surf at Buxton, one collapsed into the water, with debris on the wet sand" loading="lazy">
-<figcaption class="hat-caption">Houses in the surf at Buxton on 30 September 2025, the day five unoccupied houses there collapsed. Photo: <a href="https://www.nps.gov/caha/learn/news/five-unoccupied-houses-collapse-in-buxton-september-30-2025.htm">National Park Service</a>.</figcaption>
+<figure class="hat-photo-wide" style="max-width: 36rem; margin-left: auto; margin-right: auto;">
+<img src="{{ '/assets/hatteras/img/hero_lighthouse_beach.jpg' | relative_url }}" alt="Aerial view of the Cape Hatteras Lighthouse standing in maritime forest behind a wide beach and the surf" loading="lazy">
+<figcaption class="hat-caption">The Cape Hatteras Lighthouse at Buxton in November 2004, five years after it was moved 880 m inland to escape the retreating shoreline. Photo: <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">NPS / Michael B. Edwards</a>, public domain.</figcaption>
 </figure>
 
 ## Explore
