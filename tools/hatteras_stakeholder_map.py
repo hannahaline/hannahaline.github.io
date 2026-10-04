@@ -210,7 +210,7 @@ def main() -> None:
     ax.legend(handles=handles, loc="lower right", bbox_to_anchor=(0.985, 0.015), **MAP_LEGEND)
     # scale bar under the locator (upper left), north arrow above the legend (lower right)
     on_water = dict(color="white", path_effects=HALO)
-    scale_bar_km(ax, 10_000, x=0.035, y=0.665, text_kw=on_water)
+    scale_bar_km(ax, 10_000, x=0.035, y=0.795, text_kw=on_water)
     north_dart(ax, (x0 + 0.93 * (x1 - x0), y0 + 0.16 * (y1 - y0)), arrow_m=3000, text_kw=on_water)
     ax.text(0.015, 0.006, "Imagery: Esri World Imagery",
             transform=ax.transAxes, ha="left", va="bottom",
