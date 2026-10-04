@@ -6,8 +6,8 @@ How far each beach fill moved the shoreline, and how long the added width lasted
 Uses CASCADE's detrended CoastSat position matrix (5-scr/1-observations/detrended_position) and the same method as
 coastsat_position_attribution.test_nourishment: the change in the filled domains from the year before the fill to the
 year after, minus the same change over the rest of the island. Fills come from HATTERAS_NOURISHMENT_PROJECTS, so
-Buxton 2017 is included (the CASCADE table, attribution_nourishment.csv, predates it). Also writes the difference for
-every year after the fill. Reads CASCADE, writes only tools/data/fill_steps.csv here. Needs the CASCADE repo beside
+Buxton 2017 is included (CASCADE's NOURISHED list has it, but its attribution_nourishment.csv does not list it
+yet). Also writes the difference for every year after the fill. Reads CASCADE, writes only tools/data/fill_steps.csv here. Needs the CASCADE repo beside
 this one.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
