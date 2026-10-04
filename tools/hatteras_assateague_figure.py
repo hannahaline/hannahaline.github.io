@@ -3,11 +3,11 @@ Ocean City and Assateague Island across Ocean City Inlet, for the Dune building 
 
     python tools/hatteras_assateague_figure.py
 
-A developed, held shoreline next to a natural one: USGS National Map imagery (public domain) of Ocean City Inlet,
+A developed, held shoreline next to a natural one that is free to overwash and roll landward: USGS National Map imagery (public domain) of Ocean City Inlet,
 Maryland, with Ocean City's shoreline carried south as a dashed line so the landward offset of Assateague's north
 end shows. The inlet opened in a 1933 hurricane and was fixed with jetties; they cut off the sand drifting south,
 and Assateague's north end retreated faster (Pendleton, Williams and Thieler, 2004, USGS Open-File Report 2004-1020).
-Hannah asked for this example on 2026-10-03. The dashed line is drawn by eye along Ocean City's water's edge in the
+Hannah asked for this example on 2026-10-03, to show an island allowed to overwash and roll over beside a developed one. The dashed line is drawn by eye along Ocean City's water's edge in the
 photo; it shows the offset, it does not measure it. Writes assets/hatteras/img/assateague_offset.jpg.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
@@ -70,7 +70,10 @@ def main():
     ax.text(x1 + slope * (780 - y1) + 8, 780, "Ocean City's shoreline,\ncarried south", ha="left", va="center", fontsize=9, **t)
 
     ax.text(800, 175, "Ocean City\n(developed;\nbeach nourished)", ha="right", va="center", fontsize=10.5, fontweight="bold", **t)
-    ax.text(300, 640, "Assateague\nIsland\n(natural)", ha="center", va="center", fontsize=10.5, fontweight="bold", **t)
+    ax.text(175, 540, "Assateague Island\n(natural: free to\noverwash and roll\nlandward)", ha="center", va="center",
+            fontsize=10.5, fontweight="bold", **t)
+    ax.annotate("overwash fan:\nsand washed across\nthe island", xy=(292, 730), xytext=(115, 690), ha="center", va="center",
+                fontsize=9.5, arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
     ax.annotate("jetties", xy=(700, 515), xytext=(760, 590), ha="left", fontsize=10, arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
     ax.annotate("Ocean City Inlet,\nopened 1933", xy=(610, 400), xytext=(470, 300), ha="center", fontsize=9.5,
                 arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
