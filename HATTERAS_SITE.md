@@ -4,7 +4,56 @@ Public-facing pages on Hatteras Island shoreline change, management, and the CAS
 Cape Hatteras National Seashore, NCDOT, Dare County and residents, and the Mountains to Sea Fellowship (NC WRRI + NC Sea Grant).
 This file is excluded from the build.
 
-## Where we left off (2026-10-02, paused)
+## Where we left off (2026-10-03)
+
+**State:** everything below is committed on `hatteras-site` (last commit 9464eb7). Nothing is pushed or public. The private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is at version 16 and is behind the branch; see to-do 1.
+
+**Pages now:** The basics (Overview, How the island works), What happened (Shoreline change + 3 sub-pages, Storms, Then and now), What we can do (Management, The model, Looking ahead - hidden), More (Glossary, About).
+
+**Done 10-03 (latest session):**
+- Overview Figure 1: lighthouse before/after pair (USAF Jan 1999 by the surf; NPS 2004 at the new site).
+- Shoreline change split into an intro (`/hatteras/shoreline-change/`) and three sub-pages with tabs (`shoreline_tabs.liquid`): Survey lines (map), Along the island (profile + table), Shorelines through time (new). Sub-pages set `section:` so the menu and pager treat them as Shoreline change. One script, `shoreline-map.js`, builds whichever part is on the page (`shoreline_map.liquid part="map|profile"`).
+- Shorelines through time: calendar-year mean shorelines for 1985/1995/2005/2015/2025 (`tools/hatteras_decadal_shorelines.py`), YlOrRd gradient with a colour bar, photo switch (latest / 1993 / 2002 / 2016 / 2024, one NC OneMap exportImage per view), and zoom buttons from the data: biggest changes (Cape Point +70, Buxton -75, North of Avon +95, Rodanthe -145, Pea Island -110 m) and stable stretches to compare (South of Avon 0, Avon to Salvo -15, North of Rodanthe +20 m; within ~20 m in all five years).
+- How the island works:
+  - Longshore section: USGS photos (dye in the surf, Cape Point) replace the diagram. `longshore.svg` is still generated but no longer used.
+  - Overwash section: the USGS Isabel photo of sand over NC-12 (DS 761 frame r045s18) replaces the Buxton/Sandy pair. The Sandy files are kept in `img/sandy/`, unused.
+  - Dunes diagram: redrawn as collision vs overwash (Sallenger 2000), with the water levels labelled.
+  - New 2x2 photo figure of built dunes: CCC sand fence 1936, no dune at the S-curves 2008 (USGS baseline survey), the dune rebuilt there in 2011 (NCDOT, CC BY 2.0), and the Rodanthe breach in 2020.
+  - The Key terms drop-down was removed in favour of a pointer to the glossary.
+- Rejected on purpose:
+  - USGS North Core Banks Dorian photos: those channels were cut by sound-side outflow, not overwash.
+  - The Hatteras Village Isabel pair on the island page: it is already on Storms.
+
+## To do next time
+
+**Needs Hannah:**
+1. Collaborators' full names and affiliations for About (to-do note in `about.md`).
+2. Check the model-page draft paragraph against the 2026-window matrix (to-do note in `model.md`, behind `hatteras_draft`).
+3. Review the glossary definitions on `/hatteras/glossary/` (berm, transect and surge are approved; the other 20 are drafts).
+4. CoastSat Live download date for the About page: she wasn't sure; find it.
+5. Reference author lists on the model page.
+6. Decide whether the Sandy pair (Buxton 2011/2012) goes on the Storms page or is dropped.
+
+**Can do without her:**
+7. Refresh the private preview: build, copy the JS in by hand, run `make_preview.py`, then publish changed files to the same URL. It is missing everything from the dunes diagram onward.
+8. Model-vs-observed panel: the matrix was re-run on the 2026 windows (CASCADE eac55c59, Rodanthe 2014 at 1.62 M cy). Re-run `tools/hatteras_model_data.py` and check that its bias/RMSE check still passes.
+9. CASCADE fill outputs (`attribution_nourishment.csv` + figures) still list 3 fills, not Buxton 2017. Re-run once the other session's uncommitted work in that folder is committed.
+10. Phone-width check of the new pages: the shoreline tabs, the through-time zoom-button rows, and the 2x2 dune grid. Only the dune grid's stacking was checked, by CSS.
+11. Overview card and the Explore text for Shoreline change: make sure they still describe the split pages.
+12. Stale `HATTERAS_SITE.md` sections below: the glossary entry still mentions the Key terms box, and the figures list lacks the new photos (longshore/, dunes/, isabel/overwash_nc12_2003.jpg, lighthouse_1999.jpg).
+13. Optional: delete `longshore.svg` from the generator and the includes if the photos stay.
+
+**Later:**
+14. Nourishment explorer panel; the Looking ahead page (forecasts), then set `ready: true`.
+15. Launch: the checklist at the end of this file, only when Hannah says so. The split-windows explorer launches at the same time; its link 404s until then.
+
+**Loose ends (unchanged):**
+- CASCADE's `HATTERAS_ROAD_EVENTS` calls the 1989 move "Pea Island"; the timeline sheet says S-curves. Flagged, not changed.
+- Dorian: Category 2 from HURDAT2 (85 kt); the CASCADE match table still says Cat 1.
+- Local builds drop `assets/hatteras/js/*.js` (no Node, so Terser fails); copy it in after each build.
+- Leave the `_projects/*.md` edits alone and commit by path.
+
+## Earlier session notes (2026-10-02 to 10-03; superseded by the to-do list above where they differ)
 
 **Done and committed on `hatteras-site` (not pushed, not public):**
 - Nine pages, in menu groups (since 10-03): The basics (Overview, How the island works), What happened (Shoreline change, Storms, Then and now), What we can do (Management, The model, Looking ahead - hidden), More (About). Groups live in `_data/hatteras_pages.yml`; the island page's URL is still /hatteras/island/.
