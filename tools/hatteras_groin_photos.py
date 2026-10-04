@@ -41,8 +41,10 @@ YEARS = {1993: "DOQQ_NC_1993", 2002: "Orthoimagery_2002", 2012: "Orthoimagery_20
          2016: "Orthoimagery_2016_2019", 2020: "Orthoimagery_2020_2023", 2024: "Orthoimagery_20242027"}
 NOTES = {1993: "lighthouse still here", 2002: "after the lighthouse move", 2012: "after Hurricane Irene",
          2016: "before the 2017 fill", 2020: "after the 2017 fill", 2024: "after the 2022 fill"}
-# where the three groins meet the beach, read off the 2002 photo (lat, lon): for the labels in panel (b)
-GROINS = [(35.25777, -75.51890), (35.25599, -75.51923), (35.25431, -75.52011)]
+# the three groins, north to south, as (root, tip) in pixels of the 800 x 1000 frame, read off the 2002 photo where all
+# three are clearest; drawn in every panel so the shoreline can be read against them
+GROINS = [((455, 210), (550, 232)), ((430, 410), (512, 425)), ((340, 600), (440, 612))]
+GROIN = "#d7191c"
 REF = 1993
 LINE, REF_LINE = "#ffd23f", "#ffffff"
 MIN_OBS = 3
@@ -109,19 +111,17 @@ def main():
         for s in ax.spines.values():
             s.set_color("#1a1a1a")
             s.set_linewidth(1.2)
-        ax.text(0.03, 0.975, f"({'abcdef'[i]}) {y}", transform=ax.transAxes, ha="left", va="top", fontsize=12,
-                fontweight="bold", color="white", path_effects=[pe.withStroke(linewidth=3, foreground="#1a1a1a")])
-        ax.text(0.03, 0.925, NOTES[y], transform=ax.transAxes, ha="left", va="top", fontsize=9.5, color="white",
-                path_effects=[pe.withStroke(linewidth=2.6, foreground="#1a1a1a")])
-    # the groins, labelled once, in the clearest early photo
-    ax = axes.flat[1]
-    tip = [img.merc(la, lo) for la, lo in GROINS]
-    lx, ly = box[0] + 0.12 * (box[2] - box[0]), box[1] + 0.62 * (box[3] - box[1])
-    for gx, gy in tip:
-        ax.annotate("", xy=(gx, gy), xytext=(lx + 90 * k, ly), arrowprops=dict(arrowstyle="-|>", color="white", lw=1.2,
-                    shrinkA=2, shrinkB=1, path_effects=[pe.withStroke(linewidth=2.6, foreground="#1a1a1a")]))
-    ax.text(lx, ly, "groins", color="white", fontsize=10.5, fontweight="bold", ha="center", va="center",
-            path_effects=[pe.withStroke(linewidth=2.8, foreground="#1a1a1a")])
+        # the groins, numbered north to south, at the same place in every panel
+        for n, (root, tip) in enumerate(GROINS, 1):
+            (rx, ry), (tx, ty) = [(box[0] + px / PX[0] * (box[2] - box[0]), box[3] - py / PX[1] * (box[3] - box[1])) for px, py in (root, tip)]
+            ax.plot([rx, tx], [ry, ty], color=GROIN, lw=2.2, solid_capstyle="round",
+                    path_effects=[pe.withStroke(linewidth=4, foreground="white")])
+            ax.text(tx + 14 * k, ty, str(n), color=GROIN, fontsize=9, fontweight="bold", va="center",
+                    bbox=dict(boxstyle="circle,pad=0.18", fc="white", ec=GROIN, lw=1))
+        # panel label: letter and year, with what had just happened, in a white box
+        ax.text(0.03, 0.975, f"({'abcdef'[i]}) {y}\n" + NOTES[y], transform=ax.transAxes, ha="left", va="top",
+                fontsize=9.5, color="#1a1a1a", linespacing=1.35,
+                bbox=dict(boxstyle="square,pad=0.35", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
     # scale bar and north arrow in the first panel
     ax = axes.flat[0]
     x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.05 * (box[3] - box[1])
@@ -134,8 +134,10 @@ def main():
                 path_effects=[pe.withStroke(linewidth=2.6, foreground="#1a1a1a")])
     from matplotlib.lines import Line2D
     fig.legend(handles=[Line2D([], [], color=LINE, lw=2.4, path_effects=halo, label="Average shoreline that year (satellite)"),
-                        Line2D([], [], color=REF_LINE, lw=1.6, ls=(0, (4, 2.5)), path_effects=halo, label="Average shoreline in 1993")],
-               loc="lower center", ncol=2, frameon=False, fontsize=10.5, bbox_to_anchor=(0.5, 0.035), handlelength=3.2)
+                        Line2D([], [], color=REF_LINE, lw=1.6, ls=(0, (4, 2.5)), path_effects=halo, label="Average shoreline in 1993"),
+                        Line2D([], [], color=GROIN, lw=2.4, path_effects=[pe.withStroke(linewidth=4, foreground="white")],
+                               label="Groins 1-3 (north to south)")],
+               loc="lower center", ncol=3, frameon=False, fontsize=10, bbox_to_anchor=(0.5, 0.035), handlelength=3.2)
     fig.savefig(OUT, dpi=170, bbox_inches="tight", pad_inches=0.05, pil_kwargs={"quality": 86, "optimize": True})
     print(f"wrote {OUT.relative_to(SITE)}")
 
