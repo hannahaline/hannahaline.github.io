@@ -73,6 +73,9 @@ The added sand does not stay put: waves spread it along the shore and carry some
 
 The model includes four projects:
 
+{% comment %} its own block: the theme makes a table's parent scroll sideways (table-responsive), which would clip the full-width explorer below {% endcomment %}
+<div class="hat-table-wrap" markdown="1">
+
 | Year | Where | Sand placed |
 |---|---|---|
 | 2014 | Rodanthe, the S-curves | about 1.6 million cubic yards |
@@ -81,9 +84,12 @@ The model includes four projects:
 | 2022 | Avon, north of the pier to the village edge | about 1.0 million cubic yards |
 {: .hat-table}
 
-Each project shows up in the satellite record as a sudden seaward jump on that stretch of beach (see the [shoreline change page]({{ '/hatteras/shoreline-change/' | relative_url }})).
+</div>
 
-{% include hatteras/panel.liquid id="nourishment-explorer" title="Where the sand went" plan="Small multiples or a slider: the shoreline before, just after, and some years after each fill, observed versus modelled." %}
+Each project shows up in the satellite record as a sudden seaward jump on that stretch of beach. Pick a stretch below to see its jump and how much of it was left in 2025.
+Switch to **Shoreline position** to see the stretch and the rest of the island separately.
+
+{% include hatteras/nourishment_explorer.liquid %}
 
 ## Groins and hard structures
 

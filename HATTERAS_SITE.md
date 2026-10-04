@@ -44,7 +44,9 @@ This file is excluded from the build.
 13. Optional: delete `longshore.svg` from the generator and the includes if the photos stay.
 
 **Later:**
-14. Nourishment explorer panel; the Looking ahead page (forecasts), then set `ready: true`.
+14. Looking ahead page (forecasts), then set `ready: true`.
+    - Nourishment explorer: DONE 10-03 on the Management page (observed only; Hannah's picks). `python tools/hatteras_nourishment_data.py` -> `nourishment.json`: yearly mean CoastSat position on each filled stretch and on the rest of the island (all 1222 map transects), zero in the year before the first fill, 1984-2025. Views: relative to the rest of the island (the jump) and shoreline position (both lines). Steps: Rodanthe 14.7, Buxton 2017 32.6, Buxton 2022 8.3, Avon 11.3 m. Hannah chose this plain method over CASCADE's detrended medians, which gave 5.0 for Buxton 2022; the shoreline intro text now quotes 15/33/11/8 m and the 2025 persistence. Re-run after `hatteras_shoreline_data.py` or a config change.
+    - Theme trap: al-folio adds `table-responsive` (overflow auto) to the PARENT of every table, which clipped the full-width explorer when the parent was the article. Markdown tables on pages with full-width panels go in `<div class="hat-table-wrap" markdown="1">`.
 15. Launch: the checklist at the end of this file, only when Hannah says so. The split-windows explorer launches at the same time; its link 404s until then.
 
 **Loose ends (unchanged):**
