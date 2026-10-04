@@ -8,7 +8,8 @@ southeast, sand drifting south along the east-facing shore (arrow widths schemat
 ending at Cape Point, with a close-up of the zig-zag path
 sand takes up and down the beach face. overwash.svg: a slice across the island in a storm, the water level raised above normal
 high tide, waves running over a low dune, and a new layer of sand (an overwash fan) spread across the island
-toward the sound. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
+toward the sound. groin.svg: a groin seen from above, sand piled on the side the drift comes from and the far
+side cut back. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
 as inline SVGs so they take the page's font.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
@@ -213,8 +214,62 @@ def overwash():
     return "\n".join(s) + "\n"
 
 
+def groin():
+    W, H = 1000, 460
+    s = svg_open("groin", W, H, "How a groin traps sand",
+                 "A beach seen from above, land at the top and ocean below, with sand drifting along the shore from left "
+                 "to right. A groin, a short wall, runs from the beach out into the surf. On the left, the side the sand "
+                 "comes from, sand piles up against the groin and the beach is wider. On the right, the far side, the "
+                 "beach is cut off from that sand, so it is narrower and erodes.")
+    s.append(f'<defs>{head("gr-h")}<marker id="gr-hd" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="2.6" '
+             f'markerHeight="2.6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{ADDED}"/></marker>'
+             f'<linearGradient id="gr-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{WATER_TOP}"/>'
+             f'<stop offset="1" stop-color="{WATER_DEEP}"/></linearGradient></defs>')
+    GX = 500                                    # the groin
+    base = 220                                  # the shoreline far from the groin
+
+    def shore(x):
+        if x <= GX:                             # updrift: builds out toward the groin
+            return base + 70 * math.exp(-(GX - x) / 150)
+        return base - 55 * math.exp(-(x - GX) / 170)   # downdrift: cut back next to the groin
+
+    pts = [(x, shore(x)) for x in range(0, GX + 1, 10)] + [(x, shore(x)) for x in range(GX, W + 1, 10)]
+    s.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="url(#gr-sea)"/>')
+    s.append('<path d="M0,0 H{W} V{y} '.format(W=W, y=pts[-1][1]) + " ".join(f"L{x},{y:.1f}" for x, y in reversed(pts))
+             + f' Z" fill="{SAND}"/>')
+    s.append(f'<rect x="0" y="0" width="{W}" height="64" fill="{GROUND}"/>')
+    s.append(f'<rect x="0" y="0" width="{W}" height="30" fill="{CANOPY}"/>')
+    for x in range(6, W, 12):
+        s.append(f'<path d="M{x},60 l2,-9 M{x + 4},60 l-1,-8" stroke="{GRASS_C}" stroke-width="1.4" fill="none"/>')
+    # the original shoreline, dashed, for comparison
+    s.append(f'<line x1="0" y1="{base}" x2="{W}" y2="{base}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="7 6"/>')
+    s.append(label(W - 14, base - 10, "shoreline without the groin", anchor="end", size=14, color=MUTED, box=False))
+    # surf along the new shoreline
+    s.append('<path d="M' + " L".join(f"{x},{y + 4:.1f}" for x, y in pts) + '" stroke="#fff" stroke-width="5" '
+             'fill="none" opacity="0.85" stroke-linecap="round"/>')
+    # the groin: a rock wall from the dunes' toe out past the surf
+    s.append(f'<rect x="{GX - 9}" y="120" width="18" height="{shore(GX - 1) - 120 + 110:.0f}" rx="4" fill="#8a8f93" '
+             f'stroke="#5b6469" stroke-width="2"/>')
+    for y in range(128, int(shore(GX - 1) + 100), 16):
+        s.append(f'<circle cx="{GX - 3 + (y % 3)}" cy="{y}" r="4" fill="#a3a8ab" stroke="#6b7378" stroke-width="1"/>')
+    s.append(label(GX + 20, 112, "groin", size=17, weight=600))
+    # longshore drift: arriving from the left, stopped at the groin; little passes to the right
+    s.append(f'<line x1="60" y1="{base + 62}" x2="{GX - 40}" y2="{base + 62}" stroke="{ADDED}" stroke-width="9" '
+             f'marker-end="url(#gr-hd)"/>')
+    s.append(f'<line x1="{GX + 40}" y1="{base + 40}" x2="{W - 80}" y2="{base + 40}" stroke="{ADDED}" stroke-width="3" '
+             f'marker-end="url(#gr-hd)" stroke-dasharray="10 6"/>')
+    s.append(label(60, base + 104, "sand drifting along the shore", size=15))
+    s.append(label(GX + 40, base + 84, "little sand gets past", size=15))
+    # what happens on each side
+    s.append(label(70, 150, "sand piles up:\nthe beach grows wider", size=16, color="#2166ac"))
+    s.append(label(W - 60, 150, "cut off from the sand:\nthe beach erodes", anchor="end", size=16, color=ERODE))
+    s.append(label(14, H - 16, "Atlantic Ocean", size=15, color=MUTED, box=False))
+    s.append("</svg>")
+    return "\n".join(s) + "\n"
+
+
 def main():
-    for name, make in (("longshore.svg", longshore), ("overwash.svg", overwash)):
+    for name, make in (("longshore.svg", longshore), ("overwash.svg", overwash), ("groin.svg", groin)):
         (OUT / name).write_text(make(), encoding="utf-8")
         print(f"wrote {OUT / name}")
 

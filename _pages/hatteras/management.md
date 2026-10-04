@@ -86,6 +86,11 @@ A groin is a wall built out across the beach into the surf.
 It catches sand moving along the shore, so the beach on the side the sand comes from grows wider.
 The beach on the other side is cut off from that sand and often erodes faster.
 
+<figure class="hat-model-figure" data-scroll-start="0.3">
+{% include hatteras/groin.svg %}
+<figcaption class="hat-caption">Not to scale. Sand drifting along the shore piles up against the groin, widening the beach on the side it comes from; the beach beyond the groin is starved of sand and cut back.</figcaption>
+</figure>
+
 In 1969–70 the US Navy built three groins at Buxton, two north and one just south of where the Cape Hatteras Lighthouse then stood, to protect its Naval Facility; they also shielded the lighthouse.
 The shore kept retreating, and in the summer of 1999 the lighthouse itself was moved 2,900 feet (880 m) to the southwest.
 The 2017 and 2022 Buxton nourishment projects start at the lighthouse groin and run north.
