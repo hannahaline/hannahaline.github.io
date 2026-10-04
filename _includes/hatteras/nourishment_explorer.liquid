@@ -1,33 +1,46 @@
 {% comment %}
-  Nourishment explorer: for each nourished stretch, the yearly satellite shoreline on the stretch and on the rest of
-  the island (or their difference), with each fill's jump and what was left in the last full year. Observed only.
+  Nourishment explorer: pick a fill; a headline, one bar per year after it (how far the shoreline sat seaward of where
+  it was the year before, compared with the rest of the island), and a card. The whole record for the stretch is in a
+  Go deeper box, as the stretch against the rest of the island or their difference. Observed only.
   Data from tools/hatteras_nourishment_data.py; script assets/hatteras/js/nourishment-explorer.js.
 {% endcomment %}
 <div class="hat-mvo hat-nx hat-bleed" data-src="{{ '/assets/hatteras/data/nourishment.json' | relative_url }}">
   <div class="hat-shoremap-inner">
     <div class="hat-controls">
-      <div class="hat-seg hat-nx-stretches" role="group" aria-label="Nourished stretch"></div>
-      <div class="hat-seg hat-nx-views" role="group" aria-label="What to show">
-        <button type="button" data-view="relative" class="on">Relative to the rest of the island</button>
-        <button type="button" data-view="raw">Shoreline position</button>
-      </div>
+      <div class="hat-seg hat-nx-stretches" role="group" aria-label="Beach fill"></div>
     </div>
-    <div class="hat-nx-strip" aria-hidden="false"></div>
-    <div class="hat-tl-chart hat-nx-chart" role="img" aria-label="Shoreline position through time on the chosen nourished stretch"></div>
-    <div class="hat-tl-tip" role="status" hidden></div>
-    <div class="hat-nx-cards"></div>
-    <p class="hat-caption hat-numbered" data-for-view="relative">
-      How far the shoreline on the nourished stretch moved compared with the rest of the island, from the yearly average of
-      every satellite shoreline. Both are set to zero in the year before the first fill (open circle). Storms and island-wide
-      shifts such as 2021 move both, so they cancel here and a fill shows up as a jump; the gold bracket is the change from the
-      year before the fill to the year after. Before any fill, a falling line means the stretch was eroding faster than
-      the island as a whole. Gold bands mark fill years.
+    <div class="hat-nx-strip"></div>
+    <p class="hat-nx-headline" aria-live="polite"></p>
+    <div class="hat-nx-simple">
+      <div class="hat-nx-bars"></div>
+      <div class="hat-nx-cards"></div>
+    </div>
+    <p class="hat-caption hat-numbered">
+      Each bar is how far the shoreline on the nourished stretch sat seaward of where it was the year before the fill,
+      compared with the rest of the island, from the yearly average of every satellite shoreline. Comparing with the rest of
+      the island takes out storms and island-wide shifts such as 2021, which move both. Paler bars start in the year of a later fill on
+      the same stretch, so they include its sand too.
     </p>
-    <p class="hat-caption hat-numbered" data-for-view="raw" hidden>
-      The yearly average shoreline on the nourished stretch (blue) and on the rest of the island from Cape Point to Oregon Inlet (grey),
-      both set to zero in the year before the first fill (open circle). The gap between the two lines is the
-      "relative to the rest of the island" view. Gold bands mark fill years.
-    </p>
+    <details class="hat-deeper hat-nx-more">
+      <summary>Go deeper: the whole record for <span class="hat-nx-stretch-name"></span>, 1984–2025</summary>
+      <div class="hat-controls">
+        <div class="hat-seg hat-nx-views" role="group" aria-label="What to show">
+          <button type="button" data-view="relative" class="on">Relative to the rest of the island</button>
+          <button type="button" data-view="raw">Shoreline position</button>
+        </div>
+      </div>
+      <div class="hat-tl-chart hat-nx-chart" role="img" aria-label="Shoreline position through time on the nourished stretch"></div>
+      <div class="hat-tl-tip" role="status" hidden></div>
+      <p class="hat-caption" data-for-view="relative">
+        The stretch minus the rest of the island, both zero in the year before the first fill (open circle). A fill shows up
+        as a jump (gold bracket: the year before to the year after). Before any fill, a falling line means the stretch was
+        eroding faster than the island as a whole.
+      </p>
+      <p class="hat-caption" data-for-view="raw" hidden>
+        The yearly average shoreline on the nourished stretch (blue) and on the rest of the island from Cape Point to Oregon Inlet (grey),
+        both zero in the year before the first fill (open circle). The gap between them is the other view.
+      </p>
+    </details>
   </div>
 </div>
 <script defer src="{{ '/assets/hatteras/js/nourishment-explorer.js' | relative_url }}"></script>

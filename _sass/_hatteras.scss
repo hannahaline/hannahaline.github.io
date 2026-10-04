@@ -1384,6 +1384,39 @@ table.hat-mvo-skill {
 
 // Nourishment explorer (nourishment_explorer.liquid): locator strip and one card per fill
 .hat-nx {
+  .hat-nx-headline {
+    font-size: 1.1rem;
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  // bars beside the card on wide screens, card under the bars on narrow ones
+  .hat-nx-simple {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+    gap: 1rem;
+    align-items: start;
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
+
+    .hat-nx-cards {
+      margin: 0;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hat-nx-bars {
+    background: #fff;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 4px;
+  }
+
+  .hat-nx-more {
+    margin-top: 1rem;
+    background: #fff;
+  }
+
   .hat-nx-strip {
     margin: 0.2rem 0 0.6rem;
   }

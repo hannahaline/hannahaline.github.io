@@ -86,8 +86,7 @@ The model includes four projects:
 
 </div>
 
-Each project shows up in the satellite record as a sudden seaward jump on that stretch of beach. Pick a stretch below to see its jump and how much of it was left in 2025.
-Switch to **Shoreline position** to see the stretch and the rest of the island separately.
+Each project shows up in the satellite record as a sudden seaward jump on that stretch of beach. Pick a fill below to see how far it moved the shoreline, and how much of that was left in 2025.
 
 {% include hatteras/nourishment_explorer.liquid %}
 
@@ -97,9 +96,9 @@ A groin is a wall built out across the beach into the surf.
 It catches sand moving along the shore, so the beach on the side the sand comes from grows wider.
 The beach on the other side is cut off from that sand and often erodes faster.
 
-<figure class="hat-model-figure" data-scroll-start="0.3">
-{% include hatteras/groin.svg %}
-<figcaption class="hat-caption">Not to scale. Sand drifting along the shore piles up against the groin, widening the beach on the side it comes from; the beach beyond the groin is starved of sand and cut back.</figcaption>
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/groins_through_time.jpg' | relative_url }}" alt="Six aerial photos of the same stretch of beach at Buxton, from 1993 to 2024, each with that year's average satellite shoreline drawn in yellow and the 1993 shoreline dashed in white; three groins run out into the surf" loading="lazy">
+<figcaption class="hat-caption">The Buxton groins from 1993 to 2024, the same 800 m by 1,000 m of beach in each photo. The yellow line is the average of every satellite shoreline that calendar year, and the dashed white line is the 1993 average, for comparison. The three groins are the dark lines running into the surf, labelled in (b); the Cape Hatteras Lighthouse stood beside the southern one until 1999. A satellite shoreline is the water's edge at mean sea level, averaged over a whole year, so it can sit a little off the water's edge in a photo taken on one day. Photos: NC OneMap / NC Center for Geographic Information and Analysis (1993 black and white; 2012 Feb–Mar, 2016 Jan–Feb, 2020 Feb, 2024 Mar). Shorelines: CoastSat.</figcaption>
 </figure>
 
 In 1969–70 the US Navy built three groins at Buxton, two north and one just south of where the Cape Hatteras Lighthouse then stood, to protect its Naval Facility; they also shielded the lighthouse.

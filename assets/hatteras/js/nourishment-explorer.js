@@ -1,6 +1,7 @@
 // Nourishment explorer on /hatteras/management/ (markup in _includes/hatteras/nourishment_explorer.liquid; data from
-// tools/hatteras_nourishment_data.py). For the chosen stretch: a strip showing where it is on the island, the yearly
-// shoreline on the stretch and on the rest of the island (or their difference), the fills marked, and a card per fill.
+// tools/hatteras_nourishment_data.py). For the chosen fill: where it is on the island, a headline, one bar per year
+// after the fill (how far the shoreline sat seaward of where it was the year before, compared with the rest of the
+// island) and a card. The whole record for the stretch, as lines, sits in a Go deeper box and is drawn when opened.
 (function () {
   "use strict";
 
@@ -20,6 +21,8 @@
   function Explorer(root) {
     this.root = root;
     this.chart = root.querySelector(".hat-nx-chart");
+    this.bars = root.querySelector(".hat-nx-bars");
+    this.more = root.querySelector(".hat-nx-more");
     this.strip = root.querySelector(".hat-nx-strip");
     this.tip = root.querySelector(".hat-tl-tip");
     this.k = 0;
@@ -27,22 +30,29 @@
     var self = this;
     fetch(root.getAttribute("data-src")).then(function (r) { return r.json(); }).then(function (d) {
       self.data = d;
+      // one entry per fill, in date order, each pointing at its stretch
+      self.fills = [];
+      d.stretches.forEach(function (st, k) { st.fills.forEach(function (f) { self.fills.push({ k: k, f: f }); }); });
+      self.fills.sort(function (a, b) { return a.f.year - b.f.year || a.k - b.k; });
       self.controls();
       self.draw();
       var w = self.chart.clientWidth;
-      window.addEventListener("resize", function () { if (self.chart.clientWidth !== w) { w = self.chart.clientWidth; self.draw(); } });
+      window.addEventListener("resize", function () { if (self.bars.clientWidth !== w) { w = self.bars.clientWidth; self.draw(); } });
+      self.more.addEventListener("toggle", function () { if (self.more.open) self.drawChart(); });
     });
   }
 
   Explorer.prototype.controls = function () {
     var self = this, seg = this.root.querySelector(".hat-nx-stretches");
-    this.data.stretches.forEach(function (s, i) {
+    this.fi = 0;
+    this.fills.forEach(function (x, i) {
       var b = document.createElement("button");
       b.type = "button";
-      b.textContent = s.name + " (" + s.fills.map(function (f) { return f.year; }).join(", ") + ")";
+      b.textContent = self.data.stretches[x.k].name + " " + x.f.year;
       if (i === 0) b.className = "on";
       b.addEventListener("click", function () {
-        self.k = i;
+        self.fi = i;
+        self.k = x.k;
         seg.querySelectorAll("button").forEach(function (o, j) { o.classList.toggle("on", j === i); });
         self.draw();
       });
@@ -53,15 +63,63 @@
         self.view = b.getAttribute("data-view");
         self.root.querySelectorAll(".hat-nx-views button").forEach(function (o) { o.classList.toggle("on", o === b); });
         self.root.querySelectorAll("[data-for-view]").forEach(function (c) { c.hidden = c.getAttribute("data-for-view") !== self.view; });
-        self.draw();
+        self.drawChart();
       });
     });
   };
 
   Explorer.prototype.draw = function () {
+    this.k = this.fills[this.fi].k;
+    var name = this.data.stretches[this.k].name;
+    this.root.querySelectorAll(".hat-nx-stretch-name").forEach(function (n) { n.textContent = name; });
     this.drawStrip();
-    this.drawChart();
+    this.drawBars();
     this.drawCards();
+    if (this.more.open) this.drawChart();
+  };
+
+  // The simple view: a headline and one bar per year after the fill
+  Explorer.prototype.drawBars = function () {
+    var d = this.data, s = d.stretches[this.k], f = this.fills[this.fi].f;
+    var ys = Object.keys(f.since_before_m).map(Number).sort(), vals = ys.map(function (y) { return f.since_before_m[y]; });
+    var left = vals[vals.length - 1];
+    this.root.querySelector(".hat-nx-headline").innerHTML =
+      "The " + f.year + " fill at " + s.name + " moved the shoreline <b>" + Math.round(f.step_m) + " m seaward</b> compared with the rest of the island. " +
+      (left >= 1 ? "In " + d.last_year + ", <b>" + Math.round(left) + " m</b> of it was still there." : "By " + d.last_year + ", it was gone.");
+    var W = Math.max(this.bars.clientWidth, 300), small = W < 640, H = small ? 240 : 270, top = 28, bottom = 44, lft = small ? 34 : 50, right = 10;
+    var hi = Math.max(10, Math.ceil(Math.max.apply(null, vals.concat([0])) / 10) * 10);
+    var lo = Math.min(0, Math.floor(Math.min.apply(null, vals) / 10) * 10);
+    var slot = (W - lft - right) / Math.max(ys.length, 6), bw = Math.min(slot * 0.62, 70);
+    var X = function (i) { return lft + slot * (i + 0.5); };
+    var Y = function (v) { return top + (hi - v) / (hi - lo) * (H - top - bottom); };
+    this.bars.innerHTML = "";
+    var svg = el("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
+      "aria-label": "Bars: metres the shoreline sat seaward of where it was before the fill, each year after it" }, this.bars);
+    for (var v = lo; v <= hi; v += 10) {
+      el("line", { x1: lft, x2: W - right, y1: Y(v), y2: Y(v), stroke: v === 0 ? INK : GRID }, svg);
+      text(svg, lft - 6, Y(v) + 4, signed(v), { "text-anchor": "end", fill: MUTED, "font-size": 12 });
+    }
+    // later fills on the same stretch add sand too: mark the bars they affect
+    var later = s.fills.filter(function (o) { return o.year > f.year; });
+    ys.forEach(function (y, i) {
+      var v = vals[i], after = later.some(function (o) { return y >= o.year; });
+      el("rect", { x: X(i) - bw / 2, y: Math.min(Y(v), Y(0)), width: bw, height: Math.max(Math.abs(Y(v) - Y(0)), 1),
+        fill: after ? "rgba(200, 136, 15, 0.45)" : FILL }, svg);
+      text(svg, X(i), v >= 0 ? Y(v) - 6 : Y(v) + 15, signed(v) + " m", { "text-anchor": "middle", fill: INK, "font-size": small ? 11 : 12.5, "font-weight": 600 });
+      text(svg, X(i), H - bottom + 17, y, { "text-anchor": "middle", fill: MUTED, "font-size": 12 });
+      if (i === 0) text(svg, X(i), H - bottom + 32, "year after", { "text-anchor": "middle", fill: MUTED, "font-size": 11 });
+    });
+    later.forEach(function (o) {
+      var i = ys.indexOf(o.year);
+      if (i < 0) return;
+      var x = X(i) - slot / 2;
+      el("line", { x1: x, x2: x, y1: top - 6, y2: H - bottom, stroke: INK, "stroke-dasharray": "4 3" }, svg);
+      text(svg, x + 4, top - 10, o.year + " fill adds more sand", { fill: INK, "font-size": 11.5 });
+    });
+    if (!small) {
+      var yl = text(svg, 0, 0, "metres seaward", { fill: MUTED, "font-size": 12, "text-anchor": "middle" });
+      yl.setAttribute("transform", "translate(13," + (top + (H - top - bottom) / 2) + ") rotate(-90)");
+    }
   };
 
   // Where the stretch is: the island from Cape Point to Oregon Inlet as a bar, villages above, the fills in gold
@@ -88,6 +146,7 @@
 
   Explorer.prototype.drawChart = function () {
     var self = this, d = this.data, s = d.stretches[this.k], rel = this.view === "relative";
+    this.root.querySelectorAll(".hat-nx-stretch-name").forEach(function (n) { n.textContent = s.name; });
     var W = Math.max(this.chart.clientWidth, 320), small = W < 640;
     var left = small ? 38 : 58, right = 14, top = 46, H = small ? 320 : 380, bottom = 40;
     var y0 = s.years[0], y1 = d.last_year;
@@ -177,7 +236,7 @@
   // One card per fill: what was placed, the jump, and what was left in the last full year
   Explorer.prototype.drawCards = function () {
     var d = this.data, s = d.stretches[this.k], km = s.length_m / 1000;
-    this.root.querySelector(".hat-nx-cards").innerHTML = s.fills.map(function (f) {
+    this.root.querySelector(".hat-nx-cards").innerHTML = [this.fills[this.fi].f].map(function (f) {
       var left = f.since_before_m[String(d.last_year)];
       var pct = Math.round(left / f.step_m * 100);
       return '<div class="hat-nx-card"><h4>' + s.name + " " + f.year + "</h4><dl>" +
