@@ -63,6 +63,11 @@ Overwash can bury roads and houses, but it is also how a barrier island builds i
 ## Dunes are the island's first defence
 
 Dunes block small and medium storms from overwashing the island. Grasses trap blowing sand, so dunes regrow between storms.
+
+<figure class="hat-model-figure" data-scroll-start="0.5">
+{% include hatteras/dunes.svg %}
+<figcaption class="hat-caption">Not to scale. The same storm against (a) a tall, continuous dune, which holds the water back and keeps the island behind it dry, and (b) a low dune, which the waves run over, spreading sand across the island.</figcaption>
+</figure>
 On Hatteras, many of today's dunes were built or rebuilt by people, which is covered on the [management page]({{ '/hatteras/management/' | relative_url }}).
 
 ## Rising seas

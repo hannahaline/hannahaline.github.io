@@ -1,0 +1,38 @@
+<svg class="hat-process dunes" viewBox="0 0 1000 330" role="img" aria-labelledby="dunes-t dunes-d" xmlns="http://www.w3.org/2000/svg">
+<title id="dunes-t">Dunes are the island's first defence</title>
+<desc id="dunes-d">Two slices across the island in the same storm. (a) A tall, continuous dune: the storm water and waves reach the dune but stop at it, and the island behind stays dry. (b) A low dune: the waves run over it and spread sand across the island behind.</desc>
+<defs><marker id="du-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><pattern id="du-dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#c8880f" opacity="0.7"/></pattern></defs>
+<rect x="0" y="196" width="490" height="134" fill="#cfe0ec"/>
+<path d="M0,262 L60,240 L110,214 L170,200 L250,196 L300,192 L330,186 L355,138 L372,118 L392,124 L412,190 L440,214 L490,250 L490,330 L0,330 Z" fill="#ecdfb9" stroke="#d9c89a" stroke-width="1.5"/>
+<ellipse cx="140" cy="199" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="170" cy="192" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="200" cy="190" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="230" cy="189" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="260" cy="187" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="290" cy="185" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="320" cy="180" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<line x1="400" y1="196" x2="490" y2="196" stroke="#2166ac" stroke-width="1.5"/>
+<path d="M480,192 C450,174 425,170 405,180" stroke="#1a1a1a" stroke-width="2" fill="none" marker-end="url(#du-h)"/>
+<text x="12" y="28" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="12" dy="0em">(a)</tspan></text>
+<text x="44" y="28" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="44" dy="0em">A tall dune holds the storm back</tspan></text>
+<text x="480" y="218" text-anchor="end" font-size="13" fill="#2166ac" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="480" dy="0em">storm water level</tspan></text>
+<rect x="0.75" y="0.75" width="488.5" height="328.5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<rect x="510" y="196" width="490" height="134" fill="#cfe0ec"/>
+<path d="M510,262 L570,240 L620,214 L680,200 L760,196 L810,192 L840,186 L865,192 L882,172 L902,178 L922,190 L950,214 L1000,250 L1000,330 L510,330 Z" fill="#ecdfb9" stroke="#d9c89a" stroke-width="1.5"/>
+<ellipse cx="650" cy="199" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="680" cy="192" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="710" cy="190" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="740" cy="189" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="770" cy="187" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="800" cy="185" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<ellipse cx="830" cy="180" rx="13" ry="8" fill="#7d9467" opacity="0.85"/>
+<line x1="910" y1="196" x2="1000" y2="196" stroke="#2166ac" stroke-width="1.5"/>
+<path d="M882,169 L840,181 L770,190 L680,196 L630,210 L630,213 L680,200 L760,196 L840,186 L882,172 Z" fill="#f6e3b8" stroke="#c8880f" stroke-width="1.2"/>
+<path d="M882,169 L840,181 L770,190 L680,196 L630,210 L630,213 L680,200 L760,196 L840,186 L882,172 Z" fill="url(#du-dots)"/>
+<path d="M990,192 C940,166 910,142 870,150 S770,182 710,194" stroke="#1a1a1a" stroke-width="2" fill="none" marker-end="url(#du-h)"/>
+<text x="522" y="28" text-anchor="start" font-size="16" fill="#2b2f31" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="522" dy="0em">(b)</tspan></text>
+<text x="554" y="28" text-anchor="start" font-size="15" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="554" dy="0em">A low dune lets it through</tspan></text>
+<text x="990" y="218" text-anchor="end" font-size="13" fill="#2166ac" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="990" dy="0em">storm water level</tspan></text>
+<rect x="510.75" y="0.75" width="488.5" height="328.5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="660" y="160" text-anchor="start" font-size="13" fill="#2b2f31" font-weight="400" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"><tspan x="660" dy="0em">sand spreads</tspan><tspan x="660" dy="1.2em">across the island</tspan></text>
+</svg>

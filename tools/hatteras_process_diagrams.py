@@ -9,7 +9,8 @@ ending at Cape Point, with a close-up of the zig-zag path
 sand takes up and down the beach face. overwash.svg: a slice across the island in a storm, the water level raised above normal
 high tide, waves running over a low dune, and a new layer of sand (an overwash fan) spread across the island
 toward the sound. groin.svg: a groin seen from above, sand piled on the side the drift comes from and the far
-side cut back. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
+side cut back. dunes.svg: two slices in the same storm, a tall dune that holds it back and a low one it runs
+over. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
 as inline SVGs so they take the page's font.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
@@ -266,8 +267,55 @@ def groin():
     return svg_close(s, W, H)
 
 
+def dunes():
+    W, H = 1000, 330
+    PW = 490                                     # each panel's width; panel b starts at W - PW
+    s = svg_open("dunes", W, H, "Dunes are the island's first defence",
+                 "Two slices across the island in the same storm. (a) A tall, continuous dune: the storm water and waves "
+                 "reach the dune but stop at it, and the island behind stays dry. (b) A low dune: the waves run over "
+                 "it and spread sand across the island behind.")
+    s.append(f'<defs>{head("du-h")}<pattern id="du-dots" width="7" height="7" patternUnits="userSpaceOnUse">'
+             f'<circle cx="2" cy="2" r="1" fill="{ADDED}" opacity="0.7"/></pattern></defs>')
+    STORM = 196
+
+    def panel(x0, crest, tag, text, over):
+        # ground: sound side on the left, interior, dune, beach, ocean on the right (panel coordinates + x0)
+        g = [(0, 262), (60, 240), (110, 214), (170, 200), (250, 196), (300, 192), (330, 186),
+             (355, crest + 20), (372, crest), (392, crest + 6), (412, 190), (440, 214), (PW, 250)]
+        pts = [(x0 + x, y) for x, y in g]
+        s.append(f'<rect x="{x0}" y="{STORM}" width="{PW}" height="{H - STORM}" fill="{WATER_TOP}"/>')
+        s.append('<path d="M' + " L".join(f"{x},{y}" for x, y in pts) + f' L{x0 + PW},{H} L{x0},{H} Z" '
+                 f'fill="{SAND}" stroke="{GROUND}" stroke-width="1.5"/>')
+        for x in range(x0 + 140, x0 + 330, 30):
+            y = next(y0 + (y1 - y0) * (x - xa) / (xb - xa) for (xa, y0), (xb, y1) in zip(pts, pts[1:]) if xa <= x <= xb)
+            s.append(f'<ellipse cx="{x}" cy="{y - 8:.0f}" rx="13" ry="8" fill="{CANOPY}" opacity="0.85"/>')
+        s.append(f'<line x1="{x0 + 400}" y1="{STORM}" x2="{x0 + PW}" y2="{STORM}" stroke="#2166ac" stroke-width="1.5"/>')
+        if over:
+            fan = [(x0 + x, y) for x, y in [(372, crest - 3), (330, 181), (260, 190), (170, 196), (120, 210)]]
+            under = [(x0 + x, y) for x, y in [(120, 213), (170, 200), (250, 196), (330, 186), (372, crest)]]
+            path = "M" + " L".join(f"{x},{y}" for x, y in fan + under) + " Z"
+            s.append(f'<path d="{path}" fill="{SAND_NEW}" stroke="{ADDED}" stroke-width="1.2"/>')
+            s.append(f'<path d="{path}" fill="url(#du-dots)"/>')
+            s.append(f'<path d="M{x0 + 480},{STORM - 4} C{x0 + 430},{STORM - 30} {x0 + 400},{crest - 30} {x0 + 360},{crest - 22} '
+                     f'S{x0 + 260},{crest + 10} {x0 + 200},{crest + 22}" stroke="{ARROW}" stroke-width="2" fill="none" '
+                     f'marker-end="url(#du-h)"/>')
+        else:
+            s.append(f'<path d="M{x0 + 480},{STORM - 4} C{x0 + 450},{STORM - 22} {x0 + 425},{STORM - 26} {x0 + 405},{STORM - 16}" '
+                     f'stroke="{ARROW}" stroke-width="2" fill="none" marker-end="url(#du-h)"/>')
+        s.append(label(x0 + 12, 28, tag, size=16, weight=700))
+        s.append(label(x0 + 44, 28, text, size=15))
+        s.append(label(x0 + PW - 10, STORM + 22, "storm water level", anchor="end", size=13, color="#2166ac"))
+        s.append(f'<rect x="{x0 + 0.75}" y="0.75" width="{PW - 1.5}" height="{H - 1.5}" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>')
+
+    panel(0, 118, "(a)", "A tall dune holds the storm back", over=False)
+    panel(W - PW, 172, "(b)", "A low dune lets it through", over=True)
+    s.append(label(W - PW + 150, 160, "sand spreads\nacross the island", size=13))
+    s.append("</svg>")
+    return "\n".join(s) + "\n"
+
+
 def main():
-    for name, make in (("longshore.svg", longshore), ("overwash.svg", overwash), ("groin.svg", groin)):
+    for name, make in (("longshore.svg", longshore), ("overwash.svg", overwash), ("groin.svg", groin), ("dunes.svg", dunes)):
         (OUT / name).write_text(make(), encoding="utf-8")
         print(f"wrote {OUT / name}")
 
