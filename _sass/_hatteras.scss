@@ -1367,3 +1367,17 @@ table.hat-mvo-skill {
     margin-top: 0.7rem;
   }
 }
+
+// Three photos in a row (island page, built dunes): one height, cropped to fill; stacked on phones
+.hat-pair.hat-trio .hat-pair-photos {
+  grid-template-columns: repeat(3, 1fr);
+
+  img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
