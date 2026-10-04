@@ -6,7 +6,7 @@ This file is excluded from the build.
 
 ## Where we left off (2026-10-03)
 
-**State:** everything below is committed on `hatteras-site` (last commit 9464eb7). Nothing is pushed or public. The private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is at version 16 and is behind the branch; see to-do 1.
+**State:** everything below is committed on `hatteras-site` (last commit 9464eb7). Nothing is pushed or public. The private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is at version 16 and is behind the branch; see to-do 7.
 
 **Pages now:** The basics (Overview, How the island works), What happened (Shoreline change + 3 sub-pages, Storms, Then and now), What we can do (Management, The model, Looking ahead - hidden), More (Glossary, About).
 
