@@ -1368,9 +1368,9 @@ table.hat-mvo-skill {
   }
 }
 
-// Three photos in a row (island page, built dunes): one height, cropped to fill; stacked on phones
-.hat-pair.hat-trio .hat-pair-photos {
-  grid-template-columns: repeat(3, 1fr);
+// Four photos as a 2 x 2 grid (island page, built dunes): one shape, cropped to fill; stacked on phones
+.hat-pair.hat-quad .hat-pair-photos {
+  grid-template-columns: 1fr 1fr;
 
   img {
     aspect-ratio: 3 / 2;
