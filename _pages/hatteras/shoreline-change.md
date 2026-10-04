@@ -73,7 +73,7 @@ The added width does not last equally everywhere.
 At Rodanthe it held for about three years and had worn away by 2021–22. The shoreline there then moved seaward again, to about 13 m ahead of the rest of the island by 2025.
 At Buxton, about 40% of the 2017 jump was gone within a year, and the rest held until the 2022 fill added to it.
 Avon still had about three-quarters of its 2022 jump in 2025, while the smaller Buxton 2022 jump had mostly disappeared.
-The [nourishment explorer]({{ '/hatteras/management/' | relative_url }}#beach-nourishment) on the Management page shows each stretch year by year.
+The [nourishment explorer]({{ '/hatteras/management/nourishment/' | relative_url }}) on the Management pages shows each stretch year by year.
 Click a nourished stretch on the [survey-line map]({{ '/hatteras/shoreline-change/survey-lines/' | relative_url }}) to see its jump, marked in gold, in the full record.
 
 ### The 2021 shift

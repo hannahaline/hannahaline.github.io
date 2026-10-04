@@ -56,7 +56,7 @@ The U.S. Geological Survey photographed the same places before the storm and thr
 ## Hurricane Irene, 2011
 
 In August 2011, Irene cut through Pea Island, opening a breach now called New Inlet. NC-12 was carried across it by a temporary bridge from October 2011, replaced by the permanent Etheridge Bridge in 2017.
-You can see the breach in the [New Inlet comparison]({{ '/hatteras/then-and-now/#spot=newinlet' | relative_url }}), and the bridges on the [management page]({{ '/hatteras/management/' | relative_url }}).
+You can see the breach in the [New Inlet comparison]({{ '/hatteras/then-and-now/#spot=newinlet' | relative_url }}), and the bridges on the [NC-12 page]({{ '/hatteras/management/nc-12/' | relative_url }}).
 
 Irene cut five breaches through the island between Cape Hatteras and Oregon Inlet, severing NC-12 in several places. The U.S. Geological Survey photographed two of the breach sites before and after the storm.
 
