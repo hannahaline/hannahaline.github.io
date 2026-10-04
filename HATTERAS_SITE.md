@@ -24,6 +24,18 @@ This file is excluded from the build.
   - USGS North Core Banks Dorian photos: those channels were cut by sound-side outflow, not overwash.
   - The Hatteras Village Isabel pair on the island page: it is already on Storms.
 
+## Paused 2026-10-03 (evening): what was added after the to-do list below was written
+
+All committed on `hatteras-site` (last commit 46b1268), not pushed. Preview: claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE, version 21, up to date.
+- Management split into an overview (where-and-when chart, `management_map.liquid`) + Dune building / NC-12 / Beach nourishment / Groins (`management_tabs.liquid`).
+- Dune building: "A dune line built by people" from Dolan and Godfrey (1972, NPS NRR-5): cross-sections, plates I and III (J. G. Carswell), six-photo history 1936-2020 (moved from the island page); Assateague/Ocean City figure (`tools/hatteras_assateague_figure.py`) framed on overwash and rollover.
+- NC-12: "How the road came to Hatteras" (NPS administrative history 2007, 1961 record, 1985 HRS; NCpedia; CHEC; NPS visitor stats; NCDOT SAND 2023). Not verified, left out: ferry start year, mail boats, NC 12 naming year, island population after 1950.
+- Groins: photo series with groins 1-3 marked (`tools/hatteras_groin_photos.py`); history, the 2026 repair (contract and Dec 15 2026 completion are local news only), the 1985/2003 hard-structure ban and 2011 terminal groins, Folly Beach (jetties, USACE 1987) and Westhampton examples. No authoritative SC groin-field source was found.
+- Nourishment explorer: bars per fill first, full record in Go deeper.
+- Model page: 7-step stepper (`model_steps.liquid`, `model-steps.js`); figures from `tools/hatteras_model_steps.py` and `tools/hatteras_model_stretch.py`; example stretch GIS 43 throughout (photo-measured dune-to-road about 200 m, model file 170 m).
+
+Next, proposed and waiting on Hannah: phone-width check of the new pages; "what this means for you" summaries per village; a "start here" path on the Overview; Looking ahead page; the Hannah-only items in the list below.
+
 ## To do next time
 
 **Needs Hannah:**
