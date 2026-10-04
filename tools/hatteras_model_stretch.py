@@ -5,15 +5,17 @@ two figures for the model-input stepper on The model page of the Hatteras stakeh
     python tools/hatteras_model_stretch.py
 
 Hannah asked (2026-10-03) for the elevation step to go photo -> raw elevation -> resampled grid, and for a road figure
-on the real island instead of a chart. Both use GIS stretch 45 (between Avon and Salvo, about 22 km north of Cape
-Point), cropped to the land.
+on the real island instead of a chart, both on one stretch so the example carries through the steps (Hannah,
+2026-10-03): GIS 43, between Avon and Salvo about 21 km north of Cape Point, picked for its tall, continuous dune with
+the road behind it (the tallest 10th-percentile dune crest of the road stretches away from villages and road moves).
+It is outlined on the whole-island map of step 2 (tools/hatteras_model_steps.py reads GIS from here).
   step1.png        (a) NC OneMap 1996 aerial photo, (b) the 1 m elevation surface, (c) the 10 m grid the model is cut
-                   from; the rasters are CASCADE's 2009-2014-1996 product (clip_domain_45_*, resampled_domain_45_*),
+                   from; the rasters are CASCADE's 2009-2014-1996 product (clip_domain_43_*, resampled_domain_43_*),
                    as in scripts/figure_making/pipeline/0-elevation/dem_composition_figures.py.
   step5_road.png   the 2007 photo with the 2009 digitised dune line and the 2008 NC-12 line (lines and photo of the same
                    years, so they sit on each other; the 1996 photo is offset from them), and the distance between them. The model reads its own distance per stretch from the elevation grid
-                   (RoadSetback_1996_dunestart.csv, 150 m here); the caption on the page says so.
-Writes into assets/hatteras/img/model_steps/; the photos are cached in tools/data/model_stretch_<year>.jpg.
+                   (RoadSetback_1996_dunestart.csv, 170 m here); the caption on the page says so.
+Writes into assets/hatteras/img/model_steps/; the photos are cached in tools/data/model_stretch_gis<GIS>_<year>.jpg.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
          University of North Carolina at Chapel Hill
@@ -43,10 +45,10 @@ from shapely.geometry import LineString  # noqa: E402
 import inputs_overview_figure as io  # noqa: E402
 from site_layer.hat_elevation_products import product  # noqa: E402
 
-GIS = 45
+GIS = 43
 PRODUCT = "2009-2014-1996"
 MHW_NAVD = 0.36                       # as in dem_composition_figures.py
-X0, X1 = 900, 2000                    # metres east of the raster's west edge: the island and the beach
+X0, X1 = 1000, 1950                   # metres east of the raster's west edge: the island and the beach
 OUT = SITE / "assets/hatteras/img/model_steps"
 NCONEMAP = "https://services.nconemap.gov/secure/rest/services/Imagery/Orthoimagery_{year}/ImageServer/exportImage"
 DUNE = CASCADE / "data/hatteras_init/2-brie-offset/dunelines/duneline_2009.geojson"
@@ -63,7 +65,7 @@ def read(path):
 
 
 def photo(b, year):
-    path = SITE / f"tools/data/model_stretch_{year}.jpg"
+    path = SITE / f"tools/data/model_stretch_gis{GIS}_{year}.jpg"
     if not path.exists():
         url = (f"{NCONEMAP.format(year=year)}?bbox={b.left + X0},{b.bottom},{b.left + X1},{b.top}&bboxSR=26918&imageSR=26918"
                f"&size={(X1 - X0)},{int(b.top - b.bottom)}&format=jpg&f=image")

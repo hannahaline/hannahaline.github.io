@@ -100,6 +100,13 @@ def step2(canvas, cmap, norm, ticks, water):
     villages(ax)
     for g in range(1, 91):                       # the 500 m stretches, as ticks along the beach edge
         ax.plot([g * DOMAIN_KM] * 2, [0, 0.08], color="white", lw=0.6)
+    # the stretch shown in step 1 and step 5
+    from hatteras_model_stretch import GIS as EXAMPLE
+    ax.add_patch(Rectangle(((EXAMPLE - 1) * DOMAIN_KM, 0.02), DOMAIN_KM, rows_km - 0.04, fill=False, ec="#ffd23f", lw=2.2,
+                           path_effects=[pe.withStroke(linewidth=3.6, foreground=INK)]))
+    ax.annotate("the stretch\nin step 1", xy=((EXAMPLE - 0.5) * DOMAIN_KM, rows_km * 0.75), xytext=((EXAMPLE + 6) * DOMAIN_KM, rows_km * 0.72),
+                fontsize=9.5, color="white", va="center", path_effects=[pe.withStroke(linewidth=3, foreground=INK)],
+                arrowprops=dict(arrowstyle="-|>", color="white", lw=1.4, path_effects=[pe.withStroke(linewidth=3, foreground=INK)]))
     cb = fig.colorbar(im, ax=ax, ticks=ticks, pad=0.01, fraction=0.03, aspect=10)
     cb.set_label("height above\nhigh tide (m)", fontsize=9.5)
     cb.ax.tick_params(labelsize=9)
