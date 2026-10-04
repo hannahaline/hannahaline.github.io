@@ -12,23 +12,23 @@
         <button type="button" data-photo="2016">2016</button>
         <button type="button" data-photo="2024">2024</button>
       </div>
-      <div class="hat-seg" role="group" aria-label="Zoom to a place">
-        <button type="button" data-goto="35.245,-75.525,14">Cape Point</button>
-        <button type="button" data-goto="35.262,-75.518,15">Buxton</button>
-        <button type="button" data-goto="35.346,-75.502,15">Avon</button>
-        <button type="button" data-goto="35.590,-75.463,15">Rodanthe</button>
-        <button type="button" data-goto="35.695,-75.485,14">Pea Island</button>
+      <div class="hat-decadal-zoom">
+        <span class="hat-decadal-zoom-label">Biggest changes since 1985:</span>
+        <div class="hat-seg" role="group" aria-label="Zoom to a place with a big change" data-spots="change"></div>
+        <span class="hat-decadal-zoom-label">Little change, for comparison:</span>
+        <div class="hat-seg" role="group" aria-label="Zoom to a place with little change" data-spots="stable"></div>
       </div>
     </div>
-    <div class="hat-mvo-arms" id="decadal-years" aria-label="Shorelines shown"></div>
+    <div class="hat-decadal-key" id="decadal-years" aria-label="Shorelines shown"></div>
     <div class="hat-decadal-wrap">
-      <div id="decadal-map" role="region" aria-label="Map of the average shoreline in each decade since the 1980s"></div>
+      <div id="decadal-map" role="region" aria-label="Map of the average shoreline in one year of each decade since 1985"></div>
       <div class="hat-decadal-loading" aria-hidden="true">Loading photo…</div>
     </div>
     <p class="hat-caption hat-numbered">
-      The average shoreline in five-year windows centred on 1985, 1995, 2005, 2015 and 2025, from every satellite shoreline
-      in each window (the last window ends with the record in January 2026). Each line joins the average position on the
-      survey lines, 50 m apart; a gap means too few clear images. Satellite shorelines mark the water's edge at mean sea level,
+      The average shoreline in 1985, 1995, 2005, 2015 and 2025, from every satellite shoreline in each calendar year.
+      Each line joins the average position on the survey lines, 50 m apart. The change on each zoom button is the
+      average over the kilometre of beach around it, from 1985 to 2025; part of it is the island-wide seaward shift of 2021.
+      The places with little change stayed within about 20 m of their 1985 shoreline in every one of the five years. Satellite shorelines mark the water's edge at mean sea level,
       so they sit on the wet beach in the photos, not at the dunes.
       Photos: NC OneMap / NC Center for Geographic Information and Analysis; latest photo with USGS The National Map at island scale.
     </p>
