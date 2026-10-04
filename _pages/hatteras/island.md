@@ -23,10 +23,16 @@ They are not fixed in place. Over decades to centuries, waves, storms, and risin
 Waves rarely hit the beach head-on. When they arrive at an angle, they push sand along the shore in a slow, steady current called *longshore transport*.
 Where more sand arrives than leaves, the beach grows. Where more leaves than arrives, it erodes.
 
-<figure class="hat-model-figure" data-scroll-start="0.5">
-{% include hatteras/longshore.svg %}
-<figcaption class="hat-caption">Simplified. Along Hatteras Island's east-facing shore, waves from the northeast drive sand south toward Cape Hatteras. Arrow widths are schematic, read from the shoreline record: the drift grows where the beach is eroding (more sand leaving than arriving), holds steady where the beach is stable, and ends at Cape Point, where sand builds up. Island outline © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</figcaption>
+{% assign ls = '/assets/hatteras/img/longshore/' | relative_url %}
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ ls }}dye_release_2010.jpg" alt="Aerial photo of the surf off Cape Hatteras with bright green dye in the water, stretched out along the beach inside the breaking waves; a truck is parked on the beach" loading="lazy"><figcaption>(a) Dye in the surf</figcaption></figure>
+<figure><img src="{{ ls }}cape_point.jpg" alt="Aerial photo of Cape Point: a long hook of sand curving out into the ocean, with waves bending around its tip" loading="lazy"><figcaption>(b) Cape Point</figcaption></figure>
+</div>
+<figcaption class="hat-caption">(a) Green dye poured into the surf off Cape Hatteras during a 2010 USGS study shows how the water moves: the current inside the breaking waves stretches it out along the beach, and that same current carries sand. (b) Cape Point, where the sand carried south along the island's east-facing shore meets waves wrapping around the point from the south and piles up into a growing hook of beach. Photos: Dann Blackwood and Don Bowers (a) and Dann Blackwood (b), U.S. Geological Survey, from <a href="https://www.usgs.gov/geology-and-ecology-of-national-parks/geology-cape-hatteras-national-seashore">Geology of Cape Hatteras National Seashore</a>. Public domain.</figcaption>
 </figure>
+</div>
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: wave angle and shoreline shape</summary>
@@ -49,16 +55,10 @@ Overwash can bury roads and houses, but it is also how a barrier island builds i
 <figcaption class="hat-caption">Not to scale. A storm surge raises the water, and waves run up the beach and over a low dune, laying down a new layer of sand across the island.</figcaption>
 </figure>
 
-{% assign sandy = '/assets/hatteras/img/sandy/' | relative_url %}
-<div class="hat-pairs">
-<figure class="hat-pair">
-<div class="hat-pair-photos">
-<figure><img src="{{ sandy }}buxton_2011.jpg" alt="Buxton from the air in August 2011: oceanfront houses behind a wide, dry beach" loading="lazy"></figure>
-<figure><img src="{{ sandy }}buxton_2012.jpg" alt="The same houses at Buxton in November 2012: the beach is gone in front of them, the houses stand at the water's edge, and sand covers the ground and roads behind" loading="lazy"></figure>
-</div>
-<figcaption class="hat-caption"><b>Buxton, after Hurricane Sandy.</b> Looking west along the shore on 30 August 2011, just after Hurricane Irene (left), and on 4 November 2012, after Sandy (right). Erosion moved the shoreline landward until it reached the houses built on the beach, and sand on the roads shows overwash; some of that sand was already there after Irene. The yellow arrow points to the same building. Photos: U.S. Geological Survey, St. Petersburg Coastal and Marine Science Center, <a href="https://www.usgs.gov/media/images/oblique-aerial-photographs-buxton-north-carolina">Oblique aerial photographs of Buxton, North Carolina</a>. Public domain.</figcaption>
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/isabel/overwash_nc12_2003.jpg' | relative_url }}" alt="Aerial photo after Hurricane Isabel: the dunes are gone and a sheet of sand reaches from the beach across the island and over NC-12, where trucks are clearing the road" loading="lazy">
+<figcaption class="hat-caption">Overwash after Hurricane Isabel. Between Frisco and Hatteras Village on 21 September 2003, three days after the storm, the dunes are gone and a sheet of sand washed in from the beach covers the island and NC-12; the road shows only at the left, and trucks are clearing it. Photo: U.S. Geological Survey, <a href="https://pubs.usgs.gov/ds/761/">Archive of post-Hurricane Isabel coastal oblique aerial photographs</a> (Data Series 761), frame 2003_0921_r045s18. Public domain.</figcaption>
 </figure>
-</div>
 
 ## Dunes are the island's first defence
 
@@ -66,7 +66,7 @@ Dunes block small and medium storms from overwashing the island. Grasses trap bl
 
 <figure class="hat-model-figure" data-scroll-start="0.5">
 {% include hatteras/dunes.svg %}
-<figcaption class="hat-caption">Not to scale. The same storm against (a) a tall, continuous dune, which holds the water back and keeps the island behind it dry, and (b) a low dune, which the waves run over, spreading sand across the island.</figcaption>
+<figcaption class="hat-caption">Not to scale; heights exaggerated. The same storm against two dunes. (a) <i>Collision</i>: the highest reach of the waves stays below the crest of a tall dune. The waves cut into its face (hatched) and carry that sand offshore, and the island and road behind stay dry. (b) <i>Overwash</i>: the waves reach higher than the crest of a low dune, run over it, and leave a layer of sand across the island and the road. The two regimes follow the storm impact scale of Sallenger (2000, <a href="https://doi.org/10.2112/1551-5036(2000)016[0890:SISFBI]2.0.CO;2"><i>Journal of Coastal Research</i></a>).</figcaption>
 </figure>
 On Hatteras, many of today's dunes were built or rebuilt by people, which is covered on the [management page]({{ '/hatteras/management/' | relative_url }}).
 

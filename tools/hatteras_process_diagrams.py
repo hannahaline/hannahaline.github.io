@@ -9,8 +9,8 @@ ending at Cape Point, with a close-up of the zig-zag path
 sand takes up and down the beach face. overwash.svg: a slice across the island in a storm, the water level raised above normal
 high tide, waves running over a low dune, and a new layer of sand (an overwash fan) spread across the island
 toward the sound. groin.svg: a groin seen from above, sand piled on the side the drift comes from and the far
-side cut back. dunes.svg: two slices in the same storm, a tall dune that holds it back and a low one it runs
-over. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
+side cut back. dunes.svg: two slices in the same storm, after Sallenger's (2000) storm impact scale: collision, where
+the run-up stays below a tall dune's crest and cuts its face, and overwash, where it tops a low one. Simplified, in the palette of the cross-section. Written to _includes/hatteras/
 as inline SVGs so they take the page's font.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
@@ -268,48 +268,81 @@ def groin():
 
 
 def dunes():
-    W, H = 1000, 330
+    W, H = 1000, 350
     PW = 490                                     # each panel's width; panel b starts at W - PW
     s = svg_open("dunes", W, H, "Dunes are the island's first defence",
-                 "Two slices across the island in the same storm. (a) A tall, continuous dune: the storm water and waves "
-                 "reach the dune but stop at it, and the island behind stays dry. (b) A low dune: the waves run over "
-                 "it and spread sand across the island behind.")
-    s.append(f'<defs>{head("du-h")}<pattern id="du-dots" width="7" height="7" patternUnits="userSpaceOnUse">'
-             f'<circle cx="2" cy="2" r="1" fill="{ADDED}" opacity="0.7"/></pattern></defs>')
-    STORM = 196
+                 "Two slices across the island, sound on the left and ocean on the right, in the same storm. "
+                 "(a) Collision: the highest reach of the waves stays below a tall dune's crest. The waves cut into the "
+                 "front of the dune and carry that sand offshore, and the island behind stays dry. (b) Overwash: the waves "
+                 "reach higher than a low dune's crest, run over it, and leave a layer of sand across the island and the road.")
+    s.append(f'<defs>{head("du-h")}<pattern id="du-dots" width="6" height="6" patternUnits="userSpaceOnUse">'
+             f'<circle cx="2" cy="2" r="0.9" fill="{ADDED}"/></pattern>'
+             f'<pattern id="du-cut" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+             f'<line x1="0" y1="0" x2="0" y2="6" stroke="{ERODE}" stroke-width="1.1"/></pattern></defs>')
+    MSL, SURGE, TOE = 268, 238, 226              # y of mean sea level, storm water level, the dune's landward toe
 
-    def panel(x0, crest, tag, text, over):
-        # ground: sound side on the left, interior, dune, beach, ocean on the right (panel coordinates + x0)
-        g = [(0, 262), (60, 240), (110, 214), (170, 200), (250, 196), (300, 192), (330, 186),
-             (355, crest + 20), (372, crest), (392, crest + 6), (412, 190), (440, 214), (PW, 250)]
-        pts = [(x0 + x, y) for x, y in g]
-        s.append(f'<rect x="{x0}" y="{STORM}" width="{PW}" height="{H - STORM}" fill="{WATER_TOP}"/>')
-        s.append('<path d="M' + " L".join(f"{x},{y}" for x, y in pts) + f' L{x0 + PW},{H} L{x0},{H} Z" '
-                 f'fill="{SAND}" stroke="{GROUND}" stroke-width="1.5"/>')
-        for x in range(x0 + 140, x0 + 330, 30):
-            y = next(y0 + (y1 - y0) * (x - xa) / (xb - xa) for (xa, y0), (xb, y1) in zip(pts, pts[1:]) if xa <= x <= xb)
-            s.append(f'<ellipse cx="{x}" cy="{y - 8:.0f}" rx="13" ry="8" fill="{CANOPY}" opacity="0.85"/>')
-        s.append(f'<line x1="{x0 + 400}" y1="{STORM}" x2="{x0 + PW}" y2="{STORM}" stroke="#2166ac" stroke-width="1.5"/>')
+    def ground(crest, cut=None):
+        """Profile from the sound (x 0) to the ocean (x PW). cut: the x of a scarp cut into the dune's seaward face."""
+        g = [(0, 300), (40, 284), (80, 262), (130, 244), (200, 236), (260, TOE)]
+        face = [(282, TOE - 6), (304, (TOE + crest) / 2), (322, crest + 5), (333, crest), (346, crest + 6),
+                (360, (crest + 222) / 2 + 4), (374, 222)]
+        if cut is not None:                      # crest kept, face cut back to a near-vertical scarp
+            face = [p for p in face if p[0] < cut] + [(cut, crest + 18), (cut + 4, 216), (378, 222)]
+        return g + face + [(402, 238), (426, MSL), (PW, 322)]
+
+    def path(pts, x0):
+        return "M" + " L".join(f"{x0 + x:.1f},{y:.1f}" for x, y in pts)
+
+    def level(x0, xa, xb, y, text, dash, color, side="end", below=False):
+        s.append(f'<line x1="{x0 + xa}" y1="{y}" x2="{x0 + xb}" y2="{y}" stroke="{color}" stroke-width="1.3" '
+                 f'stroke-dasharray="{dash}"/>')
+        s.append(label(x0 + (xb - 4 if side == "end" else xa + 4), y + 15 if below else y - 5, text, anchor=side, size=12.5, color=color))
+
+    def panel(x0, crest, runup, tag, title, over):
+        pre = ground(crest)
+        post = ground(crest, cut=None if over else 352)
+        # water: open ocean and sound below mean sea level, the storm's raised water on the ocean side only
+        s.append(f'<rect x="{x0}" y="{MSL}" width="{PW}" height="{H - MSL}" fill="{WATER_DEEP}"/>')
+        s.append(f'<rect x="{x0 + 340}" y="{SURGE}" width="{PW - 340}" height="{MSL - SURGE}" fill="{WATER_TOP}"/>')
+        s.append(f'<path d="{path(post, x0)} L{x0 + PW},{H} L{x0},{H} Z" fill="{SAND}" stroke="#a8925e" stroke-width="1.6"/>')
+        # the road on the island interior
+        s.append(f'<rect x="{x0 + 214}" y="{233.5}" width="26" height="3.5" fill="#4a4f52"/>')
+        s.append(label(x0 + 227, 256, "NC-12", anchor="middle", size=12, color=MUTED))
         if over:
-            fan = [(x0 + x, y) for x, y in [(372, crest - 3), (330, 181), (260, 190), (170, 196), (120, 210)]]
-            under = [(x0 + x, y) for x, y in [(120, 213), (170, 200), (250, 196), (330, 186), (372, crest)]]
-            path = "M" + " L".join(f"{x},{y}" for x, y in fan + under) + " Z"
-            s.append(f'<path d="{path}" fill="{SAND_NEW}" stroke="{ADDED}" stroke-width="1.2"/>')
-            s.append(f'<path d="{path}" fill="url(#du-dots)"/>')
-            s.append(f'<path d="M{x0 + 480},{STORM - 4} C{x0 + 430},{STORM - 30} {x0 + 400},{crest - 30} {x0 + 360},{crest - 22} '
-                     f'S{x0 + 260},{crest + 10} {x0 + 200},{crest + 22}" stroke="{ARROW}" stroke-width="2" fill="none" '
-                     f'marker-end="url(#du-h)"/>')
+            deposit = [(345, crest + 6), (333, crest - 3), (300, TOE - 18), (262, TOE - 7), (200, 230), (150, 239)]
+            under = [(150, 242), (200, 236), (260, TOE), (282, TOE - 6), (304, (TOE + crest) / 2), (322, crest + 5), (333, crest)]
+            d = path(deposit + under, x0) + " Z"
+            s.append(f'<path d="{d}" fill="{SAND_NEW}" stroke="{ADDED}" stroke-width="1.2"/><path d="{d}" fill="url(#du-dots)"/>')
+            s.append(f'<path d="M{x0 + 470},{SURGE - 10} C{x0 + 420},{runup - 4} {x0 + 360},{runup - 12} {x0 + 318},{runup - 4} '
+                     f'S{x0 + 230},{TOE - 30} {x0 + 178},{TOE - 4}" stroke="{ARROW}" stroke-width="1.8" fill="none" marker-end="url(#du-h)"/>')
+            s.append(label(x0 + 40, 226, "overwash deposit", size=12.5, color="#8a5d06"))
         else:
-            s.append(f'<path d="M{x0 + 480},{STORM - 4} C{x0 + 450},{STORM - 22} {x0 + 425},{STORM - 26} {x0 + 405},{STORM - 16}" '
-                     f'stroke="{ARROW}" stroke-width="2" fill="none" marker-end="url(#du-h)"/>')
-        s.append(label(x0 + 12, 28, tag, size=16, weight=700))
-        s.append(label(x0 + 44, 28, text, size=15))
-        s.append(label(x0 + PW - 10, STORM + 22, "storm water level", anchor="end", size=13, color="#2166ac"))
+            # the sand cut from the dune face (hatched), shown against the pre-storm outline, and carried offshore
+            cutzone = [p for p in pre if 340 <= p[0] <= 378]
+            s.append(f'<path d="{path([(352, crest + 18)] + [p for p in cutzone if p[0] > 352] + [(378, 222), (356, 216)], x0)} Z" '
+                     f'fill="url(#du-cut)" stroke="none"/>')
+            s.append(f'<path d="{path([p for p in pre if 333 <= p[0] <= 378], x0)}" fill="none" stroke="{ERODE}" '
+                     f'stroke-width="1.2" stroke-dasharray="4 3"/>')
+            s.append(f'<path d="M{x0 + 470},{SURGE - 12} C{x0 + 430},{SURGE - 34} {x0 + 395},{runup - 4} {x0 + 362},{runup + 4}" '
+                     f'stroke="{ARROW}" stroke-width="1.8" fill="none" marker-end="url(#du-h)"/>')
+            s.append(f'<path d="M{x0 + 380},{226} Q{x0 + 402},{262} {x0 + 432},{290}" stroke="{ERODE}" stroke-width="1.5" '
+                     f'fill="none" marker-end="url(#du-r)"/>')
+            s.append(label(x0 + PW - 10, 312, "sand moved offshore", anchor="end", size=12.5, color=ERODE))
+        # levels: the dune crest and the highest reach of the waves (run-up)
+        level(x0, 120, 333, crest, "dune crest", "1.5 3", INK, side="start")
+        level(x0, 290 if over else 352, PW, runup, "highest wave run-up", "6 3", "#2166ac", below=over)
+        level(x0, 400, PW, SURGE, "storm water level", "none", "#2166ac")
+        level(x0, 0, 120, MSL, "mean sea level", "2 3", MUTED, side="start")
+        s.append(label(x0 + 12, 314, "Sound", size=13, color=MUTED))
+        s.append(label(x0 + PW - 12, 338, "Ocean", anchor="end", size=13, color=MUTED))
+        s.append(label(x0 + 12, 26, tag, size=15, weight=700))
+        s.append(label(x0 + 40, 26, title, size=14.5))
         s.append(f'<rect x="{x0 + 0.75}" y="0.75" width="{PW - 1.5}" height="{H - 1.5}" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>')
 
-    panel(0, 118, "(a)", "A tall dune holds the storm back", over=False)
-    panel(W - PW, 172, "(b)", "A low dune lets it through", over=True)
-    s.append(label(W - PW + 150, 160, "sand spreads\nacross the island", size=13))
+    s[-1] = s[-1].replace("</defs>", f'<marker id="du-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" '
+                                      f'orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{ERODE}"/></marker></defs>')
+    panel(0, 112, 170, "(a)", "Collision: run-up stays below the crest", over=False)
+    panel(W - PW, 196, 176, "(b)", "Overwash: run-up overtops the crest", over=True)
     s.append("</svg>")
     return "\n".join(s) + "\n"
 
