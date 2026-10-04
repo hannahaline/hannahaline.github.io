@@ -1519,6 +1519,17 @@ table.hat-mvo-skill {
     gap: 0.6rem;
     margin-bottom: 0.8rem;
 
+    // on a phone the seven dots take their own row above Back and Next
+    @media (max-width: 576px) {
+      flex-wrap: wrap;
+
+      .hat-steps-dots {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
     > button {
       border: 1px solid var(--global-theme-color);
       background: #fff;

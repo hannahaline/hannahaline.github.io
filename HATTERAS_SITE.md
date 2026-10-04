@@ -46,7 +46,15 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
 5. Reference author lists on the model page.
 6. Decide whether the Sandy pair (Buxton 2011/2012) goes on the Storms page or is dropped.
 
-**Can do without her:**
+**Can do without her** (worked through 2026-10-04; preview now version 22):
+- 7 done: preview refreshed to v22.
+- 8 done: `hatteras_model_data.py` re-run; checks pass and the output is byte-identical, so the panel already showed the 2026-window matrix.
+- 9 still blocked: the CASCADE detrended_position folder still holds the other session's uncommitted work.
+- 10 done: every page checked in a 390 px frame (headless Chrome, iframe; Chrome windows can't go below ~500 px). Only real overflow was the model stepper (7 dots + Back/Next, 445 px): on phones the dots now get their own row. Other pages overflow by 8 px only in a desktop frame with a scrollbar (100vw), not on phones. Also fixed: glossary term links left a space before the next comma or full stop.
+- 11 done: the Shoreline change card now names the map, the chart and the decadal shorelines; the other cards still match.
+- 12 done: glossary entry and figures list updated.
+- 13 not done (optional, left for Hannah's call).
+
 7. Refresh the private preview: build, copy the JS in by hand, run `make_preview.py`, then publish changed files to the same URL. It is missing everything from the dunes diagram onward.
 8. Model-vs-observed panel: the matrix was re-run on the 2026 windows (CASCADE eac55c59, Rodanthe 2014 at 1.62 M cy). Re-run `tools/hatteras_model_data.py` and check that its bias/RMSE check still passes.
 9. CASCADE fill outputs (`attribution_nourishment.csv` + figures) still list 3 fills, not Buxton 2017. Re-run once the other session's uncommitted work in that folder is committed.
@@ -136,6 +144,13 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
   - Both places are south-west of Cape Point, outside the modelled reach; the page says so.
 
 - `assets/hatteras/img/irene/`: USGS oblique photos (Karen Morgan, SPCMSC), public domain. Each place is cut from one USGS composite into its three panels (overview 30 Aug 2011, 6 May 2008, 31 Aug 2011) by finding the white separator rows. Sources: usgs.gov/media/images/oblique-aerial-photograph-rodanthe-nc-enlarged-details and ...-pea-island-nc-enlarged-details.
+- Overview: `hero_banner.jpg` (the beach below the lighthouse, 2004) and `lighthouse_aerial_2004.jpg`, both NPS / Michael B. Edwards on Wikimedia Commons; `lighthouse_1999.jpg`, USAF Tech. Sgt. Howard Blair on Commons. All public domain. `buxton_houses_2025.jpg` is no longer used on any page.
+- `assets/hatteras/img/longshore/`: `dye_release_2010.jpg` (Dann Blackwood and Don Bowers) and `cape_point.jpg` (Dann Blackwood), USGS, from "Geology of Cape Hatteras National Seashore". Public domain. They replace `longshore.svg`, which is still generated but unused.
+- `isabel/overwash_nc12_2003.jpg`: USGS Data Series 761, frame 2003_0921_r045s18 (21 Sep 2003, between Frisco and Hatteras Village). Public domain.
+- `assets/hatteras/img/dunes/`: CCC sand fence 1936 and the finished fence 1930s (NPS, Commons), S-curves with no dune 6 May 2008 (USGS baseline obliques, doi 10.5066/P9R9PQFK), the dune rebuilt there Sep 2011 (NCDOT, CC BY 2.0, cropped), the Rodanthe breach 2020 (CAHA). `dolan1972/`: cross-sections, plates I and III and the 1972 bulldozer photo from Dolan and Godfrey (1972), NPS NRR-5.
+- Management: `groins_through_time.jpg` (`tools/hatteras_groin_photos.py`), `road_moves_map.jpg` (`tools/hatteras_road_moves_map.py`), `nc12_scurves_2016.jpg` (NC OneMap), `assateague_offset.jpg` (`tools/hatteras_assateague_figure.py`).
+- `assets/hatteras/img/model_steps/`: from `tools/hatteras_model_steps.py` and `tools/hatteras_model_stretch.py`.
+- `sandy/`: the Buxton 2011/2012 pair, kept but unused until Hannah decides (to-do 6).
 - The cross-section was redrawn 2026-10-02 in a textbook style: zone brackets, stippled sand, and outline symbols (houses on pilings, maritime oaks, shrubs, dune and marsh grass).
 
 ## Panels to build
@@ -168,7 +183,7 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
    - Data: `python tools/hatteras_sealevel_data.py` reads CASCADE `2-rslr/record` and `fits/duck_rslr_rates.csv`, refits each period, and refuses to write if the slope or month count differs from the table. Re-run it if the record or the periods change.
    - Text: 4.9 mm/yr and about 23 cm since 1978 (NOAA trend line), 3.8 and 5.5 mm/yr for the periods, and the point that 2010–2024 gives 6.5, so short-window rates move. The model uses 4 and 5 mm/yr (config, rounded).
 3c. Storm photo slider: **TRIED AND REMOVED 2026-10-03.** A Rodanthe (Irene) slider warped the 2008 photo onto the 2011 one from hand-picked points, but Hannah judged it not working, so all storm pairs are side by side again (commit a0bcb2b has the tool if it is ever wanted). Automatic SIFT matching was unstable on these pairs too, and Frisco, Hatteras Village and Pea Island were shot from different flight lines.
-3d. Glossary: **BUILT 2026-10-03** (Hannah asked for a site-wide one). `_data/hatteras_glossary.yml` (23 terms) feeds `/hatteras/glossary/` (menu: More), the Key terms box on How the island works (`glossary_list.liquid ids=...`), and in-text links (`{% include hatteras/term.liquid id="..." %}`: dotted underline, definition on hover). First plain use per page is linked; terms the sentence itself defines, headings, place names and card text are not. Definitions are drafts for Hannah to check.
+3d. Glossary: **BUILT 2026-10-03** (Hannah asked for a site-wide one). `_data/hatteras_glossary.yml` (23 terms) feeds `/hatteras/glossary/` (menu: More), in-text links (`{% include hatteras/term.liquid id="..." %}`: dotted underline, definition on hover). First plain use per page is linked; terms the sentence itself defines, headings, place names and card text are not. Definitions are drafts for Hannah to check. (The Key terms box on How the island works was removed 10-03 in favour of a pointer to the glossary; `glossary_list.liquid` is unused.) `term.liquid` strips its own last newline (10-04), so a comma or full stop after a term stays attached.
 4. `model-vs-observed`: with and without management, canonical windows 1996–2015 and 2010–2026.
 5. `nourishment-explorer`, `forecast-explorer`: later.
 

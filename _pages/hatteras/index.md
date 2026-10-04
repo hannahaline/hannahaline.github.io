@@ -45,7 +45,7 @@ It also introduces a computer model that recreates this history, so that we can 
   </a>
   <a class="hat-card" href="{{ '/hatteras/shoreline-change/' | relative_url }}">
     <h3>Shoreline change</h3>
-    <p>Where the beach has retreated or grown since 1996, measured from satellite images.</p>
+    <p>Where the beach has retreated or grown since 1996, measured from satellite images: on a map, as one chart along the island, and as the shoreline every ten years since the 1980s.</p>
   </a>
   <a class="hat-card" href="{{ '/hatteras/storms/' | relative_url }}">
     <h3>Storms</h3>
