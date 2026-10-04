@@ -63,7 +63,8 @@ The beach in front of the dune, with nowhere to go, grew narrower and steeper: b
 
 <p class="hat-caption">Sources: Dolan and Godfrey (1972), <a href="https://npshistory.com/publications/water/nrr-5.pdf"><i>Dune Stabilization and Beach Erosion, Cape Hatteras National Seashore</i></a>, NPS Natural Resource Report 5; National Park Service, <a href="https://www.nps.gov/subjects/geology/management-response-to-storms.htm">Management Response to Storms</a>.</p>
 
-### Held in place, or free to roll over: an example from Maryland
+<details class="hat-deeper" markdown="1">
+<summary>Go deeper: held in place, or free to roll over (an example from Maryland)</summary>
 
 Ocean City and Assateague Island, on the Maryland coast just north of Virginia, show the difference side by side.
 Ocean City is built up, and its beach is nourished to hold the shoreline where it is.
@@ -77,6 +78,8 @@ The jetties built in 1934–35 to hold Ocean City Inlet open also cut Assateague
 </figure>
 
 Hatteras sits between the two. Its villages and road are held in place much like Ocean City, behind a built dune line that keeps most overwash off the island.
+
+</details>
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: how the model represents dune management</summary>

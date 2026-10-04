@@ -13,7 +13,7 @@ photo; it shows the offset, it does not measure it. Writes assets/hatteras/img/a
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
          University of North Carolina at Chapel Hill
 Contact: hahenry@unc.edu
-Version: 2026-10-03
+Version: 2026-10-04
 """
 import math
 from pathlib import Path
@@ -34,6 +34,7 @@ PX = (1100, 1300)
 CROP = (0, 0, 860, 850)                  # px: drops the dark mosaic seams offshore and in the south
 TILES = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"
 OC_EDGE = [(864, 0), (758, 470)]         # px on Ocean City's water's edge, read off the photo
+ASSA_EDGE_X = 482                        # px: Assateague's water's edge on the offset row (y 700), read off the photo
 
 
 def main():
@@ -64,21 +65,22 @@ def main():
     ax.plot([x0, x1], [y0, y1], color="#ffd23f", lw=2.2, path_effects=halo)
     ax.plot([x1, x1 + slope * (photo.height - y1)], [y1, photo.height], color="#ffd23f", lw=2, ls=(0, (5, 3)), path_effects=halo)
     xe, ye = x1 + slope * (700 - y1), 700
-    ax.annotate("", xy=(395, ye), xytext=(xe - 4, ye), arrowprops=dict(arrowstyle="<->", color="white", lw=1.6, path_effects=halo))
+    ax.annotate("", xy=(ASSA_EDGE_X, ye), xytext=(xe - 4, ye), arrowprops=dict(arrowstyle="<->", color="white", lw=1.6, path_effects=halo))
     t = dict(color="white", path_effects=halo)
-    ax.text((395 + xe) / 2 + 10, ye - 14, "offset", ha="center", va="bottom", fontsize=10, fontweight="bold", **t)
+    arrow = dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo)
+    ax.text((ASSA_EDGE_X + xe) / 2, ye - 14, "offset", ha="center", va="bottom", fontsize=10, fontweight="bold", **t)
     ax.text(x1 + slope * (780 - y1) + 8, 780, "Ocean City's shoreline,\ncarried south", ha="left", va="center", fontsize=9, **t)
 
     ax.text(800, 175, "Ocean City\n(developed;\nbeach nourished)", ha="right", va="center", fontsize=10.5, fontweight="bold", **t)
-    ax.text(175, 540, "Assateague Island\n(natural: free to\noverwash and roll\nlandward)", ha="center", va="center",
-            fontsize=10.5, fontweight="bold", **t)
-    ax.annotate("overwash fan:\nsand washed across\nthe island", xy=(292, 730), xytext=(115, 690), ha="center", va="center",
-                fontsize=9.5, arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
-    ax.annotate("jetties", xy=(700, 515), xytext=(760, 590), ha="left", fontsize=10, arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
-    ax.annotate("Ocean City Inlet,\nopened 1933", xy=(610, 400), xytext=(470, 300), ha="center", fontsize=9.5,
-                arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo), **t)
-    ax.annotate("", xy=(805, 340), xytext=(805, 270), arrowprops=dict(arrowstyle="-|>", color="white", lw=1.3, path_effects=halo))
-    ax.text(812, 310, "sand drifts\nsouth", fontsize=9, va="center", **t)
+    ax.annotate("Assateague Island\n(natural: free to\noverwash and roll\nlandward)", xy=(415, 625), xytext=(200, 585), ha="center", va="center",
+                fontsize=10.5, fontweight="bold", arrowprops=arrow, **t)
+    ax.text(95, 215, "mainland", ha="center", va="center", fontsize=9.5, fontstyle="italic", **t)
+    ax.annotate("overwash fan:\nsand washed across\nthe island", xy=(292, 730), xytext=(115, 697), ha="center", va="center",
+                fontsize=9.5, arrowprops=arrow, **t)
+    ax.annotate("south jetty", xy=(690, 513), xytext=(730, 590), ha="left", fontsize=10, arrowprops=arrow, **t)
+    ax.annotate("Ocean City Inlet,\nopened 1933", xy=(600, 445), xytext=(470, 300), ha="center", fontsize=9.5, arrowprops=arrow, **t)
+    ax.annotate("", xy=(752, 400), xytext=(782, 262), arrowprops=dict(arrowstyle="-|>", color="white", lw=1.6, path_effects=halo))
+    ax.text(778, 250, "sand drifts south", ha="right", va="bottom", fontsize=9.5, **t)
 
     # scale bar and north arrow
     bar = 1000 / m_per_px

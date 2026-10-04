@@ -60,18 +60,24 @@ Overwash can bury roads and houses, but it is also how a barrier island builds i
 <figcaption class="hat-caption">Overwash after Hurricane Isabel. Between Frisco and Hatteras Village on 21 September 2003, three days after the storm, the dunes are gone and a sheet of sand washed in from the beach covers the island and NC-12; the road shows only at the left, and trucks are clearing it. Photo: U.S. Geological Survey, <a href="https://pubs.usgs.gov/ds/761/">Archive of post-Hurricane Isabel coastal oblique aerial photographs</a> (Data Series 761), frame 2003_0921_r045s18. Public domain.</figcaption>
 </figure>
 
-## Dunes are the island's first defence
+## What dunes do
 
-Dunes block small and medium storms from overwashing the island. Grasses trap blowing sand, so dunes regrow between storms.
+Dunes are ridges of sand at the back of the beach, built by the wind and held in place by grasses.
+They store sand and stand between the ocean and the land behind them.
+In a storm, waves that reach the dune cut into its face and carry sand offshore; only when the water rises above the dune's crest does it pour over as overwash.
+Between storms, wind blows dry sand off the beach and the grasses trap it, so dunes slowly rebuild.
 
-<figure class="hat-model-figure" data-scroll-start="0.5">
-{% include hatteras/dunes.svg %}
-<figcaption class="hat-caption">Not to scale; heights exaggerated. The same storm against two dunes. (a) <i>Collision</i>: the highest reach of the waves stays below the crest of a tall dune. The waves cut into its face (hatched) and carry that sand offshore, and the island and road behind stay dry. (b) <i>Overwash</i>: the waves reach higher than the crest of a low dune, run over it, and leave a layer of sand across the island and the road. The two regimes follow the storm impact scale of Sallenger (2000, <a href="https://doi.org/10.2112/1551-5036(2000)016[0890:SISFBI]2.0.CO;2"><i>Journal of Coastal Research</i></a>).</figcaption>
-</figure>
-On Hatteras, the line of dunes along most of the island was built by people, starting in the 1930s. Its history, in photos, is on the [dune building page]({{ '/hatteras/management/dunes/' | relative_url }}).
-<figcaption class="hat-caption">Built dunes on Hatteras Island. (a) Civilian Conservation Corps workers put up a sand fence in 1936. Fences like this trapped blowing sand and began the line of dunes along most of the island. (b) The same island with no dune: just north of Rodanthe at the S-curves in May 2008, the beach runs straight up to NC-12. (c) A tall dune newly built at the S-curves in September 2011, after Hurricane Irene cut through the island there. (d) A breach in the dunes at the north end of Rodanthe in April 2020: where the dune is low or broken, ocean water runs through onto the road, and crews push sand back to close the gap. Photos: National Park Service (<a href="https://commons.wikimedia.org/wiki/File:Civilian_Conservation_Corps_constructing_sand_fence_on_Hatteras_Island,_1936.jpg">a</a>, public domain); U.S. Geological Survey (b, <a href="https://doi.org/10.5066/P9R9PQFK">baseline oblique aerial photographs, 6 May 2008</a>, frame 2008_0506_142917, public domain); NCDOT (<a href="https://commons.wikimedia.org/wiki/File:Sand_Dune_Located_at_S_Curves_near_Rodanthe_(6166935089).jpg">c</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, cropped); Cape Hatteras National Seashore (<a href="https://commons.wikimedia.org/wiki/File:Dune_breach_at_north_end_of_Rodanthe_-_April_2020_(50831853663).jpg">d</a>, public domain). The history of dune building is on the <a href="{{ '/hatteras/management/dunes/' | relative_url }}">dune building page</a>.</figcaption>
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ '/assets/hatteras/img/dunes/dune_line_lighthouse_2017.jpg' | relative_url }}" alt="A wide sand beach rising to a low, grass-covered dune line, with the Cape Hatteras Lighthouse standing beyond it" loading="lazy"><figcaption>(a) The dune line behind the beach, 2017</figcaption></figure>
+<figure><img src="{{ '/assets/hatteras/img/dunes/sea_oats_dune.jpg' | relative_url }}" alt="Sea oats growing on a sand dune, with ripples of wind-blown sand in the foreground and the ocean behind" loading="lazy"><figcaption>(b) Sea oats on a dune, 2013</figcaption></figure>
+</div>
+<figcaption class="hat-caption">Dunes at Cape Hatteras National Seashore. (a) The beach rises to a line of grass-covered dunes, with the Cape Hatteras Lighthouse beyond. (b) Sea oats growing on a dune; their stems slow the wind, so blowing sand drops and builds the dune up, and their roots hold it in place. Photos: Cape Hatteras National Seashore / NPS (<a href="https://commons.wikimedia.org/wiki/File:Cape_Hatteras_Lighthouse_beyond_the_dunes_(50068832493).jpg">a</a>, 16 September 2017) and National Park Service (<a href="https://commons.wikimedia.org/wiki/File:Sea_Oats_and_Dunes_(5d19d7fc-1dd8-b71c-078e-5bc766cf591a).jpg">b</a>, 21 November 2013), both public domain.</figcaption>
 </figure>
 </div>
+
+On Hatteras, the line of dunes along most of the island was built by people, starting in the 1930s. Its history, in photos, is on the [dune building page]({{ '/hatteras/management/dunes/' | relative_url }}).
 
 ## Rising seas
 

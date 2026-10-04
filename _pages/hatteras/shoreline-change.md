@@ -44,7 +44,7 @@ That average hides large differences from place to place.
 - **Salvo, Waves and Rodanthe** have moved landward on average, about 0.5 m per year over the whole record, with local hot spots of 2 to 3 m per year.
 - **Pea Island** has the most persistent erosion: about 0.9 m per year over the whole record, and faster since 2010.
 
-Rates that include the last few years are pushed seaward by an island-wide shift in 2021 (described below). That is why the 2010–2026 view shows more growth than the earlier period.
+Rates that include the last few years are pushed seaward by an island-wide shift in 2021. That is why the 2010–2026 view shows more growth than the earlier period.
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: how shoreline change is measured</summary>
@@ -61,7 +61,7 @@ Periods run from 1 January of the first year to 31 December of the last.
 ## Events that stand out
 
 The shoreline does not change smoothly. Storms take sand away in days, and nourishment projects add it back in weeks.
-The big storms have [their own page]({{ '/hatteras/storms/' | relative_url }}); two other events stand out in the satellite record.
+The big storms have [their own page]({{ '/hatteras/storms/' | relative_url }}); beach nourishment also stands out in the satellite record.
 
 ### Beach nourishment, 2014 to 2022
 
@@ -75,12 +75,6 @@ At Buxton, about 40% of the 2017 jump was gone within a year, and the rest held 
 Avon still had about three-quarters of its 2022 jump in 2025, while the smaller Buxton 2022 jump had mostly disappeared.
 The [nourishment explorer]({{ '/hatteras/management/nourishment/' | relative_url }}) on the Management pages shows each stretch year by year.
 Click a nourished stretch on the [survey-line map]({{ '/hatteras/shoreline-change/survey-lines/' | relative_url }}) to see its jump, marked in gold, in the full record.
-
-### The 2021 shift
-
-Between 2020 and 2021, the shoreline moved seaward by about 17 m almost everywhere on the island, in a single year.
-We are writing up what this shift was, and will share it here once it is published.
-Because it falls near the end of the record, this one event has a large effect on any rate that includes it, so it is worth keeping in mind when reading the 2010–2026 rates and the year-by-year views.
 
 ## Explore further
 
