@@ -1499,3 +1499,82 @@ table.hat-mvo-skill {
     }
   }
 }
+
+// Model input stepper (model_steps.liquid)
+.hat-steps {
+  border: 1px solid var(--global-divider-color);
+  border-radius: 6px;
+  padding: 1rem 1.1rem 0.6rem;
+  margin: 1rem 0 1.5rem;
+  background: #fbfcfc;
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+  }
+
+  .hat-steps-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+
+    > button {
+      border: 1px solid var(--global-theme-color);
+      background: #fff;
+      color: var(--global-theme-color);
+      border-radius: 4px;
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+    }
+  }
+
+  .hat-steps-dots {
+    display: flex;
+    gap: 0.4rem;
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid var(--global-theme-color);
+      background: #fff;
+      color: var(--global-theme-color);
+      font-size: 0.9rem;
+      cursor: pointer;
+
+      &.on {
+        background: var(--global-theme-color);
+        color: #fff;
+      }
+    }
+  }
+
+  .hat-step {
+    h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.4rem;
+
+      span {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--global-theme-color);
+      }
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0.6rem 0 0.4rem;
+    }
+  }
+}

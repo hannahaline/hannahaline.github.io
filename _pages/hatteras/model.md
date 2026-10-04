@@ -19,12 +19,11 @@ It starts from a detailed map of the island's elevation, applies the storms, wav
 {% include hatteras/model_diagram.svg %}
 </figure>
 
-<ol class="hat-model-parts">
-  <li><b>The starting island.</b> Laser elevation surveys (lidar) give the height of the beach, dunes, and island interior at the start of each run, on a grid of 10 m cells.</li>
-  <li><b>Storms and overwash.</b> Each year, the real storms from the record are sent over the island. Where they overtop the dunes, sand moves inland.</li>
-  <li><b>Sand along the shore.</b> Waves move sand along the beach between neighbouring stretches of island, so what happens in one place affects the next.</li>
-  <li><b>People.</b> Management rules rebuild dunes, add nourishment sand, and protect or move the road, as happened in real life.</li>
-</ol>
+### The inputs, step by step
+
+Click **Next**, or use the arrow keys, to see what goes into a run of the model, here the run that recreates 1996 to 2015.
+
+{% include hatteras/model_steps.liquid %}
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: what is inside CASCADE</summary>
