@@ -90,13 +90,15 @@
     var img = fig.querySelector("img");
     img.src = this.root.getAttribute("data-base") + p.src;
     img.alt = "Aerial photos of the same stretch of beach at " + name + ", before (" + p.before + ") and after (" + p.after +
-      ") the " + f.year + " fill, with the average shoreline of the 12 months before and after the fill drawn on them";
-    fig.querySelector("figcaption").innerHTML = "The same 300 m of beach at " + name + ", before and after the " + f.year +
-      " fill (sand placed " + p.placed + "). The dashed line is the average satellite shoreline over the 12 months before " +
-      "the sand went on; the solid line is the average over the 12 months after it was finished. The view sits where the " +
-      "change matches the average for the whole nourished stretch. The photos are the nearest ones flown before and after, " +
-      "so the water's edge in them need not sit on the lines. " +
-      "Photos: NC OneMap / NC Center for Geographic Information and Analysis. Shorelines: CoastSat.";
+      ") the " + f.year + " fill, with the satellite shoreline at the time of each photo drawn on them";
+    fig.querySelector("figcaption").innerHTML = "The same 300 m of beach at " + name + ", photographed from the air on " + p.before +
+      " and on " + p.after + ", before and after the " + f.year + " fill (sand placed " + p.placed + "). Each line is the " +
+      "satellite shoreline at the time of its photo, the average of the three satellite images nearest the flight. The view " +
+      "is the part of the nourished stretch where the shoreline moved furthest between the two photos, so the new sand shows " +
+      "clearly. The gap between the lines includes everything that changed between the two dates, not only the fill; the " +
+      "chart further down compares the fill with the rest of the island. Satellite shorelines mark mean sea level, so they sit " +
+      "a little landward of the wet edge in a photo taken at low tide. Photos: USDA National Agriculture Imagery Program " +
+      "(public domain), via Microsoft Planetary Computer. Shorelines: CoastSat.";
     var base = this.root.getAttribute("data-base"), refill = /refill/.test(p.moments.join(" "));
     var tt = this.root.querySelector(".hat-nx-time"), pr = this.root.querySelector(".hat-nx-profile");
     tt.hidden = pr.hidden = false;

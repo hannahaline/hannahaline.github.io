@@ -4,18 +4,20 @@ stakeholder pages.
 
     python tools/hatteras_nourishment_photos.py
 
-For each fill, two NC OneMap aerial photos of the same 300 m x 300 m frame on the nourished stretch: the
-last photo year before the fill and the first one after it. The lines are as close to the fill as the record allows:
-the average of every CoastSat shoreline in the 12 months before sand placement started (dashed, on both photos) and in
-the 12 months after it finished (solid, on the after photo), placed along the transects as in
-tools/hatteras_groin_photos.py. A full 12 months on each side keeps the summer and winter beach in both, and single
-shorelines scatter by about 10 m with tide and waves, so a shorter window would not be closer, only noisier. Hannah
-asked (2026-10-04) for real photos with the shorelines, one pair per fill, a tight frame, thin lines, and the lines
-matched as close to the fill as possible. The lines are raw positions, not the explorer's comparison with the rest of the island, and they need not
+For each fill, two USDA NAIP aerial photos (public domain, flown every two years in summer or autumn) of the same
+300 m x 300 m frame: the last flight before sand placement started and the first one after it finished, weeks to
+months after for every fill (NC OneMap flies Dare County only once in four years, so its nearest photos were one to
+three years away). Each photo carries the CoastSat shoreline of its own date, the average of the satellite shorelines
+within 30 days of the flight, so the line describes the beach in the photo (dashed: before, on both photos; solid:
+after). Lines are placed along the transects as in tools/hatteras_groin_photos.py. CoastSat marks mean sea level, so
+the line sits a little landward of the wet edge in a photo flown at low tide. Hannah asked (2026-10-04) for real
+photos with the shorelines, one pair per fill, a tight frame, thin lines, the fill clearly visible and the lines
+matching the imagery. The lines are raw positions, not the explorer's comparison with the rest of the island, and they need not
 match the water's edge in the photos, which were flown on other dates and tides.
-The frame goes where the change is typical: on the 300 m of beach (7 transects) whose average change between the two
-two windows is closest to the stretch's average, keeping 500 m clear of each end. Hannah chose this rule (2026-10-04)
-after the middle of the Buxton stretch turned out to have lost ground after the small 2022 fill while both ends gained.
+The frame goes where the fill shows most clearly: the 300 m of beach (7 transects) with the largest shoreline change
+between the two photo dates, keeping 500 m clear of each end of the stretch. Hannah first chose the typical spot
+(change closest to the stretch average), then asked (2026-10-04) for the spot where the fill is clearly visible; the
+caption says how the spot was chosen and the JSON keeps both the spot's change and the stretch average.
 Writes assets/hatteras/img/nourishment/<stretch>_<year>.jpg and assets/hatteras/data/nourishment_photos.json (keyed
 "<stretch> <year>" as the explorer names its fills). Photos are saved under tools/data/nourishment_photos/ so a re-run
 only redraws; pass --fetch to download them again. Needs the CASCADE repo beside this one.
@@ -63,8 +65,13 @@ PLACED_TEXT = {("Rodanthe", 2014): "late July to mid-September 2014", ("Buxton",
 DATES_CSV = SITE.parent / "CASCADE/data/hatteras_init/4-mgmt-forcing/nourishment/datasets/nourishment_placement_dates.csv"
 DATES_NAMES = {("Rodanthe", 2014): "Rodanthe emergency fill", ("Buxton", 2017): "Buxton beach nourishment",
                ("Buxton", 2022): "Buxton shore protection", ("Avon", 2022): "Avon shore protection"}
-# stretch, fill year, photo years before and after
-FILLS = [("Rodanthe", 2014, 2012, 2016), ("Buxton", 2017, 2016, 2020), ("Buxton", 2022, 2020, 2024), ("Avon", 2022, 2020, 2024)]
+# stretch, fill year, NAIP flight dates before and after (Planetary Computer STAC, searched 2026-10-04)
+FILLS = [("Rodanthe", 2014, "2012-06-28", "2014-10-17"), ("Buxton", 2017, "2016-09-10", "2018-10-29"),
+         ("Buxton", 2022, "2020-10-18", "2022-10-07"), ("Avon", 2022, "2020-10-18", "2022-10-07")]
+STAC = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+SIGN = "https://planetarycomputer.microsoft.com/api/sas/v1/sign?href="
+PHOTO_NEAREST = 3                        # a photo's line: the mean of the satellite shorelines nearest its flight
+PHOTO_MAX_DAYS = 130                     # ... none further than this (the sparse 2012 and 2020 passes reach ~4 months)
 WINDOW = 7                               # transects, 50 m apart: the frame's 300 m
 END_CLEAR_KM = 0.5
 LINE, REF_LINE = "#ffd23f", "#ffffff"
@@ -95,9 +102,20 @@ def series(tid):
     return _SERIES[tid]
 
 
+GAPS = []                                # days from each photo line's shorelines to its flight, for the caption
+
+
 def mean_in(t, w):
-    """Mean shoreline position on one transect inside a window, or None with fewer than three shorelines."""
+    """Mean shoreline position on one transect inside a window, or None with fewer than three shorelines. A window
+    given as a flight date takes the PHOTO_NEAREST shorelines closest to it instead."""
     date, pos = series(t["id"])
+    if isinstance(w, str):
+        gap = np.abs((date - pd.Timestamp(w, tz="UTC")).dt.days.values)
+        order = np.argsort(gap)[:PHOTO_NEAREST]
+        if len(order) < PHOTO_NEAREST or gap[order[-1]] > PHOTO_MAX_DAYS:
+            return None
+        GAPS.append(int(gap[order[-1]]))
+        return float(pos.values[order].mean())
     sel = pos[(date >= w[0]) & (date < w[1])]
     return float(sel.mean()) if len(sel) >= 3 else None
 
@@ -122,6 +140,53 @@ def shorelines(transects, box, wins):
             if m is not None:
                 out[i].append(tuple(a + u * m * k))
     return out
+
+
+def naip_export(date, box, size):
+    """The NAIP photo flown on `date`, warped onto the Web Mercator box (tiles that meet in the frame are combined)."""
+    import urllib.request
+    import rasterio
+    from rasterio.warp import reproject, Resampling, transform_bounds
+    from rasterio.transform import from_bounds
+    lon0, lat0, lon1, lat1 = transform_bounds("EPSG:3857", "EPSG:4326", *box)
+    body = json.dumps({"collections": ["naip"], "bbox": [lon0, lat0, lon1, lat1], "datetime": f"{date}T00:00:00Z/{date}T23:59:59Z",
+                       "limit": 20}).encode()
+    req = urllib.request.Request(STAC, data=body, headers={"Content-Type": "application/json"})
+    items = json.load(urllib.request.urlopen(req, timeout=120))["features"]
+    assert items, f"no NAIP flight on {date} over the frame"
+    dst = np.zeros((3, size, size), dtype=np.uint8)
+    dst_t = from_bounds(*box, size, size)
+    for it in items:
+        href = json.load(urllib.request.urlopen(SIGN + it["assets"]["image"]["href"], timeout=120))["href"]
+        with rasterio.open(href) as src:
+            part = np.zeros_like(dst)
+            for b in range(3):
+                reproject(rasterio.band(src, b + 1), part[b], dst_transform=dst_t, dst_crs="EPSG:3857",
+                          resampling=Resampling.bilinear)
+            empty = dst.sum(axis=0) == 0
+            dst[:, empty] = part[:, empty]
+    return Image.fromarray(np.moveaxis(dst, 0, -1)).convert("RGBA")
+
+
+def photo_window(date):
+    """A photo's 'window' is its flight date; mean_in() then takes the nearest shorelines instead of a date range."""
+    return str(date)
+
+
+def clearest_spot(transects, km, w0, w1):
+    """The centre transect of the 7-transect window with the largest mean change, and that change and the stretch's."""
+    on = [t for t in transects if km[0] <= t["km"] <= km[1]]
+    dx = [change(t, w0, w1) for t in on]
+    mean = np.mean([v for v in dx if v is not None])
+    best = None
+    for i in range(len(on) - WINDOW + 1):
+        w = dx[i:i + WINDOW]
+        c = on[i + WINDOW // 2]
+        if None in w or not (km[0] + END_CLEAR_KM <= c["km"] <= km[1] - END_CLEAR_KM):
+            continue
+        if best is None or np.mean(w) > best[0]:
+            best = (float(np.mean(w)), c)
+    return best[1], mean, best[0]
 
 
 def typical_spot(transects, km, y0, y1):
@@ -279,17 +344,19 @@ def main():
     halo = [pe.withStroke(linewidth=2.2, foreground="#1a1a1a")]
     out = {}
     for stretch, year, yb, ya in FILLS:
-        wb, wa = windows(stretch, year)
-        spot, mean, here = typical_spot(rates["transects"], stretches[stretch]["km"], wb, wa)
-        print(f"{stretch} {year}: stretch mean {mean:+.1f} m, frame at km {spot['km']:.2f} ({here:+.1f} m)")
-        box, k = frame(spot, wb)
-        lines = shorelines(rates["transects"], box, (wb, wa))
+        pb, pa = photo_window(yb), photo_window(ya)
+        spot, mean, here = clearest_spot(rates["transects"], stretches[stretch]["km"], pb, pa)
+        print(f"{stretch} {year}: {yb} -> {ya}, stretch mean {mean:+.1f} m, frame at km {spot['km']:.2f} ({here:+.1f} m)")
+        box, k = frame(spot, pb)
+        GAPS.clear()
+        lines = shorelines(rates["transects"], box, (pb, pa))
+        gap_days = max(GAPS) if GAPS else None
         lb, la = 0, 1
         fig, axes = plt.subplots(1, 2, figsize=(8, 4.25), gridspec_kw={"wspace": 0.03})
         for i, (ax, y) in enumerate(zip(axes, (yb, ya))):
-            p = PHOTOS / f"{stretch.lower()}_{year}_{box[0]:.0f}_{box[1]:.0f}_{y}.jpg"
+            p = PHOTOS / f"naip_{y}_{box[0]:.0f}_{box[1]:.0f}.jpg"
             if args.fetch or not p.exists():
-                img.save(img.export_nconemap(SERVICES[y], box, (PX, PX)), p)
+                img.save(naip_export(y, box, PX), p)
                 print(f"fetched {p.name}")
             ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
             xs, ys = zip(*lines[lb])
@@ -304,7 +371,8 @@ def main():
             for s in ax.spines.values():
                 s.set_color("#1a1a1a")
                 s.set_linewidth(1.2)
-            ax.text(0.03, 0.97, f"({'ab'[i]}) {'Before' if i == 0 else 'After'}: {WHEN[y]}", transform=ax.transAxes,
+            ax.text(0.03, 0.97, f"({'ab'[i]}) {'Before' if i == 0 else 'After'}: {pd.Timestamp(y).day} {pd.Timestamp(y):%b %Y}",
+                    transform=ax.transAxes,
                     ha="left", va="top", fontsize=9.5, color="#1a1a1a",
                     bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
         ax = axes[0]
@@ -315,8 +383,8 @@ def main():
                     color="white", fontsize=10, fontweight="bold", arrowprops=dict(arrowstyle="-|>", color="white", lw=1.4),
                     path_effects=halo)
         from matplotlib.lines import Line2D
-        fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.2, ls=(0, (4, 2.5)), path_effects=halo, label="Shoreline, 12 months before the fill"),
-                            Line2D([], [], color=LINE, lw=1.4, path_effects=halo, label="Shoreline, 12 months after")],
+        fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.2, ls=(0, (4, 2.5)), path_effects=halo, label="Satellite shoreline at the time of photo (a)"),
+                            Line2D([], [], color=LINE, lw=1.4, path_effects=halo, label="At the time of photo (b)")],
                    loc="lower center", ncol=2, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.02), handlelength=3)
         name = f"{stretch.lower()}_{year}.jpg"
         fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
@@ -326,10 +394,12 @@ def main():
             img.save(img.export_nconemap(SERVICES[2024], box, (PX, PX)), latest)
         tt_name, tt_labels = through_time(stretch, year, rates["transects"], box, k, latest, halo)
         pr_name, pr_labels = profile(stretch, year, rates["transects"], stretches[stretch]["km"], nx["places"])
-        out[f"{stretch} {year}"] = {"src": f"/assets/hatteras/img/nourishment/{name}", "before": WHEN[yb], "after": WHEN[ya],
+        out[f"{stretch} {year}"] = {"src": f"/assets/hatteras/img/nourishment/{name}",
+                                    "before": f"{pd.Timestamp(yb).day} {pd.Timestamp(yb):%B %Y}",
+                                    "after": f"{pd.Timestamp(ya).day} {pd.Timestamp(ya):%B %Y}",
                                     "through_time": f"/assets/hatteras/img/nourishment/{tt_name}", "moments": tt_labels,
                                     "profile": f"/assets/hatteras/img/nourishment/{pr_name}", "profile_lines": pr_labels,
-                                    "placed": PLACED_TEXT[(stretch, year)],
+                                    "placed": PLACED_TEXT[(stretch, year)], "line_gap_days": gap_days,
                                     "km": round(spot["km"], 2), "change_m": round(here, 1), "stretch_change_m": round(mean, 1)}
         print(f"wrote {name}: {len(lines[lb])} / {len(lines[la])} transects")
     OUT_JSON.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
