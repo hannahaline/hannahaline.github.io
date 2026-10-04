@@ -36,9 +36,12 @@
       self.fills.sort(function (a, b) { return a.f.year - b.f.year || a.k - b.k; });
       self.controls();
       self.draw();
+      // before-and-after photos, one pair per fill (tools/hatteras_nourishment_photos.py); the panel stays hidden without them
+      fetch(root.getAttribute("data-photos")).then(function (r) { return r.ok ? r.json() : {}; })
+        .then(function (p) { self.photos = p; self.drawPhoto(); }).catch(function () {});
       var w = self.chart.clientWidth;
       window.addEventListener("resize", function () { if (self.bars.clientWidth !== w) { w = self.bars.clientWidth; self.draw(); } });
-      self.more.addEventListener("toggle", function () { if (self.more.open) self.drawChart(); });
+      self.more.addEventListener("toggle", function () { if (self.more.open) { self.drawBars(); self.drawChart(); } });
     });
   }
 
@@ -75,7 +78,43 @@
     this.drawStrip();
     this.drawBars();
     this.drawCards();
+    this.drawPhoto();
     if (this.more.open) this.drawChart();
+  };
+
+  Explorer.prototype.drawPhoto = function () {
+    var fig = this.root.querySelector(".hat-nx-photo"), f = this.fills[this.fi].f, name = this.data.stretches[this.k].name;
+    var p = this.photos && this.photos[name + " " + f.year];
+    fig.hidden = !p;
+    if (!p) return;
+    var img = fig.querySelector("img");
+    img.src = this.root.getAttribute("data-base") + p.src;
+    img.alt = "Aerial photos of the same stretch of beach at " + name + ", before (" + p.before + ") and after (" + p.after +
+      ") the " + f.year + " fill, with the average shoreline of the 12 months before and after the fill drawn on them";
+    fig.querySelector("figcaption").innerHTML = "The same 300 m of beach at " + name + ", before and after the " + f.year +
+      " fill (sand placed " + p.placed + "). The dashed line is the average satellite shoreline over the 12 months before " +
+      "the sand went on; the solid line is the average over the 12 months after it was finished. The view sits where the " +
+      "change matches the average for the whole nourished stretch. The photos are the nearest ones flown before and after, " +
+      "so the water's edge in them need not sit on the lines. " +
+      "Photos: NC OneMap / NC Center for Geographic Information and Analysis. Shorelines: CoastSat.";
+    var base = this.root.getAttribute("data-base"), refill = /refill/.test(p.moments.join(" "));
+    var tt = this.root.querySelector(".hat-nx-time"), pr = this.root.querySelector(".hat-nx-profile");
+    tt.hidden = pr.hidden = false;
+    tt.querySelector("img").src = base + p.through_time;
+    tt.querySelector("img").alt = "The same beach at " + name + " on the March 2024 photo, with the average shoreline before the " +
+      f.year + " fill and at " + (p.moments.length - 1) + " later times drawn from dark to pale";
+    tt.querySelector("figcaption").innerHTML = "The same 300 m of beach on the latest photo (March 2024), with the average " +
+      "satellite shoreline over 12 months at several moments: before the fill (dashed), just after it was finished, and later. " +
+      "Dark lines are early and pale lines recent, so lines stepping back toward the dashed one show the added beach wearing away." +
+      (refill ? " Lines marked as after the refill include the sand of the later fill on this stretch too." : "");
+    pr.querySelector("img").src = base + p.profile;
+    pr.querySelector("img").alt = "Chart of how far the shoreline moved along the beach around " + name + " after the " + f.year +
+      " fill, with the nourished stretch shaded";
+    pr.querySelector("figcaption").innerHTML = "How far the shoreline moved along the beach after the " + f.year + " fill, compared " +
+      "with the 12 months before it: just after the fill was finished (dark red) and in the last year of the record (orange). " +
+      "The shading marks the stretch the fill covers in the model. The dashed lines show the typical change on the rest of the " +
+      "island over the same months, so beach above its dashed line gained more than the island as a whole. Dots are single " +
+      "survey lines, 50 m apart; the curves average 250 m of beach.";
   };
 
   // The simple view: a headline and one bar per year after the fill

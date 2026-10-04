@@ -1,0 +1,86 @@
+{
+ "Rodanthe 2014": {
+  "src": "/assets/hatteras/img/nourishment/rodanthe_2014.jpg",
+  "before": "Feb–Mar 2012",
+  "after": "Jan–Feb 2016",
+  "through_time": "/assets/hatteras/img/nourishment/rodanthe_2014_through_time.jpg",
+  "moments": [
+   "Before the fill",
+   "Just after",
+   "2 years later",
+   "5 years later",
+   "Latest (2025)"
+  ],
+  "profile": "/assets/hatteras/img/nourishment/rodanthe_2014_profile.png",
+  "profile_lines": [
+   "Just after",
+   "Latest (2025)"
+  ],
+  "placed": "late July to mid-September 2014",
+  "km": 43.16,
+  "change_m": 23.3,
+  "stretch_change_m": 23.9
+ },
+ "Buxton 2017": {
+  "src": "/assets/hatteras/img/nourishment/buxton_2017.jpg",
+  "before": "Jan–Feb 2016",
+  "after": "Feb 2020",
+  "through_time": "/assets/hatteras/img/nourishment/buxton_2017_through_time.jpg",
+  "moments": [
+   "Before the fill",
+   "Just after",
+   "2 years later",
+   "5 years later, after the 2022 refill",
+   "Latest (2025), after the 2022 refill"
+  ],
+  "profile": "/assets/hatteras/img/nourishment/buxton_2017_profile.png",
+  "profile_lines": [
+   "Just after",
+   "Latest (2025), after the 2022 refill"
+  ],
+  "placed": "21 June 2017 to 27 February 2018",
+  "km": 3.78,
+  "change_m": 20.3,
+  "stretch_change_m": 20.3
+ },
+ "Buxton 2022": {
+  "src": "/assets/hatteras/img/nourishment/buxton_2022.jpg",
+  "before": "Feb 2020",
+  "after": "Mar 2024",
+  "through_time": "/assets/hatteras/img/nourishment/buxton_2022_through_time.jpg",
+  "moments": [
+   "Before the fill",
+   "Just after",
+   "Latest (2025)"
+  ],
+  "profile": "/assets/hatteras/img/nourishment/buxton_2022_profile.png",
+  "profile_lines": [
+   "Just after",
+   "Latest (2025)"
+  ],
+  "placed": "30 June to 16 August 2022",
+  "km": 6.58,
+  "change_m": 13.1,
+  "stretch_change_m": 13.6
+ },
+ "Avon 2022": {
+  "src": "/assets/hatteras/img/nourishment/avon_2022.jpg",
+  "before": "Feb 2020",
+  "after": "Mar 2024",
+  "through_time": "/assets/hatteras/img/nourishment/avon_2022_through_time.jpg",
+  "moments": [
+   "Before the fill",
+   "Just after",
+   "Latest (2025)"
+  ],
+  "profile": "/assets/hatteras/img/nourishment/avon_2022_profile.png",
+  "profile_lines": [
+   "Just after",
+   "Latest (2025)"
+  ],
+  "placed": "19 June to 26 July 2022",
+  "km": 11.38,
+  "change_m": 19.0,
+  "stretch_change_m": 19.0
+ }
+}

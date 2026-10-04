@@ -4,25 +4,37 @@
   Go deeper box, as the stretch against the rest of the island or their difference. Observed only.
   Data from tools/hatteras_nourishment_data.py; script assets/hatteras/js/nourishment-explorer.js.
 {% endcomment %}
-<div class="hat-mvo hat-nx hat-bleed" data-src="{{ '/assets/hatteras/data/nourishment.json' | relative_url }}">
+<div class="hat-mvo hat-nx hat-bleed" data-src="{{ '/assets/hatteras/data/nourishment.json' | relative_url }}" data-photos="{{ '/assets/hatteras/data/nourishment_photos.json' | relative_url }}" data-base="{{ '' | relative_url }}">
   <div class="hat-shoremap-inner">
     <div class="hat-controls">
       <div class="hat-seg hat-nx-stretches" role="group" aria-label="Beach fill"></div>
     </div>
     <div class="hat-nx-strip"></div>
     <p class="hat-nx-headline" aria-live="polite"></p>
+    <figure class="hat-nx-photo" hidden>
+      <img src="" alt="" loading="lazy">
+      <figcaption class="hat-caption"></figcaption>
+    </figure>
     <div class="hat-nx-simple">
-      <div class="hat-nx-bars"></div>
+      <figure class="hat-nx-time" hidden>
+        <img src="" alt="" loading="lazy">
+        <figcaption class="hat-caption"></figcaption>
+      </figure>
       <div class="hat-nx-cards"></div>
     </div>
-    <p class="hat-caption hat-numbered">
-      Each bar is how far the shoreline on the nourished stretch sat seaward of where it was the year before the fill,
-      compared with the rest of the island, from the yearly average of every satellite shoreline. Comparing with the rest of
-      the island takes out storms and island-wide shifts such as 2021, which move both. Paler bars start in the year of a later fill on
-      the same stretch, so they include its sand too.
-    </p>
+    <figure class="hat-nx-profile" hidden>
+      <img src="" alt="" loading="lazy">
+      <figcaption class="hat-caption"></figcaption>
+    </figure>
     <details class="hat-deeper hat-nx-more">
       <summary>Go deeper: the whole record for <span class="hat-nx-stretch-name"></span>, 1984–2025</summary>
+      <div class="hat-nx-bars"></div>
+    <p class="hat-caption">
+      Each bar is how far the shoreline on the nourished stretch sat seaward of where it was the year before the fill,
+      compared with the rest of the island, from the yearly average of every satellite shoreline. Comparing with the rest of
+      the island takes out storms and other changes that move the whole island. Paler bars start in the year of a later fill on
+      the same stretch, so they include its sand too.
+    </p>
       <div class="hat-controls">
         <div class="hat-seg hat-nx-views" role="group" aria-label="What to show">
           <button type="button" data-view="relative" class="on">Relative to the rest of the island</button>

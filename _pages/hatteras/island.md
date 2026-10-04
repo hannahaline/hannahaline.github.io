@@ -60,7 +60,7 @@ Overwash can bury roads and houses, but it is also how a barrier island builds i
 <figcaption class="hat-caption">Overwash after Hurricane Isabel. Between Frisco and Hatteras Village on 21 September 2003, three days after the storm, the dunes are gone and a sheet of sand washed in from the beach covers the island and NC-12; the road shows only at the left, and trucks are clearing it. Photo: U.S. Geological Survey, <a href="https://pubs.usgs.gov/ds/761/">Archive of post-Hurricane Isabel coastal oblique aerial photographs</a> (Data Series 761), frame 2003_0921_r045s18. Public domain.</figcaption>
 </figure>
 
-## What dunes do
+## Dunes store sand and shelter the island
 
 Dunes are ridges of sand at the back of the beach, built by the wind and held in place by grasses.
 They store sand and stand between the ocean and the land behind them.

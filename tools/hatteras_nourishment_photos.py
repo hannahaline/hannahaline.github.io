@@ -1,0 +1,340 @@
+"""
+Before-and-after photos of each beach fill, for the nourishment explorer on the Management pages of the Hatteras
+stakeholder pages.
+
+    python tools/hatteras_nourishment_photos.py
+
+For each fill, two NC OneMap aerial photos of the same 300 m x 300 m frame on the nourished stretch: the
+last photo year before the fill and the first one after it. The lines are as close to the fill as the record allows:
+the average of every CoastSat shoreline in the 12 months before sand placement started (dashed, on both photos) and in
+the 12 months after it finished (solid, on the after photo), placed along the transects as in
+tools/hatteras_groin_photos.py. A full 12 months on each side keeps the summer and winter beach in both, and single
+shorelines scatter by about 10 m with tide and waves, so a shorter window would not be closer, only noisier. Hannah
+asked (2026-10-04) for real photos with the shorelines, one pair per fill, a tight frame, thin lines, and the lines
+matched as close to the fill as possible. The lines are raw positions, not the explorer's comparison with the rest of the island, and they need not
+match the water's edge in the photos, which were flown on other dates and tides.
+The frame goes where the change is typical: on the 300 m of beach (7 transects) whose average change between the two
+two windows is closest to the stretch's average, keeping 500 m clear of each end. Hannah chose this rule (2026-10-04)
+after the middle of the Buxton stretch turned out to have lost ground after the small 2022 fill while both ends gained.
+Writes assets/hatteras/img/nourishment/<stretch>_<year>.jpg and assets/hatteras/data/nourishment_photos.json (keyed
+"<stretch> <year>" as the explorer names its fills). Photos are saved under tools/data/nourishment_photos/ so a re-run
+only redraws; pass --fetch to download them again. Needs the CASCADE repo beside this one.
+
+Author:  Hannah A. Henry, Coastal Environmental Change Lab,
+         University of North Carolina at Chapel Hill
+Contact: hahenry@unc.edu
+Version: 2026-10-04
+"""
+import argparse
+import json
+import math
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.patheffects as pe
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from PIL import Image
+
+import hatteras_imagery_data as img
+import hatteras_shoreline_data as sd
+
+SITE = Path(__file__).resolve().parents[1]
+PHOTOS = SITE / "tools/data/nourishment_photos"
+OUT_IMG = SITE / "assets/hatteras/img/nourishment"
+OUT_JSON = SITE / "assets/hatteras/data/nourishment_photos.json"
+HALF_M = 150                             # ground metres: a 300 m square frame
+PX = 800
+SERVICES = {2012: "Orthoimagery_2012_2015", 2016: "Orthoimagery_2016_2019", 2020: "Orthoimagery_2020_2023",
+            2024: "Orthoimagery_20242027"}
+WHEN = {2012: "Feb–Mar 2012", 2016: "Jan–Feb 2016", 2020: "Feb 2020", 2024: "Mar 2024"}
+NOURISHMENT = SITE / "assets/hatteras/data/nourishment.json"   # the stretches, from tools/hatteras_nourishment_data.py
+# Sand placement, first and last load: Hannah's table of 2026-10-04, shared with the CASCADE session. Rodanthe is the
+# weakest (pumping "about to start" 29 July, "completed" reported 20 September; neither is a placement record). Avon 2022: first load 1:40 pm 19 June, last 11 pm 26 July (Dare County bulletins 31da538, 32561a3; checked 2026-10-04).
+# Buxton 2017: county updates relayed by local news, last load confirmed.
+# Buxton and Avon 2022: Dare County bulletins (govdelivery 31da538, 31fd603, 32561a3, 32653c5).
+PLACED = {("Rodanthe", 2014): ("2014-07-29", "2014-09-20"), ("Buxton", 2017): ("2017-06-21", "2018-02-27"),
+          ("Buxton", 2022): ("2022-06-30", "2022-08-16"), ("Avon", 2022): ("2022-06-19", "2022-07-26")}
+PLACED_TEXT = {("Rodanthe", 2014): "late July to mid-September 2014", ("Buxton", 2017): "21 June 2017 to 27 February 2018",
+               ("Buxton", 2022): "30 June to 16 August 2022", ("Avon", 2022): "19 June to 26 July 2022"}
+# The dates must match CASCADE's record of placement dates; the script stops if they drift apart.
+DATES_CSV = SITE.parent / "CASCADE/data/hatteras_init/4-mgmt-forcing/nourishment/datasets/nourishment_placement_dates.csv"
+DATES_NAMES = {("Rodanthe", 2014): "Rodanthe emergency fill", ("Buxton", 2017): "Buxton beach nourishment",
+               ("Buxton", 2022): "Buxton shore protection", ("Avon", 2022): "Avon shore protection"}
+# stretch, fill year, photo years before and after
+FILLS = [("Rodanthe", 2014, 2012, 2016), ("Buxton", 2017, 2016, 2020), ("Buxton", 2022, 2020, 2024), ("Avon", 2022, 2020, 2024)]
+WINDOW = 7                               # transects, 50 m apart: the frame's 300 m
+END_CLEAR_KM = 0.5
+LINE, REF_LINE = "#ffd23f", "#ffffff"
+
+
+def frame(transect, w):
+    """A square frame centred just seaward of the transect's average shoreline in the before window."""
+    (lx, ly), (sx, sy) = transect["line"]
+    a, b = np.array(img.merc(ly, lx)), np.array(img.merc(sy, sx))
+    u = (b - a) / np.linalg.norm(b - a)
+    k = 1 / math.cos(math.radians(sy))
+    x, y = a + u * (mean_in(transect, w) + 30) * k
+    return [x - HALF_M * k, y - HALF_M * k, x + HALF_M * k, y + HALF_M * k], k
+
+
+def windows(stretch, year):
+    """The 12 months before placement started and the 12 months after it finished, as (start, end) timestamps."""
+    s, e = (pd.Timestamp(d, tz="UTC") for d in PLACED[(stretch, year)])
+    return (s - pd.DateOffset(years=1), s), (e + pd.Timedelta(days=1), e + pd.Timedelta(days=1) + pd.DateOffset(years=1))
+
+
+_SERIES = {}
+
+
+def series(tid):
+    if tid not in _SERIES:
+        _SERIES[tid] = sd.load_series(tid)
+    return _SERIES[tid]
+
+
+def mean_in(t, w):
+    """Mean shoreline position on one transect inside a window, or None with fewer than three shorelines."""
+    date, pos = series(t["id"])
+    sel = pos[(date >= w[0]) & (date < w[1])]
+    return float(sel.mean()) if len(sel) >= 3 else None
+
+
+def change(t, w0, w1):
+    a, b = mean_in(t, w0), mean_in(t, w1)
+    return None if a is None or b is None else b - a
+
+
+def shorelines(transects, box, wins):
+    """{window index: [(x, y) in Web Mercator]} from the transects crossing the frame, as in hatteras_groin_photos."""
+    out = {i: [] for i in range(len(wins))}
+    for t in transects:
+        (lx, ly), (sx, sy) = t["line"]
+        a, b = np.array(img.merc(ly, lx)), np.array(img.merc(sy, sx))
+        if not (box[1] <= (a[1] + b[1]) / 2 <= box[3] and box[0] - 2000 <= a[0] <= box[2]):
+            continue
+        u = (b - a) / np.linalg.norm(b - a)
+        k = 1 / math.cos(math.radians(sy))
+        for i, w in enumerate(wins):
+            m = mean_in(t, w)
+            if m is not None:
+                out[i].append(tuple(a + u * m * k))
+    return out
+
+
+def typical_spot(transects, km, y0, y1):
+    """The centre transect of the 7-transect window whose mean change is closest to the stretch's mean change."""
+    on = [t for t in transects if km[0] <= t["km"] <= km[1]]
+    dx = [change(t, y0, y1) for t in on]
+    mean = np.mean([v for v in dx if v is not None])
+    best = None
+    for i in range(len(on) - WINDOW + 1):
+        w = dx[i:i + WINDOW]
+        c = on[i + WINDOW // 2]
+        if None in w or not (km[0] + END_CLEAR_KM <= c["km"] <= km[1] - END_CLEAR_KM):
+            continue
+        gap = abs(np.mean(w) - mean)
+        if best is None or gap < best[0]:
+            best = (gap, c, float(np.mean(w)))
+    return best[1], mean, best[2]
+
+
+RECORD_END = pd.Timestamp("2026-01-13", tz="UTC")
+TIME_COLOURS = ["#7f0000", "#d7301f", "#fc8d59", "#fdd49e"]      # just after (dark) fading to the latest (pale)
+PROFILE_MARGIN_KM = 2.5
+PROFILE_START_KM = 1.0                   # Cape Point's own growth (+200 m) would swamp the Buxton profiles
+REST_KM = (15, 38)                       # the reference beach: clear of every fill, between Avon and Rodanthe
+SMOOTH = 5                                                       # transects (250 m) in the profile's running mean
+
+
+def later_windows(stretch, year):
+    """[(label, window)] after the fill: just after, 2 and 5 years later where they fit, and the last 12 months of the
+    record, dropping any that would overlap the one before it or run past the record."""
+    _, wa = windows(stretch, year)
+    out = [("Just after", wa)]
+    for n in (2, 5):
+        w = (wa[0] + pd.DateOffset(years=n), wa[1] + pd.DateOffset(years=n))
+        if w[1] <= RECORD_END - pd.DateOffset(years=1):
+            out.append((f"{n} years later", w))
+    last = (RECORD_END - pd.DateOffset(years=1), RECORD_END)
+    if last[0] >= out[-1][1][1]:
+        out.append(("Latest (2025)", last))
+    refill = [f for f in FILLS if f[0] == stretch and f[1] > year]
+    if refill:
+        r0 = pd.Timestamp(PLACED[(stretch, refill[0][1])][0], tz="UTC")
+        out = [(lab + (f", after the {refill[0][1]} refill" if w[0] > r0 else ""), w) for lab, w in out]
+    return out
+
+
+def span(w):
+    """'Oct 2014 to Sep 2015' for a window."""
+    return f"{w[0]:%b %Y} to {(w[1] - pd.Timedelta(days=1)):%b %Y}"
+
+
+def colours(n):
+    """n colours from dark (just after) to pale (latest), the last always the palest."""
+    if n == 1:
+        return [TIME_COLOURS[0]]
+    idx = np.round(np.linspace(0, len(TIME_COLOURS) - 1, n)).astype(int)
+    return [TIME_COLOURS[i] for i in idx]
+
+
+def through_time(stretch, year, transects, box, k, photo, halo):
+    """The latest photo with the shoreline before the fill and at each later window, dark to pale."""
+    from matplotlib.lines import Line2D
+    wb, _ = windows(stretch, year)
+    wins = [("Before the fill", wb)] + later_windows(stretch, year)
+    lines = shorelines(transects, box, [w for _, w in wins])
+    fig, ax = plt.subplots(figsize=(5.2, 5.6))
+    ax.imshow(Image.open(photo), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
+    handles = []
+    cols = colours(len(wins) - 1)
+    for i, (lab, w) in enumerate(wins):
+        xs, ys = zip(*lines[i])
+        if i == 0:
+            style = dict(color=REF_LINE, lw=1.0, ls=(0, (4, 2.5)))
+        else:
+            style = dict(color=cols[i - 1], lw=1.3)
+        ax.plot(xs, ys, path_effects=halo, **style)
+        handles.append(Line2D([], [], path_effects=halo, label=f"{lab} ({span(w)})", **dict(style, lw=style["lw"] + 0.3)))
+    ax.set_xlim(box[0], box[2])
+    ax.set_ylim(box[1], box[3])
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for sp in ax.spines.values():
+        sp.set_color("#1a1a1a")
+        sp.set_linewidth(1.2)
+    ax.text(0.03, 0.97, f"Photo: {WHEN[2024]}", transform=ax.transAxes, ha="left", va="top", fontsize=9.5, color="#1a1a1a",
+            bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
+    x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.06 * (box[3] - box[1])
+    ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
+    ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=9, path_effects=halo)
+    fig.legend(handles=handles, loc="upper left", ncol=1, frameon=False, fontsize=8.5, bbox_to_anchor=(0.06, 0.035),
+               handlelength=2.6)
+    name = f"{stretch.lower()}_{year}_through_time.jpg"
+    fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
+    plt.close(fig)
+    return name, [lab for lab, _ in wins]
+
+
+def profile(stretch, year, transects, km, places):
+    """Shoreline change along the beach, just after the fill and at the latest window, against the 12 months before:
+    single transects as faint dots, a 250 m running mean as the line, the nourished stretch shaded."""
+    wb, _ = windows(stretch, year)
+    later = later_windows(stretch, year)
+    show = [later[0], later[-1]] if len(later) > 1 else later
+    lo, hi = max(km[0] - PROFILE_MARGIN_KM, PROFILE_START_KM), km[1] + PROFILE_MARGIN_KM
+    rest = [t for t in transects if REST_KM[0] <= t["km"] <= REST_KM[1]]
+    on = [t for t in transects if lo <= t["km"] <= hi]
+    x = np.array([t["km"] for t in on])
+    fig, ax = plt.subplots(figsize=(8, 3.6))
+    ax.axvspan(km[0], km[1], color="#f3d9a4", alpha=0.6, lw=0, label="Nourished stretch")
+    ax.axhline(0, color="#555", lw=0.8)
+    for j, (lab, w) in enumerate(show):
+        col = TIME_COLOURS[0] if j == 0 else "#e8a33d"
+        dx = []
+        for t in on:
+            c = change(t, wb, w)
+            dx.append(np.nan if c is None else c)
+        dx = np.array(dx)
+        ax.scatter(x, dx, s=5, color=col, alpha=0.25, lw=0)
+        sm = pd.Series(dx).rolling(SMOOTH, center=True, min_periods=3).mean().values
+        ax.plot(x, sm, color=col, lw=2.0 if j == 0 else 1.6, label=f"{lab} ({span(w)})")
+        ref = np.nanmedian([np.nan if (c := change(t, wb, w)) is None else c for t in rest])
+        ax.axhline(ref, color=col, lw=1.0, ls=(0, (5, 3)), alpha=0.9,
+                   label="Typical change elsewhere on the island, same months" if j == len(show) - 1 else None)
+    for pl in places:
+        if lo <= pl["km"] <= hi:
+            ax.axvline(pl["km"], color="#999", lw=0.6, ls=":")
+            ax.text(pl["km"], 1.01, pl["name"], transform=ax.get_xaxis_transform(), ha="center", va="bottom",
+                    fontsize=8.5, color="#555")
+    ax.set_xlim(lo, hi)
+    ax.set_xlabel("km north of Cape Point")
+    ax.set_ylabel("metres seaward of before")
+    for sp in ("top", "right"):
+        ax.spines[sp].set_visible(False)
+    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.2), ncol=2, frameon=False, fontsize=8.5)
+    name = f"{stretch.lower()}_{year}_profile.png"
+    fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.05)
+    plt.close(fig)
+    return name, [lab for lab, _ in show]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    ap.add_argument("--fetch", action="store_true")
+    args = ap.parse_args()
+    record = pd.read_csv(DATES_CSV).set_index("project")
+    for key, name in DATES_NAMES.items():
+        got = (record.loc[name, "start_date"], record.loc[name, "end_date"])
+        assert got == PLACED[key], f"{key}: {PLACED[key]} here but {got} in {DATES_CSV.name}"
+    rates = json.loads((sd.OUT / "shoreline_rates.json").read_text(encoding="utf-8"))
+    nx = json.loads(NOURISHMENT.read_text(encoding="utf-8"))
+    stretches = {s["name"]: s for s in nx["stretches"]}
+    PHOTOS.mkdir(parents=True, exist_ok=True)
+    OUT_IMG.mkdir(parents=True, exist_ok=True)
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
+    halo = [pe.withStroke(linewidth=2.2, foreground="#1a1a1a")]
+    out = {}
+    for stretch, year, yb, ya in FILLS:
+        wb, wa = windows(stretch, year)
+        spot, mean, here = typical_spot(rates["transects"], stretches[stretch]["km"], wb, wa)
+        print(f"{stretch} {year}: stretch mean {mean:+.1f} m, frame at km {spot['km']:.2f} ({here:+.1f} m)")
+        box, k = frame(spot, wb)
+        lines = shorelines(rates["transects"], box, (wb, wa))
+        lb, la = 0, 1
+        fig, axes = plt.subplots(1, 2, figsize=(8, 4.25), gridspec_kw={"wspace": 0.03})
+        for i, (ax, y) in enumerate(zip(axes, (yb, ya))):
+            p = PHOTOS / f"{stretch.lower()}_{year}_{box[0]:.0f}_{box[1]:.0f}_{y}.jpg"
+            if args.fetch or not p.exists():
+                img.save(img.export_nconemap(SERVICES[y], box, (PX, PX)), p)
+                print(f"fetched {p.name}")
+            ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
+            xs, ys = zip(*lines[lb])
+            ax.plot(xs, ys, color=REF_LINE, lw=1.0, ls=(0, (4, 2.5)), path_effects=halo)
+            if i:
+                xs, ys = zip(*lines[la])
+                ax.plot(xs, ys, color=LINE, lw=1.2, path_effects=halo)
+            ax.set_xlim(box[0], box[2])
+            ax.set_ylim(box[1], box[3])
+            ax.set_xticks([])
+            ax.set_yticks([])
+            for s in ax.spines.values():
+                s.set_color("#1a1a1a")
+                s.set_linewidth(1.2)
+            ax.text(0.03, 0.97, f"({'ab'[i]}) {'Before' if i == 0 else 'After'}: {WHEN[y]}", transform=ax.transAxes,
+                    ha="left", va="top", fontsize=9.5, color="#1a1a1a",
+                    bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
+        ax = axes[0]
+        x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.06 * (box[3] - box[1])
+        ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
+        ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=9, path_effects=halo)
+        ax.annotate("N", xy=(0.92, 0.97), xytext=(0.92, 0.84), xycoords="axes fraction", ha="center", va="center",
+                    color="white", fontsize=10, fontweight="bold", arrowprops=dict(arrowstyle="-|>", color="white", lw=1.4),
+                    path_effects=halo)
+        from matplotlib.lines import Line2D
+        fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.2, ls=(0, (4, 2.5)), path_effects=halo, label="Shoreline, 12 months before the fill"),
+                            Line2D([], [], color=LINE, lw=1.4, path_effects=halo, label="Shoreline, 12 months after")],
+                   loc="lower center", ncol=2, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.02), handlelength=3)
+        name = f"{stretch.lower()}_{year}.jpg"
+        fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
+        plt.close(fig)
+        latest = PHOTOS / f"{stretch.lower()}_{year}_{box[0]:.0f}_{box[1]:.0f}_2024.jpg"
+        if args.fetch or not latest.exists():
+            img.save(img.export_nconemap(SERVICES[2024], box, (PX, PX)), latest)
+        tt_name, tt_labels = through_time(stretch, year, rates["transects"], box, k, latest, halo)
+        pr_name, pr_labels = profile(stretch, year, rates["transects"], stretches[stretch]["km"], nx["places"])
+        out[f"{stretch} {year}"] = {"src": f"/assets/hatteras/img/nourishment/{name}", "before": WHEN[yb], "after": WHEN[ya],
+                                    "through_time": f"/assets/hatteras/img/nourishment/{tt_name}", "moments": tt_labels,
+                                    "profile": f"/assets/hatteras/img/nourishment/{pr_name}", "profile_lines": pr_labels,
+                                    "placed": PLACED_TEXT[(stretch, year)],
+                                    "km": round(spot["km"], 2), "change_m": round(here, 1), "stretch_change_m": round(mean, 1)}
+        print(f"wrote {name}: {len(lines[lb])} / {len(lines[la])} transects")
+    OUT_JSON.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"wrote {OUT_JSON.relative_to(SITE)}")
+
+
+if __name__ == "__main__":
+    main()
