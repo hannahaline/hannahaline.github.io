@@ -11,6 +11,8 @@ Writes assets/hatteras/img/model_steps/step2.png ... step6.png; step1.png (one s
 step5_road.png come from tools/hatteras_model_stretch.py.
 
     2 the whole island           elevation of every 10 m cell at the start of the run, 90 stretches of 500 m
+    offset the shape of the coast  each stretch's shoreline set back from the model's straight axis (the BRIE offset
+                                 file the run reads), drawn as the model's coastline; Hannah asked for it 2026-10-03
     3 storms                     every storm event in the run, by how high the water reached
     4 waves and sea level        the Duck sea-level record with the run's rate, and the wave settings
     5 what people did            the road's distance back from the dunes, the managed villages, the 1999 move, the 2014 fill
@@ -112,6 +114,40 @@ def step2(canvas, cmap, norm, ticks, water):
     cb.ax.tick_params(labelsize=9)
     frame(ax)
     save(fig, 2)
+
+
+def step_offset():
+    """The model's coastline: how far each stretch's shoreline sits landward of the straight axis the model lines the
+    stretches up along, from the offset file the run reads."""
+    padded = np.loadtxt(io.tv.INIT_ROOT / HATTERAS_PERIODS[START]["island_offset_file"], skiprows=1, delimiter=",")
+    off = padded[io.init.START_REAL_INDEX:io.init.END_REAL_INDEX] / 1000          # km landward
+    x = km(io.GIS)
+    fig, ax = plt.subplots(figsize=(W_IN, 3.6))
+    top = off.max() + 1.2
+    ax.fill_between(x, off, top, color="#ecdfb9", lw=0)                          # land, landward of the shoreline
+    ax.fill_between(x, -0.8, off, color="#cfe0ec", lw=0)                          # ocean
+    ax.plot(x, off, color=INK, lw=2)
+    ax.axhline(0, color=SEA, lw=1.4, ls=(0, (6, 4)))
+    ax.text(8, -0.25, "the model's straight axis", ha="left", va="top", fontsize=9.5, color=SEA)
+    for g in (1, 26, 70):
+        ax.annotate("", xy=(km(g), off[g - 1]), xytext=(km(g), 0),
+                    arrowprops=dict(arrowstyle="-|>", color=INK, lw=1.4, shrinkA=0, shrinkB=0))
+        if g < 60:
+            ax.text(km(g) + 0.5, off[g - 1] / 2, f"{off[g - 1]:.1f} km", va="center", fontsize=10, color=INK, path_effects=halo)
+        else:                                      # too short an arrow to label beside it: the label goes under the axis
+            ax.text(km(g), -0.45, f"{off[g - 1]:.1f} km", ha="center", va="center", fontsize=10, color=INK, path_effects=halo)
+    ax.text(1, top - 0.4, "island", va="top", fontsize=10, color=INK)
+    ax.text(20, 1.0, "Atlantic Ocean", fontsize=10, color=SEA, va="center")
+    ax.set_xlim(0, 45)
+    ax.set_ylim(-0.8, top)
+    ax.set_xlabel("km north of Cape Point", fontsize=10)
+    ax.set_ylabel("km landward of the axis", fontsize=10)
+    villages(ax)
+    frame(ax)
+    OUT.mkdir(parents=True, exist_ok=True)
+    fig.savefig(OUT / "step_offset.png", dpi=150, bbox_inches="tight", pad_inches=0.08)
+    plt.close(fig)
+    print("wrote step_offset.png")
 
 
 def step3():
@@ -224,6 +260,7 @@ def main():
     canvas = io.init.detrended_canvas(START, include_buffers=False)
     cmap, norm, ticks, water = io.init.scheme_colours(io.ELEVATION_SCHEME)
     step2(canvas, cmap, norm, ticks, water)
+    step_offset()
     step3()
     step4()
     step5()
