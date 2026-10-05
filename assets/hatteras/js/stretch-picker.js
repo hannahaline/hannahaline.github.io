@@ -1,6 +1,6 @@
 // "Your stretch of beach" on /hatteras/your-beach/ (markup in _includes/hatteras/stretch_picker.liquid; data from
 // tools/hatteras_stretch_data.py and tools/hatteras_island_outline.py). Pick a place: where it is on the island, the
-// shoreline rate in plain words, its yearly position since 1984, the fills, road moves and bridges there, the overwash
+// shoreline rate in plain words, the fills, road moves and bridges there, the overwash
 // seen in the aerial record, and a then-and-now photo pair. The choice is kept in the address (#avon) for sharing.
 (function () {
   "use strict";
@@ -43,7 +43,7 @@
         self.buttons();
         self.draw();
         var w = root.clientWidth;
-        window.addEventListener("resize", function () { if (root.clientWidth !== w) { w = root.clientWidth; self.drawMap(); self.drawChart(); } });
+        window.addEventListener("resize", function () { if (root.clientWidth !== w) { w = root.clientWidth; self.drawMap(); } });
         window.addEventListener("hashchange", function () {
           var j = self.data.places.findIndex(function (p) { return p.id === location.hash.slice(1); });
           if (j >= 0 && j !== self.i) { self.i = j; self.draw(); }
@@ -75,7 +75,6 @@
     });
     this.drawMap();
     this.drawSummary();
-    this.drawChart();
     this.drawPhotos();
   };
 
@@ -146,33 +145,6 @@
     cards.push('<div class="hat-sp-card"><h3>Storm overwash</h3>' + ow +
       '<p class="hat-sp-note"><a href="' + link("storms") + '">All storms since 1984</a></p></div>');
     this.root.querySelector(".hat-sp-cards").innerHTML = cards.join("");
-  };
-
-  // Yearly position since 1984-86, fills marked in gold
-  Picker.prototype.drawChart = function () {
-    var box = this.root.querySelector(".hat-sp-chart"), p = this.data.places[this.i], v = p.yearly;
-    var W = Math.max(box.clientWidth, 300), small = W < 560, H = small ? 220 : 250, top = 16, bottom = 30, left = small ? 36 : 46, right = 10;
-    var y0 = 1984, y1 = 2025, vals = v.map(function (q) { return q[1]; });
-    var vmin = Math.min(0, Math.min.apply(null, vals)), vmax = Math.max(10, Math.max.apply(null, vals));
-    var step = (vmax - vmin) > 120 ? 40 : (vmax - vmin) > 60 ? 20 : 10;
-    var lo = Math.floor(vmin / step) * step, hi = Math.ceil(vmax / step) * step;      // ticks land on 0
-    var X = function (y) { return left + (y - y0) / (y1 - y0) * (W - left - right); };
-    var Y = function (m) { return top + (hi - m) / (hi - lo) * (H - top - bottom); };
-    box.innerHTML = "";
-    var svg = el("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img",
-      "aria-label": "Chart of the yearly shoreline position at " + p.name + " since 1984, in metres seaward of where it was in 1984 to 1986" }, box);
-    for (var m = lo; m <= hi; m += step) {
-      el("line", { x1: left, x2: W - right, y1: Y(m), y2: Y(m), stroke: m === 0 ? INK : GRID }, svg);
-      text(svg, left - 6, Y(m) + 4, (m > 0 ? "+" : m < 0 ? "−" : "") + Math.abs(m), { "text-anchor": "end", fill: MUTED, "font-size": 11.5 });
-    }
-    for (var y = 1985; y <= 2025; y += 5) text(svg, X(y), H - 10, y, { "text-anchor": "middle", fill: MUTED, "font-size": 11.5 });
-    p.fills.forEach(function (f) {
-      el("line", { x1: X(f.year + 0.5), x2: X(f.year + 0.5), y1: top, y2: H - bottom, stroke: FILL, "stroke-width": 2, "stroke-dasharray": "4 3" }, svg);
-      text(svg, X(f.year + 0.5) + 4, top + 10, f.year + " fill", { fill: FILL, "font-size": 11.5, "font-weight": 600 });
-    });
-    el("polyline", { points: v.map(function (q) { return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1); }).join(" "),
-      fill: "none", stroke: TEAL, "stroke-width": 2.4 }, svg);
-    v.forEach(function (q) { el("circle", { cx: X(q[0]), cy: Y(q[1]), r: 2.4, fill: TEAL }, svg); });
   };
 
   Picker.prototype.drawPhotos = function () {
