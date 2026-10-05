@@ -7,8 +7,8 @@ stakeholder pages.
 For each fill, two USDA NAIP aerial photos (public domain, flown every two years in summer or autumn) of the same
 300 m x 300 m frame: the last flight before sand placement started and the first one after it finished, weeks to
 months after for every fill (NC OneMap flies Dare County only once in four years, so its nearest photos were one to
-three years away). Each photo carries the CoastSat shoreline of its own date, the average of the satellite shorelines
-within 30 days of the flight, so the line describes the beach in the photo (dashed: before, on both photos; solid:
+three years away). Each photo carries the CoastSat shoreline of its own date, the average of the three satellite shorelines
+nearest the flight (none more than 130 days away), so the line describes the beach in the photo (dashed: before, on both photos; solid:
 after). Lines are placed along the transects as in tools/hatteras_groin_photos.py. CoastSat marks mean sea level, so
 the line sits a little landward of the wet edge in a photo flown at low tide. Hannah asked (2026-10-04) for real
 photos with the shorelines, one pair per fill, a tight frame, thin lines, the fill clearly visible and the lines
@@ -56,9 +56,7 @@ OUT_IMG = SITE / "assets/hatteras/img/nourishment"
 OUT_JSON = SITE / "assets/hatteras/data/nourishment_photos.json"
 HALF_M = 150                             # ground metres: a 300 m square frame
 PX = 800
-SERVICES = {2012: "Orthoimagery_2012_2015", 2016: "Orthoimagery_2016_2019", 2020: "Orthoimagery_2020_2023",
-            2024: "Orthoimagery_20242027"}
-WHEN = {2012: "Feb–Mar 2012", 2016: "Jan–Feb 2016", 2020: "Feb 2020", 2024: "Mar 2024"}
+NC_ONEMAP_2024 = "Orthoimagery_20242027"   # the last of the later photos, March 2024
 NOURISHMENT = SITE / "assets/hatteras/data/nourishment.json"   # the stretches, from tools/hatteras_nourishment_data.py
 # Sand placement, first and last load: Hannah's table of 2026-10-04, shared with the CASCADE session. Rodanthe is the
 # weakest (pumping "about to start" 29 July, "completed" reported 20 September; neither is a placement record). Avon 2022: first load 1:40 pm 19 June, last 11 pm 26 July (Dare County bulletins 31da538, 32561a3; checked 2026-10-04).
@@ -199,25 +197,7 @@ def clearest_spot(transects, km, w0, w1):
     return best[1], mean, best[0]
 
 
-def typical_spot(transects, km, y0, y1):
-    """The centre transect of the 7-transect window whose mean change is closest to the stretch's mean change."""
-    on = [t for t in transects if km[0] <= t["km"] <= km[1]]
-    dx = [change(t, y0, y1) for t in on]
-    mean = np.mean([v for v in dx if v is not None])
-    best = None
-    for i in range(len(on) - WINDOW + 1):
-        w = dx[i:i + WINDOW]
-        c = on[i + WINDOW // 2]
-        if None in w or not (km[0] + END_CLEAR_KM <= c["km"] <= km[1] - END_CLEAR_KM):
-            continue
-        gap = abs(np.mean(w) - mean)
-        if best is None or gap < best[0]:
-            best = (gap, c, float(np.mean(w)))
-    return best[1], mean, best[2]
-
-
 RECORD_END = pd.Timestamp("2026-01-13", tz="UTC")
-TIME_COLOURS = ["#7f0000", "#d7301f", "#fc8d59", "#fdd49e"]      # just after (dark) fading to the latest (pale)
 
 
 def rest_of_island(transects, stretches):
@@ -250,26 +230,10 @@ def later_windows(stretch, year):
     return out
 
 
-def span(w):
-    """'Oct 2014 to Sep 2015' for a window."""
-    return f"{w[0]:%b %Y} to {(w[1] - pd.Timedelta(days=1)):%b %Y}"
-
-
-def colours(n):
-    """n colours from dark (just after) to pale (latest), the last always the palest."""
-    if n == 1:
-        return [TIME_COLOURS[0]]
-    idx = np.round(np.linspace(0, len(TIME_COLOURS) - 1, n)).astype(int)
-    return [TIME_COLOURS[i] for i in idx]
-
-
 def years_later(stretch, year, after_date, transects, box, k, halo, fetch):
     """Every photo after the 'after' one, each with its own satellite shoreline and the before line dashed."""
-    wb_photo = None
     shots = [(src, NAIP_DATE_AT.get(stretch, {}).get(d, d)) for src, d in LATER_PHOTOS]
     shots = [(src, d) for src, d in shots if d > after_date]
-    if not shots:
-        return None, []
     return shots
 
 
@@ -288,7 +252,7 @@ def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo,
     for i, ((src, d), ax) in enumerate(zip(shots, axes.flat)):
         p = PHOTOS / f"{src}_{d}_{box[0]:.0f}_{box[1]:.0f}.jpg"
         if fetch or not p.exists():
-            img.save(naip_export(d, box, PX) if src == "naip" else img.export_nconemap(SERVICES[2024], box, (PX, PX)), p)
+            img.save(naip_export(d, box, PX) if src == "naip" else img.export_nconemap(NC_ONEMAP_2024, box, (PX, PX)), p)
         ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
         if lines[0]:
             xs, ys = zip(*lines[0])
@@ -318,44 +282,6 @@ def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo,
     fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
     plt.close(fig)
     return name, [f"{pd.Timestamp(d).day} {pd.Timestamp(d):%B %Y}" for _, d in shots]
-
-
-def through_time(stretch, year, transects, box, k, photo, halo):
-    """The latest photo with the shoreline before the fill and at each later window, dark to pale."""
-    from matplotlib.lines import Line2D
-    wb, _ = windows(stretch, year)
-    wins = [("Before the fill", wb)] + later_windows(stretch, year)
-    lines = shorelines(transects, box, [w for _, w in wins])
-    fig, ax = plt.subplots(figsize=(5.2, 5.6))
-    ax.imshow(Image.open(photo), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
-    handles = []
-    cols = colours(len(wins) - 1)
-    for i, (lab, w) in enumerate(wins):
-        xs, ys = zip(*lines[i])
-        if i == 0:
-            style = dict(color=REF_LINE, lw=1.0, ls=(0, (4, 2.5)))
-        else:
-            style = dict(color=cols[i - 1], lw=1.3)
-        ax.plot(xs, ys, path_effects=halo, **style)
-        handles.append(Line2D([], [], path_effects=halo, label=f"{lab} ({span(w)})", **dict(style, lw=style["lw"] + 0.3)))
-    ax.set_xlim(box[0], box[2])
-    ax.set_ylim(box[1], box[3])
-    ax.set_xticks([])
-    ax.set_yticks([])
-    for sp in ax.spines.values():
-        sp.set_color("#1a1a1a")
-        sp.set_linewidth(1.2)
-    ax.text(0.03, 0.97, f"Photo: {WHEN[2024]}", transform=ax.transAxes, ha="left", va="top", fontsize=9.5, color="#1a1a1a",
-            bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
-    x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.06 * (box[3] - box[1])
-    ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
-    ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=9, path_effects=halo)
-    fig.legend(handles=handles, loc="upper left", ncol=1, frameon=False, fontsize=8.5, bbox_to_anchor=(0.06, 0.035),
-               handlelength=2.6)
-    name = f"{stretch.lower()}_{year}_through_time.jpg"
-    fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
-    plt.close(fig)
-    return name, [lab for lab, _ in wins]
 
 
 def main():

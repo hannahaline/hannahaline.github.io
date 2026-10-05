@@ -7,7 +7,7 @@ Hannah's choice (2026-10-03): simplified versions of CASCADE's input figures (ou
 the 1996-2015 run, with plain labels. Every panel reads the same files the run reads, through the loaders of
 scripts/figure_making/pipeline/inputs_overview_figure.py in the CASCADE repo beside this one; the storms come from
 this site's timeline.json (the same hindcast storm record), because CASCADE's storm loader has no 1996-2015 period.
-Writes assets/hatteras/img/model_steps/step2.png ... step6.png; step1.png (one stretch as photo, lidar and grid) and
+Writes assets/hatteras/img/model_steps/step2.png ... step6.png; the step-1 slider layers (one stretch as photo, lidar and grid) and
 step5_road.png come from tools/hatteras_model_stretch.py.
 
     2 the whole island           elevation of every 10 m cell at the start of the run, 90 stretches of 500 m
