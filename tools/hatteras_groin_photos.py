@@ -30,6 +30,7 @@ from PIL import Image
 
 import hatteras_imagery_data as img
 import hatteras_shoreline_data as sd
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 PHOTOS = SITE / "tools/data/groin_photos"
@@ -92,7 +93,7 @@ def main():
     for y in YEARS:
         print(f"  {y}: {len(lines[y])} transects")
 
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
+    style.apply()
     fig, axes = plt.subplots(2, 3, figsize=(10.5, 9.4), gridspec_kw={"wspace": 0.04, "hspace": 0.1})
     extent = [box[0], box[2], box[1], box[3]]
     halo = [pe.withStroke(linewidth=3.2, foreground="#1a1a1a")]

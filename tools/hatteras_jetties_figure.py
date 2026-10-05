@@ -30,6 +30,7 @@ import numpy as np
 from PIL import Image
 
 import hatteras_imagery_data as img
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 CACHE = SITE / "tools/data/charleston_naip.jpg"
@@ -80,6 +81,7 @@ def px(lat, lon, h):
 
 
 def main():
+    style.apply()
     if not CACHE.exists():
         mosaic().save(CACHE, quality=90)
     full_h = Image.open(CACHE).height

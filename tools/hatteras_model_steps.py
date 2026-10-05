@@ -8,7 +8,7 @@ the 1996-2015 run, with plain labels. Every panel reads the same files the run r
 scripts/figure_making/pipeline/inputs_overview_figure.py in the CASCADE repo beside this one; the storms come from
 this site's timeline.json (the same hindcast storm record), because CASCADE's storm loader has no 1996-2015 period.
 Writes assets/hatteras/img/model_steps/step2.png ... step6.png; the step-1 slider layers (one stretch as photo, lidar and grid) and
-step5_road.png come from tools/hatteras_model_stretch.py.
+step5_road.jpg come from tools/hatteras_model_stretch.py.
 
     2 the whole island           elevation of every 10 m cell at the start of the run, 90 stretches of 500 m
     offset the shape of the coast  each stretch's shoreline set back from the model's straight axis (the BRIE offset
@@ -33,6 +33,7 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import FancyArrowPatch, Rectangle
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 CASCADE = SITE.parent / "CASCADE"
@@ -42,14 +43,14 @@ for p in ("scripts", "scripts/figure_making/island", "scripts/hatteras_ms", "scr
 import inputs_overview_figure as io  # noqa: E402
 from HAT_hindcast_config import field_default  # noqa: E402
 from site_layer.hatteras_site_config import (  # noqa: E402
-    HATTERAS_PERIODS, HATTERAS_COMMUNITY_ZONES, HATTERAS_ROAD_EVENTS, HATTERAS_NOURISHMENT_PROJECTS,
+    HATTERAS_PERIODS,
 )
 
 START = 1996
 END = HATTERAS_PERIODS[START]["end_year"]
 OUT = SITE / "assets/hatteras/img/model_steps"
 DATA = SITE / "assets/hatteras/data"
-INK, MUTED, GRID = "#1a1a1a", "#5b6469", "#e6e9eb"
+INK, MUTED, GRID = style.INK, style.MUTED, style.GRID
 FILL, ROAD, TROP, OTHER, SEA = "#c8880f", "#d55e00", "#c8880f", "#6baed6", "#2166ac"
 DOMAIN_KM = 0.5
 W_IN = 10.0
@@ -269,7 +270,7 @@ def main():
     """Draws every step twice: for wide screens, and narrower and taller for phones (<name>_phone.png, which the page
     swaps in below 576 px; Hannah, 2026-10-04, after the phone check found the text unreadable at a third of its size)."""
     global W_IN, H_SCALE, SUFFIX
-    plt.rcParams.update({"font.family": "DejaVu Sans"})
+    style.apply()
     canvas = io.init.detrended_canvas(START, include_buffers=False)
     cmap, norm, ticks, water = io.init.scheme_colours(io.ELEVATION_SCHEME)
     for W_IN, H_SCALE, SUFFIX in ((10.0, 1.0, ""), (5.2, 1.45, "_phone")):

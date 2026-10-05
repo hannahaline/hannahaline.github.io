@@ -28,6 +28,7 @@ matplotlib.use("Agg")
 import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 HURDAT = SITE.parent / "CASCADE/data/hatteras_init/3-env-forcings/1-records/hurdat2/hurdat2-1851-2025-091226.txt"
@@ -36,7 +37,7 @@ OUT_IMG = SITE / "assets/hatteras/img/named_storms.png"
 OUT_JSON = SITE / "assets/hatteras/data/named_storms.json"
 CAPE = (35.25, -75.52)
 TOP_N = 15
-INK, MUTED, GRID = "#1a1a1a", "#5b6469", "#e6e9eb"
+INK, MUTED, GRID = style.INK, style.MUTED, style.GRID
 COLOURS = {"tropical storm": "#fdd49e", "Cat 1": "#fdae6b", "Cat 2": "#f16913", "Cat 3": "#d94801", "Cat 4": "#8c2d04",
            "Cat 5": "#4a1402", "subtropical": "#bdbdbd", "post-tropical": "#bdbdbd"}
 STATUS = {"EX": "post-tropical", "SS": "subtropical", "SD": "subtropical", "LO": "post-tropical", "DB": "post-tropical",
@@ -106,7 +107,7 @@ def main():
     top = rows[:TOP_N]
     noreaster = max((e for e in storms if e["type"] != "tropical"), key=lambda e: e["wl"])
 
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
+    style.apply()
     for phone in (False, True):
         # a narrower, taller version for phones, swapped in below 576 px (phone check, 2026-10-04)
         fig, ax = plt.subplots(figsize=(5.0, 0.5 * len(top) + 1.9) if phone else (9.5, 0.38 * len(top) + 1.4))

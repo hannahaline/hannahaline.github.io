@@ -9,12 +9,12 @@ on the real island instead of a chart, both on one stretch so the example carrie
 2026-10-03): GIS 43, between Avon and Salvo about 21 km north of Cape Point, picked for its tall, continuous dune with
 the road behind it (the tallest 10th-percentile dune crest of the road stretches away from villages and road moves).
 It is outlined on the whole-island map of step 2 (tools/hatteras_model_steps.py reads GIS from here).
-  step1_photo.jpg, step1_lidar.png, step1_grid.png  NC OneMap 1996 aerial photo, the 1 m elevation surface and the 10 m
+  step1_photo.jpg, step1_lidar.jpg, step1_grid.png  NC OneMap 1996 aerial photo, the 1 m elevation surface and the 10 m
                    grid the model is cut from, as bare, same-sized layers (1 px = 1 m) for the drag slider in step 1
                    (Hannah, 2026-10-04: a slider instead of three stacked panels), and step1_scale.png, the height
                    colour scale for it; the rasters are CASCADE's 2009-2014-1996 product (clip_domain_43_*,
                    resampled_domain_43_*), as in scripts/figure_making/pipeline/0-elevation/dem_composition_figures.py.
-  step5_road.png   the 2010 NC OneMap photo, where NC-12 shows clearly, with thin lines for the road's centreline (the
+  step5_road.jpg   the 2010 NC OneMap photo, where NC-12 shows clearly, with thin lines for the road's centreline (the
                    2008 NC-12 line) and the front of the dunes (the 2009 digitised dune line) and the distance between
                    them. Hannah asked (2026-10-04) for an aerial photo with the road clearly visible and an estimated
                    distance from the road's centreline to the dune; 2010 is the photo nearest the years of the lines. The model reads its own distance per stretch from the elevation grid
@@ -37,6 +37,7 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+import hatteras_fig_style as fig_style
 
 SITE = Path(__file__).resolve().parents[1]
 CASCADE = SITE.parent / "CASCADE"
@@ -57,7 +58,7 @@ OUT = SITE / "assets/hatteras/img/model_steps"
 NCONEMAP = "https://services.nconemap.gov/secure/rest/services/Imagery/Orthoimagery_{year}/ImageServer/exportImage"
 DUNE = CASCADE / "data/hatteras_init/2-brie-offset/dunelines/duneline_2009.geojson"
 ROAD = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset/2008/nc12_2008.geojson"
-INK = "#1a1a1a"
+INK = fig_style.INK
 halo = [pe.withStroke(linewidth=3, foreground=INK)]
 
 
@@ -79,6 +80,7 @@ def photo(b, year):
 
 
 def main():
+    fig_style.apply()
     p = product(PRODUCT)
     z1, b = read(p.gapfill_1m / f"clip_domain_{GIS}_filled.tif")
     z10, b10 = read(p.resampled_10m / f"resampled_domain_{GIS}_filled.tif")
@@ -102,7 +104,7 @@ def main():
         return Image.fromarray((rgb * 255).astype(np.uint8))
 
     img.resize((w, h), Image.LANCZOS).save(OUT / "step1_photo.jpg", quality=88)
-    colour(c1).save(OUT / "step1_lidar.png", optimize=True)
+    colour(c1).save(OUT / "step1_lidar.jpg", quality=88, optimize=True)   # smooth colours: JPEG is a third the size
     colour(np.repeat(np.repeat(c10, 10, axis=0), 10, axis=1)[:h, :w]).save(OUT / "step1_grid.png", optimize=True)
     fig, ax = plt.subplots(figsize=(6, 0.55))
     sm = plt.cm.ScalarMappable(norm=norm, cmap=cmap)
@@ -151,9 +153,9 @@ def main():
             bbox=dict(boxstyle="square,pad=0.3", fc="white", ec=INK, lw=0.7, alpha=0.93))
     ax.plot([X1 - X0 - 260, X1 - X0 - 60], [40, 40], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
     ax.text(X1 - X0 - 160, 60, "200 m", ha="center", va="bottom", fontsize=9, color="white", path_effects=halo)
-    fig.savefig(OUT / "step5_road.png", dpi=150, bbox_inches="tight", pad_inches=0.04)
+    fig.savefig(OUT / "step5_road.jpg", dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
     plt.close(fig)
-    print(f"wrote step5_road.png (about {d} m)")
+    print(f"wrote step5_road.jpg (about {d} m)")
 
 
 if __name__ == "__main__":

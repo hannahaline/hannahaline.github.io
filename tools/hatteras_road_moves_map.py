@@ -36,6 +36,7 @@ SITE = Path(__file__).resolve().parents[1]
 CASCADE = SITE.parent / "CASCADE"
 sys.path.insert(0, str(CASCADE / "scripts"))
 from site_layer.hat_figure_style import MAP_LEGEND, apply_style, scale_bar_km, spines_for_image  # noqa: E402
+import hatteras_fig_style as style  # noqa: E402
 
 ROADS = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset"
 RELOC = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_relocation/1978_2008/road_relocation_1978_2008.csv"
@@ -97,6 +98,7 @@ def imagery(ax, window, zoom=15):
 
 def main():
     apply_style()
+    style.apply(size=None)        # the site's font over the house sizes
     reloc = pd.read_csv(RELOC).set_index("domain")
     lines = {k: road(k) for k in ("1978", "2008", "current")}
 

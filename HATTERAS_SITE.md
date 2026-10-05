@@ -4,10 +4,10 @@ Public-facing pages on Hatteras Island shoreline change, management, and the CAS
 Cape Hatteras National Seashore, NCDOT, Dare County and residents, and the Mountains to Sea Fellowship (NC WRRI + NC Sea Grant).
 This file is excluded from the build.
 
-## Where we left off (2026-10-04, evening): read this first
+## Where we left off (2026-10-04, late evening): read this first
 
-**State:** committed on `hatteras-site` (last commit 32cb1c8 plus this notes update), not pushed or public. Private preview
-(claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is version 40 and matches the branch. Local review: `python -m http.server 4123`
+**State:** committed on `hatteras-site` (the commits of late 10-04), not pushed or public. Private preview
+(claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is version 40 and is BEHIND the branch (Roboto figures, village labels, cleanup not yet published). Local review: `python -m http.server 4123`
 in the scratchpad build folder after `jekyll build -d <scratch>/site_new` and copying `assets/hatteras/js/` in (no Node).
 
 **Done 2026-10-04 (high level):** Your stretch of beach page (10 places, summary cards, 1993/2024 slider beside the
@@ -39,16 +39,13 @@ bio with photo; all 2021-shift mentions removed; phone versions of every image c
 9. Sandy pair (Buxton 2011/2012): use on Storms or delete.
 
 **Can do without her:**
-10. Village labels on the "Your stretch of beach" outline (offered; small grey names, picked place in teal).
-11. Delete unused files: `model_steps/step1.png` (and stop `hatteras_model_stretch.py` writing it), `buxton_houses_2025.jpg`,
-    the Sandy pair if dropped, `longshore.svg` and `groin.svg` generators/includes, and the old `through_time` and
-    `typical_spot` code in `tools/hatteras_nourishment_photos.py`.
-12. Page weight (preview ~43 MB): convert the largest PNG photos (`step5_road.png` ~0.8 MB) to JPEG, compress the
-    compare photos, check every image has `loading="lazy"`.
-13. One chart style: the image charts use matplotlib's DejaVu Sans; switch to the site font (Roboto) and one palette in
-    every tool, then re-run them all (`hatteras_model_steps.py`, `hatteras_named_storms.py`, `hatteras_nourishment_photos.py`,
-    `hatteras_assateague_figure.py`, `hatteras_jetties_figure.py`, `hatteras_groin_photos.py`).
-14. Link-preview image and description for /hatteras/ (now the profile photo): use the Cape Point aerial.
+Done late 10-04 (old items 10-14): village labels on the stretch outline; unused figures, diagrams and dead tool
+code removed (overwash.svg is the only process diagram left); `tools/hatteras_fig_style.py` puts every image figure in
+Roboto with the interactive charts' colours (all nine tools re-run, phone copies too; Roboto must be installed);
+`step5_road` and `step1_lidar` are JPEG now (780 -> 150 KB, 290 -> 100 KB); share image `start/share.jpg` (Cape Point).
+Page weight: the 43 MB was the preview bundle (every page plus the 120 time series); built pages are 0-2.5 MB each,
+10.5 MB in total, nearly all lazy-loaded; the photographs were already well compressed. Sandy pair kept (item 9).
+Small leftover: on the phone dune chart the "Irene and Earl" label sits over the bars; it reads, but could move.
 15. CASCADE: `attribution_nourishment.csv` still lists 3 fills (no Buxton 2017). The other session's work in that folder
     is committed now (1a669b4e), so re-run `coastsat_position_attribution.py` there.
 16. A check on a real phone of the pages changed 10-04 (done only in a 390 px frame).
@@ -229,7 +226,7 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
   - Both places are south-west of Cape Point, outside the modelled reach; the page says so.
 
 - `assets/hatteras/img/irene/`: USGS oblique photos (Karen Morgan, SPCMSC), public domain. Each place is cut from one USGS composite into its three panels (overview 30 Aug 2011, 6 May 2008, 31 Aug 2011) by finding the white separator rows. Sources: usgs.gov/media/images/oblique-aerial-photograph-rodanthe-nc-enlarged-details and ...-pea-island-nc-enlarged-details.
-- Overview: `hero_banner.jpg` (the beach below the lighthouse, 2004) and `lighthouse_aerial_2004.jpg`, both NPS / Michael B. Edwards on Wikimedia Commons; `lighthouse_1999.jpg`, USAF Tech. Sgt. Howard Blair on Commons. All public domain. `buxton_houses_2025.jpg` is no longer used on any page.
+- Overview: `hero_banner.jpg` (the beach below the lighthouse, 2004) and `lighthouse_aerial_2004.jpg`, both NPS / Michael B. Edwards on Wikimedia Commons; `lighthouse_1999.jpg`, USAF Tech. Sgt. Howard Blair on Commons. All public domain.
 - `assets/hatteras/img/longshore/`: `dye_release_2010.jpg` (Dann Blackwood and Don Bowers) and `cape_point.jpg` (Dann Blackwood), USGS, from "Geology of Cape Hatteras National Seashore". Public domain. They replace `longshore.svg`, which is still generated but unused.
 - `isabel/overwash_nc12_2003.jpg`: USGS Data Series 761, frame 2003_0921_r045s18 (21 Sep 2003, between Frisco and Hatteras Village). Public domain.
 - `assets/hatteras/img/dunes/`: CCC sand fence 1936 and the finished fence 1930s (NPS, Commons), S-curves with no dune 6 May 2008 (USGS baseline obliques, doi 10.5066/P9R9PQFK), the dune rebuilt there Sep 2011 (NCDOT, CC BY 2.0, cropped), the Rodanthe breach 2020 (CAHA). `dolan1972/`: cross-sections, plates I and III and the 1972 bulldozer photo from Dolan and Godfrey (1972), NPS NRR-5.

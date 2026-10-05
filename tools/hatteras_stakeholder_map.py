@@ -40,6 +40,7 @@ from site_layer.hat_figure_style import (  # noqa: E402
 from site_layer.hat_map_layers import NE_STATES  # noqa: E402
 sys.path.insert(0, str(SITE / "tools"))
 import hatteras_shoreline_data as shoreline  # noqa: E402
+import hatteras_fig_style as style  # noqa: E402
 
 RATES = SITE / "assets/hatteras/data/shoreline_rates.json"
 NC12 = CASCADE / "data/hatteras_init/4-mgmt-forcing/road_offset/raw_offset/current/nc12_current.geojson"
@@ -52,7 +53,7 @@ TILE_CACHE = CASCADE / "data/hatteras_init/map_elements/tile_cache"
 
 LAT0, LAT1, LON0, LON1 = 35.19, 35.80, -75.72, -75.36
 CRS = "EPSG:32618"
-TEAL = "#1b7f8c"                    # house LOCATOR
+TEAL = style.TEAL                   # the site's highlight colour (was house LOCATOR #1b7f8c)
 ROAD = "#ffd23f"                    # house: NC-12 on imagery
 SAND = "#f6e3b8"                    # house ADDED_FILL
 WATER_MAP, LAND, LAND_EDGE = "#e9eff4", "#ede9df", "0.55"
@@ -123,6 +124,7 @@ def locator(ax, box_ll):
 
 def main() -> None:
     apply_style()
+    style.apply(size=None)        # the site's font over the house sizes
     data = json.loads(RATES.read_text(encoding="utf-8"))
     x0, y0 = to_utm(LON0, LAT0)
     x1, y1 = to_utm(LON1, LAT1)

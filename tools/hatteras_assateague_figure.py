@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import hatteras_imagery_data as img
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 CACHE = SITE / "tools/data/assateague_usgs.jpg"
@@ -42,6 +43,7 @@ ASSA_EDGE_X = 482                        # px: Assateague's water's edge on the 
 
 
 def main():
+    style.apply()
     if not CACHE.exists():
         x, y = img.merc(*CENTRE)
         k = 1 / math.cos(math.radians(CENTRE[0]))

@@ -49,6 +49,7 @@ from PIL import Image
 
 import hatteras_imagery_data as img
 import hatteras_shoreline_data as sd
+import hatteras_fig_style as style
 
 SITE = Path(__file__).resolve().parents[1]
 PHOTOS = SITE / "tools/data/nourishment_photos"
@@ -298,7 +299,7 @@ def main():
     rest = rest_of_island(rates["transects"], stretches)
     PHOTOS.mkdir(parents=True, exist_ok=True)
     OUT_IMG.mkdir(parents=True, exist_ok=True)
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
+    style.apply()
     halo = [pe.withStroke(linewidth=2.2, foreground="#1a1a1a")]
     out = {}
     for stretch, year, yb, ya in FILLS:
