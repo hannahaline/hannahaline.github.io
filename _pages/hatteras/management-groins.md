@@ -26,13 +26,6 @@ The groins trapped sand drifting south along the shore, and the beach south of t
 The shore kept retreating toward the lighthouse, and in the summer of 1999 the lighthouse itself was moved 2,900 feet (880 m) to the southwest.
 The 2017 and 2022 Buxton nourishment projects start at the southern groin and run north.
 
-## The repair under way
-
-Today the two northern groins are completely submerged on most days, and the southern one (groin 3 in the photos) has deteriorated.
-Dare County is repairing it, to trap more sand and keep the beach to its north wide enough to protect NC-12 through Buxton.
-The plan restores 640 feet of the groin, with stone armour on its seaward 340 feet. The National Park Service took public comments in August and September 2025, and in February 2026 the state ruled the work a repair of an existing structure, which the hard-structure ban allows.
-According to local news, the contract was awarded in June 2026, with the work due to be substantially complete by 15 December 2026.
-
 ## Why North Carolina banned hard structures
 
 In January 1985 the state's Coastal Resources Commission banned permanent erosion-control structures on the ocean shoreline, including groins, jetties, breakwaters and seawalls.
@@ -42,41 +35,33 @@ In 2003 the ban was written into state law: "No person shall construct a permane
 In 2011 the legislature made an exception for terminal groins, built at the end of an island beside an inlet. Up to four were allowed at first, and up to seven today. Two have been built: at Bald Head Island (2015) and Ocean Isle Beach (2022).
 Older structures such as the Buxton groins remain, and can be repaired.
 
-## What groins and jetties have done elsewhere
+## The repair under way
 
-Groins trap sand on the side it comes from, so the beach beyond them is starved of sand.
+Today the two northern groins are completely submerged on most days, and the southern one (groin 3 in the photos) has deteriorated.
+Dare County is repairing it, to trap more sand and keep the beach to its north wide enough to protect NC-12 through Buxton.
+The plan restores 640 feet of the groin, with stone armour on its seaward 340 feet. The National Park Service took public comments in August and September 2025, and in February 2026 the state ruled the work a repair of an existing structure, which the hard-structure ban allows.
+According to local news, the contract was awarded in June 2026, with the work due to be substantially complete by 15 December 2026.
 
-### Folly Beach, South Carolina
+<details class="hat-deeper" markdown="1">
+<summary>Lessons from other places</summary>
 
-The Charleston Harbor jetties, the larger cousins of groins, were authorized in 1878 and built between 1882 and 1895 to keep the harbor entrance open.
-A 1987 Army Corps of Engineers study found that about 57% of the erosion of Folly Beach, just south of them, was caused by the jetties.
-Between the jetties and Folly Beach, the Morris Island Lighthouse was finished on dry land in 1876, beside its keepers' houses.
-By 1982 it stood about 500 feet off what was left of Morris Island; the National Register report written that year says the jetties "caused complete erosion of the shoal protecting Morris Island from the sea."
+Groins and jetties trap sand on the side it comes from, so the beach beyond them is starved of it.
+
+**Folly Beach, South Carolina.** The Charleston Harbor jetties, built in 1882–1895, are larger cousins of groins. A 1987 Army Corps of Engineers study put about 57% of the erosion of Folly Beach, just south of them, down to the jetties. Between them and Folly Beach, the Morris Island Lighthouse was built on dry land in 1876; by 1982 it stood about 500 feet offshore.
 
 <figure class="hat-photo-wide" style="max-width: 46rem; margin-left: auto; margin-right: auto;">
 <img src="{{ '/assets/hatteras/img/charleston_jetties.jpg' | relative_url }}" alt="Aerial photo of the entrance to Charleston Harbor: the two stone jetties reaching out to sea, Morris Island south of them, and the Morris Island Lighthouse standing in the water off the island's south end, with the north end of Folly Beach beyond Lighthouse Inlet" loading="lazy">
-<figcaption class="hat-caption">The entrance to Charleston Harbor, South Carolina, in April 2023. The two jetties run out to sea on either side of the entrance; Morris Island lies south of them, and the circle marks the Morris Island Lighthouse, now standing in the water off the island's south end. Folly Beach continues south from Lighthouse Inlet. Photo: USDA National Agriculture Imagery Program (public domain), 18 April 2023, via Microsoft Planetary Computer.</figcaption>
+<figcaption class="hat-caption">The entrance to Charleston Harbor in April 2023: the two jetties, Morris Island south of them, and the Morris Island Lighthouse (circled), built on the island in 1876 and now standing in the water. Folly Beach continues south from Lighthouse Inlet. Photo: USDA National Agriculture Imagery Program (public domain), via Microsoft Planetary Computer.</figcaption>
 </figure>
 
-<div class="hat-pairs">
-<figure class="hat-pair">
-<div class="hat-pair-photos">
-<figure><img src="{{ '/assets/hatteras/img/elsewhere/charleston_light_1876.jpg' | relative_url }}" alt="Black and white photo of the striped lighthouse standing on flat, dry land beside a two-storey keeper's house and palm trees" loading="lazy"><figcaption>On land (photo titled 1876)</figcaption></figure>
-<figure><img src="{{ '/assets/hatteras/img/elsewhere/morris_island_light_2020.jpg' | relative_url }}" alt="The same lighthouse at dusk, standing alone in the water with only a low sandbar near its base" loading="lazy"><figcaption>November 2020, in the water</figcaption></figure>
-</div>
-<figcaption class="hat-caption">The Morris Island Lighthouse. It was finished in 1876 on dry land among the keepers' houses; the island it stood on has since washed away around it. Photos: U.S. Coast Guard (<a href="https://commons.wikimedia.org/wiki/File:Charleston1876.JPG">left</a>, titled "1876 Charleston Light") and Lance Cheung, U.S. Department of Agriculture (<a href="https://commons.wikimedia.org/wiki/File:20201118-RD-LSC-0019_(50732148382).jpg">right</a>, 18 November 2020), both public domain.</figcaption>
-</figure>
-</div>
-
-### Westhampton Beach, New York
-
-On Long Island, a field of 15 long rock groins was built at Westhampton in 1965–66 and 1969–70.
-The groins trapped an estimated five million cubic yards of sand, starving the beach to the west of them, which breached in a nor'easter in December 1992.
+**Westhampton Beach, New York.** Fifteen rock groins built in 1965–70 trapped an estimated five million cubic yards of sand. The beach to the west, cut off from that sand, breached in a nor'easter in December 1992.
 
 <figure class="hat-photo-wide" style="max-width: 46rem; margin-left: auto; margin-right: auto;">
 <img src="{{ '/assets/hatteras/img/elsewhere/westhampton_breach_1992.jpg' | relative_url }}" alt="Aerial photo from December 1992 of a narrow barrier island with houses, cut through by the ocean, with fans of sand spread into the bay behind it and groins visible farther along the beach" loading="lazy">
-<figcaption class="hat-caption">Westhampton Beach on 18 December 1992, days after the nor'easter: the ocean has cut through the barrier west of the groin field (groins show at the right) and spread fans of sand into the bay behind. Photo: U.S. Army Corps of Engineers, New York District, via <a href="https://www.dvidshub.net/image/7053492/1992-westhampton-beach-breach">DVIDS</a> (public domain); the "1992" label is the Corps'.</figcaption>
+<figcaption class="hat-caption">Westhampton Beach on 18 December 1992: the ocean has cut through the barrier west of the groins (at right) and spread sand into the bay behind. Photo: U.S. Army Corps of Engineers, New York District, via <a href="https://www.dvidshub.net/image/7053492/1992-westhampton-beach-breach">DVIDS</a> (public domain).</figcaption>
 </figure>
+
+</details>
 
 <p class="hat-caption">Sources: National Park Service, <a href="https://parkplanning.nps.gov/showFile.cfm?projectID=132446&amp;sfid=813968">Buxton Southern Groin Repair</a> (2025); NC Division of Coastal Management, <a href="https://www.deq.nc.gov/coastal-management/buxton-groin-determination-feb-2026/open">Buxton groin determination</a> (February 2026) and <a href="https://www.deq.nc.gov/coastal-management/proposed-groin-repairs-buxton-20250624-ncdcm/open">proposed groin repairs at Buxton</a> (2025); Island Free Press, <a href="https://islandfreepress.org/outer-banks-news/buxton-groin-repair-project-remains-on-track-for-substantial-completion-by-dec-15/">Buxton groin repair project remains on track</a> (September 2026); NC Coastal Resources Science Panel, <a href="https://deq.nc.gov/coastal-management/draft-science-panel-report-effects-hard-structures-june-15-2026-v3/download?attachment=">Effects of Hard Structures on Sandy, Open-Ocean Coastlines</a> (draft, June 2026); Coastal Resources Commission, <a href="https://www.deq.nc.gov/documents/pdf/coastal-resources-commission-meeting-agendas-minutes/agendas/shoreline-hardening-exceptions-feb17/download">History of the hardened structures ban</a>; <a href="https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_113A/GS_113A-115.1.html">N.C. Gen. Stat. 113A-115.1</a>; <a href="https://www.ncleg.gov/enactedlegislation/sessionlaws/html/2011-2012/sl2011-387.html">Session Law 2011-387</a>; National Park Service, <a href="https://www.nps.gov/articles/groins-and-jetties.htm">Groins and Jetties</a>; City of Folly Beach, <a href="https://des.sc.gov/sites/des/files/media/document/OCRM_FollyBeachLCBMP2021.pdf">Local Comprehensive Beachfront Management Plan</a> (2021), citing the US Army Corps of Engineers (1987); J. Tanski, New York Sea Grant, <a href="https://repository.library.noaa.gov/view/noaa/35726/noaa_35726_DS1.pdf">Long Island's Dynamic South Shore: A Primer</a>; US Army Corps of Engineers, Charleston District, <a href="https://www.sac.usace.army.mil/Media/News-Stories/Article/2140820/repairing-the-south-jetty/">Repairing the south jetty</a> and <a href="https://www.sac.usace.army.mil/Portals/43/docs/civilworks/follybeachfeasibility/Appendix%20G%20Section%20111%20Folly%20Beach%2026%20MAY%202020.pdf">Folly Beach Section 111, Appendix G</a> (2020); South Carolina Department of Archives and History for the National Park Service, <a href="https://npgallery.nps.gov/NRHP/GetAsset/NRHP/82003837_text">National Register nomination, Morris Island Lighthouse</a> (1982); Nersesian, Kraus and Carson, <a href="https://icce-ojs-tamu.tdl.org/icce/article/view/4935">International Conference on Coastal Engineering</a> (1992); National Park Service, <a href="https://www.nps.gov/caha/learn/historyculture/movingthelighthouse.htm">Moving the Cape Hatteras Lighthouse</a>.</p>
 

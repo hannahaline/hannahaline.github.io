@@ -208,35 +208,6 @@ def step4():
     save(fig, 4)
 
 
-def step5():
-    setback = io.two_row(io.tv.INIT_ROOT / HATTERAS_PERIODS[START]["road_setback_file"]).reindex(io.GIS)
-    fig, ax = plt.subplots(figsize=(W_IN, 3.6))
-    for lo, hi in HATTERAS_COMMUNITY_ZONES:
-        ax.axvspan(km(lo) - 0.25, km(hi) + 0.25, color="#e8edf0", zorder=0)
-    ax.axvspan(-1, -1, color="#e8edf0", label="villages: dunes rebuilt, overwash cleared from streets")
-    ax.step(km(setback.index), setback.values, where="mid", color=INK, lw=1.8, label="NC-12: distance back from the front of the dunes (m)")
-    for e in HATTERAS_ROAD_EVENTS:
-        if hasattr(e, "displacement_m") and START <= e.year < END:
-            g = list(e.displacement_m)
-            ax.axvspan(km(min(g)) - 0.25, km(max(g)) + 0.25, ymin=0, ymax=0.12, color=ROAD, zorder=2)
-            ax.text(km(np.mean(g)), 0.15, f"road moved\ninland, {e.year}", transform=ax.get_xaxis_transform(), ha="center",
-                    fontsize=9, color=ROAD, path_effects=halo)
-    for p in HATTERAS_NOURISHMENT_PROJECTS:
-        if START <= p.year < END:
-            g = p.gis_domains
-            ax.axvspan(km(min(g)) - 0.25, km(max(g)) + 0.25, ymin=0.88, ymax=1, color=FILL, zorder=2)
-            ax.text(km(np.mean(g)), 0.84, f"beach\nnourishment, {p.year}", transform=ax.get_xaxis_transform(), ha="center",
-                    va="top", fontsize=9, color="#8a5d06", path_effects=halo)
-    ax.set_xlim(0, 45)
-    ax.set_ylim(0, np.nanmax(setback) * 1.25)
-    ax.set_xlabel("km north of Cape Point", fontsize=10)
-    ax.set_ylabel("metres", fontsize=10)
-    ax.legend(frameon=False, fontsize=9.5, loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=2)
-    villages(ax)
-    frame(ax)
-    save(fig, 5)
-
-
 def step6():
     target, _ = io.observed_target(START, END)
     fig, ax = plt.subplots(figsize=(W_IN, 3.6))
@@ -247,8 +218,8 @@ def step6():
     ax.set_xlim(0, 45)
     ax.set_xlabel("km north of Cape Point", fontsize=10)
     ax.set_ylabel(f"shoreline change,\nm per year ({START}–{END})", fontsize=10)
-    ax.text(0.995, 0.97, "growing (seaward)", transform=ax.transAxes, ha="right", va="top", fontsize=9.5, color="#2166ac")
-    ax.text(0.995, 0.03, "eroding (landward)", transform=ax.transAxes, ha="right", va="bottom", fontsize=9.5, color="#b2182b")
+    ax.text(0.5, 0.97, "growing (seaward)", transform=ax.transAxes, ha="center", va="top", fontsize=9.5, color="#2166ac")
+    ax.text(0.5, 0.03, "eroding (landward)", transform=ax.transAxes, ha="center", va="bottom", fontsize=9.5, color="#b2182b")
     ax.grid(axis="y", color=GRID, lw=0.6)
     villages(ax)
     frame(ax)
@@ -263,7 +234,6 @@ def main():
     step_offset()
     step3()
     step4()
-    step5()
     step6()
 
 

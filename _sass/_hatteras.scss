@@ -1818,3 +1818,27 @@ table.hat-mvo-skill {
   object-fit: cover;
 }
 
+// Model page step 1: photo vs height map slider (1 px = 1 m, 950 x 500)
+.hat-ms-compare {
+  margin: 0.4rem 0 0.2rem;
+
+  .hat-ms-layers {
+    margin-bottom: 0.5rem;
+  }
+
+  .hat-ms-photos {
+    aspect-ratio: 950 / 500;
+
+    img {
+      margin: 0;          // the stepper's image margin would push the stacked layers down
+    }
+  }
+
+  .hat-ms-scale {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0.4rem auto 0;
+  }
+}
+

@@ -12,8 +12,24 @@
 
   <section class="hat-step" aria-label="Step 1">
     <h3><span>Step 1 of 7</span> From photo to model grid</h3>
-    <p>Planes with lasers (lidar) measure the height of the ground every metre. The model uses one height for every 10 m square. Here is one 500 m stretch of the island between Avon and Salvo, from the sound on the left to the ocean on the right, three ways.</p>
-    <img src="{{ ms }}step1.png" alt="The same 500 m stretch of island three times: an aerial photo, a detailed height map from lidar showing two dune ridges near the ocean, and the coarser 10 m grid the model uses" loading="lazy">
+    <p>Planes with lasers (lidar) measure the height of the ground every metre. The model uses one height for every 10 m square. Here is one 500 m stretch of the island between Avon and Salvo, from the sound on the left to the ocean on the right: drag the handle to compare the aerial photo with the height maps.</p>
+    <div class="hat-ms-compare" data-photo="{{ ms }}step1_photo.jpg" data-lidar="{{ ms }}step1_lidar.png" data-grid="{{ ms }}step1_grid.png">
+      <div class="hat-seg hat-ms-layers" role="group" aria-label="Compare the photo with">
+        <button type="button" data-layer="grid" class="on">The model's 10 m grid</button>
+        <button type="button" data-layer="lidar">Lidar, every 1 m</button>
+      </div>
+      <div class="hat-compare-stage">
+        <div class="hat-compare-photos hat-ms-photos" role="region" aria-label="The aerial photo compared with the height map">
+          <img class="hat-ms-before" src="{{ ms }}step1_photo.jpg" alt="Aerial photo, 1996, of a 950 m wide slice of the island from the sound to the ocean" decoding="async">
+          <img class="hat-ms-after" src="{{ ms }}step1_grid.png" alt="The same slice as the model's grid of heights, one value every 10 m" decoding="async">
+        </div>
+        <span class="hat-compare-tag left">Aerial photo, 1996</span>
+        <span class="hat-compare-tag right hat-ms-tag">The model's 10 m grid</span>
+        <div class="hat-compare-divider hat-ms-divider"><span></span></div>
+        <input type="range" min="0" max="100" value="50" class="hat-compare-range hat-ms-range" aria-label="Drag to compare the photo with the height map">
+      </div>
+      <img class="hat-ms-scale" src="{{ ms }}step1_scale.png" alt="Colour scale: height above high tide in metres, with water in blue" loading="lazy">
+    </div>
   </section>
   <section class="hat-step" aria-label="Step 2">
     <h3><span>Step 2 of 7</span> The whole island</h3>
@@ -38,9 +54,8 @@
   <section class="hat-step" aria-label="Step 6">
     <h3><span>Step 6 of 7</span> What people did</h3>
     <p>The model follows the management that really happened. In front of NC-12, dunes are rebuilt after storms and sand is pushed off the road; in the villages, part of the overwash is cleared from streets and yards. The road was moved inland north of Buxton in 1999, and sand was pumped onto the beach at the Rodanthe S-curves in 2014.</p>
-    <img src="{{ ms }}step5_road.png" alt="Aerial photo of one stretch between Avon and Salvo with the front of the dunes and NC-12 drawn on it, about 200 m apart" loading="lazy">
-    <p class="hat-step-note">The model knows how far the road sits behind the dunes on every stretch (above, one stretch; below, the whole island), so it knows where dunes must be rebuilt to protect it.</p>
-    <img src="{{ ms }}step5.png" alt="Chart along the island of how far NC-12 sits back from the dunes, with the villages shaded, the 1999 road move north of Buxton and the 2014 nourishment at Rodanthe marked" loading="lazy">
+    <img src="{{ ms }}step5_road.png" alt="Shaded relief from lidar of one stretch between Avon and Salvo: a tall dune ridge along the beach, with the front of the dunes and NC-12 drawn on it, about 200 m apart" loading="lazy">
+    <p class="hat-step-note">The model knows how far the road sits behind the dunes on every stretch, so it knows where dunes must be rebuilt to protect it.</p>
   </section>
   <section class="hat-step" aria-label="Step 7">
     <h3><span>Step 7 of 7</span> What it is compared with</h3>

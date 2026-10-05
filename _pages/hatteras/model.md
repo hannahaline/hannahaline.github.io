@@ -13,13 +13,7 @@ CASCADE is a computer model of a {% include hatteras/term.liquid id="barrier-isl
 It starts from a detailed map of the island's elevation, applies the storms, waves, and sea-level rise that actually happened, and lets the island change, year by year.
 </p>
 
-## How it works, in four parts
-
-<figure class="hat-model-figure" data-scroll-start="0.15">
-{% include hatteras/model_diagram.svg %}
-</figure>
-
-### The inputs, step by step
+## The inputs, step by step
 
 Click **Next**, or use the arrow keys, to see what goes into a run of the model, here the run that recreates 1996 to 2015.
 

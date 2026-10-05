@@ -34,7 +34,27 @@
     show(0);
   }
 
-  function start() { document.querySelectorAll(".hat-steps").forEach(function (r) { Steps(r); }); }
+  // Step 1: drag between the photo and a height map; buttons pick the 10 m grid or the 1 m lidar
+  function Compare(box) {
+    var after = box.querySelector(".hat-ms-after"), range = box.querySelector(".hat-ms-range");
+    var divider = box.querySelector(".hat-ms-divider"), tag = box.querySelector(".hat-ms-tag");
+    function clip() { after.style.clipPath = "inset(0 0 0 " + range.value + "%)"; divider.style.left = range.value + "%"; }
+    range.addEventListener("input", clip);
+    range.addEventListener("keydown", function (e) { e.stopPropagation(); });   // arrows move the handle, not the step
+    box.querySelectorAll(".hat-ms-layers button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        box.querySelectorAll(".hat-ms-layers button").forEach(function (o) { o.classList.toggle("on", o === b); });
+        after.src = box.getAttribute("data-" + b.getAttribute("data-layer"));
+        tag.textContent = b.textContent;
+      });
+    });
+    clip();
+  }
+
+  function start() {
+    document.querySelectorAll(".hat-steps").forEach(function (r) { Steps(r); });
+    document.querySelectorAll(".hat-ms-compare").forEach(Compare);
+  }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 })();

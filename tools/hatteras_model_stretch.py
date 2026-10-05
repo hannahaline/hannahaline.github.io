@@ -12,15 +12,20 @@ It is outlined on the whole-island map of step 2 (tools/hatteras_model_steps.py 
   step1.png        (a) NC OneMap 1996 aerial photo, (b) the 1 m elevation surface, (c) the 10 m grid the model is cut
                    from; the rasters are CASCADE's 2009-2014-1996 product (clip_domain_43_*, resampled_domain_43_*),
                    as in scripts/figure_making/pipeline/0-elevation/dem_composition_figures.py.
-  step5_road.png   the 2007 photo with the 2009 digitised dune line and the 2008 NC-12 line (lines and photo of the same
-                   years, so they sit on each other; the 1996 photo is offset from them), and the distance between them. The model reads its own distance per stretch from the elevation grid
+  step1_photo.jpg, step1_lidar.png, step1_grid.png  the same three views as bare, same-sized layers (1 px = 1 m) for
+                   the drag slider in step 1 (Hannah, 2026-10-04: a slider instead of three stacked panels), and
+                   step1_scale.png, the height colour scale for it
+  step5_road.png   shaded relief of the 2009 lidar (the 1 m surface above, lit from the north-west and tinted by height)
+                   with the 2009 digitised dune line and the 2008 NC-12 line, and the distance between them. Hannah
+                   asked (2026-10-04) for an image where the dunes stand out; in the 2007 photo used before they read
+                   as flat sand. Lines and lidar are of the same years, so they sit on each other. The model reads its own distance per stretch from the elevation grid
                    (RoadSetback_1996_dunestart.csv, 170 m here); the caption on the page says so.
 Writes into assets/hatteras/img/model_steps/; the photos are cached in tools/data/model_stretch_gis<GIS>_<year>.jpg.
 
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
          University of North Carolina at Chapel Hill
 Contact: hahenry@unc.edu
-Version: 2026-10-03
+Version: 2026-10-04
 """
 import io as _io
 import sys
@@ -124,6 +129,27 @@ def main():
     plt.close(fig)
     print("wrote step1.png")
 
+    # ---- step 1 as slider layers: photo, 1 m lidar, 10 m grid, each W x H px at 1 px = 1 m ------------------------
+    w, h = X1 - X0, c1.shape[0]
+    from matplotlib.colors import to_rgb
+
+    def colour(z):
+        rgb = cmap(norm(np.nan_to_num(z, nan=-1)))[..., :3]
+        rgb[~(z >= 0)] = to_rgb(water)
+        return Image.fromarray((rgb * 255).astype(np.uint8))
+
+    img.resize((w, h), Image.LANCZOS).save(OUT / "step1_photo.jpg", quality=88)
+    colour(c1).save(OUT / "step1_lidar.png", optimize=True)
+    colour(np.repeat(np.repeat(c10, 10, axis=0), 10, axis=1)[:h, :w]).save(OUT / "step1_grid.png", optimize=True)
+    fig, ax = plt.subplots(figsize=(6, 0.55))
+    sm = plt.cm.ScalarMappable(norm=norm, cmap=cmap)
+    cb = fig.colorbar(sm, cax=ax, orientation="horizontal", ticks=ticks)
+    cb.set_label("height above high tide (m); blue is water", fontsize=9.5)
+    cb.ax.tick_params(labelsize=9)
+    fig.savefig(OUT / "step1_scale.png", dpi=150, bbox_inches="tight", pad_inches=0.04)
+    plt.close(fig)
+    print(f"wrote step1 slider layers ({w} x {h} px) and scale")
+
     # ---- step 5: the road behind the dunes on this stretch ------------------------------------------------------------
     dune = gpd.read_file(DUNE).to_crs(26918).geometry.union_all()
     road = gpd.read_file(ROAD).to_crs(26918).geometry.union_all()
@@ -135,7 +161,12 @@ def main():
     from shapely.geometry import box as sbox
     clip = sbox(b.left + X0, b.bottom, b.left + X1, b.top)
     fig, ax = plt.subplots(figsize=(9.5, 9.5 * H / (X1 - X0) + 0.3))
-    ax.imshow(photo(b, 2007), extent=ext)
+    from matplotlib.colors import LightSource
+    land = np.ma.masked_less(np.ma.masked_invalid(c1), 0)
+    ls = LightSource(azdeg=315, altdeg=35)
+    relief = ls.shade(np.ma.filled(land, 0), cmap=cmap, norm=norm, blend_mode="soft", vert_exag=3)
+    relief[np.ma.getmaskarray(land)] = (*matplotlib.colors.to_rgb(water), 1)
+    ax.imshow(relief, extent=ext, interpolation="bilinear")
     for geom, col, lab in ((dune.intersection(clip), "#ffd23f", "front of the dunes (2009)"),
                            (road.intersection(clip), "#d55e00", "NC-12 (2008)")):
         for g in getattr(geom, "geoms", [geom]):
@@ -157,6 +188,8 @@ def main():
     ax.set_xticks([])
     ax.set_yticks([])
     ax.legend(loc="lower left", fontsize=9.5, framealpha=0.92, edgecolor=INK)
+    ax.text(0.008, 0.97, "Shaded relief from lidar, 2009", transform=ax.transAxes, va="top", fontsize=10, color=INK,
+            bbox=dict(boxstyle="square,pad=0.3", fc="white", ec=INK, lw=0.7, alpha=0.93))
     ax.plot([X1 - X0 - 260, X1 - X0 - 60], [40, 40], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
     ax.text(X1 - X0 - 160, 60, "200 m", ha="center", va="bottom", fontsize=9, color="white", path_effects=halo)
     fig.savefig(OUT / "step5_road.png", dpi=150, bbox_inches="tight", pad_inches=0.04)
