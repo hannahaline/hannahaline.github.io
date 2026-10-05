@@ -11,7 +11,7 @@ nav: false
 
 <p class="hat-lead">
 Satellites have photographed Hatteras Island many times a year since the 1980s.
-By tracing the {% include hatteras/term.liquid id="shoreline" text="shoreline" %} in each image, we can see where the beach has moved landward, where it has grown, and when the big changes happened.
+By tracing the {% include hatteras/term.liquid id="shoreline" text="shoreline" %} in each image shows where the beach has moved landward, where it has grown, and when the big changes happened.
 </p>
 
 ## Three ways to look at the record

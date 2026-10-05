@@ -19,7 +19,7 @@ nav: false
 <p class="hat-lead">
 This site shares what my research has learned about how Hatteras Island has changed over the last three decades.
 It covers what satellites and aerial photos show, the natural processes behind those changes, and the ways that people manage the island.
-It also introduces a computer model that recreates this history, so that we can test management choices before making them.
+It also introduces a computer model that recreates this history, so that management choices can be tested before they are made.
 </p>
 
 ## Start here: three steps
@@ -45,7 +45,7 @@ It also introduces a computer model that recreates this history, so that we can 
     <img src="{{ '/assets/hatteras/img/model_steps/step1.png' | relative_url }}" alt="One stretch of the island as an aerial photo and as the model's grid of heights" loading="lazy">
     <div>
       <h3><span>3</span> A model compares options</h3>
-      <p>CASCADE is a computer model of the island and its management. We check it against what actually happened since 1996, and show where it matches and where it does not. A model that passes that check can be used to compare options for the future; it does not choose between them.</p>
+      <p>CASCADE is a computer model of the island and its management. I check it against what actually happened since 1996, and show where it matches and where it does not. A model that passes that check can be used to compare options for the future; it does not choose between them.</p>
       <a href="{{ '/hatteras/model/' | relative_url }}">The model</a>
     </div>
   </li>
@@ -54,7 +54,7 @@ It also introduces a computer model that recreates this history, so that we can 
 <p class="hat-start-own">Live on the island or look after part of it? <a href="{{ '/hatteras/your-beach/' | relative_url }}">See the summary for your stretch of beach</a>.</p>
 
 <div class="hat-keypoint">
-<b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
+<b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then I can use it to ask "what if" questions about the future with more confidence.
 </div>
 
 <div class="hat-pairs">

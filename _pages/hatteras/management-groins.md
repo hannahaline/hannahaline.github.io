@@ -87,7 +87,7 @@ The groins trapped an estimated five million cubic yards of sand, starving the b
 
 CASCADE did not include hard structures, so part of my research adds a groin module.
 In the model, the groin blocks a share of the sand moving along the shore at its location. The beach on one side gains what the other side loses.
-We test it by asking whether the model, with the groin in place, reproduces the shoreline change measured on both sides of the Buxton groins.
+I test it by asking whether the model, with the groin in place, reproduces the shoreline change measured on both sides of the Buxton groins.
 
 </details>
 
