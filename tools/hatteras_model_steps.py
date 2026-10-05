@@ -21,7 +21,7 @@ step5_road.png come from tools/hatteras_model_stretch.py.
 Author:  Hannah A. Henry, Coastal Environmental Change Lab,
          University of North Carolina at Chapel Hill
 Contact: hahenry@unc.edu
-Version: 2026-10-03
+Version: 2026-10-04
 """
 import json
 import sys
@@ -54,6 +54,13 @@ FILL, ROAD, TROP, OTHER, SEA = "#c8880f", "#d55e00", "#c8880f", "#6baed6", "#216
 DOMAIN_KM = 0.5
 W_IN = 10.0
 STORM_NAME_M = 3.0              # named tropical storms at or above this water level, as on the Storms page
+SMALL_STORM_M = 2.5             # storms below this, and not tropical, are drawn small and pale so the big ones stand out
+# Dune crests for the storm figure (Hannah, 2026-10-04: show what the storms are up against): the island the 1996 run
+# starts from, the 10 m grids of the 2009-2014-1996 elevation product; on every 10 m row the highest point within
+# DUNE_ZONE_M of the ocean shoreline, the median of those per 500 m stretch, and the band spans the middle 80% of stretches.
+DUNE_PRODUCT = "2009-2014-1996"
+DUNE_ZONE_M = 150
+MHW_NAVD = 0.36                 # as in tools/hatteras_model_stretch.py
 halo = [pe.withStroke(linewidth=3, foreground="white")]
 
 
@@ -150,14 +157,52 @@ def step_offset():
     print("wrote step_offset.png")
 
 
+def dune_crests():
+    """Median dune-crest height above high tide for each of the 90 stretches, from the model's starting grids."""
+    import rasterio
+    from site_layer.hat_elevation_products import product
+    prod = product(DUNE_PRODUCT)
+    out = []
+    for g in io.GIS:
+        with rasterio.open(prod.resampled_10m / f"resampled_domain_{g}_filled.tif") as r:
+            z = r.read(1).astype(float)
+            z[z == r.nodata] = np.nan
+        z -= MHW_NAVD
+        crests = []
+        for row in z:
+            land = np.where(row > 0)[0]
+            if len(land):
+                east = land.max()                         # ocean on the east (right) side of every grid
+                crests.append(np.nanmax(row[max(0, east - DUNE_ZONE_M // 10 + 1):east + 1]))
+        out.append(np.nanmedian(crests) if crests else np.nan)
+    return np.array(out)
+
+
 def step3():
     t = json.loads((DATA / "timeline.json").read_text(encoding="utf-8"))
     s = [e for e in t["storms"] if START <= e["y"] < END + 1]
-    fig, ax = plt.subplots(figsize=(W_IN, 3.6))
-    for kind, col, size in (("other", OTHER, 14), ("tropical", TROP, 26)):
+    fig, ax = plt.subplots(figsize=(W_IN, 3.8))
+    crest = dune_crests()
+    lo, mid, hi = np.nanpercentile(crest, [10, 50, 90])
+    ax.axhspan(lo, hi, color="#e8d5a8", alpha=0.55, lw=0, zorder=1)
+    ax.axhline(mid, color="#a8823c", lw=1.2, ls=(0, (5, 3)), zorder=1)
+    ax.text(END + 0.9, hi - 0.08, "tops of the dunes along the island\n(middle 80% of stretches)", fontsize=9.5, color="#7a5a1e",
+            ha="right", va="top", zorder=4, path_effects=halo)
+    ax.text(END + 0.9, mid + 0.06, f"typical dune top, {mid:.1f} m", fontsize=9, color="#7a5a1e", ha="right", va="bottom", zorder=4,
+            path_effects=halo)
+    print(f"  dune crests: 10th {lo:.2f}, median {mid:.2f}, 90th {hi:.2f} m above high tide")
+    base = 1
+    for kind, col in (("other", OTHER), ("tropical", TROP)):
         d = [e for e in s if (e["type"] == "tropical") == (kind == "tropical")]
-        ax.scatter([e["y"] for e in d], [e["wl"] for e in d], s=size, color=col, edgecolors="white", linewidths=0.4, zorder=3,
-                   label="hurricanes and tropical storms" if kind == "tropical" else "other storms, mostly nor'easters")
+        for small in (True, False):
+            dd = [e for e in d if (kind == "other" and e["wl"] < SMALL_STORM_M) == small]
+            if not dd:
+                continue
+            ax.vlines([e["y"] for e in dd], base, [e["wl"] for e in dd], color=col, lw=0.6 if small else 1.1,
+                      alpha=0.35 if small else 0.9, zorder=2)
+            ax.scatter([e["y"] for e in dd], [e["wl"] for e in dd], s=8 if small else (30 if kind == "tropical" else 18),
+                       color=col, alpha=0.45 if small else 1, edgecolors="white", linewidths=0.4, zorder=3,
+                       label=None if small else ("hurricanes and tropical storms" if kind == "tropical" else "other storms, mostly nor'easters"))
     best = {}
     for e in s:
         if e["name"] and e["type"] == "tropical" and e["wl"] >= STORM_NAME_M and (e["name"] not in best or e["wl"] > best[e["name"]]["wl"]):
@@ -170,8 +215,9 @@ def step3():
     ax.set_ylabel("how high the water\nreached (m above high tide)", fontsize=10)
     ax.grid(axis="y", color=GRID, lw=0.6)
     ax.legend(frameon=False, fontsize=9.5, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
-    ax.set_ylim(1, max(e["wl"] for e in s) + 0.7)
-    ax.text(0.01, 0.95, f"{len(s)} storms, {START}–{END}", transform=ax.transAxes, fontsize=10, va="top", color=INK)
+    ax.set_ylim(base, max(hi, max(e["wl"] for e in s)) + 0.4)
+    ax.text(0.01, 0.97, f"{len(s)} storms, {START}–{END}", transform=ax.transAxes, fontsize=10, va="top", color=INK,
+            path_effects=halo, zorder=5)
     frame(ax)
     save(fig, 3)
 

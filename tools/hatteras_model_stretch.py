@@ -15,10 +15,10 @@ It is outlined on the whole-island map of step 2 (tools/hatteras_model_steps.py 
   step1_photo.jpg, step1_lidar.png, step1_grid.png  the same three views as bare, same-sized layers (1 px = 1 m) for
                    the drag slider in step 1 (Hannah, 2026-10-04: a slider instead of three stacked panels), and
                    step1_scale.png, the height colour scale for it
-  step5_road.png   shaded relief of the 2009 lidar (the 1 m surface above, lit from the north-west and tinted by height)
-                   with the 2009 digitised dune line and the 2008 NC-12 line, and the distance between them. Hannah
-                   asked (2026-10-04) for an image where the dunes stand out; in the 2007 photo used before they read
-                   as flat sand. Lines and lidar are of the same years, so they sit on each other. The model reads its own distance per stretch from the elevation grid
+  step5_road.png   the 2010 NC OneMap photo, where NC-12 shows clearly, with thin lines for the road's centreline (the
+                   2008 NC-12 line) and the front of the dunes (the 2009 digitised dune line) and the distance between
+                   them. Hannah asked (2026-10-04) for an aerial photo with the road clearly visible and an estimated
+                   distance from the road's centreline to the dune; 2010 is the photo nearest the years of the lines. The model reads its own distance per stretch from the elevation grid
                    (RoadSetback_1996_dunestart.csv, 170 m here); the caption on the page says so.
 Writes into assets/hatteras/img/model_steps/; the photos are cached in tools/data/model_stretch_gis<GIS>_<year>.jpg.
 
@@ -161,17 +161,13 @@ def main():
     from shapely.geometry import box as sbox
     clip = sbox(b.left + X0, b.bottom, b.left + X1, b.top)
     fig, ax = plt.subplots(figsize=(9.5, 9.5 * H / (X1 - X0) + 0.3))
-    from matplotlib.colors import LightSource
-    land = np.ma.masked_less(np.ma.masked_invalid(c1), 0)
-    ls = LightSource(azdeg=315, altdeg=35)
-    relief = ls.shade(np.ma.filled(land, 0), cmap=cmap, norm=norm, blend_mode="soft", vert_exag=3)
-    relief[np.ma.getmaskarray(land)] = (*matplotlib.colors.to_rgb(water), 1)
-    ax.imshow(relief, extent=ext, interpolation="bilinear")
-    for geom, col, lab in ((dune.intersection(clip), "#ffd23f", "front of the dunes (2009)"),
-                           (road.intersection(clip), "#d55e00", "NC-12 (2008)")):
+    ax.imshow(photo(b, 2010), extent=ext)
+    thin = [pe.withStroke(linewidth=2.6, foreground=INK)]
+    for geom, col, lab, style in ((dune.intersection(clip), "#ffd23f", "front of the dunes (2009)", "-"),
+                                  (road.intersection(clip), "#ff8c42", "centre of NC-12 (2008)", (0, (6, 3)))):
         for g in getattr(geom, "geoms", [geom]):
             x, y = local(g)
-            ax.plot(x, y, color=col, lw=2.6, path_effects=halo, label=lab)
+            ax.plot(x, y, color=col, lw=1.3, ls=style, path_effects=thin, label=lab)
             lab = None
     # the distance, measured east-west across the middle of the stretch
     ym = b.bottom + H / 2
@@ -188,7 +184,7 @@ def main():
     ax.set_xticks([])
     ax.set_yticks([])
     ax.legend(loc="lower left", fontsize=9.5, framealpha=0.92, edgecolor=INK)
-    ax.text(0.008, 0.97, "Shaded relief from lidar, 2009", transform=ax.transAxes, va="top", fontsize=10, color=INK,
+    ax.text(0.008, 0.97, "Aerial photo, 2010", transform=ax.transAxes, va="top", fontsize=10, color=INK,
             bbox=dict(boxstyle="square,pad=0.3", fc="white", ec=INK, lw=0.7, alpha=0.93))
     ax.plot([X1 - X0 - 260, X1 - X0 - 60], [40, 40], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
     ax.text(X1 - X0 - 160, 60, "200 m", ha="center", va="bottom", fontsize=9, color="white", path_effects=halo)
