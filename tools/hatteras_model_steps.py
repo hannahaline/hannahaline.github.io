@@ -55,9 +55,10 @@ DOMAIN_KM = 0.5
 W_IN = 10.0
 STORM_NAME_M = 3.0              # named tropical storms at or above this water level, as on the Storms page
 SMALL_STORM_M = 2.5             # storms below this, and not tropical, are drawn small and pale so the big ones stand out
-# Dune crests for the storm figure (Hannah, 2026-10-04: show what the storms are up against): the island the 1996 run
-# starts from, the 10 m grids of the 2009-2014-1996 elevation product; on every 10 m row the highest point within
-# DUNE_ZONE_M of the ocean shoreline, the median of those per 500 m stretch, and the band spans the middle 80% of stretches.
+# Dune tops for the storm figure (Hannah, 2026-10-04): the island the 1996 run starts from, the 10 m grids of the
+# 2009-2014-1996 elevation product; on every 10 m row the highest point within DUNE_ZONE_M of the ocean shoreline, and per
+# 500 m stretch the LOWEST of those, the gap or saddle water gets through first. A first version drew the median per
+# stretch as one island-wide band, which made it look as if no storm could wash over; Hannah caught it.
 DUNE_PRODUCT = "2009-2014-1996"
 DUNE_ZONE_M = 150
 MHW_NAVD = 0.36                 # as in tools/hatteras_model_stretch.py
@@ -158,7 +159,7 @@ def step_offset():
 
 
 def dune_crests():
-    """Median dune-crest height above high tide for each of the 90 stretches, from the model's starting grids."""
+    """The lowest dune top above high tide on each of the 90 stretches, from the model's starting grids."""
     import rasterio
     from site_layer.hat_elevation_products import product
     prod = product(DUNE_PRODUCT)
@@ -174,23 +175,17 @@ def dune_crests():
             if len(land):
                 east = land.max()                         # ocean on the east (right) side of every grid
                 crests.append(np.nanmax(row[max(0, east - DUNE_ZONE_M // 10 + 1):east + 1]))
-        out.append(np.nanmedian(crests) if crests else np.nan)
+        out.append(np.nanmin(crests) if crests else np.nan)
     return np.array(out)
 
 
 def step3():
+    """Top: every storm as a stem in time. Bottom: the lowest dune top along the island against three storm levels."""
     t = json.loads((DATA / "timeline.json").read_text(encoding="utf-8"))
     s = [e for e in t["storms"] if START <= e["y"] < END + 1]
-    fig, ax = plt.subplots(figsize=(W_IN, 3.8))
-    crest = dune_crests()
-    lo, mid, hi = np.nanpercentile(crest, [10, 50, 90])
-    ax.axhspan(lo, hi, color="#e8d5a8", alpha=0.55, lw=0, zorder=1)
-    ax.axhline(mid, color="#a8823c", lw=1.2, ls=(0, (5, 3)), zorder=1)
-    ax.text(END + 0.9, hi - 0.08, "tops of the dunes along the island\n(middle 80% of stretches)", fontsize=9.5, color="#7a5a1e",
-            ha="right", va="top", zorder=4, path_effects=halo)
-    ax.text(END + 0.9, mid + 0.06, f"typical dune top, {mid:.1f} m", fontsize=9, color="#7a5a1e", ha="right", va="bottom", zorder=4,
-            path_effects=halo)
-    print(f"  dune crests: 10th {lo:.2f}, median {mid:.2f}, 90th {hi:.2f} m above high tide")
+    fig, (ax, bx) = plt.subplots(2, 1, figsize=(W_IN, 6.9), gridspec_kw={"height_ratios": [1, 1], "hspace": 0.62})
+
+    # when: the storms in time
     base = 1
     for kind, col in (("other", OTHER), ("tropical", TROP)):
         d = [e for e in s if (e["type"] == "tropical") == (kind == "tropical")]
@@ -212,15 +207,37 @@ def step3():
                     fontsize=9, color=INK, path_effects=halo)
     ax.set_xlim(START, END + 1)
     ax.set_xticks(range(2000, END + 1, 5))
+    ax.set_ylim(base, max(e["wl"] for e in s) + 0.6)
     ax.set_ylabel("how high the water\nreached (m above high tide)", fontsize=10)
     ax.grid(axis="y", color=GRID, lw=0.6)
     ax.legend(frameon=False, fontsize=9.5, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
-    ax.set_ylim(base, max(hi, max(e["wl"] for e in s)) + 0.4)
-    ax.text(0.01, 0.97, f"{len(s)} storms, {START}–{END}", transform=ax.transAxes, fontsize=10, va="top", color=INK,
+    ax.text(0.01, 0.97, f"(a) When: {len(s)} storms, {START}–{END}", transform=ax.transAxes, fontsize=10, va="top", color=INK,
             path_effects=halo, zorder=5)
     frame(ax)
-    save(fig, 3)
 
+    # where: the lowest dune top on each stretch against three storm levels
+    low = dune_crests()
+    bx.bar(km(io.GIS), low, width=DOMAIN_KM * 0.9, color="#d9c08c", zorder=2)
+    def level(name):
+        return max(e["wl"] for e in s if e["name"] and e["name"].startswith(name))
+    levels = [(level("Isabel"), "Isabel", "#b2182b"), (level("Irene"), "Irene and Earl", "#e08214")]
+    levels.append((3.0, "a large nor'easter", OTHER))
+    for wl, name, col in levels:
+        bx.axhline(wl, color=col, lw=1.6, zorder=3)
+        n = int(np.sum(low < wl))
+        bx.text(45.3, wl + 0.06, f"{name}, {wl:.1f} m: over the low point on {n} of 90 stretches", ha="right", va="bottom",
+                fontsize=9, color=col, path_effects=halo, zorder=4)
+    bx.set_xlim(0, 45.5)
+    bx.set_ylim(0, max(np.nanmax(low), levels[0][0]) + 0.6)
+    bx.set_xlabel("km north of Cape Point", fontsize=10)
+    bx.set_ylabel("lowest dune top on\neach stretch (m)", fontsize=10)
+    bx.grid(axis="y", color=GRID, lw=0.6)
+    villages(bx)
+    bx.text(0.01, 1.2, "(b) Where: the lowest point of the dunes on each 500 m stretch", transform=bx.transAxes, fontsize=10,
+            va="bottom", color=INK)
+    frame(bx)
+    print(f"  lowest dune tops: " + ", ".join(f"{nm} {int(np.sum(low < wl))}" for wl, nm, _ in levels))
+    save(fig, 3)
 
 def step4():
     sl, fit = io.sea_level(START, END)

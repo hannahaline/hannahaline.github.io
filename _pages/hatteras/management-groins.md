@@ -12,6 +12,11 @@ A groin is a wall built out across the beach into the surf.
 It catches sand moving along the shore, so the beach on the side the sand comes from grows wider.
 The beach on the other side is cut off from that sand and often erodes faster.
 
+<figure class="hat-photo-wide" style="max-width: 46rem; margin-left: auto; margin-right: auto;">
+<img src="{{ '/assets/hatteras/img/groins/buxton_groin_2012_usgs.jpg' | relative_url }}" alt="Oblique aerial photo looking south-west over Buxton: a rock groin runs from the beach out into the surf at the old lighthouse site, with a parking area and ponds behind it and the striped Cape Hatteras Lighthouse standing in the trees farther inland" loading="lazy">
+<figcaption class="hat-caption">One of the Buxton groins from the air on 4 November 2012, days after Hurricane Sandy, looking south-west. The groin runs out into the surf at the old lighthouse site; the Cape Hatteras Lighthouse stands at its new site in the trees behind. Photo: U.S. Geological Survey, post-Hurricane Sandy coastal oblique aerial photographs (<a href="https://pubs.usgs.gov/ds/0858/">Data Series 858</a>), frame 2012_1104_162651, public domain.</figcaption>
+</figure>
+
 <figure class="hat-photo-wide">
 <img src="{{ '/assets/hatteras/img/groins_through_time.jpg' | relative_url }}" alt="Six aerial photos of the same stretch of beach at Buxton, from 1993 to 2024, each with that year's average satellite shoreline drawn in yellow and the 1993 shoreline dashed in white; three groins run out into the surf" loading="lazy">
 <figcaption class="hat-caption">The Buxton groins from 1993 to 2024, the same 800 m by 1,000 m of beach in each photo. The yellow line is the average of every satellite shoreline that calendar year, and the dashed white line is the 1993 average, for comparison. The three groins, numbered 1 to 3 from north to south, are drawn in red where they appear in the 2002 photo, so the shoreline can be read against them in every year; the Cape Hatteras Lighthouse stood beside groin 3 until 1999. A satellite shoreline is the water's edge at mean sea level, averaged over a whole year, so it can sit a little off the water's edge in a photo taken on one day. Photos: NC OneMap / NC Center for Geographic Information and Analysis (1993 black and white; 2012 Feb–Mar, 2016 Jan–Feb, 2020 Feb, 2024 Mar). Shorelines: CoastSat.</figcaption>
