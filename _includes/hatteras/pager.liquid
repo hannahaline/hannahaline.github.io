@@ -13,6 +13,6 @@
   {% endif %}
 {% endfor %}
 <nav class="hat-pager" aria-label="Previous and next page">
-  {% if prev %}<a class="hat-pager-prev" href="{{ prev.url | relative_url }}">&larr; {{ prev.title }}</a>{% else %}<span></span>{% endif %}
-  {% if next %}<a class="hat-pager-next" href="{{ next.url | relative_url }}">{{ next.title }} &rarr;</a>{% endif %}
+  {% if prev %}<a class="hat-pager-prev" href="{{ prev.url | relative_url }}">&larr; {{ prev.pager | default: prev.title }}</a>{% else %}<span></span>{% endif %}
+  {% if next %}<a class="hat-pager-next" href="{{ next.url | relative_url }}">{{ next.pager | default: next.title }} &rarr;</a>{% endif %}
 </nav>

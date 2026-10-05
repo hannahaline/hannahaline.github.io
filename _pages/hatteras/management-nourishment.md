@@ -2,7 +2,6 @@
 layout: page
 title: "Management: beach nourishment"
 permalink: /hatteras/management/nourishment/
-section: /hatteras/management/
 description: The four beach nourishment projects on Hatteras Island, how far each moved the shoreline, and how long it lasted.
 nav: false
 ---

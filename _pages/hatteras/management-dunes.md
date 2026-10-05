@@ -2,7 +2,6 @@
 layout: page
 title: "Management: dune building"
 permalink: /hatteras/management/dunes/
-section: /hatteras/management/
 description: How people built and maintain the line of dunes along Hatteras Island, and what that does to the island.
 nav: false
 ---

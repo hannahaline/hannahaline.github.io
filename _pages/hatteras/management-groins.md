@@ -2,7 +2,6 @@
 layout: page
 title: "Management: the Buxton groins"
 permalink: /hatteras/management/groins/
-section: /hatteras/management/
 description: The three groins at Buxton, photographed from 1993 to 2024 with the satellite shoreline each year.
 nav: false
 ---

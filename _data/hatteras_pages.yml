@@ -1,5 +1,6 @@
 # Pages of the Hatteras stakeholder section, in reading order.
 # group: the menu heading the page sits under.
+# pager: the name in previous/next links when the title alone is unclear there.
 # ready: false shows the page greyed out in the section menu and skips it in previous/next links.
 - title: Overview
   url: /hatteras/
@@ -25,8 +26,25 @@
   url: /hatteras/then-and-now/
   group: Observations
   ready: true
-- title: Management
+- title: Introduction
+  pager: Management
   url: /hatteras/management/
+  group: Management
+  ready: true
+- title: Dune building
+  url: /hatteras/management/dunes/
+  group: Management
+  ready: true
+- title: NC-12
+  url: /hatteras/management/nc-12/
+  group: Management
+  ready: true
+- title: Beach nourishment
+  url: /hatteras/management/nourishment/
+  group: Management
+  ready: true
+- title: Groins
+  url: /hatteras/management/groins/
   group: Management
   ready: true
 - title: The model

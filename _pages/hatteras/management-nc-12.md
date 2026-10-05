@@ -2,7 +2,6 @@
 layout: page
 title: "Management: NC-12 and its moves"
 permalink: /hatteras/management/nc-12/
-section: /hatteras/management/
 description: Where NC-12 has been moved inland or onto bridges as the shoreline came closer.
 nav: false
 ---
