@@ -7,7 +7,6 @@ nav: false
 ---
 
 {% include hatteras/subnav.liquid %}
-{% include hatteras/management_tabs.liquid %}
 
 A groin is a wall built out across the beach into the surf.
 It catches sand moving along the shore, so the beach on the side the sand comes from grows wider.

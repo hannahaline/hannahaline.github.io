@@ -7,7 +7,6 @@ nav: false
 ---
 
 {% include hatteras/subnav.liquid %}
-{% include hatteras/management_tabs.liquid %}
 
 Beach nourishment means dredging sand from offshore and pumping it onto the beach, to make the beach wider and higher.
 A wider beach takes the brunt of storm waves before they reach the dunes, houses and road.

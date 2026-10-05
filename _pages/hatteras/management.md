@@ -7,7 +7,6 @@ nav: false
 ---
 
 {% include hatteras/subnav.liquid %}
-{% include hatteras/management_tabs.liquid %}
 
 <p class="hat-lead">
 Hatteras Island today is partly a product of nature and partly a product of people.

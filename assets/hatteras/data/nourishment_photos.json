@@ -15,11 +15,6 @@
   "left_m": 24.7,
   "left_year": 2025,
   "left_after_refill": false,
-  "profile": "/assets/hatteras/img/nourishment/rodanthe_2014_profile.png",
-  "profile_lines": [
-   "Just after",
-   "Latest (2025)"
-  ],
   "placed": "late July to mid-September 2014",
   "line_gap_days": 58,
   "km": 42.02,
@@ -40,11 +35,6 @@
   "left_m": 24.2,
   "left_year": 2025,
   "left_after_refill": true,
-  "profile": "/assets/hatteras/img/nourishment/buxton_2017_profile.png",
-  "profile_lines": [
-   "Just after",
-   "Latest (2025), after the 2022 refill"
-  ],
   "placed": "21 June 2017 to 27 February 2018",
   "line_gap_days": 43,
   "km": 4.58,
@@ -63,11 +53,6 @@
   "left_m": 7.2,
   "left_year": 2025,
   "left_after_refill": false,
-  "profile": "/assets/hatteras/img/nourishment/buxton_2022_profile.png",
-  "profile_lines": [
-   "Just after",
-   "Latest (2025)"
-  ],
   "placed": "30 June to 16 August 2022",
   "line_gap_days": 72,
   "km": 3.84,
@@ -86,11 +71,6 @@
   "left_m": 13.2,
   "left_year": 2025,
   "left_after_refill": false,
-  "profile": "/assets/hatteras/img/nourishment/avon_2022_profile.png",
-  "profile_lines": [
-   "Just after",
-   "Latest (2025)"
-  ],
   "placed": "19 June to 26 July 2022",
   "line_gap_days": 72,
   "km": 12.18,

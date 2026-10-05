@@ -7,7 +7,6 @@ nav: false
 ---
 
 {% include hatteras/subnav.liquid %}
-{% include hatteras/management_tabs.liquid %}
 
 Along most of Hatteras Island, a line of dunes stands between the ocean and {% include hatteras/term.liquid id="nc-12" %}. After storms, sand washed onto the road is pushed back onto the dunes, and low or broken dunes are rebuilt.
 A tall, continuous dune keeps small and medium storms off the road and out of the villages.

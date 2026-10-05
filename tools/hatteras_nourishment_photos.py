@@ -23,7 +23,7 @@ shoreline and the before line dashed, so the added beach can be watched wearing 
 numbers for the explorer come from here too, on the placement dates: the jump is the change on the nourished stretch
 from the 12 months before sand went on to the 12 months after it was finished, minus the median change on the rest of
 the island (every transect more than 500 m from any fill) over the same months; what is left uses the last 12 months of
-the record in place of the 12 months after. The profile's dashed reference is the same median. Hannah asked
+the record in place of the 12 months after. Hannah asked
 (2026-10-04) for the headline, card, and figures to follow the placement dates instead of calendar years.
 Writes assets/hatteras/img/nourishment/<stretch>_<year>.jpg and assets/hatteras/data/nourishment_photos.json (keyed
 "<stretch> <year>" as the explorer names its fills). Photos are saved under tools/data/nourishment_photos/ so a re-run
@@ -218,10 +218,6 @@ def typical_spot(transects, km, y0, y1):
 
 RECORD_END = pd.Timestamp("2026-01-13", tz="UTC")
 TIME_COLOURS = ["#7f0000", "#d7301f", "#fc8d59", "#fdd49e"]      # just after (dark) fading to the latest (pale)
-PROFILE_MARGIN_KM = 2.5
-PROFILE_START_KM = 1.0                   # Cape Point's own growth (+200 m) would swamp the Buxton profiles
-REST_KM = (15, 38)                       # the reference beach: clear of every fill, between Avon and Rodanthe
-SMOOTH = 5                                                       # transects (250 m) in the profile's running mean
 
 
 def rest_of_island(transects, stretches):
@@ -362,48 +358,6 @@ def through_time(stretch, year, transects, box, k, photo, halo):
     return name, [lab for lab, _ in wins]
 
 
-def profile(stretch, year, transects, km, places, rest):
-    """Shoreline change along the beach, just after the fill and at the latest window, against the 12 months before:
-    single transects as faint dots, a 250 m running mean as the line, the nourished stretch shaded."""
-    wb, _ = windows(stretch, year)
-    later = later_windows(stretch, year)
-    show = [later[0], later[-1]] if len(later) > 1 else later
-    lo, hi = max(km[0] - PROFILE_MARGIN_KM, PROFILE_START_KM), km[1] + PROFILE_MARGIN_KM
-    on = [t for t in transects if lo <= t["km"] <= hi]
-    x = np.array([t["km"] for t in on])
-    fig, ax = plt.subplots(figsize=(8, 3.6))
-    ax.axvspan(km[0], km[1], color="#f3d9a4", alpha=0.6, lw=0, label="Nourished stretch")
-    ax.axhline(0, color="#555", lw=0.8)
-    for j, (lab, w) in enumerate(show):
-        col = TIME_COLOURS[0] if j == 0 else "#e8a33d"
-        dx = []
-        for t in on:
-            c = change(t, wb, w)
-            dx.append(np.nan if c is None else c)
-        dx = np.array(dx)
-        ax.scatter(x, dx, s=5, color=col, alpha=0.25, lw=0)
-        sm = pd.Series(dx).rolling(SMOOTH, center=True, min_periods=3).mean().values
-        ax.plot(x, sm, color=col, lw=2.0 if j == 0 else 1.6, label=f"{lab.replace('Latest (2025)', 'Latest')} ({span(w)})")
-        ref = mean_change(rest, wb, w, np.median)
-        ax.axhline(ref, color=col, lw=1.0, ls=(0, (5, 3)), alpha=0.9,
-                   label="Rest of the island (median), same months" if j == len(show) - 1 else None)
-    for pl in places:
-        if lo <= pl["km"] <= hi:
-            ax.axvline(pl["km"], color="#999", lw=0.6, ls=":")
-            ax.text(pl["km"], 1.01, pl["name"], transform=ax.get_xaxis_transform(), ha="center", va="bottom",
-                    fontsize=8.5, color="#555")
-    ax.set_xlim(lo, hi)
-    ax.set_xlabel("km north of Cape Point")
-    ax.set_ylabel("metres seaward of before")
-    for sp in ("top", "right"):
-        ax.spines[sp].set_visible(False)
-    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.2), ncol=2, frameon=False, fontsize=8.5)
-    name = f"{stretch.lower()}_{year}_profile.png"
-    fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.05)
-    plt.close(fig)
-    return name, [lab for lab, _ in show]
-
-
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--fetch", action="store_true")
@@ -469,7 +423,6 @@ def main():
         plt.close(fig)
         shots = years_later(stretch, year, ya, rates["transects"], box, k, halo, args.fetch)
         tt_name, tt_labels = draw_years_later(stretch, year, yb, shots, rates["transects"], box, k, halo, args.fetch)
-        pr_name, pr_labels = profile(stretch, year, rates["transects"], stretches[stretch]["km"], nx["places"], rest)
         wb, wa = windows(stretch, year)
         last = later_windows(stretch, year)[-1]
         on = [t for t in rates["transects"] if stretches[stretch]["km"][0] <= t["km"] <= stretches[stretch]["km"][1]]
@@ -482,7 +435,6 @@ def main():
                                     "years_later": f"/assets/hatteras/img/nourishment/{tt_name}", "later_photos": tt_labels,
                                     "jump_m": round(jump, 1), "left_m": round(left, 1), "left_year": 2025,
                                     "left_after_refill": "refill" in last[0],
-                                    "profile": f"/assets/hatteras/img/nourishment/{pr_name}", "profile_lines": pr_labels,
                                     "placed": PLACED_TEXT[(stretch, year)], "line_gap_days": gap_days,
                                     "km": round(spot["km"], 2), "change_m": round(here, 1), "stretch_change_m": round(mean, 1)}
         print(f"wrote {name}: {len(lines[lb])} / {len(lines[la])} transects")

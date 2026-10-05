@@ -7,7 +7,6 @@ nav: false
 ---
 
 {% include hatteras/subnav.liquid %}
-{% include hatteras/management_tabs.liquid %}
 
 NC-12 is the only road on and off Hatteras Island. Where it runs close to the ocean, every big storm threatens to wash sand over it or cut through it. Keeping it open shapes how the rest of the beach is managed.
 ## How the road came to Hatteras
