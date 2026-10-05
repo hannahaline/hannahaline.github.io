@@ -19,6 +19,16 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function day(iso) { var p = iso.split("-"); return +p[2] + " " + MONTHS[+p[1] - 1] + " " + p[0]; }
   function month(iso) { var p = iso.split("-"); return MONTHS[+p[1] - 1] + " " + p[0]; }
+  // Rows for village names: each takes the lowest row where it clears the last name in that row
+  function labelRows(places, X, size) {
+    var ends = [];
+    return places.map(function (p) {
+      var w = p.name.length * size * 0.56 + 6, x0 = X(p.km) - w / 2, r = 0;
+      while (ends[r] !== undefined && ends[r] > x0) r++;
+      ends[r] = x0 + w;
+      return r;
+    });
+  }
   function rateWords(r) {
     if (Math.abs(r) < 0.25) return "very little, <b>less than 0.25 m a year</b> either way";
     return "about <b>" + Math.abs(r).toFixed(1) + " m a year " + (r > 0 ? "seaward" : "landward") + "</b> (" +
@@ -81,8 +91,11 @@
   // The island turned so north runs right, ocean side down; the chosen place in teal along the ocean shore
   Picker.prototype.drawMap = function () {
     var box = this.root.querySelector(".hat-sp-map"), o = this.outline, p = this.data.places[this.i];
-    var W = Math.max(box.clientWidth, 300), L = 8, R = 8, top = 22, kmMax = 60;
+    var W = Math.max(box.clientWidth, 300), L = 8, R = 8, kmMax = 60;
     var pxkm = (W - L - R) / kmMax, X = function (km) { return L + km * pxkm; };
+    var villages = (this.data.villages || []).filter(function (v) { return v.km <= kmMax && v.name !== "Cape Point"; });   // Cape Point is already named at the corner
+    var vrow = labelRows(villages, X, 10.5), nrows = villages.length ? Math.max.apply(null, vrow) + 1 : 0;
+    var top = 22 + nrows * 12;
     var e0 = o ? o.east_m[0] : 0, h = o ? (o.east_m[1] - o.east_m[0]) / 1000 * pxkm : 10;
     var Y = function (east) { return top + (east - e0) / 1000 * pxkm; };
     var H = top + h + 16;
@@ -101,8 +114,14 @@
       el("rect", { x: L, y: top, width: W - L - R, height: 10, rx: 5, fill: SAND }, svg);
       el("rect", { x: X(p.km[0]), y: top - 2, width: X(p.km[1]) - X(p.km[0]), height: 14, rx: 3, fill: TEAL }, svg);
     }
+    // the villages in small grey type, stacked so close ones do not collide; the picked place in bold teal above them
+    villages.forEach(function (v, i) {
+      var y = 22 + (nrows - 1 - vrow[i]) * 12 + 9;
+      el("line", { x1: X(v.km), x2: X(v.km), y1: y + 2, y2: top + 2, stroke: MUTED, "stroke-width": 0.6, "stroke-dasharray": "2 2" }, svg);
+      text(svg, X(v.km), y, v.name, { "text-anchor": "middle", fill: MUTED, "font-size": 10.5, "paint-order": "stroke", stroke: "#fff", "stroke-width": 3 });
+    });
     var mid = (p.km[0] + p.km[1]) / 2;
-    text(svg, Math.min(Math.max(X(mid), L + 40), W - R - 40), 14, p.name, { "text-anchor": "middle", fill: INK, "font-size": 12.5, "font-weight": 600 });
+    text(svg, Math.min(Math.max(X(mid), L + 40), W - R - 40), 14, p.name, { "text-anchor": "middle", fill: TEAL, "font-size": 12.5, "font-weight": 600 });
     text(svg, L, H - 3, "Cape Point", { fill: MUTED, "font-size": 10.5 });
     text(svg, W - R, H - 3, "Oregon Inlet", { fill: MUTED, "font-size": 10.5, "text-anchor": "end" });
   };

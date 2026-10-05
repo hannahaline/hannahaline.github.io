@@ -183,7 +183,9 @@ def main():
               f"{'n/a' if ow is None else len(ow)} overwash images")
     OUT.write_text(json.dumps({"source": __doc__.split("\n")[1].strip(), "windows": rates["windows"],
                                "overwash_images": int(n_images), "overwash_last_gis": int(last_domain),
-                               "photo_years": list(PHOTO_YEARS), "places": out}, ensure_ascii=False), encoding="utf-8")
+                               "photo_years": list(PHOTO_YEARS), "places": out,
+                               "villages": [{"name": v["name"], "km": v["km"]} for v in rates["places"]]},
+                              ensure_ascii=False), encoding="utf-8")
     print(f"wrote {OUT.relative_to(SITE)}")
 
 

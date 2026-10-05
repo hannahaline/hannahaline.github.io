@@ -300,6 +300,11 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  # the Hatteras pages share with an aerial of Cape Point instead of the profile photo
+  - scope:
+      path: "_pages/hatteras"
+    values:
+      og_image: /assets/hatteras/img/start/share.jpg
 
 sass:
   style: compressed
