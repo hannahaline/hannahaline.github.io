@@ -3,7 +3,17 @@
 # nconemap: an NC OneMap ImageServer, drawn tile by tile through exportImage.
 # xyz: a ready-made tile template.
 # Flight dates for the multi-year mosaics are read from their Dare County tile names (identify, catalog items).
+# usgs_frames: scanned film frames of one year from the USGS Henderson release, read from the local drive below.
+usgs_frames_root: "D:/Hatteras_GIS/Aerial/Henderson_Hatteras2025/Hatteras_Georeferenced_DRAFT"
 layers:
+  - id: "1978"
+    label: "2 Dec 1978 (black and white)"
+    usgs_frames: "1978"
+    credit: "U.S. Geological Survey, scanned film (Henderson, in prep., doi:10.5066/P1CXBCDW)"
+  - id: "1984"
+    label: "19 Sep 1984 (black and white)"
+    usgs_frames: "1984"
+    credit: "U.S. Geological Survey, scanned film (Henderson, in prep., doi:10.5066/P1CXBCDW)"
   - id: "1993"
     label: "1993 (black and white)"
     nconemap: DOQQ_NC_1993

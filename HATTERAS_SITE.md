@@ -254,7 +254,9 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
    - Places: the S-curves and Jug Handle Bridge, New Inlet (located on the 2012 photo), Avon, and Buxton.
    - Every caption fact comes from the timeline xlsx or the config.
    - **Since 2026-10-02 the photos are saved, not live.** NC OneMap renders year layers on request and slowed to 15–60 s per tile, so old years never loaded. `python tools/hatteras_imagery_data.py` saves one JPEG per place and layer into `assets/hatteras/img/compare/` (44 images, about 10 MB). The slider clips the right-hand image; Leaflet is no longer used. Re-run it after changing places or layers in the yml.
-   - Not added: Irene 2011 (NOAA zips would need re-tiling), the 1980s film, and Buxton 2017 (waiting on Hannah's model update).
+   - Not added: Irene 2011 (NOAA zips would need re-tiling) and Buxton 2017 (waiting on Hannah's model update).
+   - **2026-10-05: 1978 and 1984 added** from the USGS Henderson film frames on the D: drive (`usgs_frames: <year>` layers; `usgs_frames_root` in the yml). Frames are unzipped once to `~/.cascade/usgs_frames/`, masked to the film's rotated rectangle shrunk 7% (3.5% for 1978, whose frames barely overlap and have no label strip) so the border, fiducials and the burned-in "19 SEP 84 CERC COE" strip drop out, then mosaicked nearest-frame-first. Seams are tonal only. Traps: some zips hold only the .tfw, and some carry `__MACOSX/._*` resource forks with the same names (skipped). Every year 1979-2002 covers all four spots (1978 too, except the S-curves frame centre), so more years are three lines each in the yml. Before launch: the release is "in prep" (README from R. Henderson; metadata says public domain, credit USGS); switch the credit to the published citation once doi:10.5066/P1CXBCDW resolves.
+   - Checked 10-05 and not usable: the D: drive's Hurricane Erin flight (NOAA, 23 Aug 2025) covers only the Hatteras Inlet shoals and the sound behind them, with no NC-12 and no village.
 3a. Shoreline map "Change year by year" mode: **BUILT 2026-10-03** (Hannah's picks: position not rate, 1984-2025, a mode on the map, 2021 decided before launch).
    - `python tools/hatteras_shoreline_years.py` writes `shoreline_years.json`: each transect's yearly mean CoastSat position minus its 1984-86 mean, smoothed with the same 7-domain LOWESS (GIS 1-10 domain means) as the rate profile; <2 shorelines in a year = empty. The 1984 baseline alone has ~5 shorelines, hence 1984-86.
    - Map colours in metres (5/25/50/75 classes, same RdBu), the profile on a fixed axis, a play bar with fill years and named storms of at least 3.5 m from timeline.json. The data loads only when the mode opens. Run it after `hatteras_shoreline_data.py`; it refuses to write if the transects differ.
@@ -281,7 +283,7 @@ All public domain unless noted. The slider can load the live services directly, 
 | 2008, 2014, 2016; USACE 2017 (4 cm) and 2018 (5 cm) | NOAA Digital Coast | coast.noaa.gov/dataviewer, `coast.noaa.gov/arcgisimg/rest/services/Imagery/...` |
 | Irene 2011, Dorian 2019, Erin 2025 | NOAA NGS emergency imagery | Dorian tiles `https://stormscdn.ngs.noaa.gov/20190907a-rgb/{z}/{x}/{y}`; Irene comes as UTM JPEG zips, so re-tile it |
 | 2012–2022 every 2 yr | USDA NAIP | EarthExplorer, Planetary Computer |
-| 1980s | USGS NHAP/NAPP film, not georeferenced (or the D: drive frames) | EarthExplorer; the NRCS NHAP mosaic is unverified |
+| 1978-2002 (14 years) | USGS Henderson release, georeferenced film frames (public domain; in prep., doi:10.5066/P1CXBCDW) | Local only: `D:/Hatteras_GIS/Aerial/Henderson_Hatteras2025/Hatteras_Georeferenced_DRAFT`; 1978 and 1984 in the slider since 10-05 |
 | Isabel 2003 | NOAA unrectified frames + USGS obliques only (no ortho) | storms.ngs.noaa.gov, pubs.usgs.gov/ds/761 |
 
 Do not use Esri Wayback or Google Earth: their licences forbid it. Cross-origin loading from NC OneMap and NOAA is untested.
