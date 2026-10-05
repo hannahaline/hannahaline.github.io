@@ -22,6 +22,16 @@ It covers what satellites and aerial photos show, the natural processes behind t
 It also introduces a computer model that recreates this history, so that management choices can be tested before they are made.
 </p>
 
+## The study area
+
+The study area runs from Cape Point north to Oregon Inlet and includes the villages of Buxton, Avon, Salvo, Waves, and Rodanthe.
+Most of the island lies within Cape Hatteras National Seashore. NC-12, the only road on and off the island, runs its full length.
+
+<figure class="hat-studymap">
+<img src="{{ '/assets/hatteras/img/study_area_map.jpg' | relative_url }}" alt="Map of Hatteras Island from Cape Point to Oregon Inlet, showing the villages of Buxton, Avon, Salvo, Waves and Rodanthe, NC-12, the beach nourishment reaches at Buxton, Avon and the Rodanthe S-curves, and the Buxton groins" loading="lazy">
+<figcaption class="hat-caption">Hatteras Island from Cape Point to Oregon Inlet. Sand-coloured bands just off the beach mark the stretches nourished at Buxton (2017 and 2022), Avon (2022) and the Rodanthe S-curves (2014), and the red line marks the Buxton groins. Since 2022, NC-12 crosses Pamlico Sound on the Jug Handle Bridge; the dashed line is the beach road it replaced.</figcaption>
+</figure>
+
 ## Start here: three steps
 
 <ol class="hat-steps-path">
@@ -89,16 +99,5 @@ It also introduces a computer model that recreates this history, so that managem
     <p>How CASCADE works in plain language, and how well it recreates the past.</p>
   </a>
 </div>
-
-## The study area
-
-The research covers Hatteras Island from Cape Point north to Oregon Inlet, including the villages of Buxton, Avon, Salvo, Waves, and Rodanthe.
-Most of the island lies within Cape Hatteras National Seashore. NC-12, the only road on and off the island, runs its full length.
-
-<figure class="hat-studymap">
-<img src="{{ '/assets/hatteras/img/study_area_map.jpg' | relative_url }}" alt="Map of Hatteras Island from Cape Point to Oregon Inlet, showing the villages of Buxton, Avon, Salvo, Waves and Rodanthe, NC-12, the beach nourishment reaches at Buxton, Avon and the Rodanthe S-curves, and the Buxton groins" loading="lazy">
-<figcaption class="hat-caption">Hatteras Island from Cape Point to Oregon Inlet. Sand-coloured bands just off the beach mark the stretches nourished at Buxton (2017 and 2022), Avon (2022) and the Rodanthe S-curves (2014), and the red line marks the Buxton groins. Since 2022, NC-12 crosses Pamlico Sound on the Jug Handle Bridge; the dashed line is the beach road it replaced.</figcaption>
-</figure>
-
 
 {% include hatteras/pager.liquid %}
