@@ -108,7 +108,9 @@
     fig.hidden = !p;
     if (!p) return;
     var img = fig.querySelector("img");
-    img.src = this.root.getAttribute("data-base") + p.src;
+    var assets = this.root.getAttribute("data-assets") || "/assets/hatteras/";
+    var asset = function (path) { return path.replace(/^\/assets\/hatteras\//, assets); };
+    img.src = asset(p.src);
     img.alt = "Aerial photos of the same stretch of beach at " + name + ", before (" + p.before + ") and after (" + p.after +
       ") the " + f.year + " fill, with the satellite shoreline at the time of each photo drawn on them";
     fig.querySelector("figcaption").innerHTML = "The same 300 m of beach at " + name + ", photographed from the air on " + p.before +
@@ -119,13 +121,13 @@
       "chart further down compares the fill with the rest of the island. Satellite shorelines mark mean sea level, so they sit " +
       "a little landward of the wet edge in a photo taken at low tide. Photos: USDA National Agriculture Imagery Program " +
       "(public domain), via Microsoft Planetary Computer. Shorelines: CoastSat.";
-    var base = this.root.getAttribute("data-base"), refill = /refill/.test(p.later_photos.join(" ") + "") ||
+    var refill = /refill/.test(p.later_photos.join(" ") + "") ||
       this.data.stretches[this.k].fills.some(function (o) { return o.year > f.year; });
     var tt = this.root.querySelector(".hat-nx-time"), pr = this.root.querySelector(".hat-nx-profile");
     pr.hidden = false;
     tt.hidden = !p.years_later;
     if (p.years_later) {
-      tt.querySelector("img").src = base + p.years_later;
+      tt.querySelector("img").src = asset(p.years_later);
       tt.querySelector("img").alt = "Aerial photos of the same beach at " + name + " in the years after the " + f.year +
         " fill (" + p.later_photos.join(", ") + "), each with the satellite shoreline at the time of the photo and the shoreline before the fill";
       tt.querySelector("figcaption").innerHTML = "The same 300 m of beach in every later aerial photo, " +
@@ -135,7 +137,7 @@
         " Photos: USDA National Agriculture Imagery Program to 2022, NC OneMap / NC Center for Geographic Information and " +
         "Analysis in 2024. Shorelines: CoastSat.";
     }
-    pr.querySelector("img").src = base + p.profile;
+    pr.querySelector("img").src = asset(p.profile);
     pr.querySelector("img").alt = "Chart of how far the shoreline moved along the beach around " + name + " after the " + f.year +
       " fill, with the nourished stretch shaded";
     pr.querySelector("figcaption").innerHTML = "How far the shoreline moved along the beach after the " + f.year + " fill, compared " +

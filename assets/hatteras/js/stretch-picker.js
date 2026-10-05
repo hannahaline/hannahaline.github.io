@@ -20,14 +20,18 @@
   function day(iso) { var p = iso.split("-"); return +p[2] + " " + MONTHS[+p[1] - 1] + " " + p[0]; }
   function month(iso) { var p = iso.split("-"); return MONTHS[+p[1] - 1] + " " + p[0]; }
   function rateWords(r) {
-    if (Math.abs(r) < 0.25) return "little change (less than 0.25 m a year either way)";
+    if (Math.abs(r) < 0.25) return "very little, <b>less than 0.25 m a year</b> either way";
     return "about <b>" + Math.abs(r).toFixed(1) + " m a year " + (r > 0 ? "seaward" : "landward") + "</b> (" +
       (r > 0 ? "growing" : "eroding") + ", roughly " + Math.round(Math.abs(r) * 10) + " m a decade)";
   }
 
   function Picker(root) {
     this.root = root;
-    this.base = root.getAttribute("data-base");
+    // asset paths in the data start /assets/hatteras/; the page says where that folder is, so a copy of the site
+    // with other paths still finds them. Page links come from real links in the markup for the same reason.
+    var assets = root.getAttribute("data-assets") || "/assets/hatteras/";
+    this.asset = function (path) { return path.replace(/^\/assets\/hatteras\//, assets); };
+    this.link = function (name) { var a = root.querySelector('[data-link="' + name + '"]'); return a ? a.getAttribute("href") : "#"; };
     var self = this;
     Promise.all([fetch(root.getAttribute("data-src")).then(function (r) { return r.json(); }),
                  fetch(root.getAttribute("data-outline")).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })])
@@ -55,8 +59,9 @@
       b.textContent = p.name;
       b.addEventListener("click", function () {
         self.i = i;
-        if (history.replaceState) history.replaceState(null, "", "#" + p.id);
         self.draw();
+        // keep the choice in the address for sharing; a sandboxed frame may refuse, which must not stop the redraw
+        try { if (history.replaceState) history.replaceState(null, "", "#" + p.id); } catch (e) { /* ignore */ }
       });
       seg.appendChild(b);
     });
@@ -104,7 +109,7 @@
   };
 
   Picker.prototype.drawSummary = function () {
-    var d = this.data, p = d.places[this.i], w = d.windows, base = this.base;
+    var d = this.data, p = d.places[this.i], w = d.windows, link = this.link;
     var nourished = p.fills.length > 0;
     this.root.querySelector(".hat-sp-headline").innerHTML = "<b>" + esc(p.name) + ".</b> Since 1996 the shoreline here has moved " +
       rateWords(p.rate[w[0].key]) + "." + (nourished ? " That includes the sand added by beach fills." : "");
@@ -120,12 +125,12 @@
       return "<li><b>" + f.year + "</b>: " + esc(f.name) + ", about " + (f.volume_cy / 1e6).toFixed(1) + " million cubic yards" +
         " (sand placed " + month(f.placed[0]) + " to " + month(f.placed[1]) + ")" +
         (f.stretch !== p.name ? ", part of the " + esc(f.stretch) + " project" : "") + ".</li>";
-    }).join("") + '</ul><p class="hat-sp-note"><a href="' + base + '/hatteras/management/nourishment/">Each fill in photos</a></p>' :
+    }).join("") + '</ul><p class="hat-sp-note"><a href="' + link("nourishment") + '">Each fill in photos</a></p>' :
       "<p>None on record here.</p>") + "</div>");
     cards.push('<div class="hat-sp-card"><h3>NC-12 and bridges</h3>' + (p.events.length ? "<ul>" + p.events.map(function (e) {
       return "<li><b>" + e.year + "</b>: " + esc(e.title) + ". " + esc(e.detail) + "</li>";
     }).join("") + "</ul>" : "<p>No road moves or bridges on record here.</p>") +
-      '<p class="hat-sp-note"><a href="' + base + '/hatteras/management/nc-12/">The history of NC-12</a></p></div>');
+      '<p class="hat-sp-note"><a href="' + link("nc12") + '">The history of NC-12</a></p></div>');
     var ow;
     if (p.overwash === null) {
       ow = "<p>This stretch is outside the overwash record, which covers Cape Point to just north of Rodanthe.</p>";
@@ -139,7 +144,7 @@
         }).join("") + "</ul>";
     }
     cards.push('<div class="hat-sp-card"><h3>Storm overwash</h3>' + ow +
-      '<p class="hat-sp-note"><a href="' + base + '/hatteras/storms/">All storms since 1984</a></p></div>');
+      '<p class="hat-sp-note"><a href="' + link("storms") + '">All storms since 1984</a></p></div>');
     this.root.querySelector(".hat-sp-cards").innerHTML = cards.join("");
   };
 
@@ -171,11 +176,11 @@
   };
 
   Picker.prototype.drawPhotos = function () {
-    var fig = this.root.querySelector(".hat-sp-photos"), p = this.data.places[this.i], base = this.base, ys = this.data.photo_years;
+    var fig = this.root.querySelector(".hat-sp-photos"), p = this.data.places[this.i], asset = this.asset, ys = this.data.photo_years;
     if (!p.photos || !p.photos[ys[0]]) { fig.hidden = true; return; }
     fig.hidden = false;
     fig.querySelectorAll("img").forEach(function (im, k) {
-      im.src = base + p.photos[ys[k]];
+      im.src = asset(p.photos[ys[k]]);
       im.alt = "Aerial photo of the beach at " + p.name + " in " + ys[k];
     });
     fig.querySelectorAll(".hat-sp-photo-year").forEach(function (s, k) { s.textContent = ys[k] === 1993 ? "1993 (black and white)" : "March " + ys[k]; });

@@ -2,7 +2,12 @@
   "Your stretch of beach": pick a place for a plain summary of it. Data from tools/hatteras_stretch_data.py and
   tools/hatteras_island_outline.py; script assets/hatteras/js/stretch-picker.js.
 {% endcomment %}
-<div class="hat-mvo hat-sp hat-bleed" data-src="{{ '/assets/hatteras/data/stretches.json' | relative_url }}" data-outline="{{ '/assets/hatteras/data/island_outline.json' | relative_url }}" data-base="{{ '' | relative_url }}">
+<div class="hat-mvo hat-sp hat-bleed" data-src="{{ '/assets/hatteras/data/stretches.json' | relative_url }}" data-outline="{{ '/assets/hatteras/data/island_outline.json' | relative_url }}" data-assets="{{ '/assets/hatteras/' | relative_url }}">
+  <span class="hat-sp-links" hidden>
+    <a data-link="nourishment" href="{{ '/hatteras/management/nourishment/' | relative_url }}"></a>
+    <a data-link="nc12" href="{{ '/hatteras/management/nc-12/' | relative_url }}"></a>
+    <a data-link="storms" href="{{ '/hatteras/storms/' | relative_url }}"></a>
+  </span>
   <div class="hat-shoremap-inner">
     <div class="hat-controls">
       <div class="hat-seg hat-sp-places" role="group" aria-label="Pick a stretch of beach"></div>
