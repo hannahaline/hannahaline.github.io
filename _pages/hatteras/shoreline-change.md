@@ -44,7 +44,7 @@ That average hides large differences from place to place.
 - **Salvo, Waves and Rodanthe** have moved landward on average, about 0.5 m per year over the whole record, with local hot spots of 2 to 3 m per year.
 - **Pea Island** has the most persistent erosion: about 0.9 m per year over the whole record, and faster since 2010.
 
-Rates that include the last few years are pushed seaward by an island-wide shift in 2021. That is why the 2010–2026 view shows more growth than the earlier period.
+The 2010–2026 view shows more seaward growth than the earlier period.
 
 <details class="hat-deeper" markdown="1">
 <summary>Go deeper: how shoreline change is measured</summary>
