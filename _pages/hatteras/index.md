@@ -22,6 +22,37 @@ It covers what satellites and aerial photos show, the natural processes behind t
 It also introduces a computer model that recreates this history, so that we can test management choices before making them.
 </p>
 
+## Start here: the story in three steps
+
+<ol class="hat-steps-path">
+  <li>
+    <img src="{{ '/assets/hatteras/img/isabel/overwash_nc12_2003.jpg' | relative_url }}" alt="Sand washed across NC-12 after Hurricane Isabel" loading="lazy">
+    <div>
+      <h3><span>1</span> The island moves</h3>
+      <p>Hatteras is a barrier island. Waves carry sand along the beach and storms wash it across the island, so the shoreline never stands still. Since 1996 the beach at Rodanthe has moved landward about 2 m a year, while Cape Point has grown seaward.</p>
+      <a href="{{ '/hatteras/island/' | relative_url }}">How the island works</a> · <a href="{{ '/hatteras/shoreline-change/' | relative_url }}">Shoreline change</a>
+    </div>
+  </li>
+  <li>
+    <img src="{{ '/assets/hatteras/img/dunes/scurves_dune_2011.jpg' | relative_url }}" alt="A tall dune newly built in front of NC-12 at the S-curves in 2011" loading="lazy">
+    <div>
+      <h3><span>2</span> People hold it in place</h3>
+      <p>To keep NC-12 open and protect the villages, people have built a line of dunes since the 1930s, pumped sand onto the beach, moved the road and built bridges. Each choice changes how the island responds to the next storm.</p>
+      <a href="{{ '/hatteras/management/' | relative_url }}">How management shapes the island</a>
+    </div>
+  </li>
+  <li>
+    <img src="{{ '/assets/hatteras/img/model_steps/step1.png' | relative_url }}" alt="One stretch of the island as an aerial photo and as the model's grid of heights" loading="lazy">
+    <div>
+      <h3><span>3</span> A model tests the choices</h3>
+      <p>CASCADE recreates the island's recent past, with the real storms and the management that happened. A model that can do that can help compare choices for the future before anyone has to make them.</p>
+      <a href="{{ '/hatteras/model/' | relative_url }}">The model</a>
+    </div>
+  </li>
+</ol>
+
+<p class="hat-start-own">Live on the island or look after part of it? <a href="{{ '/hatteras/your-beach/' | relative_url }}">See the summary for your stretch of beach</a>.</p>
+
 <div class="hat-keypoint">
 <b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then we can use it to ask "what if" questions about the future with more confidence.
 </div>
@@ -39,6 +70,10 @@ It also introduces a computer model that recreates this history, so that we can 
 ## Explore
 
 <div class="hat-cards">
+  <a class="hat-card" href="{{ '/hatteras/your-beach/' | relative_url }}">
+    <h3>Your stretch of beach</h3>
+    <p>Pick a village or a stretch of NC-12 for a short summary: shoreline change, fills, road moves and storms there.</p>
+  </a>
   <a class="hat-card" href="{{ '/hatteras/island/' | relative_url }}">
     <h3>How the island works</h3>
     <p>How barrier islands work: waves, storms, overwash, and sea-level rise.</p>

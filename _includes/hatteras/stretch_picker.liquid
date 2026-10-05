@@ -1,0 +1,34 @@
+{% comment %}
+  "Your stretch of beach": pick a place for a plain summary of it. Data from tools/hatteras_stretch_data.py and
+  tools/hatteras_island_outline.py; script assets/hatteras/js/stretch-picker.js.
+{% endcomment %}
+<div class="hat-mvo hat-sp hat-bleed" data-src="{{ '/assets/hatteras/data/stretches.json' | relative_url }}" data-outline="{{ '/assets/hatteras/data/island_outline.json' | relative_url }}" data-base="{{ '' | relative_url }}">
+  <div class="hat-shoremap-inner">
+    <div class="hat-controls">
+      <div class="hat-seg hat-sp-places" role="group" aria-label="Pick a stretch of beach"></div>
+    </div>
+    <div class="hat-sp-map"></div>
+    <p class="hat-sp-headline" aria-live="polite"></p>
+    <p class="hat-sp-what"></p>
+    <div class="hat-sp-cards"></div>
+    <figure class="hat-sp-trend">
+      <div class="hat-sp-chart"></div>
+      <figcaption class="hat-caption hat-numbered">
+        Where the shoreline sat each year, on average along this stretch, in metres seaward of where it was in 1984–86,
+        from every satellite shoreline. Gold dashed lines mark beach fills. Single years move back and forth with storms
+        and seasons; the trend over many years is what matters.
+      </figcaption>
+    </figure>
+    <figure class="hat-sp-photos" hidden>
+      <div class="hat-pair-photos">
+        <figure><img src="" alt="" loading="lazy"><figcaption class="hat-sp-photo-year"></figcaption></figure>
+        <figure><img src="" alt="" loading="lazy"><figcaption class="hat-sp-photo-year"></figcaption></figure>
+      </div>
+      <figcaption class="hat-caption hat-numbered">
+        The same 1.2 km of the island at <span class="hat-sp-photo-name"></span>, north at the top, in 1993 and 2024. Photos: NC OneMap /
+        NC Center for Geographic Information and Analysis.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<script defer src="{{ '/assets/hatteras/js/stretch-picker.js' | relative_url }}"></script>

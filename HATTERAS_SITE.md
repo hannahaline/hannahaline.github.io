@@ -36,6 +36,13 @@ All committed on `hatteras-site` (last commit 46b1268), not pushed. Preview: cla
 
 Next, proposed and waiting on Hannah: phone-width check of the new pages; "what this means for you" summaries per village; a "start here" path on the Overview; Looking ahead page; the Hannah-only items in the list below.
 
+## Added 2026-10-04
+
+- **Your stretch of beach** (`/hatteras/your-beach/`, menu: The basics): ten places as runs of model domains (Cape Point 1-5, Buxton 6-9, Buxton to Avon 10-20, Avon 21-31, Avon to Salvo 32-67, Salvo 68-72, Waves 73-76, Rodanthe 77-83, S-curves 84-89, Pea Island 90-120; boundaries approximate). `python tools/hatteras_stretch_data.py` -> `stretches.json` + `img/stretches/` (NC OneMap 1993 and 2024, 1.2 km frames). Overwash from CASCADE `8-overwash-analysis/1-observations` (28 images, GIS 1-90 only, so Pea Island is shown as not covered). Choice kept in the URL hash (#avon).
+- **Start here** path on the Overview (3 steps) and a Your stretch card in Explore.
+- **Groins page, elsewhere:** Folly Beach and Westhampton now subsections with pictures. Jetties authorised 1878, built 1882-1895 (USACE), not 1898; the 57% is "attributable to the jetties" (USACE 1987 via 2020 Appendix G), not "jetties and channel". Morris Island Lighthouse: NRHP nomination 1982 (no 1876 distance from the water exists in a primary source; don't add one). Aerial: `tools/hatteras_jetties_figure.py` (NAIP 2023, cropped where NAIP has no offshore coverage). Westhampton photo: USACE NY District via DVIDS, 18 Dec 1992.
+- **Nourishment viewer:** NAIP before/after pairs, later-years photos, placement-date numbers, island outline strip (`tools/hatteras_island_outline.py`).
+
 ## To do next time
 
 **Needs Hannah:**

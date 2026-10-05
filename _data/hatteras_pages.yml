@@ -5,6 +5,10 @@
   url: /hatteras/
   group: The basics
   ready: true
+- title: Your stretch of beach
+  url: /hatteras/your-beach/
+  group: The basics
+  ready: true
 - title: How the island works
   url: /hatteras/island/
   group: The basics
