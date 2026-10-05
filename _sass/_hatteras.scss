@@ -1765,7 +1765,8 @@ table.hat-mvo-skill {
 
   img {
     width: 100%;
-    height: 9rem;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
 
@@ -1866,5 +1867,9 @@ table.hat-mvo-skill {
     align-items: center;
     text-align: center;
   }
+}
+
+.hat-start-credit {
+  margin: -0.3rem 0 0.6rem;
 }
 

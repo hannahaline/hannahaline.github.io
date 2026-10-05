@@ -36,7 +36,7 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
 
 <ol class="hat-steps-path">
   <li>
-    <img src="{{ '/assets/hatteras/img/isabel/overwash_nc12_2003.jpg' | relative_url }}" alt="Sand washed across NC-12 after Hurricane Isabel" loading="lazy">
+    <img src="{{ '/assets/hatteras/img/start/cape_point_2020.jpg' | relative_url }}" style="object-position: 50% 15%;" alt="Aerial photo of Cape Point in 2020: a hook of sand curving out into the ocean, with a shallow lagoon inside it" loading="lazy">
     <div>
       <h3><span>1</span> The island changes</h3>
       <p>Hatteras is a barrier island. Waves carry sand along the beach and storms carry it across the island, so the shoreline keeps moving. Since 1996 it has moved landward by almost 2 m a year at Rodanthe and seaward by more than 2 m a year at Cape Point, with smaller changes in between.</p>
@@ -44,7 +44,7 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
     </div>
   </li>
   <li>
-    <img src="{{ '/assets/hatteras/img/dunes/scurves_dune_2011.jpg' | relative_url }}" alt="A tall dune newly built in front of NC-12 at the S-curves in 2011" loading="lazy">
+    <img src="{{ '/assets/hatteras/img/dunes/rodanthe_breach_2020.jpg' | relative_url }}" alt="A front-end loader pushing sand to close a breach in the dunes at Rodanthe in 2020, with sea water running through the gap" loading="lazy">
     <div>
       <h3><span>2</span> People manage it</h3>
       <p>Since the 1930s, people have built and rebuilt dunes, added sand to beaches, moved NC-12 and built bridges, mostly to keep the road open and protect homes. These choices also change how sand moves on the island, which affects how it responds to later storms.</p>
@@ -52,7 +52,7 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
     </div>
   </li>
   <li>
-    <img src="{{ '/assets/hatteras/img/model_steps/step1.png' | relative_url }}" alt="One stretch of the island as an aerial photo and as the model's grid of heights" loading="lazy">
+    <img src="{{ '/assets/hatteras/img/start/model_lidar.jpg' | relative_url }}" style="object-position: 75% 50%;" alt="A colour map of ground height across one stretch of the island, from the sound on the left to the ocean on the right, with the dunes standing out as a pale ridge" loading="lazy">
     <div>
       <h3><span>3</span> A model compares options</h3>
       <p>CASCADE is a computer model of the island and its management. It is checked against what actually happened since 1996, and the site shows where it matches and where it does not. A model that passes that check can be used to compare options for the future; it does not choose between them.</p>
@@ -60,6 +60,8 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
     </div>
   </li>
 </ol>
+
+<p class="hat-caption hat-start-credit">Photos: National Park Service / M. Seaman, Cape Point in August 2020 (1), and Cape Hatteras National Seashore, Rodanthe in April 2020 (2), both public domain. Height map (3): lidar, as read by the model.</p>
 
 <p class="hat-start-own">Live on the island or look after part of it? <a href="{{ '/hatteras/your-beach/' | relative_url }}">See the summary for your stretch of beach</a>.</p>
 
