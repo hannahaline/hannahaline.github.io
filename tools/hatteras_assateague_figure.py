@@ -22,6 +22,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
+import numpy as np
 
 import hatteras_imagery_data as img
 
@@ -33,7 +34,10 @@ HALF_W_M, HALF_H_M = 2200, 2600          # ground metres, before the crop
 PX = (1100, 1300)
 CROP = (0, 0, 860, 850)                  # px: drops the dark mosaic seams offshore and in the south
 TILES = "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"
-OC_EDGE = [(864, 0), (758, 470)]         # px on Ocean City's water's edge, read off the photo
+# Ocean City's water's edge, traced by eye on a 20 px grid over the photo (2026-10-04, Hannah: the old two-point line
+# sat 50-60 m up the dry beach); above y 150 the edge runs off the right of the frame
+OC_EDGE = [(860, 150), (857, 175), (847, 200), (837, 250), (823, 300), (803, 350), (787, 400), (767, 450), (762, 470)]
+CARRY_FROM_Y = 300                       # the dashed line carries on the straight trend of the edge south of this row
 ASSA_EDGE_X = 482                        # px: Assateague's water's edge on the offset row (y 700), read off the photo
 
 
@@ -60,9 +64,11 @@ def main():
         s.set_linewidth(1.2)
 
     # Ocean City's shoreline, carried south past the inlet
-    (x0, y0), (x1, y1) = OC_EDGE
-    slope = (x1 - x0) / (y1 - y0)
-    ax.plot([x0, x1], [y0, y1], color="#ffd23f", lw=2.2, path_effects=halo)
+    xs, ys = zip(*OC_EDGE)
+    south = [(x, y) for x, y in OC_EDGE if y >= CARRY_FROM_Y]
+    slope = np.polyfit([y for _, y in south], [x for x, _ in south], 1)[0]
+    x1, y1 = OC_EDGE[-1]
+    ax.plot(xs, ys, color="#ffd23f", lw=2.2, path_effects=halo)
     ax.plot([x1, x1 + slope * (photo.height - y1)], [y1, photo.height], color="#ffd23f", lw=2, ls=(0, (5, 3)), path_effects=halo)
     xe, ye = x1 + slope * (700 - y1), 700
     ax.annotate("", xy=(ASSA_EDGE_X, ye), xytext=(xe - 4, ye), arrowprops=dict(arrowstyle="<->", color="white", lw=1.6, path_effects=halo))
