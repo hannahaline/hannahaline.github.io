@@ -91,7 +91,7 @@ Dorian made landfall at Cape Hatteras as a Category 2 hurricane on the morning o
 At the shore, water reached an estimated 3.0 m above mean high water and stayed above the top of the beach for about 31 hours. Isabel's water stayed that high for about 100 hours.
 
 Even so, the ocean side of the island came through largely intact.
-NOAA photographed the island from the air the next day. Comparing those photos with ones from 2016, I found no fresh sheets of washed-over sand across NC-12 anywhere between Buxton and Oregon Inlet.
+NOAA photographed the island from the air the next day. A comparison of those photos with ones from 2016 shows no fresh sheets of washed-over sand across NC-12 anywhere between Buxton and Oregon Inlet.
 You can look for yourself: the 7 September 2019 photo is one of the years in [Then and now]({{ '/hatteras/then-and-now/' | relative_url }}).
 
 High water on its own does not decide what a storm does to the island. The height of the dunes, the width of the beach and how long the water stays high all matter too, and these are what the model weighs storm by storm.

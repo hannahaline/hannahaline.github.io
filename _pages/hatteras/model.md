@@ -61,16 +61,16 @@ every claim against the 1996-2015 / 2010-2026 matrix before it goes public. {% e
 The model does best in the earlier period. It captures the broad pattern of where the island lost ground and where it held, and it overwashes the island in roughly the storms that did so in reality.
 Including management matters: rebuilding dunes and adding sand closes the low spots in the dune line that otherwise let storms through, and brings the model's erosion much closer to what happened.
 
-It misses in three places, and each one teaches me something.
+It misses in three places, and each one is informative.
 It cannot make the island-wide seaward jump of 2021, which no process in the model explains.
 Its dunes regrow too slowly after a storm flattens them, so in the stormier later years it lets too much water over the island.
 And it has no process that keeps Cape Point built out, so the cape smooths away unless something, like the groins, holds it.
-Knowing where the model falls short tells me which forecasts to trust most, and which parts of the model to improve next.
+Knowing where the model falls short shows which forecasts are most reliable, and which parts of the model need improving next.
 {% endif %}
 
-## What this lets me do next
+## Next steps
 
-A model that reproduces the past gives me a way to ask "what if" questions:
+A model that reproduces the past provides a way to ask "what if" questions:
 what if the dunes were not rebuilt after a storm, what if a stretch of road were moved, or what if the seas rise faster?
 Those forecasts are the next stage of this research, and they will be shared on this site as they are completed.
 

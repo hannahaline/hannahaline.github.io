@@ -39,7 +39,7 @@ Where the ocean has come too close, the road has been moved:
 <figcaption class="hat-caption">Where NC-12 has been moved. Dashed: the road before a move; orange: after the 1989 or 1999 move; yellow: the road today. Distances are the largest measured moves. Imagery: Esri World Imagery (left, middle); NC OneMap / NC Center for Geographic Information and Analysis, early 2012 (right).</figcaption>
 </figure>
 
-I measured how far the road moved by comparing digitised road lines from 1978 and 2008, and the model moves the road by the same distances in the years the moves happened.
+How far the road moved was measured by comparing digitized road lines from 1978 and 2008, and the model moves the road by the same distances in the years the moves happened.
 
 <figure class="hat-photo-wide" style="max-width: 34rem; margin-left: auto; margin-right: auto;">
 <img src="{{ '/assets/hatteras/img/nc12_scurves_2016.jpg' | relative_url }}" alt="Aerial photo of NC-12 at the Rodanthe S-curves running a short distance behind a low dune line, with a narrow beach and the surf beyond" loading="lazy">

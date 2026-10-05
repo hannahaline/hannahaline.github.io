@@ -42,6 +42,6 @@ The model also leaves out the sand dredged from Oregon Inlet's navigation channe
 </div>
 
 These actions work together. The dunes protect the road, the road decides where dunes are kept, and nourishment and groins hold the beach in front of both.
-The model includes all four, so I can ask how the island would have changed without them.
+The model includes all four, so it can be used to ask how the island would have changed without them.
 
 {% include hatteras/pager.liquid %}
