@@ -4,7 +4,85 @@ Public-facing pages on Hatteras Island shoreline change, management, and the CAS
 Cape Hatteras National Seashore, NCDOT, Dare County and residents, and the Mountains to Sea Fellowship (NC WRRI + NC Sea Grant).
 This file is excluded from the build.
 
-## Where we left off (2026-10-03)
+## Where we left off (2026-10-04, evening): read this first
+
+**State:** committed on `hatteras-site` (last commit 32cb1c8 plus this notes update), not pushed or public. Private preview
+(claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is version 40 and matches the branch. Local review: `python -m http.server 4123`
+in the scratchpad build folder after `jekyll build -d <scratch>/site_new` and copying `assets/hatteras/js/` in (no Node).
+
+**Done 2026-10-04 (high level):** Your stretch of beach page (10 places, summary cards, 1993/2024 slider beside the
+cards); start-here steps on the Overview (neutral wording, Cape Point / dune-breach / lidar pictures); study area moved up;
+lighthouse pair moved to Management; menu groups The basics / Observations / Management / Modelling / More, with the four
+management pages in the menu and no tabs; nourishment viewer rebuilt (NAIP before/after pairs with photo-date shorelines,
+later-years photos, placement-date numbers, island-outline locator); placement dates checked online and corrected in
+CASCADE's record (Avon 2022 ended 26 July; Avon 2026 started 28 May); groins page reordered with a "Lessons from other
+places" drop-down (Charleston jetties aerial, Westhampton 1992 breach) and a 2012 USGS aerial of a groin at the top;
+model page: four-part diagram removed, step-1 photo/height slider, dune-to-road on the 2010 photo, storms as the lowest
+dune top per stretch against Isabel / Irene / 3 m lines; Storms page: ranked named storms by water level coloured by
+category at closest approach (HURDAT2), plus the same dune low-point chart; impersonal scientific voice throughout; About
+bio with photo; all 2021-shift mentions removed; phone versions of every image chart, collision-free village labels.
+
+## To do next time
+
+**Needs Hannah (blocks launch):**
+1. Collaborators' full names and affiliations (to-do note on About).
+2. Check the hidden model paragraph against the 2026-window matrix (to-do note on The model).
+3. Review the glossary (berm, transect and surge approved; 20 drafts).
+4. CoastSat Live download date for About.
+5. Reference author lists on the model page.
+6. Hurricane Gloria, 27 Sep 1985 (3.8 m): CASCADE's storm record types it "other", so it is missing from the ranked
+   storm chart (it would rank about third) and unnamed elsewhere. Decide whether to fix the classification in CASCADE
+   (storm_figures.py `classify`); the site would then just re-run `tools/hatteras_timeline_data.py` and
+   `tools/hatteras_named_storms.py`.
+7. Which figure's north arrow should move closer to its corner (asked, not answered).
+8. Looking ahead: keep greyed out, or a short "What's coming" page (needs the planned scenarios and a rough timeline).
+9. Sandy pair (Buxton 2011/2012): use on Storms or delete.
+
+**Can do without her:**
+10. Village labels on the "Your stretch of beach" outline (offered; small grey names, picked place in teal).
+11. Delete unused files: `model_steps/step1.png` (and stop `hatteras_model_stretch.py` writing it), `buxton_houses_2025.jpg`,
+    the Sandy pair if dropped, `longshore.svg` and `groin.svg` generators/includes, and the old `through_time` and
+    `typical_spot` code in `tools/hatteras_nourishment_photos.py`.
+12. Page weight (preview ~43 MB): convert the largest PNG photos (`step5_road.png` ~0.8 MB) to JPEG, compress the
+    compare photos, check every image has `loading="lazy"`.
+13. One chart style: the image charts use matplotlib's DejaVu Sans; switch to the site font (Roboto) and one palette in
+    every tool, then re-run them all (`hatteras_model_steps.py`, `hatteras_named_storms.py`, `hatteras_nourishment_photos.py`,
+    `hatteras_assateague_figure.py`, `hatteras_jetties_figure.py`, `hatteras_groin_photos.py`).
+14. Link-preview image and description for /hatteras/ (now the profile photo): use the Cape Point aerial.
+15. CASCADE: `attribution_nourishment.csv` still lists 3 fills (no Buxton 2017). The other session's work in that folder
+    is committed now (1a669b4e), so re-run `coastsat_position_attribution.py` there.
+16. A check on a real phone of the pages changed 10-04 (done only in a 390 px frame).
+17. Keyboard and screen-reader pass on the sliders and the place picker.
+
+**Later:**
+18. Sources and data page with downloadable tables (rates by transect, fill numbers, storm list).
+19. Handouts (ideas below).
+20. Launch: the checklist at the end of this file, only when Hannah says so; the split-windows explorer launches with it.
+
+## Handout ideas (for discussion)
+
+Printable pieces for meetings with the Park Service, NCDOT, Dare County and residents, built from data the site already
+has so they stay consistent with it. Each with a QR code to its page, the NC Sea Grant / WRRI acknowledgement, and a
+"draft, not peer reviewed" mark until the papers are out.
+- **Village one-pagers** (one per place on "Your stretch of beach", generated from `stretches.json`): locator outline,
+  shoreline rate in plain words, fills, road moves and bridges, overwash seen and the storms behind it, and the 1993 and
+  2024 photos side by side. Most useful for residents and county staff.
+- **Hatteras at a glance** (two sides): study-area map, the three start-here steps, the key numbers (rate range,
+  the four fills, the biggest storms), and where to learn more.
+- **NC-12 corridor sheet** for NCDOT: lowest dune top per stretch against storm water levels, dune-to-road distance,
+  road moves and bridges, and the low spots (Rodanthe, the S-curves, Avon to Salvo).
+- **Beach nourishment results** for Dare County: the four fills with placement dates and volumes, the before/after NAIP
+  pairs, the jump after each fill and what was left in 2025.
+- **Storms sheet**: the ranked named storms with categories, the "category is not the whole story" point, and the
+  strongest nor'easter.
+- **Model card** for funders and meetings: the seven inputs as one graphic, what the model is checked against, and what
+  it can and cannot say (it compares options; it does not choose).
+- **Glossary pocket card**: the 20-odd terms in plain language.
+
+Questions for Hannah before building any: which audience first; letter-size PDF or a print stylesheet on the pages;
+any NC Sea Grant / WRRI branding rules; whether results can be printed before publication.
+
+## Session notes 2026-10-03
 
 **State:** everything below is committed on `hatteras-site` (last commit 9464eb7). Nothing is pushed or public. The private preview (claude.ai/artifact/TAn39uBqS5KyRtN43pHvDE) is at version 16 and is behind the branch; see to-do 7.
 
@@ -43,7 +121,7 @@ Next, proposed and waiting on Hannah: phone-width check of the new pages; "what 
 - **Groins page, elsewhere:** Folly Beach and Westhampton now subsections with pictures. Jetties authorised 1878, built 1882-1895 (USACE), not 1898; the 57% is "attributable to the jetties" (USACE 1987 via 2020 Appendix G), not "jetties and channel". Morris Island Lighthouse: NRHP nomination 1982 (no 1876 distance from the water exists in a primary source; don't add one). Aerial: `tools/hatteras_jetties_figure.py` (NAIP 2023, cropped where NAIP has no offshore coverage). Westhampton photo: USACE NY District via DVIDS, 18 Dec 1992.
 - **Nourishment viewer:** NAIP before/after pairs, later-years photos, placement-date numbers, island outline strip (`tools/hatteras_island_outline.py`).
 
-## To do next time
+## Earlier to-do list (superseded 2026-10-04; kept for its notes)
 
 **Needs Hannah:**
 1. Collaborators' full names and affiliations for About (to-do note in `about.md`).
