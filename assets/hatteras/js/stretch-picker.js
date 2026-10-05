@@ -126,9 +126,9 @@
         (f.stretch !== p.name ? ", part of the " + esc(f.stretch) + " project" : "") + ".</li>";
     }).join("") + '</ul><p class="hat-sp-note"><a href="' + link("nourishment") + '">Each fill in photos</a></p>' :
       "<p>None on record here.</p>") + "</div>");
-    cards.push('<div class="hat-sp-card"><h3>NC-12 and bridges</h3>' + (p.events.length ? "<ul>" + p.events.map(function (e) {
+    cards.push('<div class="hat-sp-card"><h3>Road, bridges and groins</h3>' + (p.events.length ? "<ul>" + p.events.map(function (e) {
       return "<li><b>" + e.year + "</b>: " + esc(e.title) + ". " + esc(e.detail) + "</li>";
-    }).join("") + "</ul>" : "<p>No road moves or bridges on record here.</p>") +
+    }).join("") + "</ul>" : "<p>No road moves, bridges or groins on record here.</p>") +
       '<p class="hat-sp-note"><a href="' + link("nc12") + '">The history of NC-12</a></p></div>');
     var ow;
     if (p.overwash === null) {

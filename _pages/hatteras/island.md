@@ -68,7 +68,7 @@ In a storm, waves that reach the dune cut into its face and carry sand offshore;
 Between storms, wind blows dry sand off the beach and the grasses trap it, so dunes slowly rebuild.
 
 <div class="hat-pairs">
-<figure class="hat-pair">
+<figure class="hat-pair hat-pair-even">
 <div class="hat-pair-photos">
 <figure><img src="{{ '/assets/hatteras/img/dunes/dune_line_lighthouse_2017.jpg' | relative_url }}" alt="A wide sand beach rising to a low, grass-covered dune line, with the Cape Hatteras Lighthouse standing beyond it" loading="lazy"><figcaption>(a) The dune line behind the beach, 2017</figcaption></figure>
 <figure><img src="{{ '/assets/hatteras/img/dunes/sea_oats_dune.jpg' | relative_url }}" alt="Sea oats growing on a sand dune, with ripples of wind-blown sand in the foreground and the ocean behind" loading="lazy"><figcaption>(b) Sea oats on a dune, 2013</figcaption></figure>

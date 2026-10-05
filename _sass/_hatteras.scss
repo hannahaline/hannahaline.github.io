@@ -1654,11 +1654,26 @@ table.hat-mvo-skill {
     margin: 0 0 0.8rem;
   }
 
-  .hat-sp-cards {
+  // photos on the left, the four cards stacked on the right; one column on narrow screens, cards first
+  .hat-sp-body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.8rem;
+    grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr);
+    grid-template-areas: "photos cards";
+    gap: 1rem;
+    align-items: start;
     margin: 0 0 1.2rem;
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "cards" "photos";
+    }
+  }
+
+  .hat-sp-cards {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 
   .hat-sp-card {
@@ -1713,13 +1728,14 @@ table.hat-mvo-skill {
   }
 
   .hat-sp-photos {
-    margin: 0 0 1.2rem;
+    grid-area: photos;
+    margin: 0;
   }
 
   // square photos: the slider is as tall as it is wide, up to 40rem
   .hat-sp-compare {
     max-width: 40rem;
-    margin: 0 auto;
+    margin: 0 auto 0.4rem;
 
     .hat-compare-photos {
       aspect-ratio: 1 / 1;
@@ -1799,5 +1815,12 @@ table.hat-mvo-skill {
 .hat-start-own {
   font-size: 1.02rem;
   margin: 0 0 1.4rem;
+}
+
+// a pair whose photos have different shapes: crop both to the same 4:3 frame so they line up
+.hat-pair.hat-pair-even .hat-pair-photos img {
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
 }
 

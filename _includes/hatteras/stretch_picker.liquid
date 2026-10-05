@@ -15,23 +15,25 @@
     <div class="hat-sp-map"></div>
     <p class="hat-sp-headline" aria-live="polite"></p>
     <p class="hat-sp-what"></p>
-    <div class="hat-sp-cards"></div>
-    <figure class="hat-sp-photos" hidden>
-      <div class="hat-compare-stage hat-sp-compare">
-        <div class="hat-compare-photos" role="region" aria-label="Aerial photos of 1993 and 2024 compared">
-          <img class="hat-sp-before" alt="" decoding="async">
-          <img class="hat-sp-after" alt="" decoding="async">
+    <div class="hat-sp-body">
+      <figure class="hat-sp-photos" hidden>
+        <div class="hat-compare-stage hat-sp-compare">
+          <div class="hat-compare-photos" role="region" aria-label="Aerial photos of 1993 and 2024 compared">
+            <img class="hat-sp-before" alt="" decoding="async">
+            <img class="hat-sp-after" alt="" decoding="async">
+          </div>
+          <span class="hat-compare-tag left hat-sp-photo-year"></span>
+          <span class="hat-compare-tag right hat-sp-photo-year"></span>
+          <div class="hat-compare-divider hat-sp-divider"><span></span></div>
+          <input type="range" min="0" max="100" value="50" class="hat-compare-range hat-sp-range" aria-label="Drag to compare 1993 and 2024">
         </div>
-        <span class="hat-compare-tag left hat-sp-photo-year"></span>
-        <span class="hat-compare-tag right hat-sp-photo-year"></span>
-        <div class="hat-compare-divider hat-sp-divider"><span></span></div>
-        <input type="range" min="0" max="100" value="50" class="hat-compare-range hat-sp-range" aria-label="Drag to compare 1993 and 2024">
-      </div>
-      <figcaption class="hat-caption hat-numbered">
-        The same 1.2 km of the island at <span class="hat-sp-photo-name"></span>, north at the top: drag the handle to move
-        between 1993 (left) and 2024 (right). Photos: NC OneMap / NC Center for Geographic Information and Analysis.
-      </figcaption>
-    </figure>
+        <figcaption class="hat-caption hat-numbered">
+          The same 1.2 km of the island at <span class="hat-sp-photo-name"></span>, north at the top: drag the handle to move
+          between 1993 (left) and 2024 (right). Photos: NC OneMap / NC Center for Geographic Information and Analysis.
+        </figcaption>
+      </figure>
+      <div class="hat-sp-cards"></div>
+    </div>
   </div>
 </div>
 <script defer src="{{ '/assets/hatteras/js/stretch-picker.js' | relative_url }}"></script>
