@@ -2,7 +2,7 @@
 layout: page
 title: Storms
 permalink: /hatteras/storms/
-description: Every high-water event on Hatteras Island since 1984, and what the biggest storms did to the beach.
+description: The named storms that raised the water highest at Hatteras since 1984, and what the biggest did to the beach.
 nav: false
 ---
 
@@ -10,15 +10,22 @@ nav: false
 
 <p class="hat-lead">
 A big storm can reshape the beach in a few days.
-This page shows every {% include hatteras/term.liquid id="high-water-event" text="high-water event" %} since 1984, then looks closely at three hurricanes.
+This page ranks the named storms that raised the water highest at Hatteras since 1984, then looks closely at three hurricanes.
 </p>
 
-## Every high-water event since 1984
+## The biggest named storms since 1984
 
-Each dot is one high-water event: a time when tide, {% include hatteras/term.liquid id="storm-surge" text="storm surge" %} and waves together pushed water high up the beach. The taller the stem, the higher the water reached.
+Each bar is one named storm, ranked by how high the water reached at the shore, as tide, {% include hatteras/term.liquid id="storm-surge" text="storm surge" %} and waves together pushed it up the beach.
+The colour shows the storm's category when it was closest to Hatteras.
+Category alone does not decide how high the water gets: Dorian passed almost overhead as a Category 2 and raised the water less than Sandy, a Category 1 some 400 km offshore, because a storm's size, track and how long it lingers matter as much as its winds.
+Nor'easters matter too: the strongest, in March 2018, pushed the water higher than every hurricane except Isabel.
+
+<figure class="hat-photo-wide" style="max-width: 50rem; margin-left: auto; margin-right: auto;">
+<img src="{{ '/assets/hatteras/img/named_storms.png' | relative_url }}" alt="Bar chart of the 15 named storms that raised the water highest at Hatteras since 1984, coloured by category when closest. Isabel 2003 is highest at 5.2 m, then the 1991 Perfect Storm at 4.6 m, Earl, Irene, Sandy, Erin and Florence near 3.6 to 3.8 m; Dorian, which passed almost overhead, reached 3.0 m. A dashed line marks the highest nor'easter, March 2018, at 4.3 m" loading="lazy">
+<figcaption class="hat-caption">The 15 named storms that raised the water highest at the shore since 1984, with each storm's category and distance when it was closest to Cape Hatteras, and the highest nor'easter for comparison. Water level: peak tide, surge and wave run-up at the shore, estimated from the Duck tide gauge and the WIS wave hindcast, in metres above mean high water. The hatched bar (Erin, 2025) is an estimate placed after the wave record ends. Categories and tracks: National Hurricane Center best-track database (HURDAT2). The 1991 "Perfect Storm" was an unnamed subtropical storm.</figcaption>
+</figure>
+
 The beach projects and road moves of the same years are on the [management page]({{ '/hatteras/management/' | relative_url }}).
-
-{% include hatteras/timeline.liquid mode="storms" %}
 
 ## Hurricane Isabel, 2003
 

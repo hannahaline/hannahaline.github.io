@@ -84,7 +84,7 @@ Most of the island lies within Cape Hatteras National Seashore. NC-12, the only 
   </a>
   <a class="hat-card" href="{{ '/hatteras/storms/' | relative_url }}">
     <h3>Storms</h3>
-    <p>Every high-water event since 1984, and what Isabel, Irene and Dorian did to the island.</p>
+    <p>The named storms that raised the water highest since 1984, and what Isabel, Irene and Dorian did to the island.</p>
   </a>
   <a class="hat-card" href="{{ '/hatteras/then-and-now/' | relative_url }}">
     <h3>Then and now</h3>

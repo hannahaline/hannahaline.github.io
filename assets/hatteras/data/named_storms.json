@@ -1,0 +1,342 @@
+{
+ "source": "HURDAT2 closest approach to Cape Hatteras; water levels from timeline.json",
+ "highest_noreaster": {
+  "year": 2018,
+  "water_m": 4.3
+ },
+ "storms": [
+  {
+   "name": "Isabel",
+   "year": 2003,
+   "water_m": 5.22,
+   "category": "Cat 2",
+   "wind_kt": 90,
+   "km": 73,
+   "after_wave_record": false
+  },
+  {
+   "name": "the Perfect Storm",
+   "year": 1991,
+   "water_m": 4.59,
+   "category": "subtropical",
+   "wind_kt": 40,
+   "km": 396,
+   "after_wave_record": false
+  },
+  {
+   "name": "Earl",
+   "year": 2010,
+   "water_m": 3.83,
+   "category": "Cat 2",
+   "wind_kt": 85,
+   "km": 146,
+   "after_wave_record": false
+  },
+  {
+   "name": "Irene",
+   "year": 2011,
+   "water_m": 3.8,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 76,
+   "after_wave_record": false
+  },
+  {
+   "name": "Sandy",
+   "year": 2012,
+   "water_m": 3.64,
+   "category": "Cat 1",
+   "wind_kt": 80,
+   "km": 397,
+   "after_wave_record": false
+  },
+  {
+   "name": "Erin",
+   "year": 2025,
+   "water_m": 3.63,
+   "category": "Cat 2",
+   "wind_kt": 90,
+   "km": 325,
+   "after_wave_record": true
+  },
+  {
+   "name": "Florence",
+   "year": 2018,
+   "water_m": 3.61,
+   "category": "Cat 2",
+   "wind_kt": 90,
+   "km": 165,
+   "after_wave_record": false
+  },
+  {
+   "name": "Dennis",
+   "year": 1999,
+   "water_m": 3.29,
+   "category": "tropical storm",
+   "wind_kt": 60,
+   "km": 94,
+   "after_wave_record": false
+  },
+  {
+   "name": "Gordon",
+   "year": 1994,
+   "water_m": 3.18,
+   "category": "Cat 1",
+   "wind_kt": 70,
+   "km": 173,
+   "after_wave_record": false
+  },
+  {
+   "name": "Maria",
+   "year": 2017,
+   "water_m": 3.16,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 242,
+   "after_wave_record": false
+  },
+  {
+   "name": "Edouard",
+   "year": 1996,
+   "water_m": 3.03,
+   "category": "Cat 3",
+   "wind_kt": 100,
+   "km": 492,
+   "after_wave_record": false
+  },
+  {
+   "name": "Dorian",
+   "year": 2019,
+   "water_m": 3.02,
+   "category": "Cat 2",
+   "wind_kt": 85,
+   "km": 9,
+   "after_wave_record": false
+  },
+  {
+   "name": "Felix",
+   "year": 1995,
+   "water_m": 2.98,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 238,
+   "after_wave_record": false
+  },
+  {
+   "name": "Emily",
+   "year": 1993,
+   "water_m": 2.88,
+   "category": "Cat 3",
+   "wind_kt": 100,
+   "km": 39,
+   "after_wave_record": false
+  },
+  {
+   "name": "Jose",
+   "year": 2017,
+   "water_m": 2.81,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 357,
+   "after_wave_record": false
+  },
+  {
+   "name": "Hermine",
+   "year": 2016,
+   "water_m": 2.64,
+   "category": "post-tropical",
+   "wind_kt": 60,
+   "km": 61,
+   "after_wave_record": false
+  },
+  {
+   "name": "Fran",
+   "year": 1996,
+   "water_m": 2.62,
+   "category": "Cat 3",
+   "wind_kt": 100,
+   "km": 272,
+   "after_wave_record": false
+  },
+  {
+   "name": "Irene",
+   "year": 1999,
+   "water_m": 2.62,
+   "category": "Cat 2",
+   "wind_kt": 95,
+   "km": 58,
+   "after_wave_record": false
+  },
+  {
+   "name": "Danielle",
+   "year": 1992,
+   "water_m": 2.61,
+   "category": "tropical storm",
+   "wind_kt": 45,
+   "km": 76,
+   "after_wave_record": false
+  },
+  {
+   "name": "Floyd",
+   "year": 1999,
+   "water_m": 2.6,
+   "category": "Cat 1",
+   "wind_kt": 70,
+   "km": 126,
+   "after_wave_record": false
+  },
+  {
+   "name": "Gustav",
+   "year": 2002,
+   "water_m": 2.56,
+   "category": "tropical storm",
+   "wind_kt": 55,
+   "km": 30,
+   "after_wave_record": false
+  },
+  {
+   "name": "Wilma",
+   "year": 2005,
+   "water_m": 2.4,
+   "category": "Cat 3",
+   "wind_kt": 100,
+   "km": 389,
+   "after_wave_record": false
+  },
+  {
+   "name": "Bob",
+   "year": 1991,
+   "water_m": 2.39,
+   "category": "Cat 2",
+   "wind_kt": 95,
+   "km": 75,
+   "after_wave_record": false
+  },
+  {
+   "name": "Matthew",
+   "year": 2016,
+   "water_m": 2.39,
+   "category": "Cat 1",
+   "wind_kt": 70,
+   "km": 75,
+   "after_wave_record": false
+  },
+  {
+   "name": "Cristobal",
+   "year": 2014,
+   "water_m": 2.38,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 475,
+   "after_wave_record": false
+  },
+  {
+   "name": "Ophelia",
+   "year": 2005,
+   "water_m": 2.34,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 62,
+   "after_wave_record": false
+  },
+  {
+   "name": "Bonnie",
+   "year": 1998,
+   "water_m": 2.28,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 70,
+   "after_wave_record": false
+  },
+  {
+   "name": "Idalia",
+   "year": 2023,
+   "water_m": 2.26,
+   "category": "post-tropical",
+   "wind_kt": 55,
+   "km": 202,
+   "after_wave_record": false
+  },
+  {
+   "name": "Bertha",
+   "year": 1996,
+   "water_m": 2.2,
+   "category": "Cat 1",
+   "wind_kt": 65,
+   "km": 191,
+   "after_wave_record": false
+  },
+  {
+   "name": "Ophelia",
+   "year": 2023,
+   "water_m": 2.18,
+   "category": "tropical storm",
+   "wind_kt": 50,
+   "km": 145,
+   "after_wave_record": false
+  },
+  {
+   "name": "Ian",
+   "year": 2022,
+   "water_m": 2.13,
+   "category": "post-tropical",
+   "wind_kt": 50,
+   "km": 358,
+   "after_wave_record": false
+  },
+  {
+   "name": "Lili",
+   "year": 1990,
+   "water_m": 2.11,
+   "category": "tropical storm",
+   "wind_kt": 60,
+   "km": 304,
+   "after_wave_record": false
+  },
+  {
+   "name": "Gabrielle",
+   "year": 2001,
+   "water_m": 2.1,
+   "category": "tropical storm",
+   "wind_kt": 55,
+   "km": 410,
+   "after_wave_record": false
+  },
+  {
+   "name": "Danielle",
+   "year": 1998,
+   "water_m": 1.98,
+   "category": "Cat 2",
+   "wind_kt": 85,
+   "km": 470,
+   "after_wave_record": false
+  },
+  {
+   "name": "Ernesto",
+   "year": 2006,
+   "water_m": 1.74,
+   "category": "tropical storm",
+   "wind_kt": 30,
+   "km": 198,
+   "after_wave_record": false
+  },
+  {
+   "name": "Hanna",
+   "year": 2008,
+   "water_m": 1.72,
+   "category": "tropical storm",
+   "wind_kt": 45,
+   "km": 239,
+   "after_wave_record": false
+  },
+  {
+   "name": "Erin",
+   "year": 2019,
+   "water_m": 1.63,
+   "category": "tropical storm",
+   "wind_kt": 30,
+   "km": 271,
+   "after_wave_record": false
+  }
+ ]
+}
