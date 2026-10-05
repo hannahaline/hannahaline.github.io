@@ -15,7 +15,7 @@ NC-12 is the only road on and off Hatteras Island. Where it runs close to the oc
 Until the early 1950s there was no paved road down Hatteras Island. People reached the mainland by boat, and a car trip meant some 60 miles up the beach and a ferry across Oregon Inlet, letting tyres down and digging out of the sand along the way.
 
 - **1936–40.** The National Park Service had crews build a continuous line of dunes along the Outer Banks, in part to make room for a road behind it (see [dune building]({{ '/hatteras/management/dunes/' | relative_url }})).
-- **1937.** Congress authorised Cape Hatteras National Seashore. The villages that were already built up were left out of it, and local support was won partly with the promise of a road.
+- **1937.** Congress authorised Cape Hatteras National Seashore. The villages, home to 1,600–1,800 people who lived mostly from the sea, were left outside its boundaries, and local support was won partly with the promise of a road.
 - **1945.** The Cape Hatteras Electric Cooperative was founded; before that, only Hatteras Village had electric service.
 - **1952.** A road was completed through Pea Island to Hatteras village.
 - **1953.** The Park Service took over the seashore, which was dedicated in 1958.
