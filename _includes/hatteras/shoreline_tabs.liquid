@@ -1,5 +1,5 @@
 {% comment %} Tabs across the Shoreline change pages: the intro and its three viewers. Sub-pages set `section: /hatteras/shoreline-change/` {% endcomment %}
-{% assign tabs = "/hatteras/shoreline-change/|What happened;/hatteras/shoreline-change/survey-lines/|Survey lines;/hatteras/shoreline-change/along-the-island/|Along the island;/hatteras/shoreline-change/through-time/|Shorelines through time" | split: ";" %}
+{% assign tabs = "/hatteras/shoreline-change/|Summary;/hatteras/shoreline-change/survey-lines/|Survey lines;/hatteras/shoreline-change/along-the-island/|Along the island;/hatteras/shoreline-change/through-time/|Shorelines through time" | split: ";" %}
 <nav class="hat-tabs" aria-label="Shoreline change pages">
   {% for t in tabs %}
     {% assign parts = t | split: "|" %}

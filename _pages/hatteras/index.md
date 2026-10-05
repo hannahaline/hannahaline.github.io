@@ -57,16 +57,6 @@ It also introduces a computer model that recreates this history, so that managem
 <b>Why a model?</b> If a model can reproduce how the island actually changed, including the effects of {% include hatteras/term.liquid id="beach-nourishment" text="beach nourishment" %}, dune building, and moving the road, then it can be used to ask "what if" questions about the future with more confidence.
 </div>
 
-<div class="hat-pairs">
-<figure class="hat-pair">
-<div class="hat-pair-photos">
-<figure><img src="{{ '/assets/hatteras/img/lighthouse_1999.jpg' | relative_url }}" alt="Aerial photo from 1999: the striped Cape Hatteras Lighthouse standing at the top of the beach, with the surf a short distance away and groins running into the ocean" loading="lazy"><figcaption>January 1999, before the move</figcaption></figure>
-<figure><img src="{{ '/assets/hatteras/img/lighthouse_aerial_2004.jpg' | relative_url }}" alt="Aerial photo from 2004: the lighthouse at its new site inland, surrounded by maritime forest, with the beach in the foreground" loading="lazy"><figcaption>November 2004, at its new site</figcaption></figure>
-</div>
-<figcaption class="hat-caption">The Cape Hatteras Lighthouse before and after it was moved. By 1999 the retreating shoreline had come close to the tower, and that summer it was moved 880 m inland. Photos: Tech. Sgt. Howard Blair, U.S. Air Force (<a href="https://commons.wikimedia.org/wiki/File:Cape_Hatteras_lighthouse_North_Carolina_(improved).jpg">left</a>) and NPS / Michael B. Edwards (<a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">right</a>), both public domain.</figcaption>
-</figure>
-</div>
-
 ## Explore
 
 <div class="hat-cards">

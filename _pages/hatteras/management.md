@@ -44,4 +44,19 @@ The model also leaves out the sand dredged from Oregon Inlet's navigation channe
 These actions work together. The dunes protect the road, the road decides where dunes are kept, and nourishment and groins hold the beach in front of both.
 The model includes all four, so it can be used to ask how the island would have changed without them.
 
+## Moving back from the shore
+
+Management can also mean moving away from the ocean. In 1999 the National Park Service moved the Cape Hatteras Lighthouse 880 m inland, away from the retreating shoreline near Cape Point, and NC-12 has been moved inland where the ocean came too close.
+The lighthouse move is not part of the model.
+
+<div class="hat-pairs">
+<figure class="hat-pair">
+<div class="hat-pair-photos">
+<figure><img src="{{ '/assets/hatteras/img/lighthouse_1999.jpg' | relative_url }}" alt="Aerial photo from 1999: the striped Cape Hatteras Lighthouse standing at the top of the beach, with the surf a short distance away and groins running into the ocean" loading="lazy"><figcaption>January 1999, before the move</figcaption></figure>
+<figure><img src="{{ '/assets/hatteras/img/lighthouse_aerial_2004.jpg' | relative_url }}" alt="Aerial photo from 2004: the lighthouse at its new site inland, surrounded by maritime forest, with the beach in the foreground" loading="lazy"><figcaption>November 2004, at its new site</figcaption></figure>
+</div>
+<figcaption class="hat-caption">The Cape Hatteras Lighthouse before and after it was moved. By 1999 the retreating shoreline had come close to the tower, and that summer it was moved 880 m inland. Photos: Tech. Sgt. Howard Blair, U.S. Air Force (<a href="https://commons.wikimedia.org/wiki/File:Cape_Hatteras_lighthouse_North_Carolina_(improved).jpg">left</a>) and NPS / Michael B. Edwards (<a href="https://commons.wikimedia.org/wiki/File:Lighthouse_at_Cape_Hatteras_National_Seashore._NPS-Michael_B._Edwards_(18497979278).jpg">right</a>), both public domain.</figcaption>
+</figure>
+</div>
+
 {% include hatteras/pager.liquid %}

@@ -15,27 +15,27 @@
   ready: true
 - title: Shoreline change
   url: /hatteras/shoreline-change/
-  group: What happened
+  group: Observations
   ready: true
 - title: Storms
   url: /hatteras/storms/
-  group: What happened
+  group: Observations
   ready: true
 - title: Then and now
   url: /hatteras/then-and-now/
-  group: What happened
+  group: Observations
   ready: true
 - title: Management
   url: /hatteras/management/
-  group: What we can do
+  group: Management
   ready: true
 - title: The model
   url: /hatteras/model/
-  group: What we can do
+  group: Modelling
   ready: true
 - title: Looking ahead
   url: /hatteras/looking-ahead/
-  group: What we can do
+  group: Modelling
   ready: false
 - title: Glossary
   url: /hatteras/glossary/
