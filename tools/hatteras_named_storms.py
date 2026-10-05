@@ -107,40 +107,44 @@ def main():
     noreaster = max((e for e in storms if e["type"] != "tropical"), key=lambda e: e["wl"])
 
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
-    fig, ax = plt.subplots(figsize=(9.5, 0.38 * len(top) + 1.4))
-    y = list(range(len(top)))[::-1]
-    for yi, r in zip(y, top):
-        col = COLOURS[r["category"]]
-        ax.barh(yi, r["water_m"], color="white" if r["after_wave_record"] else col, edgecolor=col if r["after_wave_record"] else "none",
-                hatch="////" if r["after_wave_record"] else None, lw=1.2, height=0.72)
-        where = "passed almost overhead" if r["km"] < 25 else f"{r['km']} km away"
-        ax.text(r["water_m"] + 0.05, yi, f"{r['category']}, {where}", va="center", fontsize=9, color=MUTED, zorder=4,
-                path_effects=[pe.withStroke(linewidth=3, foreground="white")])
-    ax.set_yticks(y)
-    ax.set_yticklabels([f"{r['name']} {r['year']}" for r in top], fontsize=9.5)
-    ax.axvline(noreaster["wl"], color="#4393c3", lw=1.4, ls=(0, (5, 3)), zorder=1)
-    month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
-             "December"][int(noreaster["t"][5:7]) - 1]
-    ax.text(noreaster["wl"] + 0.04, len(top) - 0.35, f"highest nor'easter, {month} {noreaster['t'][:4]}: {noreaster['wl']:.1f} m",
-            fontsize=9, color="#2166ac", va="bottom")
-    ax.set_xlim(0, max(r["water_m"] for r in top) + 1.6)
-    ax.set_ylim(-0.6, len(top) + 0.2)
-    ax.set_xlabel("how high the water reached at the shore (m above high tide)", fontsize=10)
-    ax.grid(axis="x", color=GRID, lw=0.6)
-    ax.set_axisbelow(True)
-    for s in ("top", "right"):
-        ax.spines[s].set_visible(False)
-    shown = [c for c in COLOURS if any(r["category"] == c for r in top)]
-    seen, handles = set(), []
-    for c in shown:
-        lab = "subtropical or post-tropical" if c in ("subtropical", "post-tropical") else c
-        if lab not in seen:
-            seen.add(lab)
-            handles.append(Patch(color=COLOURS[c], label=lab))
-    ax.legend(handles=handles, title="category when closest to Hatteras", title_fontsize=9, fontsize=9, frameon=False,
-              loc="lower right", ncol=1)
-    fig.savefig(OUT_IMG, dpi=160, bbox_inches="tight", pad_inches=0.05)
-    plt.close(fig)
+    for phone in (False, True):
+        # a narrower, taller version for phones, swapped in below 576 px (phone check, 2026-10-04)
+        fig, ax = plt.subplots(figsize=(5.0, 0.5 * len(top) + 1.9) if phone else (9.5, 0.38 * len(top) + 1.4))
+        y = list(range(len(top)))[::-1]
+        for yi, r in zip(y, top):
+            col = COLOURS[r["category"]]
+            ax.barh(yi, r["water_m"], color="white" if r["after_wave_record"] else col, edgecolor=col if r["after_wave_record"] else "none",
+                    hatch="////" if r["after_wave_record"] else None, lw=1.2, height=0.72)
+            where = ("overhead" if r["km"] < 25 else f"{r['km']} km") if phone else ("passed almost overhead" if r["km"] < 25 else f"{r['km']} km away")
+            ax.text(r["water_m"] + 0.05, yi, f"{r['category']}, {where}", va="center", fontsize=9, color=MUTED, zorder=4,
+                    path_effects=[pe.withStroke(linewidth=3, foreground="white")])
+        ax.set_yticks(y)
+        ax.set_yticklabels([f"{r['name']} {r['year']}" for r in top], fontsize=9.5)
+        ax.axvline(noreaster["wl"], color="#4393c3", lw=1.4, ls=(0, (5, 3)), zorder=1)
+        month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+                 "December"][int(noreaster["t"][5:7]) - 1]
+        ax.text(noreaster["wl"] + (-0.06 if phone else 0.04), len(top) - 0.35,
+                f"highest nor'easter,\n{month} {noreaster['t'][:4]}: {noreaster['wl']:.1f} m" if phone else
+                f"highest nor'easter, {month} {noreaster['t'][:4]}: {noreaster['wl']:.1f} m", ha="right" if phone else "left",
+                fontsize=9, color="#2166ac", va="bottom")
+        ax.set_xlim(0, max(r["water_m"] for r in top) + 1.6)
+        ax.set_ylim(-0.6, len(top) + 0.2)
+        ax.set_xlabel("water level at the shore (m above high tide)" if phone else "how high the water reached at the shore (m above high tide)", fontsize=10)
+        ax.grid(axis="x", color=GRID, lw=0.6)
+        ax.set_axisbelow(True)
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
+        shown = [c for c in COLOURS if any(r["category"] == c for r in top)]
+        seen, handles = set(), []
+        for c in shown:
+            lab = "subtropical or post-tropical" if c in ("subtropical", "post-tropical") else c
+            if lab not in seen:
+                seen.add(lab)
+                handles.append(Patch(color=COLOURS[c], label=lab))
+        ax.legend(handles=handles, title="category when closest to Hatteras", title_fontsize=9, fontsize=9, frameon=False,
+                  **(dict(loc="upper center", bbox_to_anchor=(0.4, -0.09), ncol=2) if phone else dict(loc="lower right", ncol=1)))
+        fig.savefig(OUT_IMG.with_name(OUT_IMG.stem + "_phone.png") if phone else OUT_IMG, dpi=160, bbox_inches="tight", pad_inches=0.05)
+        plt.close(fig)
     OUT_JSON.write_text(json.dumps({"source": "HURDAT2 closest approach to Cape Hatteras; water levels from timeline.json",
                                     "highest_noreaster": {"year": int(noreaster["t"][:4]), "water_m": noreaster["wl"]},
                                     "storms": rows}, indent=1), encoding="utf-8")

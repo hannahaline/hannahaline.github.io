@@ -53,6 +53,8 @@ INK, MUTED, GRID = "#1a1a1a", "#5b6469", "#e6e9eb"
 FILL, ROAD, TROP, OTHER, SEA = "#c8880f", "#d55e00", "#c8880f", "#6baed6", "#2166ac"
 DOMAIN_KM = 0.5
 W_IN = 10.0
+H_SCALE = 1.0                   # the phone pass sets a narrower width and taller panels (see main)
+SUFFIX = ""
 STORM_NAME_M = 3.0              # named tropical storms at or above this water level, as on the Storms page
 SMALL_STORM_M = 2.5             # storms below this, and not tropical, are drawn small and pale so the big ones stand out
 # Dune tops for the storm figure (Hannah, 2026-10-04): the island the 1996 run starts from, the 10 m grids of the
@@ -76,7 +78,9 @@ def villages(ax, top=True):
         if p["km"] > 45.5:
             continue
         ax.axvline(p["km"], color=MUTED, lw=0.6, ls=":", zorder=0)
-        ax.text(p["km"], 1.01 + (0.07 if p["name"] in ("Waves", "Buxton") else 0), p["name"], transform=ax.get_xaxis_transform(),
+        # names stagger over two rows, three on phones where Salvo, Waves and Rodanthe crowd together
+        rows = {"Waves": 1, "Buxton": 1, "Rodanthe": 2 if SUFFIX else 0}
+        ax.text(p["km"], 1.01 + 0.07 * rows.get(p["name"], 0), p["name"], transform=ax.get_xaxis_transform(),
                 ha="left" if p["km"] < 1 else "center", va="bottom", fontsize=9.5, color=INK)
 
 
@@ -90,13 +94,13 @@ def frame(ax):
 
 def save(fig, n):
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / f"step{n}.png", dpi=150, bbox_inches="tight", pad_inches=0.08)
+    fig.savefig(OUT / f"step{n}{SUFFIX}.png", dpi=150, bbox_inches="tight", pad_inches=0.08)
     plt.close(fig)
-    print(f"wrote step{n}.png")
+    print(f"wrote step{n}{SUFFIX}.png")
 
 
 def step2(canvas, cmap, norm, ticks, water):
-    fig, ax = plt.subplots(figsize=(W_IN, 3.1))
+    fig, ax = plt.subplots(figsize=(W_IN, 3.1 * H_SCALE))
     rows_km = canvas.shape[0] * io.init.CELL_SIZE_M / 1000
     im = ax.imshow(np.ma.masked_less(np.ma.masked_invalid(canvas), 0.0), cmap=cmap, norm=norm, origin="lower",
                    extent=(0, canvas.shape[1] * io.init.CELL_SIZE_M / 1000, 0, rows_km), interpolation="nearest", aspect="auto")
@@ -130,7 +134,7 @@ def step_offset():
     padded = np.loadtxt(io.tv.INIT_ROOT / HATTERAS_PERIODS[START]["island_offset_file"], skiprows=1, delimiter=",")
     off = padded[io.init.START_REAL_INDEX:io.init.END_REAL_INDEX] / 1000          # km landward
     x = km(io.GIS)
-    fig, ax = plt.subplots(figsize=(W_IN, 3.6))
+    fig, ax = plt.subplots(figsize=(W_IN, 3.6 * H_SCALE))
     top = off.max() + 1.2
     ax.fill_between(x, off, top, color="#ecdfb9", lw=0)                          # land, landward of the shoreline
     ax.fill_between(x, -0.8, off, color="#cfe0ec", lw=0)                          # ocean
@@ -153,9 +157,9 @@ def step_offset():
     villages(ax)
     frame(ax)
     OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / "step_offset.png", dpi=150, bbox_inches="tight", pad_inches=0.08)
+    fig.savefig(OUT / f"step_offset{SUFFIX}.png", dpi=150, bbox_inches="tight", pad_inches=0.08)
     plt.close(fig)
-    print("wrote step_offset.png")
+    print(f"wrote step_offset{SUFFIX}.png")
 
 
 def dune_crests():
@@ -184,7 +188,7 @@ def step3():
     image goes on the Storms page (Hannah, 2026-10-04: keep this panel only, and show it on both pages)."""
     t = json.loads((DATA / "timeline.json").read_text(encoding="utf-8"))
     s = [e for e in t["storms"] if START <= e["y"] < END + 1]
-    fig, bx = plt.subplots(figsize=(W_IN, 3.9))
+    fig, bx = plt.subplots(figsize=(W_IN, 3.9 * H_SCALE))
 
     def level(name):
         return max(e["wl"] for e in s if e["name"] and e["name"].startswith(name))
@@ -195,7 +199,8 @@ def step3():
     for wl, name, col in levels:
         bx.axhline(wl, color=col, lw=1.6, zorder=3)
         n = int(np.sum(low < wl))
-        bx.text(45.3, wl + 0.06, f"{name}, {wl:.1f} m: over the low point on {n} of 90 stretches", ha="right", va="bottom",
+        text = f"{name}, {wl:.1f} m: {n} of 90 stretches" if SUFFIX else f"{name}, {wl:.1f} m: over the low point on {n} of 90 stretches"
+        bx.text(45.3, wl + 0.06, text, ha="right", va="bottom",
                 fontsize=9, color=col, path_effects=halo, zorder=4)
     bx.set_xlim(0, 45.5)
     bx.set_ylim(0, max(np.nanmax(low), levels[0][0]) + 0.6)
@@ -210,7 +215,10 @@ def step3():
 def step4():
     sl, fit = io.sea_level(START, END)
     waves = {k: field_default(k) for k in ("hs", "wave_period_s", "wave_asymmetry", "wave_angle_high_fraction")}
-    fig, (a, b) = plt.subplots(1, 2, figsize=(W_IN, 3.6), gridspec_kw={"width_ratios": [1.6, 1]})
+    if SUFFIX:
+        fig, (a, b) = plt.subplots(2, 1, figsize=(W_IN, 7.2), gridspec_kw={"height_ratios": [1, 1], "hspace": 0.35})
+    else:
+        fig, (a, b) = plt.subplots(1, 2, figsize=(W_IN, 3.6), gridspec_kw={"width_ratios": [1.6, 1]})
     a.plot(sl.t, sl.msl, color="#bdbdbd", lw=0.8, label="monthly average, Duck tide gauge")
     xs = np.array([START, END])
     rate = HATTERAS_PERIODS[START]["sea_level_rise_rate"]
@@ -241,7 +249,7 @@ def step4():
 
 def step6():
     target, _ = io.observed_target(START, END)
-    fig, ax = plt.subplots(figsize=(W_IN, 3.6))
+    fig, ax = plt.subplots(figsize=(W_IN, 3.6 * H_SCALE))
     v = target.reindex(io.GIS).values
     cols = np.where(v < 0, "#d6604d", "#4393c3")
     ax.bar(km(io.GIS), v, width=DOMAIN_KM * 0.9, color=cols)
@@ -258,14 +266,18 @@ def step6():
 
 
 def main():
+    """Draws every step twice: for wide screens, and narrower and taller for phones (<name>_phone.png, which the page
+    swaps in below 576 px; Hannah, 2026-10-04, after the phone check found the text unreadable at a third of its size)."""
+    global W_IN, H_SCALE, SUFFIX
     plt.rcParams.update({"font.family": "DejaVu Sans"})
     canvas = io.init.detrended_canvas(START, include_buffers=False)
     cmap, norm, ticks, water = io.init.scheme_colours(io.ELEVATION_SCHEME)
-    step2(canvas, cmap, norm, ticks, water)
-    step_offset()
-    step3()
-    step4()
-    step6()
+    for W_IN, H_SCALE, SUFFIX in ((10.0, 1.0, ""), (5.2, 1.45, "_phone")):
+        step2(canvas, cmap, norm, ticks, water)
+        step_offset()
+        step3()
+        step4()
+        step6()
 
 
 if __name__ == "__main__":

@@ -19,6 +19,20 @@
     return e;
   }
   function text(parent, x, y, s, attrs) { var t = el("text", Object.assign({ x: x, y: y }, attrs || {}), parent); t.textContent = s; return t; }
+
+  // Rows for place names along a chart: each name takes the lowest row where it clears the last name in that row,
+  // judged from its estimated width, so close villages (Salvo, Waves, Rodanthe) stack instead of overlapping.
+  function labelRows(places, X, size, anchorOf) {
+    var ends = [];
+    return places.map(function (p) {
+      var w = p.name.length * size * 0.56 + 6, x = X(p.km), a = anchorOf(p);
+      var x0 = a === "start" ? x : a === "end" ? x - w : x - w / 2;
+      var r = 0;
+      while (ends[r] !== undefined && ends[r] > x0) r++;
+      ends[r] = x0 + w;
+      return r;
+    });
+  }
   function fmt(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1); }
 
   function Panel(root) {
@@ -66,7 +80,7 @@
   Panel.prototype.draw = function () {
     var self = this, d = this.data, w = d.windows[this.win];
     var W = Math.max(this.chart.clientWidth, 320), small = W < 640;
-    var left = small ? 34 : 58, right = 12, top = 34, H = small ? 300 : 380, bottom = 38;
+    var left = small ? 34 : 58, right = 12, top = small ? 46 : 34, H = small ? 312 : 380, bottom = 38;
     var x0 = 0, x1 = 45;
     var X = function (km) { return left + (km - x0) / (x1 - x0) * (W - left - right); };
     var Y = function (v) { return top + (YMAX - Math.max(YMIN, Math.min(YMAX, v))) / (YMAX - YMIN) * (H - top - bottom); };
@@ -99,10 +113,12 @@
     for (var tk = 0; tk <= x1; tk += 5) el("line", { x1: X(tk), x2: X(tk), y1: H - bottom, y2: H - bottom + 4, stroke: INK }, svg);
 
     // places along the top
-    d.places.forEach(function (p, i) {
-      if (p.km > x1) return;
+    var shown = d.places.filter(function (p) { return p.km <= x1; });
+    var anchorOf = function (p) { return p.km < 1.5 ? "start" : "middle"; };
+    var prow = labelRows(shown, X, 11.5, anchorOf);
+    shown.forEach(function (p, i) {
       el("line", { x1: X(p.km), x2: X(p.km), y1: top - 4, y2: H - bottom, stroke: "rgba(107,115,120,0.25)" }, svg);
-      text(svg, X(p.km), top - 8 - (i % 2) * 12, p.name, { "text-anchor": p.km < 1.5 ? "start" : "middle", fill: INK, "font-size": 11.5 });
+      text(svg, X(p.km), top - 8 - prow[i] * 12, p.name, { "text-anchor": anchorOf(p), fill: INK, "font-size": 11.5 });
     });
 
     // observed: raw stretch means as dots, the 7-stretch smoothing as the black line

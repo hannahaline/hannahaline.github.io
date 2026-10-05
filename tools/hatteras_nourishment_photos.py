@@ -273,11 +273,11 @@ def years_later(stretch, year, after_date, transects, box, k, halo, fetch):
     return shots
 
 
-def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo, fetch):
+def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo, fetch, phone=False):
     from matplotlib.lines import Line2D
     lines = shorelines(transects, box, [before_date] + [d for _, d in shots])
     n = len(shots)
-    cols = min(n, 3)
+    cols = min(n, 2 if phone else 3)
     rows = -(-n // cols)
     fig, axes = plt.subplots(rows, cols, figsize=(2.75 * cols, 2.75 * rows + 0.45), squeeze=False,
                              gridspec_kw={"wspace": 0.04, "hspace": 0.06})
@@ -314,7 +314,7 @@ def draw_years_later(stretch, year, before_date, shots, transects, box, k, halo,
     fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.1, ls=(0, (4, 2.5)), path_effects=halo, label="Shoreline before the fill"),
                         Line2D([], [], color=LINE, lw=1.3, path_effects=halo, label="Shoreline at the time of each photo")],
                loc="lower center", ncol=2, frameon=False, fontsize=8.5, bbox_to_anchor=(0.5, -0.01), handlelength=2.6)
-    name = f"{stretch.lower()}_{year}_years_later.jpg"
+    name = f"{stretch.lower()}_{year}_years_later{'_phone' if phone else ''}.jpg"
     fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
     plt.close(fig)
     return name, [f"{pd.Timestamp(d).day} {pd.Timestamp(d):%B %Y}" for _, d in shots]
@@ -384,45 +384,51 @@ def main():
         lines = shorelines(rates["transects"], box, (pb, pa))
         gap_days = max(GAPS) if GAPS else None
         lb, la = 0, 1
-        fig, axes = plt.subplots(1, 2, figsize=(8, 4.25), gridspec_kw={"wspace": 0.03})
-        for i, (ax, y) in enumerate(zip(axes, (yb, ya))):
-            p = PHOTOS / f"naip_{y}_{box[0]:.0f}_{box[1]:.0f}.jpg"
-            if args.fetch or not p.exists():
-                img.save(naip_export(y, box, PX), p)
-                print(f"fetched {p.name}")
-            ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
-            xs, ys = zip(*lines[lb])
-            ax.plot(xs, ys, color=REF_LINE, lw=1.0, ls=(0, (4, 2.5)), path_effects=halo)
-            if i:
-                xs, ys = zip(*lines[la])
-                ax.plot(xs, ys, color=LINE, lw=1.2, path_effects=halo)
-            ax.set_xlim(box[0], box[2])
-            ax.set_ylim(box[1], box[3])
-            ax.set_xticks([])
-            ax.set_yticks([])
-            for s in ax.spines.values():
-                s.set_color("#1a1a1a")
-                s.set_linewidth(1.2)
-            ax.text(0.03, 0.97, f"({'ab'[i]}) {'Before' if i == 0 else 'After'}: {pd.Timestamp(y).day} {pd.Timestamp(y):%b %Y}",
-                    transform=ax.transAxes,
-                    ha="left", va="top", fontsize=9.5, color="#1a1a1a",
-                    bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
-        ax = axes[0]
-        x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.06 * (box[3] - box[1])
-        ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
-        ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=9, path_effects=halo)
-        ax.annotate("N", xy=(0.92, 0.97), xytext=(0.92, 0.84), xycoords="axes fraction", ha="center", va="center",
-                    color="white", fontsize=10, fontweight="bold", arrowprops=dict(arrowstyle="-|>", color="white", lw=1.4),
-                    path_effects=halo)
-        from matplotlib.lines import Line2D
-        fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.2, ls=(0, (4, 2.5)), path_effects=halo, label="Satellite shoreline at the time of photo (a)"),
-                            Line2D([], [], color=LINE, lw=1.4, path_effects=halo, label="At the time of photo (b)")],
-                   loc="lower center", ncol=2, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.02), handlelength=3)
+        for phone in (False, True):
+            # stacked, one photo above the other, for phones (phone check, 2026-10-04)
+            fig, axes = (plt.subplots(2, 1, figsize=(4.2, 8.9), gridspec_kw={"hspace": 0.04}) if phone else
+                         plt.subplots(1, 2, figsize=(8, 4.25), gridspec_kw={"wspace": 0.03}))
+            for i, (ax, y) in enumerate(zip(axes, (yb, ya))):
+                p = PHOTOS / f"naip_{y}_{box[0]:.0f}_{box[1]:.0f}.jpg"
+                if args.fetch or not p.exists():
+                    img.save(naip_export(y, box, PX), p)
+                    print(f"fetched {p.name}")
+                ax.imshow(Image.open(p), extent=[box[0], box[2], box[1], box[3]], interpolation="lanczos")
+                xs, ys = zip(*lines[lb])
+                ax.plot(xs, ys, color=REF_LINE, lw=1.0, ls=(0, (4, 2.5)), path_effects=halo)
+                if i:
+                    xs, ys = zip(*lines[la])
+                    ax.plot(xs, ys, color=LINE, lw=1.2, path_effects=halo)
+                ax.set_xlim(box[0], box[2])
+                ax.set_ylim(box[1], box[3])
+                ax.set_xticks([])
+                ax.set_yticks([])
+                for s in ax.spines.values():
+                    s.set_color("#1a1a1a")
+                    s.set_linewidth(1.2)
+                ax.text(0.03, 0.97, f"({'ab'[i]}) {'Before' if i == 0 else 'After'}: {pd.Timestamp(y).day} {pd.Timestamp(y):%b %Y}",
+                        transform=ax.transAxes,
+                        ha="left", va="top", fontsize=9.5, color="#1a1a1a",
+                        bbox=dict(boxstyle="square,pad=0.3", fc="white", ec="#1a1a1a", lw=0.8, alpha=0.92))
+            ax = axes[0]
+            x0, y0 = box[0] + 0.06 * (box[2] - box[0]), box[1] + 0.06 * (box[3] - box[1])
+            ax.plot([x0, x0 + 50 * k], [y0, y0], color="white", lw=3, solid_capstyle="butt", path_effects=halo)
+            ax.text(x0 + 25 * k, y0 + 8 * k, "50 m", ha="center", va="bottom", color="white", fontsize=9, path_effects=halo)
+            ax.annotate("N", xy=(0.92, 0.97), xytext=(0.92, 0.84), xycoords="axes fraction", ha="center", va="center",
+                        color="white", fontsize=10, fontweight="bold", arrowprops=dict(arrowstyle="-|>", color="white", lw=1.4),
+                        path_effects=halo)
+            from matplotlib.lines import Line2D
+            fig.legend(handles=[Line2D([], [], color=REF_LINE, lw=1.2, ls=(0, (4, 2.5)), path_effects=halo, label="Satellite shoreline at the time of photo (a)"),
+                                Line2D([], [], color=LINE, lw=1.4, path_effects=halo, label="At the time of photo (b)")],
+                       loc="lower center", ncol=1 if phone else 2, frameon=False, fontsize=9.5,
+                       bbox_to_anchor=(0.5, 0.0 if phone else -0.02), handlelength=3)
+            name = f"{stretch.lower()}_{year}{'_phone' if phone else ''}.jpg"
+            fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
+            plt.close(fig)
         name = f"{stretch.lower()}_{year}.jpg"
-        fig.savefig(OUT_IMG / name, dpi=150, bbox_inches="tight", pad_inches=0.04, pil_kwargs={"quality": 85, "optimize": True})
-        plt.close(fig)
         shots = years_later(stretch, year, ya, rates["transects"], box, k, halo, args.fetch)
         tt_name, tt_labels = draw_years_later(stretch, year, yb, shots, rates["transects"], box, k, halo, args.fetch)
+        draw_years_later(stretch, year, yb, shots, rates["transects"], box, k, halo, args.fetch, phone=True)
         wb, wa = windows(stretch, year)
         last = later_windows(stretch, year)[-1]
         on = [t for t in rates["transects"] if stretches[stretch]["km"][0] <= t["km"] <= stretches[stretch]["km"][1]]
@@ -433,6 +439,8 @@ def main():
                                     "before": f"{pd.Timestamp(yb).day} {pd.Timestamp(yb):%B %Y}",
                                     "after": f"{pd.Timestamp(ya).day} {pd.Timestamp(ya):%B %Y}",
                                     "years_later": f"/assets/hatteras/img/nourishment/{tt_name}", "later_photos": tt_labels,
+                                    "src_phone": f"/assets/hatteras/img/nourishment/{name.replace('.jpg', '_phone.jpg')}",
+                                    "years_later_phone": f"/assets/hatteras/img/nourishment/{tt_name.replace('.jpg', '_phone.jpg')}",
                                     "jump_m": round(jump, 1), "left_m": round(left, 1), "left_year": 2025,
                                     "left_after_refill": "refill" in last[0],
                                     "placed": PLACED_TEXT[(stretch, year)], "line_gap_days": gap_days,

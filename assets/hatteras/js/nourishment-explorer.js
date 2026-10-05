@@ -18,6 +18,20 @@
   function text(parent, x, y, s, attrs) { var t = el("text", Object.assign({ x: x, y: y }, attrs || {}), parent); t.textContent = s; return t; }
   function signed(v, d) { return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d === undefined ? 0 : d); }
 
+  // Rows for place names along a chart: each name takes the lowest row where it clears the last name in that row,
+  // judged from its estimated width, so close villages (Salvo, Waves, Rodanthe) stack instead of overlapping.
+  function labelRows(places, X, size, anchorOf) {
+    var ends = [];
+    return places.map(function (p) {
+      var w = p.name.length * size * 0.56 + 6, x = X(p.km), a = anchorOf(p);
+      var x0 = a === "start" ? x : a === "end" ? x - w : x - w / 2;
+      var r = 0;
+      while (ends[r] !== undefined && ends[r] > x0) r++;
+      ends[r] = x0 + w;
+      return r;
+    });
+  }
+
   function Explorer(root) {
     this.root = root;
     this.chart = root.querySelector(".hat-nx-chart");
@@ -110,7 +124,8 @@
     var img = fig.querySelector("img");
     var assets = this.root.getAttribute("data-assets") || "/assets/hatteras/";
     var asset = function (path) { return path.replace(/^\/assets\/hatteras\//, assets); };
-    img.src = asset(p.src);
+    var phone = window.matchMedia && window.matchMedia("(max-width: 576px)").matches;   // stacked versions for phones
+    img.src = asset(phone && p.src_phone ? p.src_phone : p.src);
     img.alt = "Aerial photos of the same stretch of beach at " + name + ", before (" + p.before + ") and after (" + p.after +
       ") the " + f.year + " fill, with the satellite shoreline at the time of each photo drawn on them";
     fig.querySelector("figcaption").innerHTML = "The same 300 m of beach at " + name + ", photographed from the air on " + p.before +
@@ -126,7 +141,7 @@
     var tt = this.root.querySelector(".hat-nx-time");
     tt.hidden = !p.years_later;
     if (p.years_later) {
-      tt.querySelector("img").src = asset(p.years_later);
+      tt.querySelector("img").src = asset(phone && p.years_later_phone ? p.years_later_phone : p.years_later);
       tt.querySelector("img").alt = "Aerial photos of the same beach at " + name + " in the years after the " + f.year +
         " fill (" + p.later_photos.join(", ") + "), each with the satellite shoreline at the time of the photo and the shoreline before the fill";
       tt.querySelector("figcaption").innerHTML = "The same 300 m of beach in every later aerial photo, " +
@@ -181,8 +196,11 @@
 
   // Where the stretch is: the island from Cape Point to Oregon Inlet as a bar, villages above, the fills in gold
   Explorer.prototype.drawStrip = function () {
-    var d = this.data, s = d.stretches[this.k], o = this.outline, W = Math.max(this.strip.clientWidth, 300), L = 8, R = 8, top = 34;
+    var d = this.data, s = d.stretches[this.k], o = this.outline, W = Math.max(this.strip.clientWidth, 300), L = 8, R = 8;
     var pxkm = (W - L - R) / d.island_km[1];
+    var anchorOf = function (p) { return p.km < 2 ? "start" : p.km > d.island_km[1] - 3 ? "end" : "middle"; };
+    var prow = labelRows(d.places, function (km) { return L + km * pxkm; }, 11.5, anchorOf);
+    var nrows = Math.max.apply(null, prow) + 1, top = 12 + nrows * 12;
     var X = function (km) { return L + km * pxkm; };
     // the island turned so north runs right, ocean side down, at true scale (tools/hatteras_island_outline.py)
     var e0 = o ? o.east_m[0] : 0, h = o ? (o.east_m[1] - o.east_m[0]) / 1000 * pxkm : 8;
@@ -218,13 +236,14 @@
     });
     // village names alternate between two rows so close villages (Salvo, Waves, Rodanthe) do not collide
     d.places.forEach(function (p, i) {
-      var row = i % 2, yb = o ? Y(shore(p.km)) - 2 : top;
+      var row = prow[i], yb = o ? Y(shore(p.km)) - 2 : top;
       el("line", { x1: X(p.km), x2: X(p.km), y1: 12 + row * 12, y2: Math.max(yb, 14 + row * 12), stroke: MUTED, "stroke-width": 0.8 }, svg);
-      text(svg, X(p.km), 9 + row * 12, p.name, { "text-anchor": p.km < 2 ? "start" : p.km > d.island_km[1] - 3 ? "end" : "middle",
+      text(svg, X(p.km), 9 + row * 12, p.name, { "text-anchor": anchorOf(p),
         fill: INK, "font-size": 11.5, "paint-order": "stroke", stroke: "#fff", "stroke-width": 3 });
     });
     text(svg, W - R, H - 3, "Oregon Inlet", { fill: MUTED, "font-size": 10.5, "text-anchor": "end" });
-    if (o) text(svg, L, H - 3, "Atlantic Ocean below, Pamlico Sound above; north is to the right", { fill: MUTED, "font-size": 10.5 });
+    if (o) text(svg, L, H - 3, W < 600 ? "Ocean below, sound above" : "Atlantic Ocean below, Pamlico Sound above; north is to the right",
+      { fill: MUTED, "font-size": 10.5 });
   };
 
   Explorer.prototype.drawChart = function () {
