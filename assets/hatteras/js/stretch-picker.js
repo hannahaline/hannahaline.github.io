@@ -132,14 +132,14 @@
       '<p class="hat-sp-note"><a href="' + link("nc12") + '">The history of NC-12</a></p></div>');
     var ow;
     if (p.overwash === null) {
-      ow = "<p>This stretch is outside the overwash record, which covers Cape Point to just north of Rodanthe.</p>";
+      ow = "<p>Outside the overwash record, which runs from Cape Point to just north of Rodanthe.</p>";
     } else if (!p.overwash.length) {
-      ow = "<p>No overwash seen here in any of the " + d.overwash_images + " aerial images checked, 1984–2024.</p>";
+      ow = "<p>None seen in " + d.overwash_images + " aerial images, 1984–2024.</p>";
     } else {
-      ow = "<p>Seen in " + p.overwash.length + " of the " + d.overwash_images + " aerial images checked, 1984–2024:</p><ul>" +
+      ow = "<p>Seen in " + p.overwash.length + " of " + d.overwash_images + " aerial images, 1984–2024:</p><ul class=\"hat-sp-tight\">" +
         p.overwash.map(function (o) {
-          return "<li><b>" + month(o.image) + "</b>" + (o.storms.length ? ", after " + o.storms.map(esc).join(", ") : "") +
-            "; " + o.domains + " of " + o.of + " half-kilometre stretches.</li>";
+          var storms = o.storms.map(function (n) { return esc(n.replace(/ \((\d{4})\)$/, " $1")); }).join(", ");
+          return "<li><b>" + month(o.image).replace(/^(\w{3})\w*/, "$1") + "</b>" + (storms ? ": " + storms : "") + "</li>";
         }).join("") + "</ul>";
     }
     cards.push('<div class="hat-sp-card"><h3>Storm overwash</h3>' + ow +
