@@ -11,7 +11,19 @@ nav: false
 This site shares results from doctoral research by Hannah Henry at the University of North Carolina at Chapel Hill on how Hatteras Island has changed and how management shapes it.
 It is written for the people who live on, manage, and plan for the island.
 
-The research is carried out in the Coastal Environmental Change Lab at UNC Chapel Hill, advised by Dr. Laura Moore. Collaborators on this work are L. Moore, K. Anarde, A. B. Murray, S. Dalyander, B. Franklin and R. Sahraei.
+## The researcher
+
+<div class="hat-person">
+<img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Portrait of Hannah Henry" loading="lazy">
+<div markdown="1">
+**Hannah Henry** is a PhD Candidate in the Department of Earth, Marine, and Environmental Sciences at the University of North Carolina at Chapel Hill, working in the Coastal Environmental Change Lab with Dr. Laura Moore.
+Her research combines satellite shorelines, aerial photos and the CASCADE model to study how Hatteras Island has changed and how management shapes it.
+
+[More about Hannah]({{ '/' | relative_url }}) · [hahenry@unc.edu](mailto:hahenry@unc.edu)
+</div>
+</div>
+
+Collaborators on this work are L. Moore, K. Anarde, A. B. Murray, S. Dalyander, B. Franklin and R. Sahraei.
 
 Thanks to the National Park Service at Cape Hatteras National Seashore, the North Carolina Department of Transportation and Dare County for data and local knowledge, and to the US Army Corps of Engineers, the US Geological Survey and NOAA, whose surveys and records this work relies on.
 
