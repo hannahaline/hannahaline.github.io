@@ -179,10 +179,15 @@
     var fig = this.root.querySelector(".hat-sp-photos"), p = this.data.places[this.i], asset = this.asset, ys = this.data.photo_years;
     if (!p.photos || !p.photos[ys[0]]) { fig.hidden = true; return; }
     fig.hidden = false;
-    fig.querySelectorAll("img").forEach(function (im, k) {
+    [fig.querySelector(".hat-sp-before"), fig.querySelector(".hat-sp-after")].forEach(function (im, k) {
       im.src = asset(p.photos[ys[k]]);
       im.alt = "Aerial photo of the beach at " + p.name + " in " + ys[k];
     });
+    // the 2024 photo sits on top, clipped at the divider; the range input moves the divider
+    var range = fig.querySelector(".hat-sp-range"), after = fig.querySelector(".hat-sp-after"), divider = fig.querySelector(".hat-sp-divider");
+    var clip = function () { after.style.clipPath = "inset(0 0 0 " + range.value + "%)"; divider.style.left = range.value + "%"; };
+    if (!range.hasAttribute("data-wired")) { range.addEventListener("input", clip); range.setAttribute("data-wired", ""); }
+    clip();
     fig.querySelectorAll(".hat-sp-photo-year").forEach(function (s, k) { s.textContent = ys[k] === 1993 ? "1993 (black and white)" : "March " + ys[k]; });
     fig.querySelector(".hat-sp-photo-name").textContent = p.name;
   };

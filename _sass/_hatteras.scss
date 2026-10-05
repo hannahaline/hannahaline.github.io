@@ -1719,29 +1719,13 @@ table.hat-mvo-skill {
     border-radius: 4px;
   }
 
-  .hat-sp-photos .hat-pair-photos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+  // square photos: the slider is as tall as it is wide, up to 40rem
+  .hat-sp-compare {
+    max-width: 40rem;
+    margin: 0 auto;
 
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-    }
-
-    figure {
-      margin: 0;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-      border-radius: 4px;
-    }
-
-    figcaption {
-      font-size: 0.88rem;
-      color: #3a3f42;
-      margin-top: 0.2rem;
+    .hat-compare-photos {
+      aspect-ratio: 1 / 1;
     }
   }
 }

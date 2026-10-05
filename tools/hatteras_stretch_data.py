@@ -9,7 +9,7 @@ the transect rates in assets/hatteras/data/shoreline_rates.json), the yearly mea
 beach fills and NC-12 moves and bridges that touched it (assets/hatteras/data/nourishment.json and timeline.json, fill
 dates from CASCADE's placement-date record), the images in CASCADE's overwash record that show overwash there and the
 named storms before each, and a then-and-now pair of NC OneMap photos (1993 and 2024) of 1.2 km of beach at the middle
-of the place. The overwash record covers GIS 1-90 only, so Pea Island has none. Hannah asked (2026-10-04) for one page
+of the place, centred 300 m landward of its recent shoreline (Hannah: show more of the island). The overwash record covers GIS 1-90 only, so Pea Island has none. Hannah asked (2026-10-04) for one page
 where someone picks a place and gets a plain summary; she chose the places, the contents and a separate page.
 Writes assets/hatteras/data/stretches.json and assets/hatteras/img/stretches/<id>_<year>.jpg; photos are cached under
 tools/data/stretch_photos/. Needs the CASCADE repo beside this one.
@@ -56,6 +56,7 @@ FILL_NAMES = {("Rodanthe", 2014): "Rodanthe emergency fill", ("Buxton", 2017): "
               ("Buxton", 2022): "Buxton shore protection", ("Avon", 2022): "Avon shore protection"}
 PHOTO_YEARS = {1993: "DOQQ_NC_1993", 2024: "Orthoimagery_20242027"}
 HALF_M = 600                             # a 1.2 km square frame
+LANDWARD_M = 300                         # frame centre this far landward of the shoreline: about a quarter ocean
 PX = 900
 
 
@@ -166,9 +167,13 @@ def main():
                 ow.append({"image": str(img_dates[oid]), "domains": int(g.domain.nunique()), "of": int(min(gis[1], last_domain) - gis[0] + 1),
                            "storms": named.get(oid, [])})
             ow.sort(key=lambda o: o["image"])
+        # centre the photo LANDWARD_M landward of the middle transect's recent shoreline, so the island fills most of the frame
         mid = on[len(on) // 2]
         (lx, ly), (sx, sy) = mid["line"]
-        centre = (ly + 0.55 * (sy - ly), lx + 0.55 * (sx - lx))
+        date, pos = sd.load_series(mid["id"])
+        recent = float(pos[date.dt.year.values >= 2015].mean())
+        frac = (recent - LANDWARD_M) / (math.hypot((sx - lx) * math.cos(math.radians(ly)), sy - ly) * 111320)
+        centre = (ly + frac * (sy - ly), lx + frac * (sx - lx))
         photos = {} if args.no_photos else {str(y): photo(pid, y, centre, args.fetch) for y in PHOTO_YEARS}
         out.append({"id": pid, "name": name, "what": what, "gis": list(gis), "km": [km[0], km[1]], "n_transects": len(on),
                     "rate": r, "rate_words": words(r[windows[0]]), "yearly": yearly(on), "fills": fills,
