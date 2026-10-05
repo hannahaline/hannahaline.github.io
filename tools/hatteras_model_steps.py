@@ -180,48 +180,18 @@ def dune_crests():
 
 
 def step3():
-    """Top: every storm as a stem in time. Bottom: the lowest dune top along the island against three storm levels."""
+    """The lowest dune top along the island against the water levels of Isabel, Irene and a large nor'easter. The same
+    image goes on the Storms page (Hannah, 2026-10-04: keep this panel only, and show it on both pages)."""
     t = json.loads((DATA / "timeline.json").read_text(encoding="utf-8"))
     s = [e for e in t["storms"] if START <= e["y"] < END + 1]
-    fig, (ax, bx) = plt.subplots(2, 1, figsize=(W_IN, 6.9), gridspec_kw={"height_ratios": [1, 1], "hspace": 0.62})
+    fig, bx = plt.subplots(figsize=(W_IN, 3.9))
 
-    # when: the storms in time
-    base = 1
-    for kind, col in (("other", OTHER), ("tropical", TROP)):
-        d = [e for e in s if (e["type"] == "tropical") == (kind == "tropical")]
-        for small in (True, False):
-            dd = [e for e in d if (kind == "other" and e["wl"] < SMALL_STORM_M) == small]
-            if not dd:
-                continue
-            ax.vlines([e["y"] for e in dd], base, [e["wl"] for e in dd], color=col, lw=0.6 if small else 1.1,
-                      alpha=0.35 if small else 0.9, zorder=2)
-            ax.scatter([e["y"] for e in dd], [e["wl"] for e in dd], s=8 if small else (30 if kind == "tropical" else 18),
-                       color=col, alpha=0.45 if small else 1, edgecolors="white", linewidths=0.4, zorder=3,
-                       label=None if small else ("hurricanes and tropical storms" if kind == "tropical" else "other storms, mostly nor'easters"))
-    best = {}
-    for e in s:
-        if e["name"] and e["type"] == "tropical" and e["wl"] >= STORM_NAME_M and (e["name"] not in best or e["wl"] > best[e["name"]]["wl"]):
-            best[e["name"]] = e
-    for e in best.values():
-        ax.annotate(e["name"].rsplit(" ", 1)[0], (e["y"], e["wl"]), xytext=(0, 6), textcoords="offset points", ha="center",
-                    fontsize=9, color=INK, path_effects=halo)
-    ax.set_xlim(START, END + 1)
-    ax.set_xticks(range(2000, END + 1, 5))
-    ax.set_ylim(base, max(e["wl"] for e in s) + 0.6)
-    ax.set_ylabel("how high the water\nreached (m above high tide)", fontsize=10)
-    ax.grid(axis="y", color=GRID, lw=0.6)
-    ax.legend(frameon=False, fontsize=9.5, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
-    ax.text(0.01, 0.97, f"(a) When: {len(s)} storms, {START}–{END}", transform=ax.transAxes, fontsize=10, va="top", color=INK,
-            path_effects=halo, zorder=5)
-    frame(ax)
-
-    # where: the lowest dune top on each stretch against three storm levels
-    low = dune_crests()
-    bx.bar(km(io.GIS), low, width=DOMAIN_KM * 0.9, color="#d9c08c", zorder=2)
     def level(name):
         return max(e["wl"] for e in s if e["name"] and e["name"].startswith(name))
-    levels = [(level("Isabel"), "Isabel", "#b2182b"), (level("Irene"), "Irene and Earl", "#e08214")]
-    levels.append((3.0, "a large nor'easter", OTHER))
+    low = dune_crests()
+    bx.bar(km(io.GIS), low, width=DOMAIN_KM * 0.9, color="#d9c08c", zorder=2)
+    levels = [(level("Isabel"), "Isabel", "#b2182b"), (level("Irene"), "Irene and Earl", "#e08214"),
+              (3.0, "a large nor'easter", OTHER)]
     for wl, name, col in levels:
         bx.axhline(wl, color=col, lw=1.6, zorder=3)
         n = int(np.sum(low < wl))
@@ -233,10 +203,8 @@ def step3():
     bx.set_ylabel("lowest dune top on\neach stretch (m)", fontsize=10)
     bx.grid(axis="y", color=GRID, lw=0.6)
     villages(bx)
-    bx.text(0.01, 1.2, "(b) Where: the lowest point of the dunes on each 500 m stretch", transform=bx.transAxes, fontsize=10,
-            va="bottom", color=INK)
     frame(bx)
-    print(f"  lowest dune tops: " + ", ".join(f"{nm} {int(np.sum(low < wl))}" for wl, nm, _ in levels))
+    print("  lowest dune tops: " + ", ".join(f"{nm} {int(np.sum(low < wl))}" for wl, nm, _ in levels))
     save(fig, 3)
 
 def step4():

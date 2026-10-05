@@ -25,6 +25,17 @@ Nor'easters matter too: the strongest, in March 2018, pushed the water higher th
 <figcaption class="hat-caption">The 15 named storms that raised the water highest at the shore since 1984, with each storm's category and distance when it was closest to Cape Hatteras, and the highest nor'easter for comparison. Water level: peak tide, surge and wave run-up at the shore, estimated from the Duck tide gauge and the WIS wave hindcast, in metres above mean high water. The hatched bar (Erin, 2025) is an estimate placed after the wave record ends. Categories and tracks: National Hurricane Center best-track database (HURDAT2). The 1991 "Perfect Storm" was an unnamed subtropical storm.</figcaption>
 </figure>
 
+## Where storms can get over the dunes
+
+How much a storm does depends on where its water meets a low spot in the dunes.
+The chart shows the lowest point of the dunes on each 500 m stretch of the island, against the water levels of three storms.
+Where a bar falls below a line, that storm's water could wash over there: Isabel could reach over the low point of almost every stretch, and even a large nor'easter reaches the low spots around Rodanthe and between Avon and Salvo.
+
+<figure class="hat-photo-wide" style="max-width: 50rem; margin-left: auto; margin-right: auto;">
+<img src="{{ '/assets/hatteras/img/model_steps/step3.png' | relative_url }}" alt="Chart of the lowest dune top on each 500 m stretch from Cape Point to just north of Rodanthe, with lines for the water levels of Isabel (5.2 m), Irene and Earl (3.8 m) and a large nor'easter (3.0 m); many stretches dip below the lines, most of all around Rodanthe and between Avon and Salvo" loading="lazy">
+<figcaption class="hat-caption">The lowest dune top on each 500 m stretch, as the model's 1996–2015 run starts (beach and dunes from the 1996 NOAA/NASA lidar survey), against the peak water levels of three storms, in metres above mean high water. Dunes are worn down while a storm goes on, so water gets over in more places than this shows. The same chart appears in the walk-through on <a href="{{ '/hatteras/model/' | relative_url }}">the model page</a>.</figcaption>
+</figure>
+
 The beach projects and road moves of the same years are on the [management page]({{ '/hatteras/management/' | relative_url }}).
 
 ## Hurricane Isabel, 2003

@@ -17,11 +17,6 @@ The beach on the other side is cut off from that sand and often erodes faster.
 <figcaption class="hat-caption">One of the Buxton groins from the air on 4 November 2012, days after Hurricane Sandy, looking south-west. The groin runs out into the surf at the old lighthouse site; the Cape Hatteras Lighthouse stands at its new site in the trees behind. Photo: U.S. Geological Survey, post-Hurricane Sandy coastal oblique aerial photographs (<a href="https://pubs.usgs.gov/ds/0858/">Data Series 858</a>), frame 2012_1104_162651, public domain.</figcaption>
 </figure>
 
-<figure class="hat-photo-wide">
-<img src="{{ '/assets/hatteras/img/groins_through_time.jpg' | relative_url }}" alt="Six aerial photos of the same stretch of beach at Buxton, from 1993 to 2024, each with that year's average satellite shoreline drawn in yellow and the 1993 shoreline dashed in white; three groins run out into the surf" loading="lazy">
-<figcaption class="hat-caption">The Buxton groins from 1993 to 2024, the same 800 m by 1,000 m of beach in each photo. The yellow line is the average of every satellite shoreline that calendar year, and the dashed white line is the 1993 average, for comparison. The three groins, numbered 1 to 3 from north to south, are drawn in red where they appear in the 2002 photo, so the shoreline can be read against them in every year; the Cape Hatteras Lighthouse stood beside groin 3 until 1999. A satellite shoreline is the water's edge at mean sea level, averaged over a whole year, so it can sit a little off the water's edge in a photo taken on one day. Photos: NC OneMap / NC Center for Geographic Information and Analysis (1993 black and white; 2012 Feb–Mar, 2016 Jan–Feb, 2020 Feb, 2024 Mar). Shorelines: CoastSat.</figcaption>
-</figure>
-
 ## A short history
 
 In 1969–70 the US Navy built three groins at Buxton, about 1,670 feet of them in all, to protect its Naval Facility at Cape Hatteras: two north of where the Cape Hatteras Lighthouse then stood and one just south of it. They also shielded the lighthouse. The groins were lengthened in 1980–82.
@@ -42,10 +37,15 @@ Older structures such as the Buxton groins remain, and can be repaired.
 
 ## The repair under way
 
-Today the two northern groins are completely submerged on most days, and the southern one (groin 3 in the photos) has deteriorated.
+Today the two northern groins are completely submerged on most days, and the southern one (groin 3 in the photos below) has deteriorated.
 Dare County is repairing it, to trap more sand and keep the beach to its north wide enough to protect NC-12 through Buxton.
 The plan restores 640 feet of the groin, with stone armour on its seaward 340 feet. The National Park Service took public comments in August and September 2025, and in February 2026 the state ruled the work a repair of an existing structure, which the hard-structure ban allows.
 According to local news, the contract was awarded in June 2026, with the work due to be substantially complete by 15 December 2026.
+
+<figure class="hat-photo-wide">
+<img src="{{ '/assets/hatteras/img/groins_through_time.jpg' | relative_url }}" alt="Six aerial photos of the same stretch of beach at Buxton, from 1993 to 2024, each with that year's average satellite shoreline drawn in yellow and the 1993 shoreline dashed in white; three groins run out into the surf" loading="lazy">
+<figcaption class="hat-caption">The Buxton groins from 1993 to 2024, the same 800 m by 1,000 m of beach in each photo. The yellow line is the average of every satellite shoreline that calendar year, and the dashed white line is the 1993 average, for comparison. The three groins, numbered 1 to 3 from north to south, are drawn in red where they appear in the 2002 photo, so the shoreline can be read against them in every year; the Cape Hatteras Lighthouse stood beside groin 3 until 1999. A satellite shoreline is the water's edge at mean sea level, averaged over a whole year, so it can sit a little off the water's edge in a photo taken on one day. Photos: NC OneMap / NC Center for Geographic Information and Analysis (1993 black and white; 2012 Feb–Mar, 2016 Jan–Feb, 2020 Feb, 2024 Mar). Shorelines: CoastSat.</figcaption>
+</figure>
 
 <details class="hat-deeper" markdown="1">
 <summary>Lessons from other places</summary>
