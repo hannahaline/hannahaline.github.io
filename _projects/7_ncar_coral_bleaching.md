@@ -13,11 +13,15 @@ category: past research
     <dt>Question</dt>
     <dd>How can models of ocean warming help anticipate coral reef bleaching in NOAA National Marine Sanctuaries?</dd>
     <dt>Where</dt>
-    <dd>Climate and Global Dynamics Laboratory, U.S. National Center for Atmospheric Research (NCAR), Boulder, Colorado</dd>
+    <dd>NOAA National Marine Sanctuaries; work based at NCAR, Boulder, Colorado</dd>
     <dt>Approach</dt>
     <dd>Developing and refining a Python-based coral bleaching model and analyzing climate and ecological data</dd>
-    <dt>Program</dt>
-    <dd>Bridge to the Graduate Visitor Program (GVP), NCAR, 2024</dd>
+    <dt>Data</dt>
+    <dd>Climate and ecological data for sanctuary reefs</dd>
+    <dt>Collaborators</dt>
+    <dd>Climate and Global Dynamics Laboratory, U.S. National Center for Atmospheric Research (NCAR)</dd>
+    <dt>Status</dt>
+    <dd>Complete; Bridge to the Graduate Visitor Program (GVP), 2024</dd>
   </dl>
 </div>
 

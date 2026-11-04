@@ -16,8 +16,10 @@ related_publications: true
     <dt>Where</dt>
     <dd>Mobile Bay and the Alabama Gulf Coast</dd>
     <dt>Approach</dt>
-    <dd>Large-scale surveys (1,200+ responses) and 60+ in-depth interviews, co-designed with state and federal managers</dd>
-    <dt>Partners</dt>
+    <dd>Mixed-methods social science: large-scale surveys and in-depth interviews co-designed with state and federal managers, analyzed with statistical models</dd>
+    <dt>Data</dt>
+    <dd>1,200+ survey responses and 60+ interviews with anglers, charter and tour operators, shrimpers, and coastal residents</dd>
+    <dt>Collaborators</dt>
     <dd>NOAA, Alabama Department of Conservation and Natural Resources, Auburn University</dd>
     <dt>Status</dt>
     <dd>Complete; three papers published, one in review</dd>
@@ -44,3 +46,7 @@ This work formed my M.S. thesis, <i>Conservation Compliance and Public Awareness
 - **Anglers:** residency, fishing motivations, and ecological knowledge shape whether recreational anglers will switch to sea turtle-friendly hooks and bait, so outreach should be tailored to each fishery {% cite henry2025anglers %}.
 - **Charter fishing:** dolphin interactions with charter gear are common and sea turtle interactions rare, while awareness of how to report stranded or injured wildlife is low {% cite olivas2025charter %}.
 - **Shrimping:** dolphins increasingly raid nets and scavenge bycatch, while turtle excluder devices have made conflicts with sea turtles rare {% cite dunning2026shrimping %}.
+
+### Presentations
+
+- Eight conference talks from this work (2023–2024), including Best Graduate Student Oral Presentation at the 27th Biennial CERF Conference (2023) and the 75th Atlantic Estuarine Research Society Conference (2024), plus a poster at the Restore America's Estuaries Summit (2024). See all [talks and posters](/talks/).

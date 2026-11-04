@@ -15,8 +15,10 @@ category: past research
     <dt>Where</dt>
     <dd>The Gulf of Mexico: the United States, Mexico, and Cuba</dd>
     <dt>Approach</dt>
-    <dd>Bilingual surveys of anglers, guides, and policy officials, and a shared database of valuation methods</dd>
-    <dt>Partners</dt>
+    <dd>Bilingual (Spanish and English) stakeholder surveys and a shared database of economic valuation methods</dd>
+    <dt>Data</dt>
+    <dd>Survey responses from anglers, guides, and policy officials across the three countries</dd>
+    <dt>Collaborators</dt>
     <dd>Harte Research Institute (Texas A&amp;M University–Corpus Christi), UMDI-Sisal (UNAM), Universidad de La Habana</dd>
     <dt>Status</dt>
     <dd>Data collection complete; analysis under way</dd>
@@ -36,4 +38,6 @@ As project lead for a multinational social science initiative spanning the U.S.,
 
 The project was conducted through the 7th Gulf of Mexico Student Workshop on International Marine Management (SWIMM) and co-organized with UMDI-Sisal at the Universidad Nacional Autónoma de México (UNAM). We launched with in-person sessions in Quintana Roo, Mexico, in May 2023, followed by year-long virtual collaboration and stakeholder outreach. Data collection concluded in May 2024, and findings will inform peer-reviewed publications focused on improving fisheries governance and supporting sustainable marine resource management throughout the Gulf region.
 
-**Poster.** Olmo L, Henry H, Coffill-Rivera M, Costa S, Gallardo JB, Peña GM, Islas FN, Castillo D, Hernández LV, and Besonen M. "Economic valuation of recreational fisheries in the Gulf of Mexico / Valoración económica de la pesca recreativa en el Golfo de México." 154th Annual Meeting of the American Fisheries Society, Honolulu, Hawai'i, September 2024.
+### Presentations
+
+- Poster: Olmo L, Henry H, Coffill-Rivera M, Costa S, Gallardo JB, Peña GM, Islas FN, Castillo D, Hernández LV, and Besonen M. "Economic valuation of recreational fisheries in the Gulf of Mexico / Valoración económica de la pesca recreativa en el Golfo de México." 154th Annual Meeting of the American Fisheries Society, Honolulu, Hawai'i, September 2024.
