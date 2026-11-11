@@ -17,9 +17,9 @@ You can also find my work on [Google Scholar](https://scholar.google.com/citatio
 
 </div>
 
-## In review
+## In press
 
-- **Henry H**\*, Olivas T, Gumbleton S, Beckham N, Steury TD, Willoughby J, & Dunning K. Residency and ecological knowledge drive willingness to reduce artificial beach lighting among coastal users in Alabama. _Submitted July 2026._
+- **Henry H**\*, Olivas T, Gumbleton S, Beckham N, Steury TD, Willoughby J, & Dunning K. Residency and ecological knowledge drive willingness to reduce artificial beach lighting among coastal users in Alabama. _Conservation Science and Practice_, in press.
 
 <small>\* denotes corresponding author</small>
 
